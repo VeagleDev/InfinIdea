@@ -57,7 +57,7 @@ $db = getDB();
         {
             $_SESSION['user'] = $user;
             $_SESSION['password'] = $pass;
-            echo '<p>Bienvenue ' . $_COOKIE['user'] . '</p>';
+            $_SESSION['id'] = getIdbyUser($user);
         }
         else
         {

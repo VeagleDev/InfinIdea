@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$" />
+    </include_path>
+  </component>
   <component name="PhpInterpreters">
     <interpreters>
       <interpreter id="8df2782b-5968-47ba-b1c1-c30ac61e3f10" name="root@192.168.1.50:22 password" home="sshConfig://DATA" debugger_id="php.debugger.XDebug">

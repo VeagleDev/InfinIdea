@@ -20,4 +20,17 @@
         <a href="login.php">Se connecter</a>
         <a href="register.php">S'inscrire</a>
     <?php endif; ?>
+
+    <!-- css -->
+<style>
+    h1 {
+        text-align: center;
+    }
+    a {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
 </body>
+</html>
