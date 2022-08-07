@@ -1,5 +1,5 @@
-<?php session_start();
-require_once 'tools.php'?>
+<?php session_start(); // On démarre la session AVANT toute chose
+require_once 'tools.php'?> // On appelle le fichier tools.php
 
 <!-- DERNIER TRUC A FAIRE !! -->
 
@@ -12,11 +12,11 @@ require_once 'tools.php'?>
     <title>MyProject : Compte</title>
 </head>
 <body>
-<?php if(isset($_SESSION['id'])) : ?>
+<?php if(isset($_SESSION['id'])) : ?> // Si l'utilisateur est connecté, on affiche son compte
     <h1>MyProject - Compte</h1>
     <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle ! (votre id est <?=$_SESSION['id']?>)</p>
     <a href="logout.php">Se déconnecter</a>
-<?php else : ?>
+<?php else : ?> // Sinon, on lui demande de se connecter
     <h1>MyProject - Accueil</h1>
     <p>Bienvenue, vous n'êtes pas connecté !</p>
     <a href="login.php">Se connecter</a>

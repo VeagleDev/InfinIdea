@@ -11,11 +11,11 @@
 <body>
     <h1>MyProject - Accueil</h1>
     <!-- PAGE D'ACCUEIL, JE TE LAISSE FAIRE -->
-    <?php if(isset($_SESSION['user'])) : ?>
+    <?php if(isset($_SESSION['user'])) : ?> // Si l'utilisateur est connecté, on affiche son compte
         <p>Bienvenue <?=getPseudo($_SESSION['id'])?> !</p>
         <a href="account.php">Mon compte</a>
         <a href="logout.php">Se déconnecter</a>
-    <?php else : ?>
+    <?php else : ?> // Sinon, on lui demande de se connecter ou de s'inscrire
         <p>Bienvenue sur MyProject !</p>
         <a href="login.php">Se connecter</a>
         <a href="register.php">S'inscrire</a>
