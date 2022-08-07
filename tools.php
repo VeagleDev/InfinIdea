@@ -89,21 +89,18 @@ function getAvatarbyUser($user) : string
 function register($pseudo, $firstname, $email, $password, $age, $avatar) : string
 {
     $db = getDB();
-    // verify no user with same pseudo
     $query = "SELECT pseudo FROM users WHERE pseudo = '$pseudo'";
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
     {
         return '<p style="color:red">Le pseudo " . $pseudo . " est déjà utilisé</p>';
     }
-    // verify no user with same email
     $query = "SELECT email FROM users WHERE email = '$email'";
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
     {
         return '<p style="color:red">L\'email " . $email . " est déjà utilisée</p>';
     }
-    // insert user in database
     $password = hash("sha512", $password);
     $query = "INSERT INTO users (pseudo, prenom, email, age, password, avatar) VALUES ('$pseudo', '$firstname', '$email', '$age', '$password', '$avatar')";
     $result = mysqli_query($db, $query);
@@ -115,4 +112,25 @@ function register($pseudo, $firstname, $email, $password, $age, $avatar) : strin
     {
         return '<p style="color:red">Inscription échouée</p>';
     }
+}
+
+function createAuthToken($id) : string
+{
+    $db = getDB();
+    // on créé un token aléatoire de 64 caractères
+    $token = bin2hex(random_bytes(64));
+    // on définit la date d'expiration du token
+    $expiration = time() + 15*24*3600; // 15 jours
+    $query = "INSERT INTO tokens (type, token, user, expiration) VALUES ('auth', '$token', " . $id . ", '$expiration');";
+    echo $query;
+    $result = mysqli_query($db, $query);
+    if($result)
+    {
+        return $token;
+    }
+    else
+    {
+        return 'NONE';
+    }
+
 }

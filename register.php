@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once 'tools.php';
 require_once 'strings.php';
     $db = getDB();
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,10 +18,7 @@ require_once 'strings.php';
     <!-- TU PEUX FAIRE COMME LE FORMULAIRE DE LOGIN MAIS AVEC PLUS DE CHAMPS -->
 
 
-
-
-
-    <?php
+<?php
     if( isset($_POST['pseudo']) &&
         isset($_POST['firstname']) &&
         isset($_POST['email']) &&
@@ -73,6 +70,7 @@ require_once 'strings.php';
             else
             {
                 echo register($pseudo, $firstname, $email, $password, $age, $avatar);
+
             }
         }
     }
