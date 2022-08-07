@@ -14,6 +14,39 @@ $db = getDB();
 </head>
 <body>
     <h1>Connexion</h1>
+
+    <!-- JE TE LAISSE FAIRE UN BEAU FORMULAIRE DE CONNEXION AVEC TOUT CE DONT TU AS BESOIN, JE M'ADAPTERAIS
+    A CE QUE TU FERA, IL FAUT JUSTE PSEUDO/MDP + RESTER CONNECTÉ -->
+
+
+    <!-- Pour information, pour que je puisse récupérer des informations, il faut faire un
+    formulaire de ce type :
+        <form action="login.php" method="post">
+        <p>
+            <label for="pseudo">Pseudo</label>
+            <input type="text" name="pseudo" id="pseudo">
+        </p>
+        <p>
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+        </p>
+        <p>
+            <input type="checkbox" name="stay_connected" id="stay_connected">
+            <label for="stay_connected">Rester connecté</label>
+        </p>
+        <p>
+            <input type="submit" value="Se connecter">
+        </p>
+    </form>
+    -->
+
+
+
+
+
+
+
+
     <?php
     if(isset($_POST['pseudo']) && isset($_POST['password']))
     {
@@ -39,4 +72,5 @@ $db = getDB();
     {
         echo login_form();
     }
+
     ?>

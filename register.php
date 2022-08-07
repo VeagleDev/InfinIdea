@@ -14,6 +14,13 @@ require_once 'strings.php';
 </head>
 <body>
     <h1>Inscription</h1>
+
+    <!-- TU PEUX FAIRE COMME LE FORMULAIRE DE LOGIN MAIS AVEC PLUS DE CHAMPS -->
+
+
+
+
+
     <?php
     if( isset($_POST['pseudo']) &&
         isset($_POST['firstname']) &&
