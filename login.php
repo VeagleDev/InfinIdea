@@ -51,17 +51,21 @@ $db = getDB();
     if(isset($_POST['pseudo']) && isset($_POST['password']))
     {
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST['pseudo']));
-        $pass = mysqli_real_escape_string($db, htmlspecialchars($_POST['password']));
+        $pass = hash("sha512", mysqli_real_escape_string($db, htmlspecialchars($_POST['password'])));
         $real = getPasswordbyUser($user);
+        echo "<p>Le vrai mot de passe est : $real</p>";
+        echo "<p>Le mot de passe que tu as entré est : $pass</p>";
+
         if($real == $pass)
         {
             $_SESSION['user'] = $user;
             $_SESSION['password'] = $pass;
             $_SESSION['id'] = getIdbyUser($user);
+            echo "<p style='color: green'>Connexion réussie !</p>";
         }
         else
         {
-            echo '<p>Mauvais identifiants</p>';
+            echo "<p style='color: red'>Connexion échouée !</p>";
         }
     }
     else if(isset($_SESSION['user']))
