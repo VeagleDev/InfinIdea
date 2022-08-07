@@ -1,3 +1,12 @@
+
+
+<!-- TOUCHE PAS A CE FICHIER C'EST LA OU JE MET LE HTML POUR LES TESTS MAIS JE M'OCCUPERAIS DE FAIRE
+UN TRUC PROPRE QUAND TU AURAS FAIT LE FRONT-END -->
+
+
+
+
+
 <?php
 
 function register_form(string $pseudo = '', string $name = '', string $email = '', string $password = '', string $password_confirm = '', string $age = '', string $avatar = '') : string {

@@ -1,3 +1,8 @@
+
+<!-- TOUCHE PAS NON PLUS A CE FICHIER CE SONT DES FONCTIONS QUI ME SERVENT
+DANS LE BACK-END -->
+
+
 <?php
 require_once 'strings.php';
 function getDB()
