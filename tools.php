@@ -134,3 +134,31 @@ function createAuthToken($id) : string
     }
 
 }
+function connectByCookie($token)
+{
+    $db = getDB();
+    $query = "SELECT user, expiration FROM tokens WHERE type = 'auth' AND token = '$token'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+    // if we have a row, the token is valid
+    if(mysqli_num_rows($result) > 0)
+    {
+        // if the token is not expired
+        if($row['expiration'] > time())
+        {
+            // we return the user id
+            return $row['user'];
+        }
+        else
+        {
+            // the token is expired, we delete it
+            $query = "DELETE FROM tokens WHERE type = 'auth' AND token = '$token'";
+            $result = mysqli_query($db, $query);
+            return 'NONE';
+        }
+    }
+    else
+    {
+        return 'NONE';
+    }
+}
