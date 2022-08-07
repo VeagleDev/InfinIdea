@@ -1,6 +1,8 @@
-<!-- DERNIER TRUC A FAIRE !! -->
 <?php session_start();
-        require_once 'tools.php'?>
+require_once 'tools.php'?>
+
+<!-- DERNIER TRUC A FAIRE !! -->
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,7 +14,7 @@
 <body>
 <?php if(isset($_SESSION['id'])) : ?>
     <h1>MyProject - Compte</h1>
-    <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle !</p>
+    <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle ! (votre id est <?=$_SESSION['id']?>)</p>
     <a href="logout.php">Se déconnecter</a>
 <?php else : ?>
     <h1>MyProject - Accueil</h1>
