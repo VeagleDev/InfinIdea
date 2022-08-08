@@ -1,3 +1,18 @@
+<!--
+GNU General Public License version 3 or later.
+Mysterious Developers 2022
+All rights reserved.
+
+Authors :
+- pierrbt
+- nicolasfasa
+
+Last update : 2022/08/08
+
+-->
+
+
+
 <?php session_start(); // On démarre la session AVANT toute chose
 require_once 'autoconnect.php';
 require_once 'tools.php'?> // On appelle le fichier tools.php
