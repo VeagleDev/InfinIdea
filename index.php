@@ -1,7 +1,9 @@
 <?php session_start();
-        require_once 'tools.php';
-        require_once 'autoconnect.php';
+require_once 'autoconnect.php';
+require_once 'tools.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,12 +15,12 @@
 <body>
     <h1>MyProject - Accueil</h1>
     <!-- PAGE D'ACCUEIL, JE TE LAISSE FAIRE -->
-    <?php if(isset($_SESSION['user'])) : ?> // Si l'utilisateur est connecté, on affiche son compte
+    <?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
         <p>Bienvenue <?=getPseudo($_SESSION['id'])?> !</p>
         <a href="account.php">Mon compte</a>
         <a href="logout.php">Se déconnecter</a>
-    <?php else : ?> // Sinon, on lui demande de se connecter ou de s'inscrire
-        <p>Bienvenue sur MyProject !</p>
+    <?php else : ?> <!-- Sinon, on lui demande de se connecter ou de s'inscrire -->
+        <p>Bienvenue sur MyProject, vous n'êtes pas encore connecté !</p>
         <a href="login.php">Se connecter</a>
         <a href="register.php">S'inscrire</a>
     <?php endif; ?>

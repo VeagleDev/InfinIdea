@@ -42,7 +42,18 @@ $db = getDB();
 
 
 <?php
-    if(isset($_POST['pseudo']) && isset($_POST['password'])) // Si les champs pseudo et password sont remplis
+    if(isset($_SESSION['id']))
+    {
+        if(isset($_GET['redirect'])) // Si on a demandé une redirection
+        {
+            header("Location: ".$_GET['redirect']);
+        }
+        else
+        {
+            header("Location: index.php");
+        }
+    }
+    else if(isset($_POST['pseudo']) && isset($_POST['password'])) // Si les champs pseudo et password sont remplis
     {
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST['pseudo'])); // On récupère le pseudo
         $pass = hash("sha512", mysqli_real_escape_string($db, htmlspecialchars($_POST['password']))); // On récupère le mot de passe
@@ -84,7 +95,6 @@ $db = getDB();
                     );
                 }
 
-                echo "<p style='color: green'>Connexion réussie !</p>"; // On affiche un message de succès
                 if(isset($_GET['redirect'])) // Si on a demandé une redirection
                 {
                     header("Location: ".$_GET['redirect']);
@@ -101,10 +111,6 @@ $db = getDB();
             }
         }
 
-    }
-    else if(isset($_SESSION['user']))
-    {
-        echo '<p>Vous êtes déjà connecté en tant que ' . $_SESSION['user'] . '. <a href="logout.php">Se déconnecter</a></p>';
     }
     else
     {
