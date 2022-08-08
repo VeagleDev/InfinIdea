@@ -19,8 +19,23 @@ function getID($pseudo) : int
     $db = getDB();
     $query = "SELECT id FROM users WHERE pseudo = '$pseudo'";
     $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['id'];
+    // if we have a result, we can return the id
+    if($result)
+    {
+        $row = mysqli_fetch_assoc($result);
+        if(!$row)
+        {
+            return -1;
+        }
+        else
+        {
+            return $row['id'];
+        }
+    }
+    else
+    {
+        return -1;
+    }
 }
 function getPseudo($id) : string
 {
@@ -59,8 +74,16 @@ function getPasswordbyUser($user) : string
     $db = getDB();
     $query = "SELECT password FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['password'];
+    // if we get result, we return the password
+    if($result)
+    {
+        $row = mysqli_fetch_assoc($result);
+        return $row['password'];
+    }
+    else // else we return an empty string
+    {
+        return "";
+    }
 }
 function getAge($id) : int
 {

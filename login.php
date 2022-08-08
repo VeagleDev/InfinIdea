@@ -47,60 +47,60 @@ $db = getDB();
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST['pseudo'])); // On récupère le pseudo
         $pass = hash("sha512", mysqli_real_escape_string($db, htmlspecialchars($_POST['password']))); // On récupère le mot de passe
         $userID = getID($user); // On récupère l'id de l'utilisateur
-        $real = getPassword($userID); // On récupère le mot de passe de l'utilisateur
-        echo "Test : " . $real . " - " . $pass;
-        if($real == $pass) // Si les mots de passe sont identiques
+        if($userID == -1)
         {
-            // On enregistre ses informations dans la session pour qu'il soit connecté
-            $_SESSION['id'] = $userID;
-            echo "Session enregistrée";
-            $token = createAuthToken($userID); // On crée un jeton d'authentification
-            echo "On créé le token";
-
-            echo "Token : " . $token;
-
-            if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
-            {
-                echo "test";
-
-                setcookie( // On crée un cookie
-                    'token', // Le nom du cookie
-                    $token, // Son contenu
-                    [
-                        'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
-                        'secure' => true, // On dit que le cookie est sécurisé
-                        'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
-                    ]
-                );
-            }
-            else // Sinon
-            {
-                setcookie( // On crée un cookie
-                    'token', // Le nom du cookie
-                     'NONE', // Son contenu
-                    [
-                        'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
-                        'secure' => true, // On dit que le cookie est sécurisé
-                        'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
-                    ]
-                );
-            }
-
-            echo "<p style='color: green'>Connexion réussie !</p>"; // On affiche un message de succès
-            if(isset($_GET['redirect'])) // Si on a demandé une redirection
-            {
-                header("Location: ".$_GET['redirect']);
-            }
-            else
-            {
-                header("Location: index.php");
-            }
+            echo "<p style='color: red'>Utilisateur inconnu !</p>";
         }
         else
         {
-            echo login_form();
-            echo "<p style='color: red'>Mauvais identifiants !</p>";
+            $real = getPasswordbyUser($user); // On récupère le mot de passe de l'utilisateur
+            if($real == $pass) // Si les mots de passe sont identiques
+            {
+                // On enregistre ses informations dans la session pour qu'il soit connecté
+                $_SESSION['id'] = $userID;
+                $token = createAuthToken($userID); // On crée un jeton d'authentification
+                if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
+                {
+                    setcookie( // On crée un cookie
+                        'token', // Le nom du cookie
+                        $token, // Son contenu
+                        [
+                            'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+                            'secure' => true, // On dit que le cookie est sécurisé
+                            'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                        ]
+                    );
+                }
+                else // Sinon
+                {
+                    setcookie( // On crée un cookie
+                        'token', // Le nom du cookie
+                        'NONE', // Son contenu
+                        [
+                            'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+                            'secure' => true, // On dit que le cookie est sécurisé
+                            'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                        ]
+                    );
+                }
+
+                echo "<p style='color: green'>Connexion réussie !</p>"; // On affiche un message de succès
+                if(isset($_GET['redirect'])) // Si on a demandé une redirection
+                {
+                    header("Location: ".$_GET['redirect']);
+                }
+                else
+                {
+                    header("Location: index.php");
+                }
+            }
+            else
+            {
+                echo login_form();
+                echo "<p style='color: red'>Mot de passe incorrect !</p>";
+            }
         }
+
     }
     else if(isset($_SESSION['user']))
     {
