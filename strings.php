@@ -136,3 +136,24 @@ function login_form() : string
 }
 
 
+function passwordForgotten() : string
+{
+    return '<p>Bienvenue sur la page de réinitialisation de votre mot de passe !</p>
+        <form action="forgot.php" method="post">
+        <label for="email">Entrez votre adresse email :</label>
+        <input type="email" name="email" id="email" required>
+        <input type="submit" value="Envoyer">
+        </form>
+        <style>
+        form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        label {
+        margin-bottom: 0.5em;
+        }
+        </style>';
+}
+
+
