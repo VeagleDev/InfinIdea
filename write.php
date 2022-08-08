@@ -1,4 +1,15 @@
+<!--
+GNU General Public License version 3 or later.
+Mysterious Developers 2022
+All rights reserved.
 
+Authors :
+- pierrbt
+- nicolasfasa
+
+Last update : 2022/08/08
+
+-->
 
 <!-- IL FAUT FAIRE LA PAGE POUR ECRIRE DES ARTICLES, TU PEUX CHERCHER
 UN EDITEUR SUR GITHUB, POUR QUE JE PUISSE RECUPERER LE TEXTE,
