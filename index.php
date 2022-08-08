@@ -1,5 +1,7 @@
 <?php session_start();
-        require_once 'tools.php'?>
+        require_once 'tools.php';
+        require_once 'autoconnect.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
