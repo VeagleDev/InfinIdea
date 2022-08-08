@@ -70,8 +70,7 @@ return '
 
 function login_form() : string
 {
-    return '<h1>Connexion</h1>
-    <form action="login.php" method="post">
+    return '<form action="login.php" method="post">
         <p>
             <label for="pseudo">Pseudo</label>
             <input type="text" name="pseudo" id="pseudo">
