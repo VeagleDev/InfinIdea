@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4fefc86a-92cc-450a-8cad-5a25cc0d8d30" name="MysteriousWeb" url="http://myproject.mysteriousdev.fr">
+        <fileTransfer rootFolder="/var/www/blog" accessType="SFTP" host="192.168.1.50" port="22" sshConfigId="1f1a2327-3649-40aa-9f8e-09243b13acdf" sshConfig="root@192.168.1.50:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
