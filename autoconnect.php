@@ -1,26 +1,32 @@
 <?php
 session_start();
-echo "Salut !";
 if(isset($_COOKIE['token']))
 {
     require_once 'tools.php';
     $db = getDB();
-    $token = mysqli_escape_string(htmlspecialchars(['token']));
-    $req = $db->prepare("SELECT * FROM tokens WHERE type = 'auth' AND token = '$token'");
-    echo $req;
-    // get result from mysqli request
-    $req->execute();
-    $result = $req->get_result();
-    $row = $result->fetch_assoc();
+    $token = htmlspecialchars($_COOKIE['token']);
+    $query = "SELECT id, expiration FROM tokens WHERE token = '$token'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
     if($row)
     {
         $ts = $row['expiration'];
-        $user = $row['user'];
-        if (int($ts) > time())
+        $user = $row['id'];
+        if($ts > time())
         {
             $_SESSION['id'] = $user;
+            setcookie( // On actualise le cookie
+                'token', // Le nom du cookie
+                $token, // Son contenu
+                [
+                    'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+                    'secure' => true, // On dit que le cookie est sécurisé
+                    'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                ]
+            );
         }
     }
 }
+
 
 

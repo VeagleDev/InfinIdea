@@ -69,7 +69,30 @@ require_once 'strings.php';
             }
             else
             {
-                echo register($pseudo, $firstname, $email, $password, $age, $avatar);
+                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar);
+                echo $ret;
+
+                if($ret = '<p style="color:green">Inscription réussie</p>')
+                {
+                    $userID = mysqli_insert_id($db);
+                    $_SESSION['id'] = $userID;
+                    if(isset($_POST['stay_csonnected']))
+                    {
+                        $token = createAuthToken($userID); // On crée un jeton d'authentification
+                        if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
+                        {
+                            setcookie( // On crée un cookie
+                                'token', // Le nom du cookie
+                                $token, // Son contenu
+                                [
+                                    'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+                                    'secure' => true, // On dit que le cookie est sécurisé
+                                    'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                                ]
+                            );
+                        }
+                    }
+                }
 
             }
         }
