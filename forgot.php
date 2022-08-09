@@ -142,14 +142,16 @@ $db = getDB();
         Si vous rencontrez un problème, <a href=\"mailto:contact@mysteriousdev.fr\">contactez nous sur notre email</a> <br /> <br />
         Cordialement, <br />
         L'équipe MysteriousDev de MyProject";
-        $headers = array();
-        $headers[] = 'Content-Type: text/html; charset="UTF-8"';
-        $headers[] = 'X-Mailer: PHP/'. phpversion();
-        $headers[] = 'From: MyProject <contact@mysteriousdev.fr>';
 
-        if(mail($to, $subject, $message, implode('\r\n', $headers)))
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset="UTF-8"' . "\r\n";
+        $headers .= 'From:  ' . 'MyProject' . ' <' . 'contact@mysteriousdev.fr' .'>' . " \r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+
+        if(mail($to, $subject, $message, $headers))
         {
-            echo "<p>Un email vous a été envoyé à " . $to . " pour réinitialiser votre mot de passe !</p>
+            echo "<p>Un email vous a été envoyé à <code>" . $to . "</code> pour réinitialiser votre mot de passe !</p>
             <p>Si vous n'avez pas reçu d'email, veuillez vérifier dans les spams ou <a href=\"mailto:contact@mysteriousdev.fr\">contactez-nous</a>.</p>";
         }
         else
