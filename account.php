@@ -30,9 +30,9 @@ require_once 'tools.php'?> <!-- On appelle le fichier tools.php -->
 <body>
 <?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
     <h1>MyProject - Compte</h1>
-    <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle !</p>
+    <p>Bienvenue sur MyProject, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle !</p>
     <a href="logout.php">Se déconnecter</a>
-<?php else : ?> // Sinon, on lui demande de se connecter
+<?php else : ?>  <!-- Sinon, on lui demande de se connecter -->
     <h1>MyProject - Accueil</h1>
     <p>Bienvenue, vous n'êtes pas connecté !</p>
     <a href="login.php">Se connecter</a>&nbsp;
