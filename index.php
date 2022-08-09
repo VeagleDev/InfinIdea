@@ -33,6 +33,7 @@ require_once 'tools.php';
     <?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
         <p>Bienvenue <?=getPseudo($_SESSION['id'])?> !</p>
         <a href="account.php">Mon compte</a>
+        <a href="write.php">Ecrire un article</a>
         <a href="logout.php">Se déconnecter</a>
     <?php else : ?> <!-- Sinon, on lui demande de se connecter ou de s'inscrire -->
         <p>Bienvenue sur MyProject, vous n'êtes pas encore connecté !</p>

@@ -98,6 +98,9 @@ function login_form() : string
             <input type="submit" value="Se connecter">
         </p>
     </form>
+    <span class="forgot_password">
+        <a href="forgot.php">Mot de passe oublié ?</a>
+    </span>
     <style>
         body {
             background-color: #f2f2f2;
@@ -130,6 +133,10 @@ function login_form() : string
             border: none;
             padding: 0.5rem;
             cursor: pointer;
+        }
+        .forgot_password {
+            text-align: center;
+            margin-top: 1rem;
         }
 </style>';
 }
