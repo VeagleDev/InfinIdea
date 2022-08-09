@@ -39,22 +39,39 @@ $db = getDB();
         $token = htmlspecialchars($_POST['token']);
         $pass = htmlspecialchars($_POST['pass']);
         $pass2 = htmlspecialchars($_POST['pass2']);
+        list($ok, $error) = verifyPasswordStrongness($pass);
+        if(!$ok)
+        {
+            echo('<form action="forgot.php" method="post">
+                <input type="hidden" name="token" value="' . $token . '">
+                <input type="password" name="pass" placeholder="Nouveau mot de passe">
+                <input type="password" name="pass2" placeholder="Confirmer le mot de passe">
+                <input type="submit" value="Changer le mot de passe">
+                </form>
+                <p style="color:red">' . $error . '</p>');
+            exit;
+        }
         if($pass == $pass2)
         {
             $password = hash("sha512", $pass);
-            $sql = "SELECT user, expiration FROM tokens WHERE type='pass' AND token='" . $token . "'";
+            $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
             $result = mysqli_query($db, $sql);
             if(mysqli_num_rows($result) == 1)
             {
                 $row = mysqli_fetch_assoc($result);
                 $user = $row['user'];
                 $expiration = $row['expiration'];
-                if($expiration > time())
+                $used = $row['used'] == 1;
+                if($expiration > time() && !$used)
                 {
                     $sql = "UPDATE users SET password='" . $password . "' WHERE id='" . $user . "'";
                     $result = mysqli_query($db, $sql);
                     if($result)
                     {
+                        // on met used à 1 pour dire que le token est utilisé
+                        $sql = "UPDATE tokens SET used=1 WHERE token='" . $token . "'";
+                        $result = mysqli_query($db, $sql);
+
                         echo "<p style='color: green;'>Votre mot de passe a bien été modifié !</p>";
                     }
                     else
@@ -81,14 +98,15 @@ $db = getDB();
     else if(isset($_GET['token']))
     {
         $token = htmlspecialchars($_GET['token']);
-        $sql = "SELECT user, expiration FROM tokens WHERE type='pass' AND token='" . $token . "'";
+        $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
         $result = mysqli_query($db, $sql);
         if(mysqli_num_rows($result) == 1)
         {
             $row = mysqli_fetch_assoc($result);
             $user = $row['user'];
             $expiration = $row['expiration'];
-            if($expiration > time())
+            $used = $row['used'] == 1;
+            if($expiration > time() && !$used)
             {
                 ?>
                 <form action="forgot.php" method="post">

@@ -191,3 +191,27 @@ function createPassForgotToken($id) : string
     }
 
 }
+
+function verifyPasswordStrongness($password)
+{
+    $ok = true;
+    $error = "";
+
+    if(strlen($password) < 8)
+    {
+        $ok = false;
+        $error .= "Password is too short<br/>";
+    }
+    if(!preg_match("#[0-9]+#", $password))
+    {
+        $ok = false;
+        $error = "Password must include at least one number<br/>";
+    }
+    if(!preg_match("#[a-zA-Z]+#", $password))
+    {
+        $ok = false;
+        $error = "Password must include at least one letter<br/>";
+    }
+    return array($ok, $error);
+
+}
