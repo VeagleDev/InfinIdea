@@ -79,7 +79,6 @@ return '
 }
 
 
-
 function login_form() : string
 {
     return '<form action="login.php" method="post">

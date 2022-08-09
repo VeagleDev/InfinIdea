@@ -83,6 +83,12 @@ require_once 'strings.php';
             }
             else
             {
+                list($ok, $error) = verifyPasswordStrongness($password);
+                if(!$ok)
+                {
+                    echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
+                    echo '<p style="color:red;">'.$error.'</p>';
+                }
                 $ret = register($pseudo, $firstname, $email, $password, $age, $avatar);
                 echo $ret;
 
