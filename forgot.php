@@ -53,7 +53,7 @@ $db = getDB();
         }
         if($pass == $pass2)
         {
-            $password = hash("sha512", $pass);
+            $password = hash('sha512', $pass);
             $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
             $result = mysqli_query($db, $sql);
             if(mysqli_num_rows($result) == 1)
@@ -153,7 +153,7 @@ $db = getDB();
         $token = createPassForgotToken($row['id']);
         $to = $email;
         $subject = 'Réinitialisation de votre mot de passe MyProject';
-        $message = "Bonjour " . $row['prenom'] . ",\r\n
+        $message = 'Bonjour ' . $row['prenom'] . ",\r\n
         Une demande de <i>réinitialisation de mot de passe</i> a été faite sur <b>MyProject</b>.<br />
         Pour <u>réinitialiser votre mot de passe</u>, veuillez cliquer sur le lien suivant :<br />
         https://myproject.mysteriousdev.fr/forgot.php?token=" . $token . " <br />
@@ -169,7 +169,7 @@ $db = getDB();
 
         if(mail($to, $subject, $message, $headers))
         {
-            echo "<p>Un email vous a été envoyé à <code>" . $to . "</code> pour réinitialiser votre mot de passe !</p>
+            echo '<p>Un email vous a été envoyé à <code>' . $to . "</code> pour réinitialiser votre mot de passe !</p>
             <p>Si vous n'avez pas reçu d'email, veuillez vérifier dans les spams ou <a href=\"mailto:contact@mysteriousdev.fr\">contactez-nous</a>.</p>";
         }
         else

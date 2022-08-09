@@ -25,7 +25,6 @@ $db = getDB();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Connexion</title>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Connexion</h1>
@@ -61,17 +60,17 @@ $db = getDB();
     {
         if(isset($_GET['redirect'])) // Si on a demandé une redirection
         {
-            header("Location: ".$_GET['redirect']);
+            header('Location: ' .$_GET['redirect']);
         }
         else
         {
-            header("Location: index.php");
+            header('Location: index.php');
         }
     }
     else if(isset($_POST['pseudo']) && isset($_POST['password'])) // Si les champs pseudo et password sont remplis
     {
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST['pseudo'])); // On récupère le pseudo
-        $pass = hash("sha512", mysqli_real_escape_string($db, htmlspecialchars($_POST['password']))); // On récupère le mot de passe
+        $pass = hash('sha512', mysqli_real_escape_string($db, htmlspecialchars($_POST['password']))); // On récupère le mot de passe
         $userID = getID($user); // On récupère l'id de l'utilisateur
         if($userID == -1)
         {
@@ -112,11 +111,11 @@ $db = getDB();
 
                 if(isset($_GET['redirect'])) // Si on a demandé une redirection
                 {
-                    header("Location: ".$_GET['redirect']);
+                    header('Location: ' .$_GET['redirect']);
                 }
                 else
                 {
-                    header("Location: index.php");
+                    header('Location: index.php');
                 }
             }
             else
