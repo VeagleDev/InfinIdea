@@ -27,4 +27,4 @@ setcookie( // On crée un cookie
         'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
     ]
 );
-header("Location: index.php");
+header('Location: index.php');
