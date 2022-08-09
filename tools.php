@@ -180,7 +180,6 @@ function createPassForgotToken($id) : string
     // on définit la date d'expiration du token
     $expiration = time() + 24*3600; // 1 jours
     $query = "INSERT INTO tokens (type, token, user, expiration) VALUES ('pass', '$token', " . $id . ", '$expiration');";
-    echo $query;
     $result = mysqli_query($db, $query);
     if($result)
     {
