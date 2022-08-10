@@ -222,6 +222,7 @@ function updateUserIP($user, mysqli $db) : void
 function logs($action, $details = '', $user = 'Guest', mysqli $db) : void
 {
     $ip = getIP();
-    $query = "INSERT INTO logs (action, details, user, ip) VALUES ('$action', '$details', '$user', '$ip')";
+    $query = 'INSERT INTO logs (action, details, user, ip) VALUES ("' . $action . '", "' . $details . '", ' . $user . ', "' . $ip . '")';
+    echo $query;
     mysqli_query($db, $query);
 }

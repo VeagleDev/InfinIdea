@@ -39,12 +39,20 @@ require_once 'tools.php';
         <a href="account.php">Mon compte</a>
         <a href="write.php">Ecrire un article</a>
         <a href="logout.php">Se déconnecter</a>
-    <?php logs('ouverture de la page accueil', 'utilisateur connecté se connecte sur la page d\'accueil', $_SESSION['id'], getDB()); ?>
+    <?php
+        $db = getDB();
+        logs('ouverture de la page accueil', 'utilisateur connecté se connecte sur la page d\'accueil', $_SESSION['id'], $db);
+        mysqli_close($db);
+    ?>
     <?php else : ?> <!-- Sinon, on lui demande de se connecter ou de s'inscrire -->
         <p>Bienvenue sur MyProject, vous n'êtes pas encore connecté !</p>
         <a href="login.php">Se connecter</a>
         <a href="register.php">S'inscrire</a>
-    <?php logs('ouverture de la page accueil', 'utilisateur déconnecté se connecte sur la page d\'accueil', getDB()); ?>
+    <?php
+        $db = getDB();
+        logs('ouverture de la page accueil', 'utilisateur déconnecté se connecte sur la page d\'accueil', $db);
+        mysqli_close($db);
+        ?>
     <?php endif; ?>
 
     <!-- css -->
