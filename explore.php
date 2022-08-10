@@ -20,7 +20,6 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'tools.php';
 require_once 'autoconnect.php';
-$db = getDB();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +36,9 @@ $db = getDB();
 </body>
 
 <?php
-logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'));
+$db = getDB();
+logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'), $db);
+mysqli_close($db);
 ?>
 
 

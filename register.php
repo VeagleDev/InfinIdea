@@ -55,7 +55,7 @@ require_once 'strings.php';
         {
             echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
             echo '<p style="color:red">Les mots de passe ne correspondent pas</p>';
-            logs('register', 'utilisateur essaye d\'inscrire un compte avec des mots de passe différents');
+            logs('register', 'utilisateur essaye d\'inscrire un compte avec des mots de passe différents', $db);
         }
         else
         {
@@ -64,31 +64,31 @@ require_once 'strings.php';
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">Le pseudo doit contenir entre 3 et 24 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un pseudo invalide');
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un pseudo invalide', $db);
             }
             else if(strlen($firstname) > 30 || strlen($firstname) < 3)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">Le prénom doit contenir entre 3 et 30 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un prénom invalide');
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un prénom invalide', $db);
             }
             else if(strlen($email) > 100 || strlen($email) < 4 || !filter_var($email, FILTER_VALIDATE_EMAIL))
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'email doit être correcte et contenir entre 3 et 100 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un email invalide');
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un email invalide', $db);
             }
             else if(strlen($age) > 2 || strlen($age) < 1)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'age doit contenir entre 1 et 2 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un age invalide');
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un age invalide', $db);
             }
             else if(strlen($avatar) > 200 || strlen($avatar) < 3)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'avatar doit contenir entre 3 et 200 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un avatar invalide');
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un avatar invalide', $db);
             }
             else
             {
@@ -97,20 +97,20 @@ require_once 'strings.php';
                 {
                     echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                     echo '<p style="color:red;">'.$error.'</p>';
-                    logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible');
+                    logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible', $db);
                     exit;
                 }
-                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar);
+                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar, $db);
                 echo $ret;
 
                 if($ret = '<p style="color:green">Inscription réussie</p>')
                 {
-                    logs('register', 'utilisateur inscrit un compte', getID($pseudo));
+                    logs('register', 'utilisateur inscrit un compte', getID($pseudo), $db);
                     $userID = mysqli_insert_id($db);
                     $_SESSION['id'] = $userID;
                     if(isset($_POST['stay_csonnected']))
                     {
-                        $token = createAuthToken($userID); // On crée un jeton d'authentification
+                        $token = createAuthToken($userID, $db); // On crée un jeton d'authentification
                         if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
                         {
                             setcookie( // On crée un cookie
@@ -127,7 +127,7 @@ require_once 'strings.php';
                 }
                 else
                 {
-                    logs('register', 'utilisateur essaye d\'inscrire un compte qui existe déjà');
+                    logs('register', 'utilisateur essaye d\'inscrire un compte qui existe déjà', $db);
                 }
 
             }
@@ -137,6 +137,8 @@ require_once 'strings.php';
     {
         echo register_form();
     }
+
+$db->close();
     ?>
 </body>
 </html>

@@ -62,7 +62,7 @@ $db = getDB();
 <?php
     if(isset($_SESSION['id']))
     {
-        logs('login', 'utilisateur connecte essaie de se login', $_SESSION['id']);
+        logs('login', 'utilisateur connecte essaie de se login', $_SESSION['id'], $db);
         if(isset($_GET['redirect'])) // Si on a demandé une redirection
         {
             header('Location: ' .$_GET['redirect']);
@@ -80,7 +80,7 @@ $db = getDB();
         if($userID == -1)
         {
             echo "<p style='color: red'>Utilisateur inconnu !</p>";
-            logs('login', 'utilisateur essaye de se connecter avec un pseudo inconnu');
+            logs('login', 'utilisateur essaye de se connecter avec un pseudo inconnu', $db);
         }
         else
         {
@@ -89,7 +89,7 @@ $db = getDB();
             {
                 // On enregistre ses informations dans la session pour qu'il soit connecté
                 $_SESSION['id'] = $userID;
-                $token = createAuthToken($userID); // On crée un jeton d'authentification
+                $token = createAuthToken($userID, $db); // On crée un jeton d'authentification
                 if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
                 {
                     setcookie( // On crée un cookie
@@ -115,7 +115,7 @@ $db = getDB();
                     );
                 }
 
-                logs('login', 'utilisateur connecte', $userID);
+                logs('login', 'utilisateur connecte', $userID, $db);
 
                 if(isset($_GET['redirect'])) // Si on a demandé une redirection
                 {
@@ -130,7 +130,7 @@ $db = getDB();
             {
                 echo login_form();
                 echo "<p style='color: red'>Mot de passe incorrect !</p>";
-                logs('login', 'utilisateur essaye de se connecter avec un mdp incorrect', $userID);
+                logs('login', 'utilisateur essaye de se connecter avec un mdp incorrect', $userID, $db);
             }
         }
 
@@ -140,5 +140,6 @@ $db = getDB();
         echo login_form();
 
     }
+$db->close();
 
     ?>
