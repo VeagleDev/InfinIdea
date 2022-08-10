@@ -187,3 +187,28 @@ function verifyPasswordStrongness(string $password)
     return array($ok, $error);
 
 }
+function getIP() : string
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        echo $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        echo $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        echo $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+function updateUserIP($user) : void
+{
+    $db = getDB();
+    $ip = getIP();
+    $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
+    mysqli_query($db, $query);
+}
+function logs($action, $details = '', $user = '') : void
+{
+    $db = getDB();
+    $ip = getIP();
+    $query = "INSERT INTO logs (action, details, user, ip) VALUES ('$action', '$details', '$user', '$ip')";
+    mysqli_query($db, $query);
+}
