@@ -51,7 +51,7 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
 elseif(isset($_SESSION['id']))
 {
     require_once('tools.php');
-    updateUserIP($_SESSION['id']);
+    updateUserIP($_SESSION['id'], getDB());
 }
 
 
