@@ -13,7 +13,10 @@ Last update : 2022/08/08
 
 
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
 {
     require_once 'tools.php';

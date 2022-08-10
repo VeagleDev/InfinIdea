@@ -13,7 +13,11 @@ Last update : 2022/08/08
 
 
 
-<?php session_start();
+<?php
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 require_once 'tools.php';
 require_once 'strings.php';
 $db = getDB();

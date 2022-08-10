@@ -14,7 +14,10 @@ Last update : 2022/08/08
 
 <!-- PAGE PRINCIPALE, JE TE LAISSE FAIRE TOUT LE FRONT-END -->
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 require_once 'tools.php';
 require_once 'autoconnect.php';
 $db = getDB();
@@ -32,6 +35,7 @@ $db = getDB();
     <h1>MyProject - Explorer</h1>
     <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur la page de découverte !</p>
 </body>
+
 
 
 </html>

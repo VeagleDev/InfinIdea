@@ -26,7 +26,10 @@ ET TU CHANGERAS LA VALEUR DE article AVEC LA FONCTION QUI SERA SUREMENT EN JavaS
 -->
 
 <?php
-session_start() ;
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 $db = getDB();
 
 if(isset($_SESSION['id']))

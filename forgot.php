@@ -18,7 +18,10 @@ DEMANDE DE MOT DE PASSE
 CONFIRMATION DE CHANGEMENT DE MOT DE PASSE
 -->
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 require_once 'tools.php';
 require_once 'autoconnect.php';
 $db = getDB();
