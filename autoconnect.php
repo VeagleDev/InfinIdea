@@ -29,7 +29,7 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
     {
         $ts = $row['expiration'];
         $user = $row['id'];
-        logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user);
+        logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user, $db);
         updateUserIP($user);
         echo "<p style=\"color:grey\">Votre adresse IP est <code>" . getIP() . "</code></p>";
         if($ts > time())
@@ -46,6 +46,7 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
             );
         }
     }
+    mysqli_close($db);
 }
 elseif(isset($_SESSION['id']))
 {

@@ -21,7 +21,10 @@ if(session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'autoconnect.php';
-require_once 'tools.php'?> <!-- On appelle le fichier tools.php -->
+require_once 'tools.php';
+$db = getDB();
+?> <!-- On appelle le fichier tools.php -->
+
 
 <!-- DERNIER TRUC A FAIRE !! -->
 
@@ -40,12 +43,12 @@ if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche 
     <h1>MyProject - Compte</h1>
     <p>Bienvenue sur MyProject, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle !</p>
     <a href="logout.php">Se déconnecter</a>
-<?php logs('ouverture de la page compte', 'utilisateur connecté se connecte sur sa page personelle', $_SESSION['id']); ?>
+<?php logs('ouverture de la page compte', 'utilisateur connecté se connecte sur sa page personelle', $_SESSION['id'], $db); ?>
 <?php else : ?>  <!-- Sinon, on lui demande de se connecter -->
     <h1>MyProject - Accueil</h1>
     <p>Bienvenue, vous n'êtes pas connecté !</p>
     <a href="login.php">Se connecter</a>&nbsp;
     <a href="register.php">S'inscrire</a>
-<?php logs('ouverture de la page compte', 'utilisateur déconnecté se connecte sur sa page personelle'); ?>
+<?php logs('ouverture de la page compte', 'utilisateur déconnecté se connecte sur sa page personelle', $db); ?>
 <?php endif; ?>
 </body>

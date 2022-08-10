@@ -16,7 +16,7 @@ Last update : 2022/08/08
 <?php
 if(session_status() == PHP_SESSION_ACTIVE)
 {
-    logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'));
+    logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'), getDB());
     session_destroy() ;
     session_unset() ;
     $_SESSION = [] ;

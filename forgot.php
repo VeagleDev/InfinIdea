@@ -42,11 +42,11 @@ $db = getDB();
         $token = htmlspecialchars($_POST['token']);
         $pass = htmlspecialchars($_POST['pass']);
         $pass2 = htmlspecialchars($_POST['pass2']);
-        logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token);
+        logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, $db);
         list($ok, $error) = verifyPasswordStrongness($pass);
         if(!$ok)
         {
-            logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token);
+            logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, $db);
             echo('<form action="forgot.php" method="post">
                 <input type="hidden" name="token" value="' . $token . '">
                 <input type="password" name="pass" placeholder="Nouveau mot de passe">
@@ -78,31 +78,31 @@ $db = getDB();
                         $result = mysqli_query($db, $sql);
 
                         echo "<p style='color: green;'>Votre mot de passe a bien été modifié !</p>";
-                        logs('reinit', 'utilisateur a réinitialisé son mot de passe avec le token ' . $token);
+                        logs('reinit', 'utilisateur a réinitialisé son mot de passe avec le token ' . $token, $db);
                     }
                     else
                     {
                         echo "<p style='color: red;'>Une erreur est survenue lors de la modification de votre mot de passe !</p>";
-                        logs('reinit', 'erreur réinitialisation de mot de passe (sql erreur changement) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
+                        logs('reinit', 'erreur réinitialisation de mot de passe (sql erreur changement) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user, $db);
                     }
                 }
                 else
                 {
                     echo "<p style=\"color:red\">Le lien est expiré</p>";
-                    logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
+                    logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user, $db);
                 }
             }
             else
             {
                 echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-                logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token );
+                logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token, $db);
             }
 
         }
         else
         {
             echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
-            logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token);
+            logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, $db);
         }
     }
     else if(isset($_GET['token']))
@@ -130,20 +130,20 @@ $db = getDB();
             else
             {
                 echo "<p style=\"color:red\">Le lien est expiré</p>";
-                logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
+                logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user, $db);
             }
         }
         else
         {
             echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token );
+            logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token , $db);
         }
     }
     else if(isset($_SESSION['id']))
     {
         echo '<p>Bienvenue ' . getPseudo($_SESSION['id']) . ' sur la page de réinitialisation de votre mot de passe !</p>
         <p style="color:red">Attention, vous êtes connecté, veuillez vous <a href="logout.php">déconnecter</a> pour pouvoir réinitialiser votre mot de passe.</p>';
-        logs('reinit', 'utilisateur essaie de réinitialiser son mdp en étant connecté', $_SESSION['id']);
+        logs('reinit', 'utilisateur essaie de réinitialiser son mdp en étant connecté', $_SESSION['id'], $db);
     }
     else if(isset($_POST['email']))
     {
@@ -152,7 +152,7 @@ $db = getDB();
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             echo "<p style='color:red'>L'adresse email n'est pas valide !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email invalide)');
+            logs('reinit', 'erreur réinitialisation de mot de passe (email invalide)', $db);
             exit;
         }
         $sql = "SELECT prenom, id FROM users WHERE email = '$email'";
@@ -162,10 +162,10 @@ $db = getDB();
         {
             echo passwordForgotten();
             echo "<p style='color:red'>L'email est inconnue !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email inconnu)');
+            logs('reinit', 'erreur réinitialisation de mot de passe (email inconnu)', $db);
             exit;
         }
-        $token = createPassForgotToken($row['id']);
+        $token = createPassForgotToken($row['id'], $db);
         $to = $email;
         $subject = 'Réinitialisation de votre mot de passe MyProject';
         $message = 'Bonjour ' . $row['prenom'] . ",\r\n
@@ -186,20 +186,24 @@ $db = getDB();
         {
             echo '<p>Un email vous a été envoyé à <code>' . $to . "</code> pour réinitialiser votre mot de passe !</p>
             <p>Si vous n'avez pas reçu d'email, veuillez vérifier dans les spams ou <a href=\"mailto:contact@mysteriousdev.fr\">contactez-nous</a>.</p>";
-            logs('reinit', 'email envoyé pour réinitialisation de mot de passe', $row['id']);
+            logs('reinit', 'email envoyé pour réinitialisation de mot de passe', $row['id'], $db);
         }
         else
         {
             echo "<p style='color:red'>Une erreur est survenue lors de l'envoi de l'email !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (envoi email)', $row['id']);
+            logs('reinit', 'erreur réinitialisation de mot de passe (envoi email)', $row['id'], $db);
         }
     }
     else
     {
         echo passwordForgotten();
-        logs('reinit', 'utilisateur charge le formulaire de réinitialisation de mot de passe');
+        logs('reinit', 'utilisateur charge le formulaire de réinitialisation de mot de passe', $db);
     }
 
     ?>
 </body>
 </html>
+
+<?php
+$db->close();
+?>

@@ -36,6 +36,7 @@ function getID($pseudo) : int
     if($result)
     {
         $row = mysqli_fetch_assoc($result);
+        mysqli_close($db);
         if(!$row)
         {
             return -1;
@@ -47,6 +48,7 @@ function getID($pseudo) : int
     }
     else
     {
+        mysqli_close($db);
         return -1;
     }
 }
@@ -56,6 +58,7 @@ function getPseudo($id) : string
     $query = "SELECT pseudo FROM users WHERE id = '$id'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
+    mysqli_close($db);
     return $row['pseudo'];
 }
 function getMail($id) : string
@@ -64,6 +67,7 @@ function getMail($id) : string
     $query = "SELECT email FROM users WHERE id = $id";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
+    mysqli_close($db);
     return $row['email'];
 }
 function getMailbyUser($user) : string
@@ -72,6 +76,7 @@ function getMailbyUser($user) : string
     $query = "SELECT email FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
+    mysqli_close($db);
     return $row['email'];
 }
 function getPassword($id) : string
@@ -80,6 +85,7 @@ function getPassword($id) : string
     $query = "SELECT password FROM users WHERE id = $id";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
+    mysqli_close($db);
     return $row['password'];
 }
 function getPasswordbyUser($user) : string
@@ -91,16 +97,17 @@ function getPasswordbyUser($user) : string
     if($result)
     {
         $row = mysqli_fetch_assoc($result);
+        mysqli_close($db);
         return $row['password'];
     }
     else // else we return an empty string
     {
+        mysqli_close($db);
         return '';
     }
 }
-function register($pseudo, $firstname, $email, $password, $age, $avatar) : string
+function register($pseudo, $firstname, $email, $password, $age, $avatar, mysqli $db) : string
 {
-    $db = getDB();
     $query = "SELECT pseudo FROM users WHERE pseudo = '$pseudo'";
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
@@ -125,9 +132,8 @@ function register($pseudo, $firstname, $email, $password, $age, $avatar) : strin
         return '<p style="color:red">Inscription échouée</p>';
     }
 }
-function createAuthToken($id) : string
+function createAuthToken($id, mysqli $db) : string
 {
-    $db = getDB();
     // on créé un token aléatoire de 64 caractères
     $token = bin2hex(random_bytes(64));
     // on définit la date d'expiration du token
@@ -137,11 +143,14 @@ function createAuthToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
+        mysqli_close($db);
         logs('token', 'create auth token', $id);
+
         return $token;
     }
     else
     {
+        mysqli_close($db);
         return 'NONE';
     }
 
@@ -158,10 +167,12 @@ function createPassForgotToken($id) : string
     if($result)
     {
         logs('token', 'create pass forgot token', $id);
+        mysqli_close($db);
         return $token;
     }
     else
     {
+        mysqli_close($db);
         return 'NONE';
     }
 
@@ -191,28 +202,24 @@ function verifyPasswordStrongness(string $password)
 }
 function getIP() : string
 {
-    logs('ip', 'get ip', (isset($_SESSION['id']) ? $_SESSION['id'] : "Guest"));
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        echo $ip = $_SERVER['HTTP_CLIENT_IP'];
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        echo $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
     } else {
-        echo $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $_SERVER['REMOTE_ADDR'];
     }
     return $ip;
 }
-function updateUserIP($user) : void
+function updateUserIP($user, mysqli $db) : void
 {
-    $db = getDB();
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
     logs('ip', 'updated ip for user ' . $user, $user);
+    $db->close();
 }
 function logs($action, $details = '', $user = 'Guest') : void
 {
-    $db = getDB();
-    $ip = getIP();
-    $query = "INSERT INTO logs (action, details, user, ip) VALUES ('$action', '$details', '$user', '$ip')";
-    mysqli_query($db, $query);
+
 }
