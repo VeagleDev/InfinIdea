@@ -29,6 +29,7 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
     {
         $ts = $row['expiration'];
         $user = $row['id'];
+        updateUserIP($user);
         if($ts > time())
         {
             $_SESSION['id'] = $user;

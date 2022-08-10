@@ -34,7 +34,9 @@ require_once 'tools.php'?> <!-- On appelle le fichier tools.php -->
     <title>MyProject : Compte</title>
 </head>
 <body>
-<?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
+<?php
+
+if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
     <h1>MyProject - Compte</h1>
     <p>Bienvenue sur MyProject, <?=getPseudo($_SESSION['id'])?>  sur votre page personelle !</p>
     <a href="logout.php">Se déconnecter</a>
