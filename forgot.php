@@ -42,11 +42,11 @@ $db = getDB();
         $token = htmlspecialchars($_POST['token']);
         $pass = htmlspecialchars($_POST['pass']);
         $pass2 = htmlspecialchars($_POST['pass2']);
-        logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, 'Guest', $db);
+        logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, 0, $db);
         list($ok, $error) = verifyPasswordStrongness($pass);
         if(!$ok)
         {
-            logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, 'Guest', $db);
+            logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, 0, $db);
             echo('<form action="forgot.php" method="post">
                 <input type="hidden" name="token" value="' . $token . '">
                 <input type="password" name="pass" placeholder="Nouveau mot de passe">
@@ -95,14 +95,14 @@ $db = getDB();
             else
             {
                 echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-                logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token, 'Guest', $db);
+                logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token, 0, $db);
             }
 
         }
         else
         {
             echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
-            logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 'Guest', $db);
+            logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 0, $db);
         }
     }
     else if(isset($_GET['token']))
@@ -136,7 +136,7 @@ $db = getDB();
         else
         {
             echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token , 'Guest', $db);
+            logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token , 0, $db);
         }
     }
     else if(isset($_SESSION['id']))
@@ -152,7 +152,7 @@ $db = getDB();
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             echo "<p style='color:red'>L'adresse email n'est pas valide !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email invalide)', 'Guest', $db);
+            logs('reinit', 'erreur réinitialisation de mot de passe (email invalide)', 0, $db);
             exit;
         }
         $sql = "SELECT prenom, id FROM users WHERE email = '$email'";
@@ -162,7 +162,7 @@ $db = getDB();
         {
             echo passwordForgotten();
             echo "<p style='color:red'>L'email est inconnue !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email inconnu)', 'Guest', $db);
+            logs('reinit', 'erreur réinitialisation de mot de passe (email inconnu)', 0, $db);
             exit;
         }
         $token = createPassForgotToken($row['id'], $db);
@@ -197,7 +197,7 @@ $db = getDB();
     else
     {
         echo passwordForgotten();
-        logs('reinit', 'utilisateur charge le formulaire de réinitialisation de mot de passe', 'Guest', $db);
+        logs('reinit', 'utilisateur charge le formulaire de réinitialisation de mot de passe', 0, $db);
     }
 
     ?>

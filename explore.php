@@ -37,7 +37,7 @@ require_once 'autoconnect.php';
 
 <?php
 $db = getDB();
-logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'), $db);
+logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 0), $db);
 mysqli_close($db);
 ?>
 
