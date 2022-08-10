@@ -20,7 +20,7 @@ DANS LE BACK-END -->
 require_once 'strings.php';
 function getDB()
 {
-    $db = mysqli_connect('localhost', 'root', 'rta45tty1!_SL', 'blog');
+    $db = mysqli_connect('localhost', 'root', 'tta55tty4!_AL', 'blog');
     if(!$db)
     {
         die('Erreur de connexion (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
