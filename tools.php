@@ -137,6 +137,7 @@ function createAuthToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
+        logs('token', 'create auth token', $id);
         return $token;
     }
     else
@@ -156,6 +157,7 @@ function createPassForgotToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
+        logs('token', 'create pass forgot token', $id);
         return $token;
     }
     else
@@ -189,6 +191,7 @@ function verifyPasswordStrongness(string $password)
 }
 function getIP() : string
 {
+    logs('ip', 'get ip', (isset($_SESSION['id']) ? $_SESSION['id'] : "Guest"));
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         echo $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -204,8 +207,9 @@ function updateUserIP($user) : void
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
+    logs('ip', 'updated ip for user ' . $user, $user);
 }
-function logs($action, $details = '', $user = '') : void
+function logs($action, $details = '', $user = 'Guest') : void
 {
     $db = getDB();
     $ip = getIP();
