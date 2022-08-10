@@ -14,10 +14,12 @@ Last update : 2022/08/08
 
 <!-- Script de déconnexion -->
 <?php
-session_start() ;
-session_destroy() ;
-session_unset() ;
-$_SESSION = [] ;
+if(session_status() == PHP_SESSION_ACTIVE)
+{
+    session_destroy() ;
+    session_unset() ;
+    $_SESSION = [] ;
+}
 setcookie( // On crée un cookie
     'token', // Le nom du cookie
     'NONE', // Son contenu
