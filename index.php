@@ -50,7 +50,7 @@ require_once 'tools.php';
         <a href="register.php">S'inscrire</a>
     <?php
         $db = getDB();
-        logs('ouverture de la page accueil', 'utilisateur déconnecté se connecte sur la page d\'accueil', $db);
+        logs('ouverture de la page accueil', 'utilisateur déconnecté se connecte sur la page d\'accueil', '0', $db);
         mysqli_close($db);
         ?>
     <?php endif; ?>
