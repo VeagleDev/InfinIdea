@@ -155,9 +155,8 @@ function createAuthToken($id, mysqli $db) : string
     }
 
 }
-function createPassForgotToken($id) : string
+function createPassForgotToken($id, mysqli $db) : string
 {
-    $db = getDB();
     // on créé un token aléatoire de 26 caractères
     $token = bin2hex(random_bytes(26));
     // on définit la date d'expiration du token
@@ -166,13 +165,12 @@ function createPassForgotToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
-        logs('token', 'create pass forgot token', $id);
-        mysqli_close($db);
+        logs('token', 'create pass forgot token', $id, $db);
         return $token;
     }
     else
     {
-        mysqli_close($db);
+        logs('token', 'error creating pass forgot token', $id, $db);
         return 'NONE';
     }
 
