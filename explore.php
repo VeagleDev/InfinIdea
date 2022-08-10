@@ -36,6 +36,10 @@ $db = getDB();
     <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur la page de découverte !</p>
 </body>
 
+<?php
+logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 'Guest'));
+?>
+
 
 
 </html>

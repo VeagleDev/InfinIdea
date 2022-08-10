@@ -62,6 +62,7 @@ $db = getDB();
 <?php
     if(isset($_SESSION['id']))
     {
+        logs('login', 'utilisateur connecte essaie de se login', $_SESSION['id']);
         if(isset($_GET['redirect'])) // Si on a demandé une redirection
         {
             header('Location: ' .$_GET['redirect']);
@@ -79,6 +80,7 @@ $db = getDB();
         if($userID == -1)
         {
             echo "<p style='color: red'>Utilisateur inconnu !</p>";
+            logs('login', 'utilisateur essaye de se connecter avec un pseudo inconnu');
         }
         else
         {
@@ -113,6 +115,8 @@ $db = getDB();
                     );
                 }
 
+                logs('login', 'utilisateur connecte', $userID);
+
                 if(isset($_GET['redirect'])) // Si on a demandé une redirection
                 {
                     header('Location: ' .$_GET['redirect']);
@@ -126,6 +130,7 @@ $db = getDB();
             {
                 echo login_form();
                 echo "<p style='color: red'>Mot de passe incorrect !</p>";
+                logs('login', 'utilisateur essaye de se connecter avec un mdp incorrect', $userID);
             }
         }
 
@@ -133,6 +138,7 @@ $db = getDB();
     else
     {
         echo login_form();
+
     }
 
     ?>
