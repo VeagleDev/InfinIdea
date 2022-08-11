@@ -28,15 +28,18 @@ function getDB()
     {
         if(isset($_SESSION['db']))
         {
-            mysqli_close($_SESSION['db']);
-            $newDB = mysqli_connect('localhost', 'root', '***REMOVED***', 'blog');
-            $_SESSION['db'] = $newDB;
+            // on regarde si la base a été fermée
+
+            if($_SESSION['db']->ping())
+            {
+                $_SESSION['db']->close();
+            }
+            $_SESSION['db'] = mysqli_connect('p:' . 'localhost:3306', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
         else
         {
-            $db = mysqli_connect('localhost', 'root', '***REMOVED***', 'blog');
-            $_SESSION['db'] = $db;
+            $_SESSION['db'] = mysqli_connect('p:' . 'localhost:3306', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
     }
@@ -55,7 +58,6 @@ function getID($pseudo) : int
     if($result)
     {
         $row = mysqli_fetch_assoc($result);
-        mysqli_close($db);
         if(!$row)
         {
             return -1;
@@ -67,7 +69,6 @@ function getID($pseudo) : int
     }
     else
     {
-        mysqli_close($db);
         return -1;
     }
 }
@@ -77,7 +78,6 @@ function getPseudo($id) : string
     $query = "SELECT pseudo FROM users WHERE id = '$id'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
-    mysqli_close($db);
     return $row['pseudo'];
 }
 function getMail($id) : string
@@ -86,7 +86,6 @@ function getMail($id) : string
     $query = "SELECT email FROM users WHERE id = $id";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
-    mysqli_close($db);
     return $row['email'];
 }
 function getMailbyUser($user) : string
@@ -95,7 +94,6 @@ function getMailbyUser($user) : string
     $query = "SELECT email FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
-    mysqli_close($db);
     return $row['email'];
 }
 function getPassword($id) : string
@@ -104,7 +102,6 @@ function getPassword($id) : string
     $query = "SELECT password FROM users WHERE id = $id";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
-    mysqli_close($db);
     return $row['password'];
 }
 function getPasswordbyUser($user) : string
@@ -112,16 +109,13 @@ function getPasswordbyUser($user) : string
     $db = getDB();
     $query = "SELECT password FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
-    // if we get result, we return the password
     if($result)
     {
         $row = mysqli_fetch_assoc($result);
-        mysqli_close($db);
         return $row['password'];
     }
-    else // else we return an empty string
+    else
     {
-        mysqli_close($db);
         return '';
     }
 }
@@ -165,12 +159,10 @@ function createAuthToken($id) : string
     if($result)
     {
         logs('token', 'create auth token', $id, $db);
-        mysqli_close($db);
         return $token;
     }
     else
     {
-        mysqli_close($db);
         return 'NONE';
     }
 
