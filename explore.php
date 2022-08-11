@@ -36,9 +36,7 @@ require_once 'autoconnect.php';
 </body>
 
 <?php
-$db = getDB();
-logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 0), $db);
-mysqli_close($db);
+logs('explorer', 'utilisateur se rend sur la page d\'exploration', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
 ?>
 
 

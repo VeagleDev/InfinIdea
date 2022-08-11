@@ -17,15 +17,34 @@ DANS LE BACK-END -->
 
 
 <?php
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 require_once 'strings.php';
 function getDB()
 {
-    $db = mysqli_connect('localhost', 'root', 'tta55tty4!_AL', 'blog');
-    if(!$db)
+    if(PHP_SESSION_ACTIVE)
     {
-        die('Erreur de connexion (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        if(isset($_SESSION['db']))
+        {
+            mysqli_close($_SESSION['db']);
+            $newDB = mysqli_connect('localhost', 'root', 'tta55tty4!_AL', 'blog');
+            $_SESSION['db'] = $newDB;
+            return $_SESSION['db'];
+        }
+        else
+        {
+            $db = mysqli_connect('localhost', 'root', 'tta55tty4!_AL', 'blog');
+            $_SESSION['db'] = $db;
+            return $_SESSION['db'];
+        }
     }
-    return $db;
+    else
+    {
+        echo "Veillez activer les SESSIONS";
+    }
+
 }
 function getID($pseudo) : int
 {
@@ -106,8 +125,9 @@ function getPasswordbyUser($user) : string
         return '';
     }
 }
-function register($pseudo, $firstname, $email, $password, $age, $avatar, mysqli $db) : string
+function register($pseudo, $firstname, $email, $password, $age, $avatar) : string
 {
+    $db = getDB();
     $query = "SELECT pseudo FROM users WHERE pseudo = '$pseudo'";
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
@@ -132,8 +152,9 @@ function register($pseudo, $firstname, $email, $password, $age, $avatar, mysqli 
         return '<p style="color:red">Inscription échouée</p>';
     }
 }
-function createAuthToken($id, mysqli $db) : string
+function createAuthToken($id) : string
 {
+    $db = getDB();
     // on créé un token aléatoire de 64 caractères
     $token = bin2hex(random_bytes(64));
     // on définit la date d'expiration du token
@@ -154,8 +175,9 @@ function createAuthToken($id, mysqli $db) : string
     }
 
 }
-function createPassForgotToken($id, mysqli $db) : string
+function createPassForgotToken($id) : string
 {
+    $db = getDB();
     // on créé un token aléatoire de 26 caractères
     $token = bin2hex(random_bytes(26));
     // on définit la date d'expiration du token
@@ -208,15 +230,17 @@ function getIP() : string
     }
     return $ip;
 }
-function updateUserIP($user, mysqli $db) : void
+function updateUserIP($user) : void
 {
+    $db = getDB();
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
     logs('ip', 'updated ip for user ' . $user, $user, $db);
 }
-function logs($action, $details = '', $user = 0, mysqli $db) : void
+function logs($action, $details = '', $user = 0) : void
 {
+    $db = getDB();
     $ip = getIP();
     $query = 'INSERT INTO logs (action, details, user, ip) VALUES ("' . $action . '", "' . $details . '", ' . $user . ', "' . $ip . '")';
     echo $query;

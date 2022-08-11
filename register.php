@@ -19,7 +19,7 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'tools.php';
 require_once 'strings.php';
-    $db = getDB();
+$db = getDB();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,7 +55,7 @@ require_once 'strings.php';
         {
             echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
             echo '<p style="color:red">Les mots de passe ne correspondent pas</p>';
-            logs('register', 'utilisateur essaye d\'inscrire un compte avec des mots de passe différents', $db);
+            logs('register', 'utilisateur essaye d\'inscrire un compte avec des mots de passe différents', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
         }
         else
         {
@@ -64,31 +64,31 @@ require_once 'strings.php';
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">Le pseudo doit contenir entre 3 et 24 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un pseudo invalide', $db);
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un pseudo invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
             }
             else if(strlen($firstname) > 30 || strlen($firstname) < 3)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">Le prénom doit contenir entre 3 et 30 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un prénom invalide', $db);
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un prénom invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
             }
             else if(strlen($email) > 100 || strlen($email) < 4 || !filter_var($email, FILTER_VALIDATE_EMAIL))
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'email doit être correcte et contenir entre 3 et 100 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un email invalide', $db);
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un email invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
             }
             else if(strlen($age) > 2 || strlen($age) < 1)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'age doit contenir entre 1 et 2 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un age invalide', $db);
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un age invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
             }
             else if(strlen($avatar) > 200 || strlen($avatar) < 3)
             {
                 echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                 echo '<p style="color:red;">L\'avatar doit contenir entre 3 et 200 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un avatar invalide', $db);
+                logs('register', 'utilisateur essaye d\'inscrire un compte avec un avatar invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
             }
             else
             {
@@ -97,15 +97,15 @@ require_once 'strings.php';
                 {
                     echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
                     echo '<p style="color:red;">'.$error.'</p>';
-                    logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible', $db);
+                    logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
                     exit;
                 }
-                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar, $db);
+                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar);
                 echo $ret;
 
                 if($ret = '<p style="color:green">Inscription réussie</p>')
                 {
-                    logs('register', 'utilisateur inscrit un compte', getID($pseudo), $db);
+                    logs('register', 'utilisateur inscrit un compte', getID($pseudo));
                     $userID = mysqli_insert_id($db);
                     $_SESSION['id'] = $userID;
                     if(isset($_POST['stay_csonnected']))
@@ -127,7 +127,7 @@ require_once 'strings.php';
                 }
                 else
                 {
-                    logs('register', 'utilisateur essaye d\'inscrire un compte qui existe déjà', $db);
+                    logs('register', 'utilisateur essaye d\'inscrire un compte qui existe déjà', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
                 }
 
             }
@@ -138,7 +138,6 @@ require_once 'strings.php';
         echo register_form();
     }
 
-$db->close();
     ?>
 </body>
 </html>
