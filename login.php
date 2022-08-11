@@ -20,7 +20,7 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'tools.php';
 require_once 'strings.php';
-$db = getDB();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,6 +60,7 @@ $db = getDB();
 
 
 <?php
+    $db = getDB();
     if(isset($_SESSION['id']))
     {
         logs('login', 'utilisateur connecte essaie de se login', $_SESSION['id'], $db);
@@ -114,7 +115,8 @@ $db = getDB();
                         ]
                     );
                 }
-
+                mysqli_close($db); // On ferme la connexion à la base de données
+                $db = getDB(); // On récupère la connexion à la base de données
                 logs('login', 'utilisateur connecte', $userID, $db);
 
                 if(isset($_GET['redirect'])) // Si on a demandé une redirection
@@ -140,6 +142,6 @@ $db = getDB();
         echo login_form();
 
     }
-$db->close();
+mysqli_close($db);
 
     ?>
