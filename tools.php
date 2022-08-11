@@ -30,16 +30,13 @@ function getDB()
         {
             // on regarde si la base a été fermée
 
-            if($_SESSION['db']->ping())
-            {
-                $_SESSION['db']->close();
-            }
-            $_SESSION['db'] = mysqli_connect('p:' . 'localhost:3306', 'root', '***REMOVED***', 'blog');
+
+            $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
         else
         {
-            $_SESSION['db'] = mysqli_connect('p:' . 'localhost:3306', 'root', '***REMOVED***', 'blog');
+            $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
     }
