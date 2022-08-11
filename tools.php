@@ -144,7 +144,7 @@ function createAuthToken($id, mysqli $db) : string
     if($result)
     {
         mysqli_close($db);
-        logs('token', 'create auth token', $id);
+        logs('token', 'create auth token', $id, $db);
 
         return $token;
     }
