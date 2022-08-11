@@ -35,14 +35,7 @@ require_once 'tools.php';
     <h1>MyProject - Accueil</h1>
     <!-- PAGE D'ACCUEIL, JE TE LAISSE FAIRE -->
     <?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
-        <p>Bienvenue
-            <?php
-            if(isset($_SESSION['id']))
-            {
-                echo ', ' . getPseudo($_SESSION['id']);
-            }
-            ?>
-            &nbsp;!</p>
+        <p>Bienvenue sur MyProject<?=(isset($_SESSION['id'])) ? (getPseudo($_SESSION['id']) != null ? ', ' . getPseudo($_SESSION['id']) : '') : ''?> !</p>
         <a href="account.php">Mon compte</a>
         <a href="write.php">Ecrire un article</a>
         <a href="logout.php">Se déconnecter</a>
