@@ -143,9 +143,8 @@ function createAuthToken($id, mysqli $db) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
-        mysqli_close($db);
         logs('token', 'create auth token', $id, $db);
-
+        mysqli_close($db);
         return $token;
     }
     else
@@ -215,7 +214,6 @@ function updateUserIP($user, mysqli $db) : void
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
     logs('ip', 'updated ip for user ' . $user, $user, $db);
-    $db->close();
 }
 function logs($action, $details = '', $user = 0, mysqli $db) : void
 {
