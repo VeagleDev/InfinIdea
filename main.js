@@ -31,13 +31,14 @@ function get_check_site () {
     }
   }else {
     codeDisplayViewport = true
+    document.getElementsByClassName("welcom-display")[0].style.opacity = "0"
   }
 }
 
 window.addEventListener("scroll", effect);
 
 function effect() {
-    if((window.pageYOffset * 2) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
+    if((window.pageYOffset * 4) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
         if(codeDisplayViewport === true) {
           var speed = 75;
           var h1 = document.getElementsByClassName("o")[0];
@@ -60,6 +61,8 @@ function effect() {
               typeEffect(p[10], speed);
               typeEffect(p[11], speed);
           }, delay);
+
+          document.getElementsByClassName("welcom-display")[0].style.animation = "welcomCodeDisplay 1500ms forwards"
   
           codeDisplayViewport = false
         }

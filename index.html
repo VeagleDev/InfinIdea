@@ -6,15 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfinIdea : Bienvenue</title>
     <link rel="stylesheet" href="index.css">
+    <script src="js/fontawesome.js"></script>
 </head>
 <body>
     <section class="top-page">
         <header>
-            <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers creation" class="logo-top"></a>
+            <nav class="top-nav">
+                <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers creation" class="logo-top"></a>
+                <ul class="main-list">
+                    <li class="first-child">
+                        <a href=""><p>Explorer</p></a>
+
+                        <ul class="scrolling-menu">
+                            <li><a href=""><p>Découverte aléatoire</p></a></li>
+                            <li><a href=""><p>Programmation</p></a>
+                                <ul class="second-scrolling-menu">
+                                    <li><a href=""><p>C++</p></a></li>
+                                    <li><a href=""><p>C</p></a></li>
+                                    <li><a href=""><p>C#</p></a></li>
+                                    <li><a href=""><p>HTML/CSS</p></a></li>
+                                    <li><a href=""><p>Javascript</p></a></li>
+                                    <li><a href=""><p>Python</p></a></li>
+                                </ul>
+                            </li>
+                            <li><a href=""><p>Autres catégories</p></a>
+                                <ul class="second-scrolling-menu">
+                                    <li><a href="">Robotique</a></li>
+                                    <li><a href="">Projet complexe</a></li>
+                                    <li><a href=""><p>Autres...</p></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="first-child"><a href=""><p>A propos</p></a>
+                        <ul class="scrolling-menu">
+                            <p class="categorie">Général</p>
+                            <li><a href=""><p>Conditions Générale</p></a></li>
+                            <li><a href=""><p>A propos de MysteriousDev</p></a></li>
+                            <li><a href=""><p>FAQ</p></a></li>
+                            <p class="categorie">Informations supplémentaires</p>
+                            <li><a href=""><p>Devenir développeur</p></a></li>
+                            <li><a href=""><p>Devenir membre de MysteriousDev</p></a></li>
+                            <li><a href=""><p>Nous contacter</p></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
             <nav class="user-connection-interaction-nav">
-                <ul>
-                    <a href=""><li><h4>S'inscrire</h4></li></a>
-                    <a href=""><li><h4>Se connecter</h4></li></a>
+                <ul class="user-connection-interaction-list">
+                    <li class="user-menu">
+                        <a href="">
+                            <p>Bonjour, &nbsp;<p class="unconnected">connectez-vous &nbsp;<i class="fa-solid fa-angle-down"></i></p></p>
+                            <ul class="user-connection-scrolling-menu">
+                                <li><a href=""><p>Mon compte</p></a></li>
+                                <li><a href=""><p>Comment se connecter ?</p></a></li>
+                                <li><a href=""><p>A propos</p></a></li>
+                                <li><a href=""><p>Mes projets</p></a></li>
+                                <li><a href=""><p>Conditions d'utilisations</p></a></li>
+                                <li><a href=""><p>Paramètres</p></a></li>
+                            </ul>
+                        </a>                       
+                    </li>  
+                    <a href="" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S'inscrire</p></li></a>
                 </ul>
             </nav>
             <div class="main-title-container">
