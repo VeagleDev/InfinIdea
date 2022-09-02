@@ -232,6 +232,5 @@ function logs($action, $details = '', $user = 0) : void
     $db = getDB();
     $ip = getIP();
     $query = 'INSERT INTO logs (action, details, user, ip) VALUES ("' . $action . '", "' . $details . '", ' . $user . ', "' . $ip . '")';
-    echo $query;
     mysqli_query($db, $query);
 }
