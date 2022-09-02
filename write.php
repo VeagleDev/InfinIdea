@@ -37,17 +37,26 @@ require_once 'tools.php';
 // si l'utilisateur est connecté
 if(isset($_POST['title']) && isset($_POST['content']))
 {
-    echo "Publication de l'article...";
-    $title = $_POST['title'];
-    $content = $_POST['content'];
+    $title = htmlspecialchars($_POST['title']);
+    $content = htmlspecialchars($_POST['content']);
     $author = $_SESSION['id'];
-    echo "Article de " . getPseudo($author) . " : " . $title . " : " . $content;
+    $db = getDB();
+    $sql = "INSERT INTO articles (name, content, creator, tags) VALUES ('$title', '$content', '$author', 'dev')";
+    $result = mysqli_query($db, $sql);
+    if($result)
+    {
+        echo "Article publié";
+    }
+    else
+    {
+        echo "Erreur lors de la publication de l'article";
+    }
 }
 else
 {
     // si l'utilisateur a envoyé un article
     if (!isset($_SESSION['id'])) {
-        echo "Il faut être connecté pour publier un article !";
+        echo "<p style=\"color:red;\">Il faut être connecté pour publier un article !</p>";
         die();
     }
     ?>
