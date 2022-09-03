@@ -39,9 +39,26 @@ if(isset($_POST['title']) && isset($_POST['content']))
 {
     $title = htmlspecialchars($_POST['title']);
     $content = htmlspecialchars($_POST['content']);
+    if(isset($_POST['desc']))
+    {
+        $desc = htmlspecialchars($_POST['desc']);
+    }
+    else
+    {
+        $desc = '';
+    }
+    if(isset($_POST['tags']))
+    {
+        $tags = htmlspecialchars($_POST['tags']);
+    }
+    else
+    {
+        $tags = '';
+    }
     $author = $_SESSION['id'];
     $db = getDB();
-    $sql = "INSERT INTO articles (name, content, creator, tags) VALUES ('$title', '$content', '$author', 'dev')";
+    $sql = "INSERT INTO articles ( name, description, content, creator, tags) 
+            VALUES ('$title', '$desc', '$content', $author, '$tags')";
     $result = mysqli_query($db, $sql);
     if($result)
     {
@@ -65,9 +82,49 @@ else
     <!-- formulaire avec champs pour le titre, et le contenu de l'article avec un bouton submit-->
     <form action="write.php" method="post">
         <input type="text" name="title" placeholder="Titre de l'article">
+        <input type="text" name="desc" placeholder="Description de l'article">
+        <-- entrée pour mettre des tags -->
+        <input type="text" name="tags" placeholder="Tags de l'article">
+
+        <!-- Nice text area -->
         <textarea name="content" id="content" cols="30" rows="10" placeholder="Contenu de l'article"></textarea>
         <input type="submit" value="Publier">
     </form>
+
+
+    <!-- stylesheet for the form -->
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            margin: 10px;
+
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            resize: none;
+        }
+        <-- submit button -->
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
     <?php
 
 }

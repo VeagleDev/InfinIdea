@@ -32,7 +32,75 @@ require_once 'autoconnect.php';
 </head>
 <body>
     <h1>MyProject - Explorer</h1>
-    <p>Bienvenue, <?=getPseudo($_SESSION['id'])?>  sur la page de découverte !</p>
+
+    <?php
+    $db = getDB();
+    if(isset($_GET['article']))
+    {
+        $sql = "SELECT name, description, content, creator, created, modified, tags, views, likes FROM articles WHERE id = " . $_GET['article'] . " AND visibility = 'public';";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $sql = "UPDATE articles SET views = views + 1 WHERE id = " . $_GET['article'] . ";";
+        mysqli_query($db, $sql);
+        echo '<h2>' . $row['name'] . '</h2>';
+        echo '<p>' . $row['description'] . '</p>';
+        echo '<p>' . $row['content'] . '</p>';
+        echo '<p>Créé par ' . getPseudo($row['creator']) . ' le ' . $row['created'] . '</p>';
+        echo '<p>Modifié le ' . $row['modified'] . '</p>';
+        echo '<p>Tags : ' . $row['tags'] . '</p>';
+        echo '<p>Vues : ' . $row['views'] . '</p>';
+        echo '<p>Likes : ' . $row['likes'] . '</p>';
+
+
+    }
+    else
+    {
+        $sql = "SELECT id, name, description, content, creator, created, tags, views FROM articles WHERE visibility = 'public' ORDER BY created DESC";
+        $result = mysqli_query($db, $sql);
+        if($result)
+        {
+            while($row = mysqli_fetch_assoc($result))
+            {
+                // create a card for each article
+                echo '<a href="explore.php?article='.$row['id'].'">';
+                echo '<div class="card">';
+                echo '<h2>'.$row['name'].'</h2>';
+                echo '<p>'.$row['description'].'</p>';
+                echo '<p>Écrit par '. getPseudo($row['creator']) . ' le ' . $row['created'] . '</p>';
+                echo '<p>'.$row['tags'].'</p>';
+                echo '<p>'.$row['views'].' vues</p>';
+                echo '</div>';
+                echo '</a>';
+
+            }
+
+        }
+        else
+        {
+            echo 'Erreur : '.mysqli_error($db);
+        }
+
+    }
+    ?>
+
+    <!-- create nice style for the cards -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .card {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+
+        }
+    </style>
+
+
+
 </body>
 
 <?php
