@@ -83,7 +83,6 @@ else
     <form action="write.php" method="post">
         <input type="text" name="title" placeholder="Titre de l'article">
         <input type="text" name="desc" placeholder="Description de l'article">
-        <-- entrée pour mettre des tags -->
         <input type="text" name="tags" placeholder="Tags de l'article">
 
         <!-- Nice text area -->
