@@ -113,7 +113,6 @@ else
             padding: 12px 20px 12px 40px;
             resize: none;
         }
-        <-- submit button -->
         input[type=submit] {
             width: 100%;
             background-color: #4CAF50;
