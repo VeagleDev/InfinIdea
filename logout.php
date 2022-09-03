@@ -14,6 +14,7 @@ Last update : 2022/08/08
 
 <!-- Script de déconnexion -->
 <?php
+require_once 'tools.php';
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose

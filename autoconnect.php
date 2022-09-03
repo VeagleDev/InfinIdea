@@ -31,7 +31,6 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
         $user = $row['id'];
         logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user);
         updateUserIP($user);
-        echo "<p style=\"color:grey\">Votre adresse IP est <code>" . getIP() . "</code></p>";
         if($ts > time())
         {
             $_SESSION['id'] = $user;
