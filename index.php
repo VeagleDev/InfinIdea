@@ -35,7 +35,7 @@ require_once 'tools.php';
 <body>
 <section class="top-page">
     <header>
-        <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers creation" class="logo-top"></a>
+        <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers" class="logo-top"></a>
         <nav class="user-connection-interaction-nav">
             <ul>
                 <a href="register.php"><li><h4>S'inscrire</h4></li></a>
@@ -46,7 +46,7 @@ require_once 'tools.php';
             <img src="images/Logo_InfinIdea.png" alt="Logo_InfinIdea" class="logo title">
             <h1 class="catchword">Créer est la découverte</h1>
         </div>
-        <a href="" id="discover-interaction"><h4>Découvrir</h4></a>
+        <a href="explore.php" id="discover-interaction"><h4>Découvrir</h4></a>
     </header>
 </section>
 
@@ -59,12 +59,7 @@ require_once 'tools.php';
         <div class="line-display"><p>01</p></div>
 
         <div class="site-usefullness line">
-            <p class="o">Bienvenue
-                <?php
-                if(isset($_SESSION['id']))
-                    echo(', ' . getPseudo($_SESSION['id']))
-            ?>
-            () {</p>
+            <p class="o">Bienvenue<?php if(isset($_SESSION['id']))echo(', ' . getPseudo($_SESSION['id']))?>() {</p>
         </div>
 
         <div class="line-display"><p>02</p></div>
