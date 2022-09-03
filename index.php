@@ -38,8 +38,19 @@ require_once 'tools.php';
         <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers" class="logo-top"></a>
         <nav class="user-connection-interaction-nav">
             <ul>
-                <a href="register.php"><li><h4>S'inscrire</h4></li></a>
-                <a href="login.php"><li><h4>Se connecter</h4></li></a>
+                <?php
+                if(isset($_SESSION['id']))
+                {
+                    echo('<a href="account.php"><li><h4>Bienvenue, <b>' . getPseudo($_SESSION['id']) . '</b></h4></li></a>');
+                }
+                else
+                {
+                    ?>
+                        <a href="register.php"><li><h4>S'inscrire</h4></li></a>
+                        <a href="login.php"><li><h4>Se connecter</h4></li></a>
+                    <?php
+                }
+                ?>
             </ul>
         </nav>
         <div class="main-title-container">
