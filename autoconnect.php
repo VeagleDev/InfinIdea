@@ -13,14 +13,13 @@ Last update : 2022/08/08
 
 
 <?php
-if(session_status() == PHP_SESSION_NONE)
+
+require_once 'tools.php';
+
+$db = getDB();
+
+function connectViaCookie(mysqli $db)
 {
-    session_start(); // On démarre la session AVANT toute chose
-}
-if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
-{
-    require_once 'tools.php';
-    $db = getDB();
     $token = htmlspecialchars($_COOKIE['token']);
     $query = "SELECT id, expiration FROM tokens WHERE token = '$token'";
     $result = mysqli_query($db, $query);
@@ -46,10 +45,30 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
         }
     }
 }
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
+if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
+{
+    connectViaCookie($db);
+}
 elseif(isset($_SESSION['id']))
 {
     require_once('tools.php');
+    if($_SESSION['id'] == 0)
+    {
+        if(isset($_COOKIE['token']))
+        {
+            connectViaCookie($db);
+        }
+        else
+        {
+            logout();
+        }
+    }
     updateUserIP($_SESSION['id']);
+
 }
 
 

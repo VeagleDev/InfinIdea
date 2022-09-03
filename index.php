@@ -44,6 +44,7 @@ require_once 'tools.php';
                     ?>
                         <a href="account.php"><li><h4>Compte</h4></li></a>
                         <a href="write.php"><li><h4>Écrire</h4></li></a>
+                        <a href="logout.php"><li><h4>Déconnexion</h4></li></a>
                     <?php
                 }
                 else
