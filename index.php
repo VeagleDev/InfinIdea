@@ -41,7 +41,10 @@ require_once 'tools.php';
                 <?php
                 if(isset($_SESSION['id']))
                 {
-                    echo('<a href="account.php"><li><h4>Bienvenue, ' . getPseudo($_SESSION['id']) . '</h4></li></a>');
+                    ?>
+                        <a href="account.php"><li><h4>Compte</h4></li></a>
+                        <a href="write.php"><li><h4>Écrire</h4></li></a>
+                    <?php
                 }
                 else
                 {

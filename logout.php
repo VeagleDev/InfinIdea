@@ -14,6 +14,10 @@ Last update : 2022/08/08
 
 <!-- Script de déconnexion -->
 <?php
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
 if(session_status() == PHP_SESSION_ACTIVE)
 {
     logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
