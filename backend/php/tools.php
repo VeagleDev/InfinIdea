@@ -74,8 +74,23 @@ function getPseudo($id) : string
     $db = getDB();
     $query = "SELECT pseudo FROM users WHERE id = '$id'";
     $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['pseudo'];
+    // if we have a result, we can return the id
+    if($result)
+    {
+        $row = mysqli_fetch_assoc($result);
+        if(!$row)
+        {
+            return "Utilisateur inconnu ($id)";
+        }
+        else
+        {
+            return $row['pseudo'];
+        }
+    }
+    else
+    {
+        return "Utilisateur inconnu ($id)";
+    }
 }
 function getMail($id) : string
 {
@@ -232,6 +247,29 @@ function logs($action, $details = '', $user = 0) : void
     $db = getDB();
     $ip = getIP();
     $query = 'INSERT INTO logs (action, details, user, ip) VALUES ("' . $action . '", "' . $details . '", ' . $user . ', "' . $ip . '")';
-    echo $query;
     mysqli_query($db, $query);
+}
+
+function logout() : void
+{
+    if(session_status() == PHP_SESSION_NONE)
+    {
+        session_start(); // On démarre la session AVANT toute chose
+    }
+    if(session_status() == PHP_SESSION_ACTIVE)
+    {
+        logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
+        session_destroy() ;
+        session_unset() ;
+        $_SESSION = [] ;
+    }
+    setcookie( // On crée un cookie
+        'token', // Le nom du cookie
+        'NONE', // Son contenu
+        [
+            'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+            'secure' => true, // On dit que le cookie est sécurisé
+            'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+        ]
+    );
 }
