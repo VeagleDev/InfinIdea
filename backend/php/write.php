@@ -69,24 +69,29 @@ if(isset($_POST['title']) && isset($_POST['content']))
     {
         echo "Article publié";
         // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
-        if (isset($_FILES['banner']) && $_FILES['banner']['error'] == 0) {
+        if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
+        {
             // Testons si le fichier n'est pas trop gros
-            if ($_FILES['banner']['size'] <= 2000000) {
+            if ($_FILES['screenshot']['size'] <= 1000000)
+            {
                 // Testons si l'extension est autorisée
-                $fileInfo = pathinfo($_FILES['banner']['name']);
+                $fileInfo = pathinfo($_FILES['screenshot']['name']);
                 $extension = $fileInfo['extension'];
                 $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-                if (in_array($extension, $allowedExtensions)) {
+                if (in_array($extension, $allowedExtensions))
+                {
                     // On peut valider le fichier et le stocker définitivement
                     move_uploaded_file($_FILES['screenshot']['tmp_name'], 'uploads/' . mysqli_affected_rows($db) . '.' . $extension);
-                echo "L'envoi a bien été effectué !";
-            }
+                    echo "L'envoi a bien été effectué !";
+                }
             }
         }
+
+
     }
     else
     {
-        echo "Erreur lors de la publication de l'article";
+        echo "Rien n'a été publié";
     }
 }
 else
@@ -100,14 +105,14 @@ else
     <h1>MyProject - Article</h1>
     <p>Bienvenue sur MyProject, <?=getPseudo($_SESSION['id'])?>  sur la page d'écriture !</p>
     <!-- formulaire avec champs pour le titre, et le contenu de l'article avec un bouton submit-->
-    <form action="write.php" method="post">
+    <form action="write.php" method="post" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Titre de l'article">
         <input type="text" name="desc" placeholder="Description de l'article">
         <input type="text" name="tags" placeholder="Tags de l'article">
 
         <div class="mb-3">
-            <label for="image" class="form-label">Votre bannière</label>
-            <input type="file" class="form-control" id="banner" name="banner" />
+            <label for="screenshot" class="form-label">Votre capture d'écran</label>
+            <input type="file" class="form-control" id="screenshot" name="screenshot" />
         </div>
 
         <!-- Nice text area -->
