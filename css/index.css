@@ -33,7 +33,10 @@
     }
 }
 
-
+.top-nav::after {
+    height: 0;
+    width: 0;
+}
 
 .top-page {
     width: 100%;
