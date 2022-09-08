@@ -50,6 +50,16 @@ require_once 'autoconnect.php';
         echo '<p>Tags : ' . $row['tags'] . '</p>';
         echo '<p>Vues : ' . $row['views'] . '</p>';
         echo '<p>Likes : ' . $row['likes'] . '</p>';
+        // make a modify button if the user is the creator
+        if(isset($_SESSION['id']) && $_SESSION['id'] == $row['creator'])
+        {
+            echo '<a href="modify.php?article=' . $_GET['article'] . '">Modifier</a>';
+        }
+        // add a like button if the user is connected
+        if(isset($_SESSION['id']))
+        {
+            echo '<a href="like.php?article=' . $_GET['article'] . '">Like</a>';
+        }
 
 
     }
