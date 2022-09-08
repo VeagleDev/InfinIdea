@@ -100,7 +100,7 @@ $db = getDB();
                     logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
                     exit;
                 }
-                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar);
+                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar, $db);
                 echo $ret;
 
                 if($ret = '<p style="color:green">Inscription réussie</p>')
