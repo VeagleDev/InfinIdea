@@ -56,6 +56,11 @@ if(isset($_POST['title']) && isset($_POST['content']))
         $tags = '';
     }
     $author = $_SESSION['id'];
+
+
+
+
+
     $db = getDB();
     $sql = "INSERT INTO articles ( name, description, content, creator, tags) 
             VALUES ('$title', '$desc', '$content', $author, '$tags')";
@@ -63,6 +68,21 @@ if(isset($_POST['title']) && isset($_POST['content']))
     if($result)
     {
         echo "Article publié";
+        // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
+        if (isset($_FILES['banner']) && $_FILES['banner']['error'] == 0) {
+            // Testons si le fichier n'est pas trop gros
+            if ($_FILES['banner']['size'] <= 2000000) {
+                // Testons si l'extension est autorisée
+                $fileInfo = pathinfo($_FILES['banner']['name']);
+                $extension = $fileInfo['extension'];
+                $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
+                if (in_array($extension, $allowedExtensions)) {
+                    // On peut valider le fichier et le stocker définitivement
+                    move_uploaded_file($_FILES['screenshot']['tmp_name'], 'uploads/' . mysqli_affected_rows($db) . '.' . $extension);
+                echo "L'envoi a bien été effectué !";
+            }
+            }
+        }
     }
     else
     {
@@ -84,6 +104,11 @@ else
         <input type="text" name="title" placeholder="Titre de l'article">
         <input type="text" name="desc" placeholder="Description de l'article">
         <input type="text" name="tags" placeholder="Tags de l'article">
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Votre bannière</label>
+            <input type="file" class="form-control" id="banner" name="banner" />
+        </div>
 
         <!-- Nice text area -->
         <textarea name="content" id="content" cols="30" rows="10" placeholder="Contenu de l'article"></textarea>
