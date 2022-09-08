@@ -82,7 +82,7 @@ if(isset($_POST['title']) && isset($_POST['content']))
                 if (in_array($extension, $allowedExtensions))
                 {
                     // On peut valider le fichier et le stocker définitivement
-                    move_uploaded_file($_FILES['screenshot']['tmp_name'], 'uploads/' . mysqli_affected_rows($db) . '.' . $extension);
+                    move_uploaded_file($_FILES['screenshot']['tmp_name'], 'uploads/' . mysqli_insert_id($db) . '.' . $extension);
                     echo "L'envoi a bien été effectué !";
                 }
             }
