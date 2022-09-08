@@ -31,6 +31,7 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
         $row = mysqli_fetch_assoc($result);
         if ($row) {
             if ($row['creator'] != $_SESSION['id']) {
+                echo "<p> " . $row['creator'] . " != " . $_SESSION['id']  . "</p>";
                 echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article !</p>";
                 die();
             }
