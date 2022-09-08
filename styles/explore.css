@@ -37,7 +37,7 @@
 
 .top-page {
     width: 100%;
-    height: 100vh;
+    height: 75px;
     background: linear-gradient(0deg, #0b162c 10%, #1c2942 90%);
 }
 
@@ -48,7 +48,7 @@
 }
 
 .top-nav a {
-    color: #000;
+    color: #FFF;
     display: block;
     width: 100%;
     padding-right: 30px;
@@ -66,8 +66,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 100px;
+    background: red;
     font-size: 18px;
 }
 
@@ -87,12 +86,19 @@
     transform-origin: top center;
 }
 
+.scrolling-menu a {
+    color: #000;
+    transition: all 200ms ease;
+}
+
 .scrolling-menu li, .second-scrolling-menu li {
     padding-bottom: 15px;
+
+    transition: all 200ms ease;
 }
 
 .second-scrolling-menu {
-    display: inline;
+    display: none;
     position: absolute;
 
     background-color: #e8eddf;
@@ -102,16 +108,12 @@
     top: -2px;
     padding: 30px;
     margin-left: calc(100% - 30px);
-    transform: scaleX(0);
-
-    transition: all 200ms ease;
-    transform-origin: left;
 }
 
 .scrolling-menu p.categorie {
     padding-bottom: 10px;
-    margin-top: -10px;
     margin-left: -20px;
+    margin-bottom: 15px;
 }
 
 .scrolling-menu p.categorie::after {
@@ -125,12 +127,21 @@
     background: #F5CB5C;
 }
 
+.scrolling-menu p {
+    width: 120%;
+}
+
 .top-nav .first-child:hover .scrolling-menu {
     transform: scale(100%);
 }
 
 .top-nav .scrolling-menu li:hover .second-scrolling-menu {
-    transform: scaleX(100%);
+    display: inline;
+}
+
+.top-nav .scrolling-menu a:hover {
+    background: #ababab;
+    border-radius: 3px;
 }
 
 .logo-top {
@@ -213,184 +224,23 @@
     width: 100%;
     height: 100%;
     color: #000;
-    transition: all 100ms ease;
 }
 
 
 .user-connection-scrolling-menu a:hover {
     color: #42847e;
-    text-decoration: underline;
-    opacity: .5;
 }
 
 .user-menu:hover .user-connection-scrolling-menu {
     animation: growDown 800ms forwards;
 }
 
-.user-menu i {
+.user-menu i, .first-child i {
     transition: all 800ms ease;
     opacity: .3;
 }
 
-.user-menu:hover i {
+.user-menu:hover i, .first-child:hover i {
     transform: translateY(5px);
     opacity: 1;
-}
-
-
-.main-title-container {
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-}
-
-.title {
-    padding-bottom: 65px;
-    padding-left: 10px;
-}
-
-.logo {
-    width: 400px;
-}
-
-.catchword {
-    font-family: 'Poppins';
-    color: #FFF;
-
-    font-size: 40px;
-    padding-left: 10px;
-}
-
-.catchword::before {
-    content: '•';
-    padding-right: 10px;
-}
-
-#discover-interaction {
-    position: absolute;
-    background: linear-gradient(50deg, rgba(95,194,186,.2) 25%, rgba(61,122,117,.2) 82%);
-    border: #42847e 3px solid;
-
-    width: 300px;
-    height: 90px;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    border-radius: 5px;
-    color: #FFF;
-    font-family: 'Cabin';
-    font-size: 40px;
-    letter-spacing: 1.5px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.top-page::after {
-    content: "";
-    position: absolute;
-    background: linear-gradient(180deg, rgba(11,22,44,1) 0%, rgba(0,0,0,0) 100%);
-    width: 100%;
-    height: 500px;
-}
-
-
-.contents-page {
-    margin-top: 300px;
-    width: 100%;
-}
-
-.code-header {
-    width: 100%;
-    height: 50px;
-    background: #181817;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: #000 0px 5px 10px;
-}
-
-.file-display:nth-child(2) {
-    background: #3a3a3a;
-    height: 80%;
-    width: 40%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 5px;
-}
-
-.file-display:nth-child(1) {
-    background: #242423;
-    height: 100%;
-    width: 40%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 5px;
-}
-
-.line-display {
-    position: absolute;
-    height: 30px;
-    font-size: 17px;
-    padding-left: 5px;
-    padding-top: 3px;
-}
-
-.welcom-display {
-    width: 75%;
-    height: 1000px;
-
-    margin: 50px;
-    padding-top: 20px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-
-    border-radius: 15px;
-    background: #242423;
-
-    font-family: 'Titillium Web';
-    color: #e8eddf;
-    letter-spacing: 3px;
-}
-
-.following-text p {
-    display: none;
-}
-
-.site-usefullness p {
-    display: none;
-}
-
-.site-usefullness-bottom p {
-    display: none;
-}
-
-#welcom {
-    padding: 20px 0px 0px 20px;
-    font-size: 40px;
-}
-
-.following-text {
-    padding-left: 60px;
-    font-size: 20px;
-}
-
-.site-usefullness{
-    padding-left: 40px;
-    font-size: 20px;
-}
-
-.site-usefullness-bottom {
-    padding-left: 40px;
-    font-size: 20px;
 }
