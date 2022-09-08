@@ -161,6 +161,7 @@
     top: 0;
     font-family: 'Cabin';
     letter-spacing: .3px;
+    z-index: 999;
 }
 
 .user-connection-interaction-list {

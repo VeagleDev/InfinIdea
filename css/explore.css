@@ -15,20 +15,67 @@ html {
     background: #0b162c;
     background: linear-gradient(0deg, #0b162c 10%, #1c2942 90%);
     width: 90%;
-    height: 1000px;
+    height: auto;
 
-    margin-top: 70px;
+    margin-top: 50px;
     margin-left: 50%;
     transform: translate(-50%);
     border-radius: 30px;
+    padding-bottom: 90px;
 }
 
 .card {
-    background: red;
+    display: flex;
+
     width: 90%;
-    height: 300px;
+    height: 200px;
 
     margin-left: 50%;
     transform: translate(-50%);
-    margin-top: 50px;
+    margin-top: 70px;
+
+    font-family: 'Cabin';
+    letter-spacing: .5px;
+}
+
+.presentation-photo {
+    width: 400px;
+    height: 250px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 100%;
+    padding-left: 15px;
+    color: #FFF;
+
+    padding-top: 3px;
+}
+
+.card h3 {
+    font-size: 25px;
+}
+
+.card p {
+    font-size: 17px;
+}
+
+.statistics-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+.views-number {
+    padding-right: 5px;
+}
+
+.date-upload::before {
+    content: '•';
+    padding-right: 5px;
+}
+
+.description {
+    margin-top: 30px;
 }
