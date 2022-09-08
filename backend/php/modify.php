@@ -31,7 +31,6 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
         $row = mysqli_fetch_assoc($result);
         if ($row) {
             if ($row['creator'] != $_SESSION['id']) {
-                echo "<p> " . $row['creator'] . " != " . $_SESSION['id']  . "</p>";
                 echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article !</p>";
                 die();
             }
@@ -92,6 +91,24 @@ elseif(isset($_GET['article']))
                 <input type="text" name="tags" id="tags" value="<?php echo $row['tags']; ?>">
                 <input type="submit" value="Modifier">
             </form>
+            <!-- nice style for the form and the textarea -->
+            <style>
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    width: 50%;
+                    margin: 0 auto;
+                }
+                form label {
+                    margin-top: 10px;
+                }
+                form input, form textarea {
+                    padding: 5px;
+                    border: 1px solid #000;
+                }
+                form textarea {
+                    resize: none;
+                }
             <?php
         }
     }
