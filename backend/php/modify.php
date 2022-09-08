@@ -14,6 +14,7 @@ if(!isset($_SESSION['id']))
     die();
 }
 
+
 if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']))
 {
     $id = htmlspecialchars($_POST['id']);
@@ -42,32 +43,8 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
     {
         echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article</p>";
     }
-
 }
-else
-{
-    // si l'utilisateur a envoyé un article
-    if (!isset($_SESSION['id'])) {
-        echo "<p style=\"color:red;\">Il faut être connecté pour publier un article !</p>";
-        die();
-    }
-    ?>
-    <h1>MyProject - Article</h1>
-    <form action="modify.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-        <label for="title">Titre</label>
-        <input type="text" name="title" id="title" value="<?php echo $_GET['title']; ?>">
-        <label for="desc">Description</label>
-        <input type="text" name="desc" id="desc" value="<?php echo $_GET['desc']; ?>">
-        <label for="content">Contenu</label>
-        <textarea name="content" id="content" cols="30" rows="10"><?php echo $_GET['content']; ?></textarea>
-        <label for="tags">Tags</label>
-        <input type="text" name="tags" id="tags" value="<?php echo $_GET['tags']; ?>">
-        <input type="submit" value="Modifier">
-    </form>
-    <?php
-}
-if(isset($_GET['article']))
+elseif(isset($_GET['article']))
 {
     $db = getDB();
     $id = $_GET['article'];
