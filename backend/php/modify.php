@@ -37,11 +37,13 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
         else
         {
             echo "Erreur lors de la modification de l'article";
+            die();
         }
     }
     else
     {
         echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article</p>";
+        die();
     }
 }
 elseif(isset($_GET['article']))
@@ -54,6 +56,7 @@ elseif(isset($_GET['article']))
     if( $result )
     {
         $row = mysqli_fetch_assoc($result);
+
         if($row['creator'] != $_SESSION['id'])
         {
             echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article !</p>";
