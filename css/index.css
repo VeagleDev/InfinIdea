@@ -42,210 +42,8 @@
 }
 
 .top-nav {
-    display: flex;
-    font-family: 'Cabin';
-    position: absolute;
+    background: none;
 }
-
-.top-nav a {
-    color: #FFF;
-    display: block;
-    width: 100%;
-    padding-right: 30px;
-}
-
-.top-nav ul {
-    list-style: none;
-}
-
-.top-nav .main-list {
-    display: flex;
-}
-
-.top-nav .first-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 125px;
-    font-size: 18px;
-}
-
-.scrolling-menu {
-    display: block;
-    position: absolute;
-
-    background-color: #e8eddf;
-    border: #000 2px solid;
-
-    width: 150px;
-    top: 64px;
-    padding: 30px;
-    transform: scale(0);
-
-    transition: all 200ms ease;
-    transform-origin: top center;
-}
-
-.scrolling-menu a {
-    color: #000;
-    transition: all 200ms ease;
-}
-
-.scrolling-menu li, .second-scrolling-menu li {
-    padding-bottom: 15px;
-
-    transition: all 200ms ease;
-}
-
-.second-scrolling-menu {
-    display: none;
-    position: absolute;
-
-    background-color: #e8eddf;
-    border: #000 2px solid;
-
-    width: 150px;
-    top: -2px;
-    padding: 30px;
-    margin-left: calc(100% - 30px);
-}
-
-.scrolling-menu p.categorie {
-    padding-bottom: 10px;
-    margin-left: -20px;
-    margin-bottom: 15px;
-}
-
-.scrolling-menu p.categorie::after {
-    content: "";
-    width: 95%;
-    height: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 25px;
-    position: absolute;
-    background: #F5CB5C;
-}
-
-.scrolling-menu p {
-    width: 120%;
-}
-
-.top-nav .first-child:hover .scrolling-menu {
-    transform: scale(100%);
-}
-
-.top-nav .scrolling-menu li:hover .second-scrolling-menu {
-    display: inline;
-}
-
-.top-nav .scrolling-menu a:hover {
-    background: #ababab;
-    border-radius: 3px;
-}
-
-.logo-top {
-    width: 50px;
-    margin: 5px;
-}
-
-.user-connection-interaction-nav {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-family: 'Cabin';
-}
-
-.user-connection-interaction-list {
-    list-style: none;
-    display: flex;
-    margin: 10px;
-}
-
-.sign-in-sub-element {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.user-connection-interaction-nav p {
-    font-size: 20px;
-}
-
-.sign-in {
-    color: #FFF;
-    text-decoration: none;
-
-    width: 400px;
-    height: 50px;
-    margin-left: 10px;
-    border-radius: 3px;
-
-    border: #42847e 2px solid;
-    background: linear-gradient(50deg, rgba(95,194,186,.1) 25%, rgba(61,122,117,.1) 82%);
-}
-
-.user-menu a {
-    color: #fff;
-}
-
-.user-menu {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-
-.user-connection-scrolling-menu {
-    display: block;
-    position: absolute;
-
-    list-style: none;
-    background: #e8eddf;
-
-    width: 150px;
-    padding: 10px 0 10px 0;
-    border-radius: 3px;
-    box-shadow: #181817 1px 2px 10px;
-
-    transform-origin: top center;
-    transform: scaleY(0);
-}
-
-.user-connection-scrolling-menu li {
-    display: block;
-    margin: 5px;
-    border-bottom: #000 1px solid;
-}
-
-.user-connection-scrolling-menu a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    color: #000;
-}
-
-
-.user-connection-scrolling-menu a:hover {
-    color: #42847e;
-}
-
-.user-menu:hover .user-connection-scrolling-menu {
-    animation: growDown 800ms forwards;
-}
-
-.user-menu i, .first-child i {
-    transition: all 800ms ease;
-    opacity: .3;
-}
-
-.user-menu:hover i, .first-child:hover i {
-    transform: translateY(5px);
-    opacity: 1;
-}
-
 
 .main-title-container {
     width: 100%;
@@ -280,10 +78,10 @@
 #discover-interaction {
     position: absolute;
     background: linear-gradient(50deg, rgba(95,194,186,.2) 25%, rgba(61,122,117,.2) 82%);
-    border: #42847e 3px solid;
+    border: #647799 2px solid;
 
-    width: 300px;
-    height: 90px;
+    width: 280px;
+    height: 85px;
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
@@ -291,8 +89,8 @@
     border-radius: 5px;
     color: #FFF;
     font-family: 'Cabin';
-    font-size: 40px;
-    letter-spacing: 1.5px;
+    font-size: 35px;
+    letter-spacing: 2px;
 
     display: flex;
     justify-content: center;
