@@ -131,9 +131,8 @@ function getPasswordbyUser($user) : string
         return '';
     }
 }
-function register($pseudo, $firstname, $email, $password, $age, $avatar) : string
+function register($pseudo, $firstname, $email, $password, $age, $avatar, mysqli $db) : string
 {
-    $db = getDB();
     $query = "SELECT pseudo FROM users WHERE pseudo = '$pseudo'";
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
