@@ -1,0 +1,264 @@
+@import url(import-fonts.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0);
+    }
+
+    80% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(100%);
+    }
+}
+
+@keyframes welcomCodeDisplay {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
+.top-nav {
+    display: flex;
+    font-family: 'Rubik';
+    letter-spacing: .4px;
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    background: rgb(11,22,44);
+}
+
+.top-nav::after {
+    content: "";
+    position: absolute;
+    background: linear-gradient(180deg, rgba(11,22,44,1) 0%, rgba(140,145,156,0.387) 28%, rgba(192,195,201,0) 49%, rgba(255,255,255,0) 62%);
+    width: 100%;
+    height: 50px;
+    margin-top: 75px;
+}
+
+.top-nav a {
+    color: #FFF;
+    display: block;
+    width: 100%;
+}
+
+.top-nav ul {
+    list-style: none;
+}
+
+.top-nav .main-list {
+    display: flex;
+    height: 100%;
+}
+
+.top-nav .first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.scrolling-menu {
+    display: block;
+    position: absolute;
+
+    background-color: #e8eddf;
+    border: #000 2px solid;
+
+    width: 150px;
+    top: 64px;
+    padding: 30px;
+    transform: scale(0);
+
+    transition: all 200ms ease;
+    transform-origin: top center;
+}
+
+.scrolling-menu a {
+    color: #000;
+    transition: all 200ms ease;
+}
+
+.scrolling-menu li, .second-scrolling-menu li {
+    padding-bottom: 15px;
+
+    transition: all 200ms ease;
+}
+
+.second-scrolling-menu {
+    display: none;
+    position: absolute;
+
+    background-color: #e8eddf;
+    border: #000 2px solid;
+
+    width: 150px;
+    top: -2px;
+    padding: 30px;
+    margin-left: calc(100% - 30px);
+}
+
+.scrolling-menu p.categorie {
+    padding-bottom: 10px;
+    margin-left: -20px;
+    margin-bottom: 15px;
+}
+
+.scrolling-menu p.categorie::after {
+    content: "";
+    width: 95%;
+    height: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 25px;
+    position: absolute;
+    background: #F5CB5C;
+}
+
+.scrolling-menu p {
+    width: 120%;
+}
+
+.top-nav .first-child:hover .scrolling-menu {
+    transform: scale(100%);
+}
+
+.top-nav .scrolling-menu li:hover .second-scrolling-menu {
+    display: inline;
+}
+
+.top-nav .scrolling-menu a:hover {
+    background: #ababab;
+    border-radius: 3px;
+}
+
+.logo-top {
+    width: 50px;
+    height: 50px;
+    margin: 10px 5px 0 5px;
+}
+
+.user-connection-interaction-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-family: 'Cabin';
+    letter-spacing: .3px;
+}
+
+.user-connection-interaction-list {
+    list-style: none;
+    display: flex;
+    margin: 10px;
+}
+
+.sign-in-sub-element {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-connection-interaction-nav p {
+    font-size: 18px;
+}
+
+.sign-in {
+    color: #FFF;
+    text-decoration: none;
+
+    width: 250px;
+    height: 50px;
+    margin-left: 10px;
+    border-radius: 3px;
+    background: linear-gradient(50deg, rgba(95,194,186,.1) 25%, rgba(61,122,117,.1) 82%);
+}
+
+.user-menu a {
+    color: #fff;
+}
+
+.user-menu {
+    display: block;
+    height: 50px;
+    padding: 3px 50px 0 3px;
+
+    border-radius: 3px;
+    background: linear-gradient(50deg, rgba(95,194,186,.05) 25%, rgba(61,122,117,.05) 82%);
+}
+
+.user-connection-scrolling-menu {
+    display: block;
+    position: absolute;
+
+    list-style: none;
+    background: #ededed;
+
+    width: 150px;
+    padding: 10px 0 10px 0;
+    margin-top: 5px;
+    border-radius: 3px;
+    box-shadow: #181817 1px 2px 10px;
+
+    transform-origin: top center;
+    transform: scaleY(0);
+}
+
+.user-connection-scrolling-menu li {
+    display: block;
+    margin: 5px;
+    border-bottom: #000 1px solid;
+}
+
+.user-connection-scrolling-menu a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #000;
+}
+
+
+.user-connection-scrolling-menu a:hover {
+    color: #42847e;
+}
+
+.user-menu:hover .user-connection-scrolling-menu {
+    animation: growDown 800ms forwards;
+}
+
+.first-child {
+    transition: all 200ms ease;
+    opacity: 1;
+}
+
+.user-menu i, .first-child i {
+    transition: all 250ms ease;
+    opacity: .3;
+}
+
+.user-menu:hover i, .first-child:hover i {
+    transform: translateY(3px);
+    opacity: 1;
+}
+
+.first-child:hover {
+    opacity: .8;
+}
