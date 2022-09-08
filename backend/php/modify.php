@@ -23,28 +23,41 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
     $content = htmlspecialchars($_POST['content']);
     $tags = htmlspecialchars($_POST['tags']);
 
-    $author = $_SESSION['id'];
+    $db = getDB();
+    $sql = "SELECT * FROM articles WHERE id = $id";
+    $result = mysqli_query($db, $sql);
 
-    if($id == $author)
-    {
-        $db = getDB();
-        $sql = "UPDATE articles SET name = '$title', description = '$desc', content = '$content', tags = '$tags' WHERE id = $id";
-        $result = mysqli_query($db, $sql);
-        if($result)
-        {
-            echo "Article modifié";
+    if($result) {
+        $row = mysqli_fetch_assoc($result);
+        if ($row) {
+            if ($row['creator'] != $_SESSION['id']) {
+                echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article !</p>";
+                die();
+            }
         }
-        else
-        {
-            echo "Erreur lors de la modification de l'article";
+        else {
+            echo "<p style=\"color:red;\">Cet article n'existe pas !</p>";
             die();
         }
     }
-    else
-    {
-        echo "<p style=\"color:red;\">Vous n'avez pas le droit de modifier cet article</p>";
+    else {
+        echo "<p style=\"color:red;\">Erreur lors de la modification de l'article !</p>";
         die();
     }
+
+    $sql = "UPDATE articles SET name = '$title', description = '$desc', content = '$content', tags = '$tags' WHERE id = $id";
+    $result = mysqli_query($db, $sql);
+    if($result)
+    {
+        echo "Article modifié";
+    }
+    else
+    {
+        echo "Erreur lors de la modification de l'article";
+        die();
+    }
+
+
 }
 elseif(isset($_GET['article']))
 {
