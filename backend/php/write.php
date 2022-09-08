@@ -25,4 +25,4 @@ ET IL FAUT QUE CA L'ENVOIE AVEC POST VERS LA PAGE write.php comme ça :
 ET TU CHANGERAS LA VALEUR DE article AVEC LA FONCTION QUI SERA SUREMENT EN JavaScript.
 -->
 
-<?php
+<?php>
