@@ -27,40 +27,128 @@ require_once 'tools.php';
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyProject : Accueil</title>
+    <title>InfinIdea : Bienvenue</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>MyProject - Accueil</h1>
-    <!-- PAGE D'ACCUEIL, JE TE LAISSE FAIRE -->
-    <?php if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche son compte -->
-        <p>Bienvenue sur MyProject, <?=getPseudo($_SESSION['id'])?> !</p>
-        <a href="account.php">Mon compte</a>
-        <a href="write.php">Ecrire un article</a>
-        <a href="logout.php">Se déconnecter</a>
-    <?php
-        logs('ouverture de la page accueil', 'utilisateur connecté se connecte sur la page d\'accueil', $_SESSION['id']);
-    ?>
-    <?php else : ?> <!-- Sinon, on lui demande de se connecter ou de s'inscrire -->
-        <p>Bienvenue sur MyProject, vous n'êtes pas encore connecté !</p>
-        <a href="login.php">Se connecter</a>
-        <a href="register.php">S'inscrire</a>
-    <?php
-        logs('ouverture de la page accueil', 'utilisateur déconnecté se connecte sur la page d\'accueil', '0');
-        ?>
-    <?php endif; ?>
+<section class="top-page">
+    <header>
+        <a href="https://mysteriousdev.fr"><img src="images/logo.png" alt="MysteriousDevelopers" class="logo-top"></a>
+        <nav class="user-connection-interaction-nav">
+            <ul>
+                <?php
+                if(isset($_SESSION['id']))
+                {
+                    ?>
+                        <a href="account.php"><li><h4>Compte</h4></li></a>
+                        <a href="write.php"><li><h4>Écrire</h4></li></a>
+                        <a href="logout.php"><li><h4>Déconnexion</h4></li></a>
+                    <?php
+                }
+                else
+                {
+                    ?>
+                        <a href="register.php"><li><h4>S'inscrire</h4></li></a>
+                        <a href="login.php"><li><h4>Se connecter</h4></li></a>
+                    <?php
+                }
+                ?>
+            </ul>
+        </nav>
+        <div class="main-title-container">
+            <img src="images/Logo_InfinIdea.png" alt="Logo_InfinIdea" class="logo title">
+            <h1 class="catchword">Créer est la découverte</h1>
+        </div>
+        <a href="explore.php" id="discover-interaction"><h4>Découvrir</h4></a>
+    </header>
+</section>
 
-    <!-- css -->
-<style>
-    h1 {
-        text-align: center;
-    }
-    a {
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-    }
-</style>
+<section class="contents-page">
+    <div class="welcom-display">
+        <header class="code-header">
+            <div class="file-display"><p><>infinidea.cdd</p></div>
+            <div class="file-display"><p><>main.cdd</p></div>
+        </header>
+        <div class="line-display"><p>01</p></div>
+
+        <div class="site-usefullness line">
+            <p class="o">Bienvenue<?php if(isset($_SESSION['id']))echo(', ' . getPseudo($_SESSION['id']))?>() {</p>
+        </div>
+
+        <div class="line-display"><p>02</p></div>
+
+        <div class="following-text">
+            <p class="o">sur InfinIdea;</p>
+        </div>
+
+        <div class="line-display"><p>03</p></div>
+
+        <div class="site-usefullness-bottom">
+            <p class="o">}</p>
+        </div>
+
+        <div class="line-display"><p>04</p></div>
+
+        <div class="site-usefullness">
+            <p class="o">Decouvrir() {</p>
+        </div>
+
+        <div class="line-display"><p>05</p></div>
+
+        <div class="following-text">
+            <p class="o">Un clique, un nouveau projet vous est présenté !
+                Vous l'aimez ? Likez, et suivez son
+                avancement;</p>
+        </div>
+
+        <div class="line-display"><p>06</p></div>
+
+        <div class="site-usefullness-bottom">
+            <p class="o">}</p>
+        </div>
+
+        <div class="line-display"><p>07</p></div>
+
+        <div class="site-usefullness">
+            <p class="o">Créer() {</p>
+        </div>
+
+        <div class="line-display"><p>08</p></div>
+
+        <div class="following-text">
+            <p class="o">Créez les projets que vous voulez,
+                à volonté. Une idée ? Un projet;</p>
+        </div>
+
+        <div class="line-display"><p>09</p></div>
+
+        <div class="site-usefullness-bottom">
+            <p class="o">}</p>
+        </div>
+
+        <div class="line-display"><p>10</p></div>
+
+        <div class="site-usefullness">
+            <p class="o">Discutter() {</p>
+        </div>
+
+        <div class="line-display"><p>11</p></div>
+
+        <div class="following-text">
+            <p class="o">Une question ? Posez-la, un passioné vous
+                répondra;</p>
+        </div>
+
+        <div class="line-display"><p>12</p></div>
+
+        <div class="site-usefullness-bottom">
+            <p class="o">}</p>
+        </div>
+    </div>
+</section>
+
+<script src="main.js"></script>
 </body>
 </html>

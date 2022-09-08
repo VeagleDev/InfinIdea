@@ -50,4 +50,10 @@ if(isset($_SESSION['id'])) : ?> <!-- Si l'utilisateur est connecté, on affiche 
     <a href="register.php">S'inscrire</a>
 <?php logs('ouverture de la page compte', 'utilisateur déconnecté se connecte sur sa page personelle', 0); ?>
 <?php endif; ?>
+<style>
+    body {
+        background-color: #000000;
+        color: #ffffff;
+    }
+</style>
 </body>
