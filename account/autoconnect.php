@@ -56,11 +56,12 @@ if(session_status() == PHP_SESSION_NONE)
 }
 
 
-if(isset($_COOKIE['token']) && !isset($_SESSION['id'])) // Si on a un cookie et qu'on est pas connecté
+if(isset($_COOKIE['token'])) // Si on a un cookie et qu'on est pas connecté
 {
     connectViaCookie($db);
 }
-elseif(isset($_SESSION['id']))
+
+if(isset($_SESSION['id']))
 {
     updateUserIP($_SESSION['id']);
 }
