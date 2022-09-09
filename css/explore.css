@@ -41,6 +41,7 @@ html {
 .presentation-photo {
     width: 400px;
     height: 250px;
+    image-resolution: 300dpi snap;
 }
 
 .text-container {
