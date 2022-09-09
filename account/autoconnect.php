@@ -12,7 +12,7 @@ Last update : 2022/08/08
 -->
 
 <?php
-
+set_include_path('/var/www/blog');
 require_once 'tools/tools.php';
 
 $db = getDB();

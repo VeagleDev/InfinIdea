@@ -17,11 +17,12 @@ DANS LE BACK-END -->
 
 
 <?php
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'strings.php';
+require_once 'tools/strings.php';
 function getDB()
 {
     if(PHP_SESSION_ACTIVE)

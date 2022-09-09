@@ -20,7 +20,7 @@ UN TRUC PROPRE QUAND TU AURAS FAIT LE FRONT-END -->
 
 
 <?php
-
+set_include_path('/var/www/blog');
 function register_form(string $pseudo = '', string $name = '', string $email = '', string $password = '', string $password_confirm = '', string $age = '', string $avatar = '') : string {
 return '
 <form action="../account/register.php" method="post">
