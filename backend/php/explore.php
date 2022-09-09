@@ -46,8 +46,7 @@ require_once 'autoconnect.php';
         echo '<p>' . $row['description'] . '</p>';
         echo '<p>' . $row['content'] . '</p>';
         echo '<p>Créé par ' . getPseudo($row['creator']) . '</p>';
-        // send create time with the correcttimestamp function
-        echo '<p>Créé le ' . correctTimestamp($row['created']) . '</p>';
+        echo '<p>Créé le ' .$row['created'] . '</p>';
         echo '<p>Tags : ' . $row['tags'] . '</p>';
         echo '<p>Vues : ' . $row['views'] . '</p>';
         echo '<p>Likes : ' . $row['likes'] . '</p>';
