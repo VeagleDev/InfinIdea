@@ -19,9 +19,9 @@ if(session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 }
 
-require_once '/tools/autoconnect.php';
-require_once '/tools/tools.php';
-require_once '/tools/strings.php';
+require_once '../tools/autoconnect.php';
+require_once '../tools/tools.php';
+require_once '../tools/strings.php';
 
 ?>
 <!DOCTYPE html>
