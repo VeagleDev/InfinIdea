@@ -78,7 +78,7 @@ if(session_status() == PHP_SESSION_NONE)
                             <h3>' . $row['name'] . '</h3>
                             <div class="statistics-container">
                                 <p class="views-number">' . $row['views'] . ' vues</p>
-                                <p class="date-upload">Créé le ' . $row['created'] . '</p>
+                                <p class="date-upload">' . correctTimestamp($row['created']) . '</p>
                             </div>
                             <p class="description">' . $row['description'] . '</p>
                         </div>            
