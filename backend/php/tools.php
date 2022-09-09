@@ -283,6 +283,10 @@ function correctTimestamp($timestamp) : string
     {
         return 'À l\'instant';
     }
+    elseif($diff < 3600)
+    {
+        return "Il y a " . floor($diff / 60) . " minutes";
+    }
     elseif($diff < 3600*24)
     {
         return "Il y a " . floor($diff / 3600) .  " heures";
