@@ -11,7 +11,6 @@ Last update : 2022/08/08
 
 -->
 
-
 <?php
 
 require_once '../tools/tools.php';
