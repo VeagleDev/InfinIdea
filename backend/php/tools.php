@@ -272,3 +272,31 @@ function logout() : void
         ]
     );
 }
+
+function correctTimestamp($timestamp) : string
+{
+    $date = new DateTime($timestamp);
+    $date->setTimezone(new DateTimeZone('Europe/Paris'));
+    $diff = time() - $date->getTimestamp();
+
+    if($diff < 600)
+    {
+        return 'À l\'instant';
+    }
+    elseif($diff < 3600*24)
+    {
+        return "Il y a " . floor($diff / 3600) .  " heures";
+    }
+    elseif($diff < 3600*24*2)
+    {
+        return "Hier à " . $date->format('H') . "h";
+    }
+    elseif($diff < 3600*24*90)
+    {
+        return "Il y a " . floor($diff / (3600*24)) . " jours";
+    }
+    else
+    {
+        return "Il y a " . floor($diff / (3600*24*30)) . " mois";
+    }
+}
