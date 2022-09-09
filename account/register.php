@@ -17,8 +17,8 @@ if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'tools.php';
-require_once 'strings.php';
+require_once '/tools/tools.php';
+require_once '/tools/strings.php';
 $db = getDB();
 ?>
 <!DOCTYPE html>
@@ -105,6 +105,7 @@ $db = getDB();
 
                 if($ret = '<p style="color:green">Inscription réussie</p>')
                 {
+                    echo '<a href="/">Retour à l\'accueil</a>';
                     logs('register', 'utilisateur inscrit un compte', getID($pseudo));
                     $userID = mysqli_insert_id($db);
                     $_SESSION['id'] = $userID;

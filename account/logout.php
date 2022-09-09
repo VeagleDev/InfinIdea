@@ -14,11 +14,14 @@ Last update : 2022/08/08
 
 <!-- Script de déconnexion -->
 <?php
-require_once 'tools.php';
+
+require_once '/tools/tools.php';
+
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
+
 if(session_status() == PHP_SESSION_ACTIVE)
 {
     logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
@@ -26,6 +29,7 @@ if(session_status() == PHP_SESSION_ACTIVE)
     session_unset() ;
     $_SESSION = [] ;
 }
+
 setcookie( // On crée un cookie
     'token', // Le nom du cookie
     'NONE', // Son contenu
@@ -35,4 +39,5 @@ setcookie( // On crée un cookie
         'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
     ]
 );
-header('Location: index.php');
+
+header('Location: /');
