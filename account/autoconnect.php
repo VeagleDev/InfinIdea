@@ -20,21 +20,26 @@ $db = getDB();
 function connectViaCookie(mysqli $db)
 {
     $token = htmlspecialchars($_COOKIE['token']);
-    $query = "SELECT id, expiration FROM tokens WHERE token = '$token'";
+    echo '<p style="color: red;">Token : ' . $token . '</p>';
+    $query = "SELECT id, user, expiration FROM tokens WHERE token = '$token'";
+    echo '<p style="color: blue;">' . $query . '</p>';
     $result = mysqli_query($db, $query);
     if(!$result)
     {
+        echo '<p style="color: red;">' . mysqli_error($db) . '</p>';
         return false;
     }
     $row = mysqli_fetch_assoc($result);
     if($row)
     {
+        echo '<p style="color: green;">ID du token : ' . $row['id'] . '</p>';
         $ts = $row['expiration'];
-        $user = $row['id'];
+        $user = $row['user'];
         logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user);
         updateUserIP($user);
         if($ts > time())
         {
+            echo '<p style="color: green;">Token valide</p>';
             $_SESSION['id'] = $user;
             setcookie( // On actualise le cookie
                 'token', // Le nom du cookie
@@ -48,16 +53,21 @@ function connectViaCookie(mysqli $db)
         }
     }
 }
+
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
+
+
+if(isset($_COOKIE['token']))
 {
+    echo "<p>Connexion automatique par le cookie</p>";
     connectViaCookie($db);
 }
 elseif(isset($_SESSION['id']))
 {
+    echo "<p>Connexion automatique par la session</p>";
     if($_SESSION['id'] == 0)
     {
         if(isset($_COOKIE['token']))
@@ -70,6 +80,12 @@ elseif(isset($_SESSION['id']))
         }
     }
     updateUserIP($_SESSION['id']);
+}
+else
+{
+    $cookie = isset($_COOKIE['token']);
+    echo "<p>Connexion automatique : " . ($cookie ? "oui" : "non") . "</p>";
+    echo "<p>Connexion automatique impossible " . isset($_COOKIE['token']) . "</p>";
 }
 
 
