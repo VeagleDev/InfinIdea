@@ -23,6 +23,10 @@ function connectViaCookie(mysqli $db)
     $token = htmlspecialchars($_COOKIE['token']);
     $query = "SELECT id, expiration FROM tokens WHERE token = '$token'";
     $result = mysqli_query($db, $query);
+    if(!$result)
+    {
+        return false;
+    }
     $row = mysqli_fetch_assoc($result);
     if($row)
     {
