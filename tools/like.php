@@ -3,7 +3,7 @@ if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'autoconnect.php';
+require_once '../account/autoconnect.php';
 require_once 'tools.php';
 
 if(!isset($_SESSION['id']))
