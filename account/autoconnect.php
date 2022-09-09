@@ -58,7 +58,6 @@ if(isset($_COOKIE['token']) && !isset($_SESSION['id']))
 }
 elseif(isset($_SESSION['id']))
 {
-    require_once('tools/tools.php');
     if($_SESSION['id'] == 0)
     {
         if(isset($_COOKIE['token']))
