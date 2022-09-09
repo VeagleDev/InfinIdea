@@ -88,67 +88,6 @@ if(session_status() == PHP_SESSION_NONE)
                 }
 
             ?>
-            <!--
-            <a href="" class="card">
-                <img src="images/base.jpg" class="presentation-photo">
-                <div class="text-container">
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div class="statistics-container">
-                        <p class="views-number">195 k vues</p>
-                        <p class="date-upload">Il y a 5 jours</p>
-                    </div>
-                    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quas vitae. Aperiam, asperiores aut. Aspernatur assumenda ullam quasi quas eligendi?</p>
-                </div>            
-            </a>
-
-            <a href="" class="card">
-                <img src="images/base.jpg" class="presentation-photo">
-                <div class="text-container">
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div class="statistics-container">
-                        <p class="views-number">195 k vues</p>
-                        <p class="date-upload">Il y a 5 jours</p>
-                    </div>
-                    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quas vitae. Aperiam, asperiores aut. Aspernatur assumenda ullam quasi quas eligendi?</p>
-                </div>            
-            </a>
-
-            <a href="" class="card">
-                <img src="images/base.jpg" class="presentation-photo">
-                <div class="text-container">
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div class="statistics-container">
-                        <p class="views-number">195 k vues</p>
-                        <p class="date-upload">Il y a 5 jours</p>
-                    </div>
-                    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quas vitae. Aperiam, asperiores aut. Aspernatur assumenda ullam quasi quas eligendi?</p>
-                </div>            
-            </a>
-
-            <a href="" class="card">
-                <img src="images/base.jpg" class="presentation-photo">
-                <div class="text-container">
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div class="statistics-container">
-                        <p class="views-number">195 k vues</p>
-                        <p class="date-upload">Il y a 5 jours</p>
-                    </div>
-                    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quas vitae. Aperiam, asperiores aut. Aspernatur assumenda ullam quasi quas eligendi?</p>
-                </div>            
-            </a>
-
-            <a href="" class="card">
-                <img src="images/base.jpg" class="presentation-photo">
-                <div class="text-container">
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div class="statistics-container">
-                        <p class="views-number">195 k vues</p>
-                        <p class="date-upload">Il y a 5 jours</p>
-                    </div>
-                    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, quas vitae. Aperiam, asperiores aut. Aspernatur assumenda ullam quasi quas eligendi?</p>
-                </div>            
-            </a>
-            -->
         </div>
     </section>
 </body>
