@@ -77,6 +77,7 @@ require_once 'tools/strings.php';
                             'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                             'secure' => true, // On dit que le cookie est sécurisé
                             'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                            'path' => '/', // On dit que le cookie est accessible depuis la racine du site
                         ]
                     );
                 }
@@ -89,6 +90,7 @@ require_once 'tools/strings.php';
                             'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                             'secure' => true, // On dit que le cookie est sécurisé
                             'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                            'path' => '/', // On dit que le cookie est accessible depuis la racine du site
                         ]
                     );
                 }

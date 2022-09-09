@@ -37,6 +37,7 @@ setcookie( // On crée un cookie
         'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
         'secure' => true, // On dit que le cookie est sécurisé
         'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+        'path' => '/',
     ]
 );
 

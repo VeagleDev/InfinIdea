@@ -48,6 +48,7 @@ function connectViaCookie(mysqli $db)
                     'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                     'secure' => true, // On dit que le cookie est sécurisé
                     'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                    'path' => '/',
                 ]
             );
         }
@@ -68,24 +69,12 @@ if(isset($_COOKIE['token']))
 elseif(isset($_SESSION['id']))
 {
     echo "<p>Connexion automatique par la session</p>";
-    if($_SESSION['id'] == 0)
-    {
-        if(isset($_COOKIE['token']))
-        {
-            connectViaCookie($db);
-        }
-        else
-        {
-            logout();
-        }
-    }
     updateUserIP($_SESSION['id']);
 }
 else
 {
-    $cookie = isset($_COOKIE['token']);
-    echo "<p>Connexion automatique : " . ($cookie ? "oui" : "non") . "</p>";
-    echo "<p>Connexion automatique impossible " . isset($_COOKIE['token']) . "</p>";
+    echo "<p style='color: blue;'>Pas de connexion automatique car SESSION " . (isset($_SESSION['id']) ? 'Valide' : 'Invalide') . " et COOKIE " . (isset($_COOKIE['token']) ? 'Disponible' : 'Indisponible') . "</p>";
+    echo "<p style='color: red;'>COOKIE : " . $_COOKIE['token'] . "</p>";
 }
 
 
