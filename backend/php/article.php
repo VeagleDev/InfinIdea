@@ -25,7 +25,7 @@ if(isset($_GET['id']))
 {
     $id = htmlspecialchars($_GET['id']);
     $db = getDB();
-    $sql = "SELECT COUNT(*) FROM views WHERE article = $id";
+    $sql = "SELECT COUNT(*) FROM articles WHERE id = $id";
     $result = mysqli_query($db, $sql);
     if(mysqli_affected_rows($db) == 0)
     {
