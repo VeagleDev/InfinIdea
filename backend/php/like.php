@@ -26,6 +26,8 @@ if(isset($_GET['article']))
         if($row)
         {
             $likes = $row['likes'];
+
+            $sql = "SELECT COUNT(*) FROM views WHE";
             $likes++;
             $sql = "UPDATE articles SET likes = $likes WHERE id = $article";
             $result = mysqli_query($db, $sql);
