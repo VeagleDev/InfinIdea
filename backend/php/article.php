@@ -35,9 +35,11 @@ if(isset($_GET['id']))
     $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR uid = " . $_SESSION['id'] : "") . " AND aid = $id";
     echo '<p style="color:blue">' . $sql . '</p>';
     $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);
+
     if(mysqli_affected_rows($db) == 0)
     {
-        $sql = "INSERT INTO views (ip, aid, uid) VALUES ('" . getIP() . "', $id, " . (isset($_SESSION['id']) ? $_SESSION['id'] : "NULL") . ")";
+        $sql = "INSERT INTO views (ip, aid, uid) VALUES ('" . getIP() . "', $id, " . (isset($_SESSION['id']) ? $_SESSION['id'] : "0") . ")";
         echo '<p style="color:blue">' . $sql . '</p>';
         $result = mysqli_query($db, $sql);
         $sql = "SELECT COUNT(*) FROM views WHERE aid = $id";
