@@ -1,5 +1,5 @@
 <?php
-
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose

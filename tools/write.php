@@ -26,13 +26,13 @@ ET TU CHANGERAS LA VALEUR DE article AVEC LA FONCTION QUI SERA SUREMENT EN JavaS
 -->
 
 <?php
-
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'account/autoconnect.php';
-require_once 'tools.php';
+require_once 'tools/tools.php';
 
 // si l'utilisateur est connecté
 if(isset($_POST['title']) && isset($_POST['content']))
