@@ -15,7 +15,7 @@ Last update : 2022/08/08
 <!-- Script de déconnexion -->
 <?php
 
-require_once '/tools/tools.php';
+require_once '../tools/tools.php';
 
 if(session_status() == PHP_SESSION_NONE)
 {
