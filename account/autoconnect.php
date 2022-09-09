@@ -14,7 +14,7 @@ Last update : 2022/08/08
 
 <?php
 
-require_once 'tools.php';
+require_once '/tools/tools.php';
 
 $db = getDB();
 
@@ -72,7 +72,6 @@ elseif(isset($_SESSION['id']))
         }
     }
     updateUserIP($_SESSION['id']);
-
 }
 
 

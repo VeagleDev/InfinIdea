@@ -17,13 +17,14 @@ DEMANDE D'EMAIL
 DEMANDE DE MOT DE PASSE
 CONFIRMATION DE CHANGEMENT DE MOT DE PASSE
 -->
+
 <?php
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'tools.php';
-require_once 'autoconnect.php';
+require_once '/tools/tools.php';
+require_once '/tools/autoconnect.php';
 $db = getDB();
 ?>
 <!DOCTYPE html>
@@ -101,20 +102,11 @@ $db = getDB();
         }
         else
         {
-            echo '<p style="color:red;">Les mots de passe ne correspondent
- 
- 
- 
- 
- 
- 
- 
- 
- pas !</p>';
+            echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
             logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 0);
         }
     }
-    else if(isset($_GET['token']))
+    elseif(isset($_GET['token']))
     {
         $token = htmlspecialchars($_GET['token']);
         $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
@@ -148,13 +140,13 @@ $db = getDB();
             logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token , 0);
         }
     }
-    else if(isset($_SESSION['id']))
+    elseif(isset($_SESSION['id']))
     {
         echo '<p>Bienvenue ' . getPseudo($_SESSION['id']) . ' sur la page de réinitialisation de votre mot de passe !</p>
         <p style="color:red">Attention, vous êtes connecté, veuillez vous <a href="logout.php">déconnecter</a> pour pouvoir réinitialiser votre mot de passe.</p>';
         logs('reinit', 'utilisateur essaie de réinitialiser son mdp en étant connecté', $_SESSION['id']);
     }
-    else if(isset($_POST['email']))
+    elseif(isset($_POST['email']))
     {
         $email = htmlspecialchars($_POST['email']);
         // verification de l'email
