@@ -55,7 +55,7 @@ if(isset($_GET['id']))
     echo "<p>" . $row['views'] . " vues</p>";
     echo "<p>" . $row['likes'] . " likes</p>";
     echo "<p>Créé : " . correctTimestamp($row['created']) . "</p>";
-    echo "<p>Modifié : " . correctTimestamp($row['updated']) . "</p>";
+    echo "<p>Modifié : " . correctTimestamp($row['modified']) . "</p>";
     echo "<p>Écrit par : " . $row['author'] . "</p>";
     echo "<p><a href=\"explore.php\">Retour au menu</a></p>";
 }
