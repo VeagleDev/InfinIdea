@@ -32,7 +32,7 @@ if(isset($_GET['id']))
         echo '<p style="color:red;">Cet article n\'existe pas</p>';
         die();
     }
-    $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR user = " . $_SESSION['id'] : "") . " AND aid = $id";
+    $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR uid = " . $_SESSION['id'] : "") . " AND aid = $id";
     echo '<p style="color:blue">' . $sql . '</p>';
     $result = mysqli_query($db, $sql);
     if(mysqli_affected_rows($db) == 0)
