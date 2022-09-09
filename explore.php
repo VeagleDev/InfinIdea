@@ -72,7 +72,7 @@ if(session_status() == PHP_SESSION_NONE)
                 {
                     echo('
 
-                        <a href="backend/php/explore.php?article=' . $row['id'] . '" class="card">
+                        <a href="backend/php/article.php?id=' . $row['id'] . '" class="card">
                         <img src="backend/php/uploads/' . $row['id'] . '.jpg" class="presentation-photo">
                         <div class="text-container">
                             <h3>' . $row['name'] . '</h3>
