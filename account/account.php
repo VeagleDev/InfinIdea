@@ -21,7 +21,7 @@ if(session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'autoconnect.php';
-require_once '../tools/tools.php';
+require_once 'tools/tools.php';
 ?> <!-- On appelle le fichier tools.php -->
 
 
