@@ -15,7 +15,7 @@ LikeMachine.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         // we get the response
         const response = this.responseText;
-        console.log("[INFO] Like request response: " + response);
+        console.log("[INFO] Like request response received");
         // we refresh the like counter
         refreshLikeCounter();
     }
@@ -40,11 +40,11 @@ LikeRefresher.onreadystatechange = function() {
         // read the content of likeButton
         const likeButton = document.getElementById("likeButton");
         console.log ("[INFO] Like button content: " + likeButton.innerHTML);
-        if(likeButton == "Like") {
-            likeButton.innerHTML = "Unlike";
+        if(likeButton.contains("Unlike")) {
+            likeButton.innerHTML = "Like";
         }
         else {
-            likeButton.innerHTML = "Like";
+            likeButton.innerHTML = "Unlike";
         }
     }
 }
