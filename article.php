@@ -62,7 +62,7 @@ if(isset($_GET['id'])) {
             WHERE             
             aid = " . $id . " 
             AND date > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
-            AND (" . (isset($_SESSION['id']) ? "uid = " . $_SESSION['id'] . "OR " : "") . ")ip = '" . getIP() . "')";
+            AND (" . (isset($_SESSION['id']) ? "uid = " . $_SESSION['id'] . "OR " : "") . "ip = '" . getIP() . "')";
 
     echo $sql;
 
