@@ -94,7 +94,7 @@ html {
     justify-content: center;
     position: absolute;
     top: 0;
-    transform: translateY(1530%);
+    margin-top: 40%;
 }
 
 .interaction-nav .nav {
@@ -117,4 +117,8 @@ html {
 
 button:hover {
     cursor: pointer;
+}
+
+.glow {
+    border: #000 2px solid;
 }
