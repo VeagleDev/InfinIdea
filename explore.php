@@ -1,10 +1,13 @@
 <?php
+set_include_path('/var/www/blog/');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
-    require_once 'backend/php/autoconnect.php';
-    require_once 'backend/php/tools.php';
 }
+
+require_once 'account/autoconnect.php';
+
+require_once 'tools/tools.php';
 
 ?>
 <!DOCTYPE html>
@@ -72,8 +75,8 @@ if(session_status() == PHP_SESSION_NONE)
                 {
                     echo('
 
-                        <a href="backend/php/explore.php?article=' . $row['id'] . '" class="card">
-                        <img src="backend/php/uploads/' . $row['id'] . '.jpg" class="presentation-photo">
+                        <a href="article.php?id=' . $row['id'] . '" class="card">
+                        <img src="images/uploads/' . $row['id'] . '.jpg" class="presentation-photo">
                         <div class="text-container">
                             <h3>' . $row['name'] . '</h3>
                             <div class="statistics-container">

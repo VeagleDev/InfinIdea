@@ -14,12 +14,15 @@ Last update : 2022/08/08
 
 
 <?php
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'tools.php';
-require_once 'strings.php';
+
+require_once 'autoconnect.php';
+require_once 'tools/tools.php';
+require_once 'tools/strings.php';
 
 ?>
 <!DOCTYPE html>
@@ -33,32 +36,6 @@ require_once 'strings.php';
 <body>
     <h1>Connexion</h1>
 
-    <!-- JE TE LAISSE FAIRE UN BEAU FORMULAIRE DE CONNEXION AVEC TOUT CE DONT TU AS BESOIN, JE M'ADAPTERAIS
-    A CE QUE TU FERA, IL FAUT JUSTE PSEUDO/MDP + RESTER CONNECTÉ -->
-
-
-    <!-- Pour information, pour que je puisse récupérer des informations, il faut faire un
-    formulaire de ce type :
-        <form action="login.php" method="post">
-        <p>
-            <label for="pseudo">Pseudo</label>
-            <input type="text" name="pseudo" id="pseudo">
-        </p>
-        <p>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password">
-        </p>
-        <p>
-            <input type="checkbox" name="stay_connected" id="stay_connected">
-            <label for="stay_connected">Rester connecté</label>
-        </p>
-        <p>
-            <input type="submit" value="Se connecter">
-        </p>
-    </form>
-    -->
-
-
 <?php
     $db = getDB();
     if(isset($_SESSION['id']))
@@ -70,10 +47,10 @@ require_once 'strings.php';
         }
         else
         {
-            header('Location: index.php');
+            header('Location: /');
         }
     }
-    else if(isset($_POST['pseudo']) && isset($_POST['password'])) // Si les champs pseudo et password sont remplis
+    elseif(isset($_POST['pseudo']) && isset($_POST['password'])) // Si les champs pseudo et password sont remplis
     {
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST['pseudo'])); // On récupère le pseudo
         $pass = hash('sha512', mysqli_real_escape_string($db, htmlspecialchars($_POST['password']))); // On récupère le mot de passe
@@ -100,6 +77,7 @@ require_once 'strings.php';
                             'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                             'secure' => true, // On dit que le cookie est sécurisé
                             'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                            'path' => '/', // On dit que le cookie est accessible depuis la racine du site
                         ]
                     );
                 }
@@ -112,6 +90,7 @@ require_once 'strings.php';
                             'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                             'secure' => true, // On dit que le cookie est sécurisé
                             'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                            'path' => '/', // On dit que le cookie est accessible depuis la racine du site
                         ]
                     );
                 }
@@ -123,7 +102,7 @@ require_once 'strings.php';
                 }
                 else
                 {
-                    header('Location: index.php');
+                    header('Location: /');
                 }
             }
             else

@@ -20,10 +20,10 @@ UN TRUC PROPRE QUAND TU AURAS FAIT LE FRONT-END -->
 
 
 <?php
-
+set_include_path('/var/www/blog');
 function register_form(string $pseudo = '', string $name = '', string $email = '', string $password = '', string $password_confirm = '', string $age = '', string $avatar = '') : string {
 return '
-<form action="register.php" method="post">
+<form action="../account/register.php" method="post">
     <label for="pseudo">Pseudo</label>
     <input type="text" name="pseudo" id="pseudo" value="' . $pseudo . '">
     <label for="firstname">Prénom</label>
@@ -81,7 +81,7 @@ return '
 
 function login_form() : string
 {
-    return '<form action="login.php" method="post">
+    return '<form action="../account/login.php" method="post">
         <p>
             <label for="pseudo">Pseudo</label>
             <input type="text" name="pseudo" id="pseudo">
@@ -99,7 +99,7 @@ function login_form() : string
         </p>
     </form>
     <span class="forgot_password">
-        <a href="forgot.php">Mot de passe oublié ?</a>
+        <a href="../account/forgot.php">Mot de passe oublié ?</a>
     </span>
     <style>
         body {
@@ -145,7 +145,7 @@ function login_form() : string
 function passwordForgotten() : string
 {
     return '<p>Bienvenue sur la page de réinitialisation de votre mot de passe !</p>
-        <form action="forgot.php" method="post">
+        <form action="../account/forgot.php" method="post">
         <label for="email">Entrez votre adresse email :</label>
         <input type="email" name="email" id="email" required>
         <input type="submit" value="Envoyer">
