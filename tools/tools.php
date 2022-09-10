@@ -306,3 +306,15 @@ function correctTimestamp($timestamp) : string
         return "Il y a " . floor($diff / (3600*24*30)) . " mois";
     }
 }
+
+function getClientUID() : string
+{
+    $ip = getIP();
+    $port = $_SERVER['REMOTE_PORT'];
+
+    $key = $ip . $port;
+
+    $hash = hash('sha1', $key);
+
+    return $hash;
+}
