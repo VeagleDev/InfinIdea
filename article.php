@@ -58,10 +58,19 @@ if(isset($_GET['id']))
     }
 
 
-    $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR uid = " . $_SESSION['id'] : "") . " AND aid = $id AND date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+    $sql = "SELECT * 
+            FROM views 
+            WHERE             
+            aid = $id 
+            AND date > DATE_SUB(NOW(), INTERVAL 1 DAY)
+            AND (uid = " . $_SESSION['id'] . " OR ip = '" . getIP() . "')";
+
+
     $result = mysqli_query($db, $sql);
 
     $do = mysqli_affected_rows($db) == 0;
+
+
 
     while($row = mysqli_fetch_assoc($result))
     {
@@ -81,7 +90,6 @@ if(isset($_GET['id']))
     if($do)
     {
         $sql = "INSERT INTO views (ip, aid, uid) VALUES ('" . getIP() . "', $id, " . (isset($_SESSION['id']) ? $_SESSION['id'] : "0") . ")";
-        echo '<p style="color:blue">' . $sql . '</p>';
         $result = mysqli_query($db, $sql);
         $sql = "SELECT COUNT(*) FROM views WHERE aid = $id";
         $result = mysqli_query($db, $sql);
