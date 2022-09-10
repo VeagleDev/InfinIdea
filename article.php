@@ -37,22 +37,22 @@ if(isset($_GET['id']))
         die();
     }
 
-    if(isset($_POST['like']))
+    if(isset($_POST['like']) && isset($_SESSION['id']))
     {
         $sql = "SELECT * FROM likes WHERE aid = " . $id . " AND uid = " . $_SESSION['id'] ;
         mysqli_query($db, $sql);
         if(mysqli_affected_rows($db) == 0)
         {
-            $sql = "INSERT INTO likes (aid, uid) VALUES ($id, " . $_SESSION['id'] . ")";
+            $sql = "INSERT INTO likes (aid, uid) VALUES (, " . $_SESSION['id'] . ")";
             mysqli_query($db, $sql);
-            $sql = "UPDATE articles SET likes = likes + 1 WHERE id = $id";
+            $sql = "UPDATE articles SET likes = likes + 1 WHERE id = " . $id;
             mysqli_query($db, $sql);
         }
         else
         {
-            $sql = "DELETE FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
+            $sql = "DELETE FROM likes WHERE aid = " . $id . " AND uid = " . $_SESSION['id'];
             mysqli_query($db, $sql);
-            $sql = "UPDATE articles SET likes = likes - 1 WHERE id = $id";
+            $sql = "UPDATE articles SET likes = likes - 1 WHERE id = " . $id ;
             mysqli_query($db, $sql);
         }
     }
@@ -101,20 +101,25 @@ if(isset($_GET['id']))
     echo "<p>Modifié : " . correctTimestamp($row['modified']) . "</p>";
     echo "<p>Écrit par : " . $row['creator'] . "</p>";
     echo "<br />";
-    echo "<form method='post'>";
-    $sql = "SELECT * FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
-    $result = mysqli_query($db, $sql);
-    if(mysqli_affected_rows($db) == 0)
-    {
-        echo "<input type='submit' name='like' value='Like' />";
-    }
-    else
-    {
-        echo "<input type='submit' name='like' value='Unlike' />";
-    }
-    echo "</form>";
 
-    echo "<br />";
+    if(isset($_SESSION['id']))
+    {
+        echo "<form method='post'>";
+        $sql = "SELECT * FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
+        $result = mysqli_query($db, $sql);
+        if(mysqli_affected_rows($db) == 0)
+        {
+            echo "<input type='submit' name='like' value='Like' />";
+        }
+        else
+        {
+            echo "<input type='submit' name='like' value='Unlike' />";
+        }
+        echo "</form>";
+
+        echo "<br />";
+    }
+
 
     echo "<p><a href=\"explore.php\">Retour au menu</a></p>";
 }
