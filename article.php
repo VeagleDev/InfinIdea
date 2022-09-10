@@ -62,7 +62,7 @@ if(isset($_GET['id']))
             FROM views 
             WHERE             
             aid = $id 
-            AND date > DATE_SUB(NOW(), INTERVAL 1 DAY)
+            AND date > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
             AND (uid = " . $_SESSION['id'] . " OR ip = '" . getIP() . "')";
 
 
