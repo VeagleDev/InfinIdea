@@ -33,13 +33,13 @@ LikeRefresher.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         // we get the response
         const response = this.responseText;
-        console.log("[INFO] Like request response: " + response);
+        console.log("[INFO] Like counter responce received");
         // we set the paragraph with the id likeCounter to the response
         document.getElementById("likeCounter").innerHTML = response;
 
         // read the content of likeButton
         const likeButton = document.getElementById("likeButton");
-
+        console.log ("[INFO] Like button content: " + likeButton.innerHTML);
         if(likeButton == "Like") {
             likeButton.innerHTML = "Unlike";
         }
