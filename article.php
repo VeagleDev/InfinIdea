@@ -43,7 +43,7 @@ if(isset($_GET['id']))
         mysqli_query($db, $sql);
         if(mysqli_affected_rows($db) == 0)
         {
-            $sql = "INSERT INTO likes (aid, uid) VALUES (, " . $_SESSION['id'] . ")";
+            $sql = "INSERT INTO likes (aid, uid) VALUES (" . $id . ", " . $_SESSION['id'] . ")";
             mysqli_query($db, $sql);
             $sql = "UPDATE articles SET likes = likes + 1 WHERE id = " . $id;
             mysqli_query($db, $sql);
