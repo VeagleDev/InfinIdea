@@ -14,10 +14,10 @@ html {
 
     background: #0b162c;
     background: linear-gradient(0deg, #0b162c 10%, #1c2942 90%);
-    width: 90%;
+    width: 95%;
     height: auto;
 
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: 50%;
     transform: translate(-50%);
     border-radius: 30px;
@@ -41,7 +41,7 @@ html {
 .presentation-photo {
     width: 400px;
     height: 250px;
-    image-resolution: 300dpi snap;
+    aspect-ratio: 16 / 9;
 }
 
 .text-container {
