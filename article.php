@@ -64,7 +64,6 @@ if(isset($_GET['id'])) {
             AND date > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
             AND (" . (isset($_SESSION['id']) ? "uid = " . $_SESSION['id'] . " OR " : "") . "ip = '" . getIP() . "')";
 
-    echo $sql;
 
     $result = mysqli_query($db, $sql);
 
