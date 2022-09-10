@@ -105,9 +105,9 @@ if(isset($_GET['id'])) {
         $sql = "SELECT * FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
         $result = mysqli_query($db, $sql);
         if (mysqli_affected_rows($db) == 0) {
-            echo "<button id='likeButton' onclick='performLike(" . $id . ")'>Like</button>";
+            echo "<button onclick='performLike(" . $id . ")'><span id='likeButton'>Like</span></button>";
         } else {
-            echo "<button id='likeButton' onclick='performLike(" . $id . ")'>Unlike</button>";
+            echo "<button onclick='performLike(" . $id . ")'><span id='likeButton'>Unlike</span></button>";
         }
     }
 }
