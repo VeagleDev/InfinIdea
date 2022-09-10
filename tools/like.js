@@ -1,15 +1,13 @@
 const LikeMachine = new XMLHttpRequest();
 const LikeRefresher = new XMLHttpRequest();
 
-function performLike() {
-    url = window.location.href;
-    url = url.replace('http://', 'https://');
-    if(url.includes('?')) {
-        url += '&action=like';
-        console.log("[INFO] Sending like request to " + url);
-        LikeMachine.open("GET", url);
-        LikeMachine.send();
-    }
+function performLike( id ) {
+
+    const url = "https://myproject.mysteriousdev.fr/article.php?id=" + id + "&action=like";
+    console.log("[INFO] Sending like request to " + url);
+    LikeMachine.open("GET", url);
+    LikeMachine.send();
+
 
 }
 
@@ -24,7 +22,7 @@ LikeMachine.onreadystatechange = function() {
 }
 
 function refreshLikeCounter() {
-    const url = "https://myproject.mysteriousdev.fr/tools/infos.php?info=likes";
+    const url = "https://myproject.mysteriousdev.fr/tools/infos.php?like=" + id;
     console.log("[INFO] Refreshing like counter");
     LikeRefresher.open("GET", url);
     LikeRefresher.send();
