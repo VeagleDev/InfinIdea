@@ -13,12 +13,13 @@ Last update : 2022/08/08
 
 
 <?php
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'tools.php';
-require_once 'strings.php';
+require_once 'tools/tools.php';
+require_once 'tools/strings.php';
 $db = getDB();
 ?>
 <!DOCTYPE html>
@@ -105,6 +106,7 @@ $db = getDB();
 
                 if($ret = '<p style="color:green">Inscription réussie</p>')
                 {
+                    echo '<a href="/">Retour à l\'accueil</a>';
                     logs('register', 'utilisateur inscrit un compte', getID($pseudo));
                     $userID = mysqli_insert_id($db);
                     $_SESSION['id'] = $userID;
@@ -120,6 +122,7 @@ $db = getDB();
                                     'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
                                     'secure' => true, // On dit que le cookie est sécurisé
                                     'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+                                    'path' => '/', // On dit que le cookie est accessible sur tout le site
                                 ]
                             );
                         }

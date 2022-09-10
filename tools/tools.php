@@ -17,11 +17,12 @@ DANS LE BACK-END -->
 
 
 <?php
+set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
     session_start(); // On démarre la session AVANT toute chose
 }
-require_once 'strings.php';
+require_once 'tools/strings.php';
 function getDB()
 {
     if(PHP_SESSION_ACTIVE)
@@ -269,6 +270,7 @@ function logout() : void
             'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
             'secure' => true, // On dit que le cookie est sécurisé
             'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
+            'path' => '/', // On dit que le cookie est accessible sur tout le site
         ]
     );
 }
@@ -282,6 +284,10 @@ function correctTimestamp($timestamp) : string
     if($diff < 600)
     {
         return 'À l\'instant';
+    }
+    elseif($diff < 3600)
+    {
+        return "Il y a " . floor($diff / 60) . " minutes";
     }
     elseif($diff < 3600*24)
     {
