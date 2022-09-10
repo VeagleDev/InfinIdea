@@ -42,10 +42,10 @@ LikeRefresher.onreadystatechange = function() {
         console.log ("[INFO] Like button content: " + likeButton.innerHTML);
 
         if(likeButton.innerHTML == 'Like') {
-            document.getElementById("likeButton").innerHTML = "Unlike";
+            likeButton.innerHTML = "Unlike";
         }
         else {
-            document.getElementById("likeButton").innerHTML = "Like";
+            likeButton.innerHTML = "Like";
         }
     }
 }
