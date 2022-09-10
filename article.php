@@ -27,6 +27,7 @@ $db = getDB();
 
 
 if(isset($_GET['id'])) {
+
     $id = htmlspecialchars($_GET['id']);
 
     $sql = "SELECT COUNT(*) FROM articles WHERE id = $id";
@@ -59,10 +60,11 @@ if(isset($_GET['id'])) {
     $sql = "SELECT * 
             FROM views 
             WHERE             
-            aid = $id 
+            aid = " . $id . " 
             AND date > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
             AND (uid = " . $_SESSION['id'] . " OR ip = '" . getIP() . "')";
 
+    echo $sql;
 
     $result = mysqli_query($db, $sql);
 
