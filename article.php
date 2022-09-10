@@ -7,6 +7,8 @@ if(session_status() == PHP_SESSION_NONE)
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 
+$db = getDB();
+
 ?>
 
 <!DOCTYPE html>
@@ -21,10 +23,12 @@ require_once 'tools/tools.php';
 
 <?php
 
+
+
 if(isset($_GET['id']))
 {
     $id = htmlspecialchars($_GET['id']);
-    $db = getDB();
+
     $sql = "SELECT COUNT(*) FROM articles WHERE id = $id";
     $result = mysqli_query($db, $sql);
     if(mysqli_affected_rows($db) == 0)
@@ -32,12 +36,49 @@ if(isset($_GET['id']))
         echo '<p style="color:red;">Cet article n\'existe pas</p>';
         die();
     }
-    $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR uid = " . $_SESSION['id'] : "") . " AND aid = $id";
-    echo '<p style="color:blue">' . $sql . '</p>';
-    $result = mysqli_query($db, $sql);
-    $row = mysqli_fetch_assoc($result);
 
-    if(mysqli_affected_rows($db) == 0)
+    if(isset($_POST['like']))
+    {
+        $sql = "SELECT * FROM likes WHERE aid = " . $id . " AND uid = " . $_SESSION['id'] ;
+        mysqli_query($db, $sql);
+        if(mysqli_affected_rows($db) == 0)
+        {
+            $sql = "INSERT INTO likes (aid, uid) VALUES ($id, " . $_SESSION['id'] . ")";
+            mysqli_query($db, $sql);
+            $sql = "UPDATE articles SET likes = likes + 1 WHERE id = $id";
+            mysqli_query($db, $sql);
+        }
+        else
+        {
+            $sql = "DELETE FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
+            mysqli_query($db, $sql);
+            $sql = "UPDATE articles SET likes = likes - 1 WHERE id = $id";
+            mysqli_query($db, $sql);
+        }
+    }
+
+
+    $sql = "SELECT * FROM views WHERE ip = '" . getIP() . "'" . (isset($_SESSION['id']) ? " OR uid = " . $_SESSION['id'] : "") . " AND aid = $id AND date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+    $result = mysqli_query($db, $sql);
+
+    $do = mysqli_affected_rows($db) == 0;
+
+    while($row = mysqli_fetch_assoc($result))
+    {
+        if($row['uid'] == 0)
+        {
+            if($row['ip'] == getIP())
+            {
+                $do = false;
+            }
+            else
+            {
+                $do = true;
+            }
+        }
+    }
+
+    if($do)
     {
         $sql = "INSERT INTO views (ip, aid, uid) VALUES ('" . getIP() . "', $id, " . (isset($_SESSION['id']) ? $_SESSION['id'] : "0") . ")";
         echo '<p style="color:blue">' . $sql . '</p>';
