@@ -100,5 +100,19 @@ if(isset($_GET['id']))
     echo "<p>Créé : " . correctTimestamp($row['created']) . "</p>";
     echo "<p>Modifié : " . correctTimestamp($row['modified']) . "</p>";
     echo "<p>Écrit par : " . $row['creator'] . "</p>";
+    echo "<br />";
+    echo "<form method='post'>";
+    $sql = "SELECT * FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
+    $result = mysqli_query($db, $sql);
+    if(mysqli_affected_rows($db) == 0)
+    {
+        echo "<input type='submit' name='like' value='Like' />";
+    }
+    else
+    {
+        echo "<input type='submit' name='like' value='Unlike' />";
+    }
+    echo "</form>";
+    echo "<br />";
     echo "<p><a href=\"explore.php\">Retour au menu</a></p>";
 }
