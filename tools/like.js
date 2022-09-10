@@ -40,7 +40,8 @@ LikeRefresher.onreadystatechange = function() {
         // read the content of likeButton
         const likeButton = document.getElementById("likeButton");
         console.log ("[INFO] Like button content: " + likeButton.innerHTML);
-        if(likeButton == 'Like') {
+
+        if(likeButton.innerHTML == 'Like') {
             document.getElementById("likeButton").innerHTML = "Unlike";
         }
         else {
