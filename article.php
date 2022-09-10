@@ -113,6 +113,8 @@ if(isset($_GET['id']))
         echo "<input type='submit' name='like' value='Unlike' />";
     }
     echo "</form>";
+
     echo "<br />";
+
     echo "<p><a href=\"explore.php\">Retour au menu</a></p>";
 }
