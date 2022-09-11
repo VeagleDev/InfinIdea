@@ -1,4 +1,5 @@
 <?php
+
 set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
 {
