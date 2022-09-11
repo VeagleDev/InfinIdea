@@ -253,3 +253,71 @@
 .first-child:hover {
     opacity: .8;
 }
+
+.bottom-page {
+    width: 100%;
+    font-family: 'Rubik';
+}
+
+.bottom-page a {
+    color: #000;
+}
+
+.bottom-page a:hover {
+    color: #42847e;
+    text-decoration: underline;
+}
+
+.bottom-page::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 99%;
+    height: 1px;
+    background: #000;
+}
+
+.bottom-page .site-nav {
+    display: flex;
+    position: relative;
+    margin-left: 60%;
+}
+
+.site-nav nav {
+    margin: 30px;
+}
+
+.bottom-page ul {
+    list-style: none;
+}
+
+.bottom-page .nav-title {
+    padding-bottom: 10px;
+}
+
+.copyright-infos-nav {
+    background: #efefef;
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+.copyright-infos-nav ul {
+    display: flex;
+}
+
+.copyright-infos-nav ul li {
+    margin-left: 15px;
+}
+
+.copyright-infos-nav .social-media {
+    position: absolute;
+    right: 5%;
+    font-size: 40px;
+}
+
+.copyright-infos-nav .social-media ul li {
+    margin-right: 20px;
+}
