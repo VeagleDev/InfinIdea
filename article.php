@@ -100,7 +100,7 @@ if(isset($_GET['id'])) {
     echo "<p><span id='likeCounter'>" . $row['likes'] . "</span> likes</p>";
     echo "<p>Créé : " . correctTimestamp($row['created']) . "</p>";
     echo "<p>Modifié : " . correctTimestamp($row['modified']) . "</p>";
-    echo "<p>Écrit par : " . $row['creator'] . "</p>";
+    echo "<p>Écrit par : " . getPseudo($row['creator']) . "</p>";
     echo "<br />";
 
     if (isset($_SESSION['id'])) {
