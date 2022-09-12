@@ -27,38 +27,52 @@ require_once 'tools/tools.php';
             <nav class="top-nav">
                 <img src="images/logo.png" alt="MysteriousDevelopers creation" class="logo-top">
                 <ul class="main-list">
-                    <li class="first-child"><a href=""><p>Explorer &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
-                    <li class="first-child"><a href=""><p>Recommendations &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
-                    <li class="first-child"><a href=""><p>Lus récemmment &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
-                    <li class="first-child"><a href=""><p>A propos &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
+                    <li class="first-child"><a href="index.html"><p>Accueil &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
+                    <li class="first-child"><a href="article.php?type=recommanded"><p>Recommendations &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
+                    <li class="first-child"><a href="article.php?type=recents"><p>Lus récemmment &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
+                    <li class="first-child"><a href="about.html"><p>A propos &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
                 </ul>
             </nav>
             <nav class="user-connection-interaction-nav">
                 <ul class="user-connection-interaction-list">
-                    <li class="user-menu">
-                        <a href="">
-                            <p>
-                                <?php if(!isset($_SESSION['id']))
+                    
+                            
+                                <?php if(isset($_SESSION['id']))
                                 {
-                                    echo('Bonjour, &nbsp;<p class="unconnected">connectez-vous &nbsp;<i class="fa-solid fa-angle-down"></i></p>');
-                                }    
-                                else
-                                {
-                                    echo('Bonjour, &nbsp;<p class="unconnected">' . getPseudo($_SESSION['id']) . '&nbsp;<i class="fa-solid fa-angle-down"></i></p>');
-                                }                               
                                     ?>
-                                </p>
-                            <ul class="user-connection-scrolling-menu">
-                                <li><a href=""><p>Mon compte</p></a></li>
-                                <li><a href=""><p>Comment se connecter ?</p></a></li>
-                                <li><a href=""><p>A propos</p></a></li>
-                                <li><a href=""><p>Mes projets</p></a></li>
-                                <li><a href=""><p>Conditions d'utilisations</p></a></li>
-                                <li><a href=""><p>Paramètres</p></a></li>
-                            </ul>
-                        </a>                       
-                    </li>  
-                    <a href="" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S'inscrire</p></li></a>
+                                    <li class="user-menu">
+                        <a href="">
+                            <?php
+                                    echo('<p>Bonjour, &nbsp;<p class="unconnected">' . getPseudo($_SESSION['id']) . '&nbsp;<i class="fa-solid fa-angle-down"></i></p></p>');
+                                ?>
+
+                                    <ul class="user-connection-scrolling-menu">
+                                        <li><a href="account/account.php"><p>Mon compte</p></a></li>
+                                        <li><a href="about.html"><p>A propos</p></a></li>
+                                        <li><a href="explore.php?type=own"><p>Mes projets</p></a></li>
+                                        <li><a href=""><p>Conditions d'utilisations</p></a></li>
+                                        <li><a href="account/account.php"><p>Paramètres</p></a></li>
+                                        <li><a href="account/logout.php"><p>Déconnexion</p></a></li>
+                                    </ul>
+                                    </a>                       
+                    </li>
+                                <?php
+                                }                                  
+                                ?>
+                            
+                            
+                       
+                    
+                    
+
+                    <?php
+                        if(!isset($_SESSION['id']))
+                        {
+                            echo '<a href="account/login.php?redirect=explore.php" class="sign-in unconnected"><li class="sign-in-sub-element"><p>Se connecter</p></li></a>';
+                            echo '<a href="account/register.php" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>';
+                        }
+                    ?>
+                    
                 </ul>
             </nav>
         </header>
