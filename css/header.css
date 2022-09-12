@@ -277,6 +277,8 @@
     width: 99%;
     height: 1px;
     background: #000;
+
+    margin-top: 1px;
 }
 
 .bottom-page .site-nav {
