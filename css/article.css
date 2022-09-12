@@ -6,17 +6,55 @@ html {
     background: #FFF;
 }
 
+.top-nav {
+    background: #efefef;
+}
+
+.top-nav a {
+    color: #000;
+}
+
+.sign-in {
+    color: #000;
+    background: #5fc2ba44;
+}
+
+.user-menu {
+    background: #5fc2ba44;
+}
+
+.user-menu a {
+    color: #000;
+}
+
+.top-nav::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 99%;
+    height: 1px;
+    background: #000;
+
+    margin-top: 60px;
+}
+
 .article-container {
     display: flex;
     flex-direction: column;
 
     background: #0b162b;
-    width: 100%;
+    width: 99%;
     height: 2000px;
 
     margin-left: 50%;
     transform: translate(-50%);
     padding-bottom: 90px;
+
+    border-radius: 50px;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .article {

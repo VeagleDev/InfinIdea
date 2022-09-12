@@ -1,5 +1,7 @@
 const container = document.getElementsByClassName("preview-container")[0]
 
+document.getElementsByClassName("preview")[0].classList.add("glow")
+
 container.addEventListener('click', (event) => {
     const displayedImg = document.getElementById("displayed-img")
 
