@@ -72,7 +72,7 @@ html {
 .displayed-img img {
     width: 100%;
     height: 100%;
-    aspect-ratio: 16 / 12;
+    aspect-ratio: 16/12;
 }
 
 .img-nav .nav ul {
@@ -87,6 +87,7 @@ html {
     width: 60px;
     height: 60px;
     margin-right: 5px;
+    border: #efefef 1px solid;
 }
 
 .img-nav .nav ul li img {
@@ -111,6 +112,7 @@ html {
     width: 50%;
 
     margin-top: 20px;
+    margin-right: 20px;
 
     background: #0f1e3b;
     padding: 15px;

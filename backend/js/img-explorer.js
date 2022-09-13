@@ -7,6 +7,7 @@ container.addEventListener('click', (event) => {
 
     event.target.classList.remove("glow")
 
+    if(event.target.classList.contains("preview"))
     for (var i = 0; i < container.children.length; i++) {
         document.getElementsByClassName("preview")[i].classList.remove("glow")
     }
