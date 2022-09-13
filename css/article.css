@@ -6,6 +6,10 @@ html {
     background: #FFF;
 }
 
+ul {
+    list-style: none;
+}
+
 .top-nav {
     background: #efefef;
 }
@@ -160,4 +164,66 @@ button:hover {
 
 .glow {
     box-shadow: 0px 5px 10px -5px #FFF;
+}
+
+.comment-section {
+    position:fixed;
+    z-index: 999;
+
+    top: 0;
+    right: 0;
+
+    height: 100%;
+    width: 20%;
+
+    background: #efefef;
+    font-family: 'Cabin';
+
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+.comment {
+    background: rgb(223, 223, 223);
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-top: 30px;
+    padding-bottom: 40px;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px;
+    font-size: 25px;
+}
+
+.comment .username {
+    font-size: 16px;
+    letter-spacing: .75px;
+    color: rgb(47, 47, 47);
+}
+
+.comment .comment-content {
+    letter-spacing: .25px;
+    margin-top: 10px;
+    width: 95%;
+}
+
+.comment .comment-user-interaction {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.comment .comment-user-interaction button {
+    background: none;
+    border: none;
+    margin: 10px;
+}
+
+.comment .comment-user-interaction button i {
+    font-size: 18px;
 }
