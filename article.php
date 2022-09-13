@@ -57,6 +57,19 @@ if(isset($_GET['id'])) {
         }
 
     }
+    if(isset($_POST['comment']) && isset($_SESSION['id']))
+    {
+        $sql = "INSERT INTO comments 
+        (aid, uid, message)
+        VALUES (" . $id . ", " . 
+        $_SESSION['id'] . ", '" .
+        htmlspecialchars($_POST['comment']) . "')";
+        $result = mysqli_query($db, $sql);
+        if($result)
+        {
+            echo '<p color:orange>Votre commentaire a été publié';
+        }
+    }
 
     $sql = "SELECT * 
             FROM views 
@@ -103,6 +116,30 @@ if(isset($_GET['id'])) {
     echo "<p>Écrit par : " . getPseudo($row['creator']) . "</p>";
     echo "<br />";
 
+    if(isset($_SESSION['id']))
+    {
+        echo('<form action="article.php?id=' . $id . '" method="post">');
+        ?>        
+            <label for="comment">Commentaire :</label>
+            <input type="text" name="comment" id="comment" value="">
+            <input type="submit" value="Inscription">
+        </form>
+        <?php
+    }
+    $sql = "SELECT * FROM comments WHERE aid = " . $id;
+    $result = mysqli_query($db ,$sql);
+    if(mysqli_affected_rows($db) != 0)
+    {
+        while($row = mysqli_fetch_assoc($result))
+        {
+            echo('<p color=blue><b>' . getPseudo($row['uid']) . '</b> <em>a commenté</em> : ' . $row['message'] . '</p>');
+        }
+    }
+    else 
+    {
+        echo('<p color="gray">Il n\'y a pas encore de commentaires ici !</p>');
+    }
+
     if (isset($_SESSION['id'])) {
         $sql = "SELECT * FROM likes WHERE aid = $id AND uid = " . $_SESSION['id'];
         $result = mysqli_query($db, $sql);
@@ -112,6 +149,7 @@ if(isset($_GET['id'])) {
             echo "<button onclick='performLike(" . $id . ")'><span id='likeButton'>Unlike</span></button>";
         }
     }
+
 }
 
 ?>
