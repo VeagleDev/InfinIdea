@@ -83,7 +83,7 @@ require_once 'tools/tools.php';
 
             <?php
                 $db = getDB();
-                $sql = "SELECT * FROM articles ORDER BY created DESC LIMIT 6;";
+                $sql = "SELECT * FROM articles ORDER BY created DESC LIMIT 16;";
                 $result = mysqli_query($db, $sql);
                 while($row = mysqli_fetch_assoc($result))
                 {
