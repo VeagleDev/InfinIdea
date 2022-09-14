@@ -116,13 +116,14 @@ if(isset($_GET['id'])) {
     echo "<p>Écrit par : " . getPseudo($row['creator']) . "</p>";
     echo "<br />";
 
+
     if(isset($_SESSION['id']))
     {
         echo('<form action="article.php?id=' . $id . '" method="post">');
         ?>        
             <label for="comment">Commentaire :</label>
             <input type="text" name="comment" id="comment" value="">
-            <input type="submit" value="Inscription">
+            <input type="submit" value="Commenter">
         </form>
         <?php
     }
@@ -132,7 +133,7 @@ if(isset($_GET['id'])) {
     {
         while($row = mysqli_fetch_assoc($result))
         {
-            echo('<p color=blue><b>' . getPseudo($row['uid']) . '</b> <em>a commenté</em> : ' . $row['message'] . '</p>');
+            echo('<p><font color="blue"><b>' . getPseudo($row['uid']) . '</b></font> <em>a commenté</em> : ' . $row['message'] . '</p>');
         }
     }
     else 
