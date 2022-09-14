@@ -126,7 +126,7 @@ if(isset($_GET['id'])) {
         </form>
         <?php
     }
-    $sql = "SELECT * FROM comments WHERE aid = " . $id . " ORDER BY date DESC LIMIT 100;";
+    $sql = "SELECT * FROM comments WHERE aid = " . $id . " ORDER BY id DESC LIMIT 100;";
     $result = mysqli_query($db ,$sql);
     if(mysqli_affected_rows($db) != 0)
     {
