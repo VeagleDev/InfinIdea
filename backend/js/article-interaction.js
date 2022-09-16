@@ -1,4 +1,5 @@
 const interactionContainer = document.getElementsByClassName("interaction-container")[0]
+const interactionCommentContainer = document.getElementsByClassName("interaction-container")[1]
 
 interactionContainer.addEventListener('click', (event) => {
     if(event.target.classList.contains("like") && event.target.classList.contains("fa-regular")) {
