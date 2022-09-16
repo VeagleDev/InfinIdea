@@ -9,3 +9,15 @@ interactionContainer.addEventListener('click', (event) => {
         event.target.classList.remove("fa-solid")
     }
 })
+
+const commentCloseBtn = document.getElementsByClassName("close")[0]
+const commentOpenBtn = document.getElementsByClassName("open-comment")[0]
+
+commentCloseBtn.addEventListener('click', () => {
+    document.getElementsByClassName("comment-section")[0].style.transform = "scaleX(0)"
+})
+
+commentOpenBtn.addEventListener('click', () => {
+    document.getElementsByClassName("comment-section")[0].style.transform = "scaleX(100%)"
+})
+
