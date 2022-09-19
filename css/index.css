@@ -44,8 +44,34 @@
     background: linear-gradient(0deg, #0b162c 10%, #1c2942 90%);
 }
 
+.shadow {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    box-shadow: #80398f 100px 900px 1000px 200px;
+    z-index: 0;
+}
+
+.shadow:nth-child(5) {
+    top: 0;
+    left: 0;
+    box-shadow: #33188f -50px -50px 200px 200px;
+    z-index: 0;
+}
+
+.shadow:nth-child(7) {
+    top: 0;
+    left: right;
+    box-shadow: #33188f 0px -200px 1000px 300px;
+    z-index: 0;
+}
+
 .top-nav {
     background: none;
+    z-index: 999;
 }
 
 .main-title-container {
@@ -103,7 +129,7 @@
 .top-page::after {
     content: "";
     position: absolute;
-    background: linear-gradient(180deg, rgba(11,22,44,1) 0%, rgba(0,0,0,0) 100%);
+    background: #FFF;
     width: 100%;
     height: 500px;
     margin-top: -60px;
