@@ -60,7 +60,7 @@ $db = getDB();
         }
         else
         {
-            $aid = htmlspecialchars($db, $_GET['id']);
+            $aid = htmlspecialchars($_GET['id']);
             $sql = 'SELECT * FROM articles WHERE id = ' . $aid;
             $result = mysqli_query($db, $sql);
             if(mysqli_num_rows($result) == 0)
