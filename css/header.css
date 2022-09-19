@@ -33,6 +33,18 @@
     }
 }
 
+@keyframes pointer-alternation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .top-nav {
     display: flex;
     font-family: 'Rubik';
@@ -322,4 +334,12 @@
 
 .copyright-infos-nav .social-media ul li {
     margin-right: 20px;
+}
+
+.pointer {
+    animation: pointer-alternation 1s ease-in-out infinite;
+}
+
+.o {
+    display: none;
 }
