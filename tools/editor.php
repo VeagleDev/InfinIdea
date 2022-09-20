@@ -23,10 +23,7 @@ if(isset($_POST['content']))
         <!-- add colors and style here -->
     </style>
     <?php
-    $Parsedown->setBreaksEnabled(true);
-    $Parsedown->setMarkupEscaped(true);
     $Parsedown->setUrlsLinked(true);
-    $Parsedown->setSafeMode(true);
     $mardown = $Parsedown->text($content);
     ?>
     <div>
