@@ -1,0 +1,130 @@
+@import url(import-fonts.css);
+
+.top-nav {
+    position: relative;
+}
+
+html {
+    height: 100%;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+
+    background: #0b162c;
+    background: linear-gradient(0deg, #0b162c 10%, #1c2942 90%);
+    width: 80%;
+    height: auto;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 50%;
+    transform: translate(-50%);
+
+    border-radius: 30px;
+    padding-bottom: 90px;
+}
+
+.search-container {
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    border: #647799 1px solid;
+    background: #0b162c;
+
+    width: 50%;
+    height: 80%;
+
+    border-radius: 2px;
+    padding-left: 5px;
+}
+
+.search-input {
+    outline: none;
+    border: none;
+    background: none;
+
+    height: 90%;
+    width: 90%;
+
+    font-size: 20px;
+    color: #FFF;
+    font-family: 'Cabin';
+    letter-spacing: .5px;
+}
+
+.search-button {
+    outline: none;
+    border: none;
+    background: #647799;
+
+    font-size: 20px;
+    width: 77px;
+    height: 40px;
+    position: absolute;
+}
+
+.card {
+    display: flex;
+
+    width: 95%;
+    height: 200px;
+
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-top: 70px;
+
+    font-family: 'Cabin';
+    letter-spacing: .5px;
+}
+
+.presentation-photo {
+    width: 400px;
+    height: 250px;
+    aspect-ratio: 16 / 9;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 100%;
+    padding-left: 15px;
+    color: #FFF;
+
+    padding-top: 3px;
+}
+
+.card h3 {
+    font-size: 25px;
+    letter-spacing: 1.5px;
+}
+
+.card p {
+    font-size: 17px;
+}
+
+.statistics-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+.views-number {
+    padding-right: 5px;
+}
+
+.date-upload::before {
+    content: '•';
+    padding-right: 5px;
+}
+
+.description {
+    margin-top: 30px;
+}

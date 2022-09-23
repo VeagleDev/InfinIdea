@@ -30,7 +30,7 @@ var codeDisplayViewport = true
 window.addEventListener("scroll", effect);
 
 function effect() {
-    if((window.pageYOffset * 4) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
+    if((window.pageYOffset * 10) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
         if(codeDisplayViewport === true) {
           typeEffect(document.getElementsByClassName("o")[el], 20)
 
