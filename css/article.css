@@ -11,6 +11,10 @@ ul {
 }
 
 .top-nav {
+    background: #0b162b;
+}
+
+/* .top-nav {
     background: #efefef;
 }
 
@@ -20,50 +24,46 @@ ul {
 
 .sign-in {
     color: #000;
-    background: #5fc2ba44;
+    background: #5fc2ba30;
 }
 
 .user-menu {
-    background: #5fc2ba44;
+    background: #5fc2ba30;
 }
 
 .user-menu a {
     color: #000;
 }
-
+*/
 .top-nav::before {
     content: "";
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 
-    width: 99%;
+    width: 94%;
     height: 1px;
-    background: #000;
+    background: #FFF;
 
     margin-top: 60px;
-}
+} 
 
 .article-container {
     display: flex;
     flex-direction: column;
 
     background: #0b162b;
-    width: 99%;
+    width: 100%;
     height: 2000px;
 
-    margin-left: 50%;
-    transform: translate(-50%);
     padding-bottom: 90px;
 
-    border-radius: 50px;
-    margin-top: 1%;
     margin-bottom: 1%;
 }
 
 .article {
     display: flex;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .img-nav {
@@ -114,6 +114,7 @@ ul {
     color: #FFF;
 
     width: 50%;
+    height: 710px;
 
     margin-top: 20px;
     margin-right: 20px;
@@ -132,11 +133,11 @@ ul {
 }
 
 .interaction-nav {
-    width: 48%;
+    width: 46%;
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 35%;
+    bottom: 110px;
 }
 
 .interaction-nav .nav {
@@ -168,6 +169,7 @@ button:hover {
 .comment-section {
     position:fixed;
     z-index: 999;
+    display: none;
 
     top: 0;
     right: 0;
@@ -175,7 +177,7 @@ button:hover {
     height: 100%;
     width: 30%;
 
-    background: #efefef;
+    background: #111111;
     font-family: 'Cabin';
 
     overflow-y: auto;
@@ -186,7 +188,6 @@ button:hover {
 }
 
 .comment {
-    background: rgb(223, 223, 223);
     width: 100%;
     height: auto;
     padding: 10px;
@@ -195,25 +196,27 @@ button:hover {
 }
 
 .close {
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: fixed;
+    right: 3px;
+    top: -3px;
     padding: 3px;
     font-size: 25px;
     background: none;
     border: none;
+    color: #FFF;
 }
 
 .comment .username {
     font-size: 16px;
     letter-spacing: .75px;
-    color: rgb(47, 47, 47);
+    color: rgb(188, 188, 188);
 }
 
 .comment .comment-content {
     letter-spacing: .25px;
     margin-top: 10px;
     width: 95%;
+    color: #FFF;
 }
 
 .comment .comment-user-interaction {
@@ -230,4 +233,24 @@ button:hover {
 
 .comment .comment-user-interaction button i {
     font-size: 18px;
+    color: #FFF;
+}
+
+
+.comment-section {
+scrollbar-width: auto;
+scrollbar-color: #b3b3b3 #ffffff;
+}
+
+.comment-section::-webkit-scrollbar {
+width: 5px;
+}
+
+.comment-section::-webkit-scrollbar-track {
+background: none;
+}
+
+.comment-section::-webkit-scrollbar-thumb {
+background-color: #b3b3b3;
+border-radius: 10px;
 }

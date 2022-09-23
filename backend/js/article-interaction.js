@@ -13,11 +13,17 @@ interactionContainer.addEventListener('click', (event) => {
 const commentCloseBtn = document.getElementsByClassName("close")[0]
 const commentOpenBtn = document.getElementsByClassName("open-comment")[0]
 
-commentCloseBtn.addEventListener('click', () => {
-    document.getElementsByClassName("comment-section")[0].style.transform = "scaleX(0)"
+
+document.getElementsByClassName("comment-section")[0].style.transform = "translateX(100%)"
+document.getElementsByClassName("comment-section")[0].style.display = "inline"
+
+commentCloseBtn.addEventListener('click', () => {  
+    document.getElementsByClassName("comment-section")[0].style.display = "inline"
+    document.getElementsByClassName("comment-section")[0].style.transform = "translateX(100%)"
 })
 
 commentOpenBtn.addEventListener('click', () => {
-    document.getElementsByClassName("comment-section")[0].style.transform = "scaleX(100%)"
+    document.getElementsByClassName("comment-section")[0].style.display = "inline"
+    document.getElementsByClassName("comment-section")[0].style.transform = "translateX(0)"
 })
 
