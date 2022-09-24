@@ -186,7 +186,7 @@
                 {
                     ?>
                     <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
-                    <img src="images/uploads/ <?php echo($row['id']); ?>" alt="">
+                    <img src="images/uploads/<?php echo($row['id']); ?>.jpg" alt="">
                     <div class="text">
                         <h1><?php echo($row['name']); ?></h1>
                         <p class="description"><?php echo($row['description']); ?></p>
