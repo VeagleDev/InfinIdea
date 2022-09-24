@@ -89,9 +89,9 @@
             <div class="site-usefullness line">
                 <p class="o">Bienvenue() {</p>
                 <?php
-                    if(isset($_SESSION['id']))
+                    if(isset($_SESSION['id'])) // Si connecté, prenom
                     {
-                        echo('<p class="o">Bienvenue(string prenom = "' . getPseudo($_SESSION['id']) . '") {</p>');
+                        echo('<p class="o">Bienvenue(string pseudo = "' . getPseudo($_SESSION['id']) . '") {</p>');
                     }
                     else
                     {
@@ -179,35 +179,25 @@
             <div class="gallery js-flickity"
             data-flickity-options='{ "wrapAround": true }'>
 
+                <?php
+                $sql = "SELECT * FROM articles ORDER BY views DESC LIMIT 50;"; // on charge les 50 articles les plus vus
+                $result = mysqli_query($db, $sql); // on execute la requete
+                while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
+                {
+                    ?>
+                    <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
+                    <img src="images/uploads/ <?php echo($row['id']); ?>" alt="">
+                    <div class="text">
+                        <h1><?php echo($row['name']); ?></h1>
+                        <p class="description"><?php echo($row['description']); ?></p>
+                    </div>
+                    </a>
+                    <?php
+                }
 
-                <a href="" class="gallery-cell">
-                    <img src="images/base.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/5.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/3.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/12.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
+                ?>
+
+                <!--
                 <a href="" class="gallery-cell">
                     <img src="images/uploads/1.jpg" alt="">
                     <div class="text">
@@ -215,47 +205,45 @@
                         <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
                     </div>
                 </a>
+                -->
 
 
             </div>
+
+
+
             <h1 class="big-title">Nouveaux</h1>
             <div class="gallery js-flickity"
             data-flickity-options='{ "wrapAround": true }'>
-                <a href="" class="gallery-cell">
-                    <img src="images/base.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/5.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/3.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/12.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
+
+                <?php
+                $sql = "SELECT * FROM articles ORDER BY created DESC LIMIT 50;"; // on charge les 50 articles les plus récents
+                $result = mysqli_query($db, $sql); // on execute la requete
+                while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
+                {
+                    ?>
+                    <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
+                        <img src="images/uploads/ <?php echo($row['id']); ?>" alt="">
+                        <div class="text">
+                            <h1><?php echo($row['name']); ?></h1>
+                            <p class="description"><?php echo($row['description']); ?></p>
+                        </div>
+                    </a>
+                    <?php
+                }
+
+                ?>
+
+                <!--
                 <a href="" class="gallery-cell">
                     <img src="images/uploads/1.jpg" alt="">
                     <div class="text">
                         <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
+                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>
                     </div>
                 </a>
+                -->
+
             </div>
 
             <!--
@@ -269,68 +257,12 @@
                         <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
                     </div>
                 </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/5.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/3.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/12.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/1.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
             </div>
             <h1 class="big-title">Mécanismes et projets manuels</h1>
             <div class="gallery js-flickity"
             data-flickity-options='{ "wrapAround": true }'>
                 <a href="" class="gallery-cell">
                     <img src="images/base.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/5.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/3.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/12.jpg" alt="">
-                    <div class="text">
-                        <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
-                    </div>
-                </a>
-                <a href="" class="gallery-cell">
-                    <img src="images/uploads/1.jpg" alt="">
                     <div class="text">
                         <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
                         <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>         
