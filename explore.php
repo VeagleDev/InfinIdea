@@ -27,7 +27,7 @@ require_once 'tools/tools.php';
             <nav class="top-nav">
                 <img src="images/logo.png" alt="MysteriousDevelopers creation" class="logo-top">
                 <ul class="main-list">
-                    <li class="first-child"><a href="index.html"><p>Accueil &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
+                    <li class="first-child"><a href="index.php"><p>Accueil &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
                     <li class="first-child"><a href="article.php?type=recommanded"><p>Recommendations &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
                     <li class="first-child"><a href="article.php?type=recents"><p>Lus récemmment &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
                     <li class="first-child"><a href="about.html"><p>A propos &nbsp;<i class="fa-solid fa-angle-down"></i></p></a></li>
