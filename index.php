@@ -87,7 +87,6 @@
             <div class="line-display"><p>01</p></div>
 
             <div class="site-usefullness line">
-                <p class="o">Bienvenue() {</p>
                 <?php
                     if(isset($_SESSION['id'])) // Si connecté, prenom
                     {
