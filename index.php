@@ -97,7 +97,6 @@
                         echo('<p class="o">Bienvenue() {</p>');
                     }
                 ?>
-                ?>
             </div>
 
             <div class="line-display"><p>02</p></div>
