@@ -20,7 +20,7 @@ if(width / height <= 1) {
     document.getElementsByClassName("displayed-img")[0].style.height = "450px"
 }
 
-if(height > document.getElementsByClassName("displayed-img")[0].offsetHeight) {
+if(height >= document.getElementsByClassName("displayed-img")[0].offsetHeight) {
     displayedImg.style.marginTop = (height - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
     previewContainer.style.marginTop = (height - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
 }
@@ -45,7 +45,7 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
         document.getElementsByClassName("displayed-img")[0].style.height = "450px"
     }
 
-    if(newHeight > document.getElementsByClassName("displayed-img")[0].offsetHeight) {
+    if(newHeight >= document.getElementsByClassName("displayed-img")[0].offsetHeight) {
         displayedImg.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
         previewContainer.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
     }
