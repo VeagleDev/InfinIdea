@@ -29,7 +29,7 @@
                     <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
-                    <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i> A propos</p></a></li>
+                    <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
                 </ul>
             </nav>
             <nav class="user-connection-interaction-nav">
@@ -178,7 +178,7 @@
             data-flickity-options='{ "wrapAround": true }'>
 
                 <?php
-                $sql = "SELECT * FROM articles ORDER BY views DESC LIMIT 50;"; // on charge les 50 articles les plus vus
+                $sql = "SELECT * FROM articles ORDER BY views DESC LIMIT 20;"; // on charge les 50 articles les plus vus
                 $result = mysqli_query($db, $sql); // on execute la requete
                 while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
                 {
