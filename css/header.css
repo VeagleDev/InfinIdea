@@ -382,3 +382,39 @@ background-color: #9c9c9c;
 .o {
     display: none;
 }
+
+@media (max-width:950px) {
+    .user-connection-interaction-list {
+        display: none;
+    }
+}
+
+@media (max-width:600px) {
+    .top-nav {
+        height: auto;
+        width: 100%;
+    }
+    .logo-top {
+        display: none;
+    }
+    .main-list {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+    .top-nav .first-child:nth-child(1) {
+        margin-left: 0;
+    }
+    .top-nav .first-child {
+        width: 100%;
+        margin-left: 0;
+        border-bottom: #F5CB5C 1px solid;
+    }
+
+    .social-media {
+        display: none;
+    }
+    .bottom-page .site-nav {
+        margin-left: 0;
+    }
+}
