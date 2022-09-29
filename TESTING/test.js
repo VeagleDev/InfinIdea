@@ -184,16 +184,17 @@ window.addEventListener("paste", function(e){
             // data:image/png;base64,iVBORw0KGgoAAAAN......
             let data = imageDataBase64;
             console.log('Old size => ', calc_image_size(data), 'KB')
+            console.log('Old data => ', data);
             // resize the image and get the new base64
             let newData;
             reduce_image_file_size(data).then((resized) => {
                 console.log('New size => ', calc_image_size(resized), 'KB')
                 document.getElementById("new").src = resized;
-                newData = resized;
+                console.log('New data => ', newData);
             });
 
-            console.log('Old data => ', data);
-            console.log('New data => ', newData);
+
+
 
         }
     });
