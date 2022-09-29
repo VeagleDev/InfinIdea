@@ -1,7 +1,6 @@
 var width = document.getElementById("displayed-img").offsetWidth
 var height = document.getElementById("displayed-img").offsetHeight
 
-var displayedImg = document.getElementById("displayed-img")
 var previewContainer = document.getElementsByClassName("preview-container")[0]
 
 if(width / height <= 1) {
@@ -32,15 +31,15 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
     if(newWidth / newHeight <= 1) {
         displayedImg.style.height = "100%"
         displayedImg.style.width = "auto"
-        displayedImg.style.marginTop = "0px"
-        previewContainer.style.marginTop = "0px"
+        displayedImg.style.margin = "0px"
+        previewContainer.style.margin = "0px"
         
         document.getElementsByClassName("displayed-img")[0].style.height = "450px"
     } else {
         displayedImg.style.height = "auto"
         displayedImg.style.width = "100%"
-        displayedImg.style.marginTop = "0px"
-        previewContainer.style.marginTop = "0px"
+        displayedImg.style.margin = "0px"
+        previewContainer.style.margin = "0px"
 
         document.getElementsByClassName("displayed-img")[0].style.height = "450px"
     }
@@ -48,5 +47,12 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
     if(newHeight >= document.getElementsByClassName("displayed-img")[0].offsetHeight) {
         displayedImg.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
         previewContainer.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
+    }
+})
+
+window.addEventListener("resize", () => {
+    if(document.getElementById("displayed-img").offsetHeight >= document.getElementsByClassName("displayed-img")[0].offsetHeight) {
+        displayedImg.style.marginTop = (document.getElementById("displayed-img").offsetHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
+        previewContainer.style.marginTop = (document.getElementById("displayed-img").offsetHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
     }
 })
