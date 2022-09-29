@@ -188,11 +188,12 @@ window.addEventListener("paste", function(e){
                 reduce_image_file_size(data).then((resized) => {
                     console.log('New size => ', calc_image_size(resized), 'KB')
                     console.log('New data => ', resized);
+                    sendImageToServer(resized);
                 });
             }
             else
             {
-
+                sendImageToServer(imageDataBase64);
             }
 
 
