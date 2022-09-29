@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <script>
-        // make a function which detect if user press ctrl + v
-        function ctrlV(e) {
-            if (e.ctrlKey && e.keyCode == 86) {
-                // if user press ctrl + v, alert a message
-                getClipboardData(e);
-                // prevent the default action
-                e.preventDefault();
-            }
-        }
-        // call function ctrlV when user press a key
-        document.getElementById("comment").addEventListener("keydown", ctrlV);
 
-        // make a function to get clipboard data
-        function getClipboardData(e) {
-            // get clipboard data
-            var clipboardData = e.clipboardData || window.clipboardData;
-            // get text from clipboard
-            var text = clipboardData.getData('text');
-            // if text is not empty
-            alert('Voici le texte que vous avez copié : ' + text);
-        }
+        document.getElementById("comment").addEventListener("keydown", function (ev) {
+
+            // function to check the detection
+            ev = ev || window.event;  // Event object 'ev'
+            var key = ev.which || ev.keyCode; // Detecting keyCode
+
+            // Detecting Ctrl
+            var ctrl = ev.ctrlKey ? ev.ctrlKey : ((key === 17)
+                ? true : false);
+
+            // If key pressed is V and if ctrl is true.
+            if (key == 86 && ctrl) {
+                // print in console.
+                console.log("Ctrl+V is pressed.");
+            }
+            else if (key == 67 && ctrl) {
+
+                // If key pressed is C and if ctrl is true.
+                // print in console.
+                console.log("Ctrl+C is pressed.");
+            }
+
+        }, false);
     </script>
 </head>
 <body>
