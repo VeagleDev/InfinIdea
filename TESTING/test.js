@@ -44,7 +44,7 @@ function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
             // Execute callback with the base64 URI of the image
             if(typeof(callback) == "function"){
                 callback(mycanvas.toDataURL(
-                    (imageFormat || "image/png")
+                    (imageFormat || "image/jpeg")
                 ));
             }
         };
