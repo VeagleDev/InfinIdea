@@ -182,7 +182,10 @@ window.addEventListener("paste", function(e){
         // If there's an image, open it in the browser as a new window :)
         if(imageDataBase64){
             // data:image/png;base64,iVBORw0KGgoAAAAN......
-            let data = reduce_image_file_size(imageDataBase64);
+            let data = imageDataBase64;
+            console.log('Old size => ', calc_image_size(data), 'KB')
+            data = reduce_image_file_size(data);
+            console.log('New size => ', calc_image_size(data), 'KB')
             console.log(data);
         }
     });
