@@ -207,9 +207,12 @@ window.addEventListener("paste", function(e){
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
     // Create an AJAX call
-    let data = 'image=' + imageDataBase64;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://infinidea.veagle.fr/TESTING/upload-image.php");
-    xhr.setRequestHeader('Content-Type', 'application/upload');
-    xhr.send(data);
+    $.ajax({
+        type : "POST",  //type of method
+        url  : "https://infinidea.veagle.fr/TESTING/upload-image.php",  //your page
+        data : { image : imageDataBase64},// passing the values
+        success: function(res){
+            console.log('Yes');
+        }
+    });
 }
