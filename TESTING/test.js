@@ -188,8 +188,12 @@ window.addEventListener("paste", function(e){
             reduce_image_file_size(data).then((resized) => {
                 console.log('New size => ', calc_image_size(resized), 'KB')
                 document.getElementById("new").src = resized;
-
+                let newData = resized;
             });
+
+            console.log('Old data => ', data);
+            console.log('New data => ', newData);
+
         }
     });
 }, false);
