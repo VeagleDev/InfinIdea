@@ -184,8 +184,11 @@ window.addEventListener("paste", function(e){
             // data:image/png;base64,iVBORw0KGgoAAAAN......
             let data = imageDataBase64;
             console.log('Old size => ', calc_image_size(data), 'KB')
-            process_image(data).then((resized) => {
-                console.log('New size => ', calc_image_size(resized), 'KB');
+            // resize the image and get the new base64
+            reduce_image_file_size(data).then((resized) => {
+                console.log('New size => ', calc_image_size(resized), 'KB')
+                document.getElementById("new").src = resized;
+
             });
         }
     });
