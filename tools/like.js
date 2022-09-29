@@ -3,7 +3,7 @@ const LikeRefresher = new XMLHttpRequest();
 aid = 0;
 function performLike( id ) {
     aid = id;
-    const url = "https://myproject.mysteriousdev.fr/article.php?id=" + id + "&action=like";
+    const url = "https://infinidea.veagle.fr/article.php?id=" + id + "&action=like";
     console.log("[INFO] Sending like request to " + url);
     LikeMachine.open("GET", url);
     LikeMachine.send();
@@ -22,7 +22,7 @@ LikeMachine.onreadystatechange = function() {
 }
 
 function refreshLikeCounter( id ) {
-    const url = "https://myproject.mysteriousdev.fr/tools/infos.php?like=" + aid;
+    const url = "https://infinidea.veagle.fr/tools/infos.php?like=" + aid;
     console.log("[INFO] Refreshing like counter");
     LikeRefresher.open("GET", url);
     LikeRefresher.send();
