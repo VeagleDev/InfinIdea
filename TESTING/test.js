@@ -160,7 +160,7 @@ function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
             // Execute callback with the base64 URI of the image
             if(typeof(callback) == "function"){
                 callback(mycanvas.toDataURL(
-                    (imageFormat || "image/jpeg")
+                    (imageFormat || "image/png")
                 ));
             }
         };
@@ -183,15 +183,18 @@ window.addEventListener("paste", function(e){
         if(imageDataBase64){
             // data:image/png;base64,iVBORw0KGgoAAAAN......
             let data = imageDataBase64;
-            console.log('Old size => ', calc_image_size(data), 'KB')
-            console.log('Old data => ', data);
-            // resize the image and get the new base64
-            let newData;
-            reduce_image_file_size(data).then((resized) => {
-                console.log('New size => ', calc_image_size(resized), 'KB')
-                document.getElementById("new").src = resized;
-                console.log('New data => ', resized);
-            });
+            // if size is too big, resize it
+            if (data.length > 1000000) {
+                reduce_image_file_size(data).then((resized) => {
+                    console.log('New size => ', calc_image_size(resized), 'KB')
+                    console.log('New data => ', resized);
+                });
+            }
+            else
+            {
+
+            }
+
 
 
 
@@ -199,3 +202,12 @@ window.addEventListener("paste", function(e){
         }
     });
 }, false);
+
+// create a function which send the base64 image to the server
+function sendImageToServer(imageDataBase64){
+    // Create an AJAX call
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://infinidea.veagle.fr/TESTING/upload-image.php");
+    xhr.setRequestHeader('Content-Type', 'application/upload');
+    xhr.send(imageDataBase64);
+}
