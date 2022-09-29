@@ -1,7 +1,7 @@
 <?php
-if(isset($_POST['image']))
+if(isset($_POST['data']))
 {
-    $image = $_POST['image'];
+    $image = $_POST['data'];
     $image = str_replace('data:image/png;base64,', '', $image);
     $image = str_replace(' ', '+', $image);
     $data = base64_decode($image);
@@ -10,4 +10,8 @@ if(isset($_POST['image']))
     print $success ? $file : 'Unable to save the file.';
     echo 'Voici le lien de votre image : ' . $file;
     echo 'Voici le base64 de votre image : ' . $image;
+}
+else
+{
+    echo 'Aucune image reçue';
 }
