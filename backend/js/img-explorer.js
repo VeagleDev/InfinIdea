@@ -1,5 +1,12 @@
 const container = document.getElementsByClassName("preview-container")[0]
 
+var displayedImg = document.getElementById("displayed-img")
+var previewContainer = document.getElementsByClassName("preview-container")[0]
+
+var startImgSelected = document.getElementsByClassName("preview")[0].src
+
+displayedImg.src = startImgSelected
+
 document.getElementsByClassName("preview")[0].classList.add("glow")
 
 container.addEventListener('click', (event) => {
