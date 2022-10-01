@@ -318,3 +318,18 @@ function getClientUID() : string
 
     return $hash;
 }
+
+function articleExists($id) : bool
+{
+    $db = getDB();
+    $query = "SELECT * FROM articles WHERE id = '$id'";
+    $result = mysqli_query($db, $query);
+    if(mysqli_num_rows($result) == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
