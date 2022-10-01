@@ -6,6 +6,10 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
+
+require_once 'vendor/autoload.php';
+use League\CommonMark\GithubFlavoredMarkdownConverter;
+
 $db = getDB();
 ?>
 
@@ -85,12 +89,23 @@ $db = getDB();
         }
         elseif(isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']) && $_POST['article'])
         {
-            $title = htmlspecialchars($_POST['title']);
-            $desc = htmlspecialchars($_POST['desc']);
-            $content = htmlspecialchars($_POST['content']);
-            $tags = htmlspecialchars($_POST['tags']);
-            $article = htmlspecialchars($_POST['article']);
+            $purifier = new HTMLPurifier(HTMLPurifier::createDefault());
+
+            $title = $purifier->purify($_POST['title']);
+            $desc = $purifier->purify($_POST['desc']);
+            $content = $purifier->purify($_POST['content']);
+            $tags = $purifier->purify($_POST['tags']);
+            $article = $purifier->purify($_POST['article']);
             $author = $_SESSION['id'];
+
+            $converter = new GithubFlavoredMarkdownConverter([
+                'html_input' => 'allow',
+                'allow_unsafe_links' => true,
+            ]);
+
+            $content = $converter->convert($content);
+
+
 
             // On modifie les valeurs par défaut avec les nouvelles pour l'article
             $sql = "UPDATE articles
