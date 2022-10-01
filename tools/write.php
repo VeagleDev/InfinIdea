@@ -107,7 +107,7 @@ $db = getDB();
 
             $content = $converter->convert($content);
 
-
+            $content = str_replace("'", "\\\'", $content);
 
             // On modifie les valeurs par défaut avec les nouvelles pour l'article
             $sql = "UPDATE articles
