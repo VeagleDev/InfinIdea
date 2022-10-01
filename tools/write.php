@@ -92,8 +92,16 @@ $db = getDB();
             $article = htmlspecialchars($_POST['article']);
             $author = $_SESSION['id'];
 
-            $sql = "INSERT INTO articles (name, description, content, creator, tags) 
-            VALUES ('$title', '$desc', '$content', $author, '$tags')";
+            // On modifie les valeurs par défaut avec les nouvelles pour l'article
+            $sql = "UPDATE articles
+                    SET name = '$title',
+                        description = '$desc',
+                        content = '$content',
+                        tags = '$tags',
+                        visibility = 'public'
+                    WHERE id = $article
+                    AND creator = $author";
+
             $result = mysqli_query($db, $sql);
 
             ?>
