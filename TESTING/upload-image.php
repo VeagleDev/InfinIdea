@@ -1,17 +1,14 @@
 <?php
-if(isset($_POST['image']))
+
+if(isset($_POST['base64']))
 {
-    $image = $_POST['image'];
-    $image = str_replace('data:image/png;base64,', '', $image);
-    $image = str_replace(' ', '+', $image);
-    $data = base64_decode($image);
-    $file = 'images/uploads/' . uniqid() . '.png';
-    $success = file_put_contents($file, $data);
-    print $success ? $file : 'Unable to save the file.';
-    echo 'Voici le lien de votre image : ' . $file;
-    echo 'Voici le base64 de votre image : ' . $image;
+    $img = $_POST['base64'];
+    $base_to_php = explode(',', $img);
+    $data = base64_decode($base_to_php[1]);
+    file_put_contents("test-image.jpg",$data);
+    echo("Image uploaded : test-image.jpg");
 }
 else
 {
-    echo 'Aucune image reçue';
+    echo("No image");
 }
