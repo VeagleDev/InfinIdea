@@ -89,7 +89,9 @@ $db = getDB();
         }
         elseif(isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']) && $_POST['article'])
         {
-            $purifier = new HTMLPurifier(HTMLPurifier::createDefault());
+            // create purifier
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
 
             $title = $purifier->purify($_POST['title']);
             $desc = $purifier->purify($_POST['desc']);
@@ -124,7 +126,7 @@ $db = getDB();
                 <form action="write.php" method="post">
                     <input type="text" name="title" placeholder="Titre" value="<?php echo $title; ?>">
                     <input type="text" name="desc" placeholder="Description" value="<?php echo $desc; ?>">
-                    <input type="text" name="content" placeholder="Contenu" value="<?php echo $content; ?>">
+                    <textarea type="text" name="content" placeholder="Contenu"><?php echo $content; ?></textarea>
                     <input type="hidden" name="article" value="<?php echo $article; ?>">
                     <!-- add disabled button -->
 
@@ -199,7 +201,7 @@ $db = getDB();
             <form action="write.php" method="post">
                 <input type="text" name="title" placeholder="Titre">
                 <input type="text" name="desc" placeholder="Description">
-                <input type="text" name="content" placeholder="Contenu">
+                <textarea type="text" name="content" placeholder="Contenu"></textarea>
                 <input type="text" name="tags" placeholder="Tags">
                 <input type="hidden" name="article" value="<?php echo $aid; ?>">
                 <input type="submit" value="Envoyer">
