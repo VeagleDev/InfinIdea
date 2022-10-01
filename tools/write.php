@@ -104,11 +104,12 @@ $db = getDB();
                     <input type="text" name="desc" placeholder="Description" value="<?php echo $desc; ?>">
                     <input type="text" name="content" placeholder="Contenu" value="<?php echo $content; ?>">
                     <input type="hidden" name="article" value="<?php echo $article; ?>">
+                    <!-- add disabled button -->
+
                     <input type="text" name="tags" placeholder="Tags" value="<?php echo $tags; ?>">
-                <input type="submit" value="Envoyer">
+                <input type="submit" value="Envoyer"<?php if($result) echo " disabled"; ?>>
                 </form>
                 <style>
-                <!-- make beautiful css for the form -->
                 .form
                 {
                     display: block;
@@ -147,6 +148,7 @@ $db = getDB();
                     padding: 0.5em;
 
                 }
+                </style
             <?php
             if($result) {
                 echo "<p style='color: green;'>Votre article a bien été publié !</p>";
