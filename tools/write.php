@@ -93,7 +93,7 @@ $db = getDB();
             $article = htmlspecialchars($_POST['article']);
             $author = $_SESSION['id'];
 
-            $sql = "INSERT INTO articles (title, description, content, author, tags) 
+            $sql = "INSERT INTO articles (name, description, content, author, tags) 
             VALUES ('$title', '$desc', '$content', $author, '$tags')";
             $result = mysqli_query($db, $sql);
 
@@ -158,7 +158,7 @@ $db = getDB();
         }
         else
         {
-            $sql = "INSERT INTO articles (creator, visibility) VALUES ('" . $_SESSION['id'] . "', 'private')";
+            $sql = "INSERT INTO articles (creator, visibility) VALUES ('" . $_SESSION['id'] . "', 'not-written')";
             $result = mysqli_query($db, $sql);
             if(!$result)
             {
