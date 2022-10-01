@@ -193,6 +193,23 @@ window.addEventListener("paste", function(e){
     });
 }, false);
 
+
+function responseHandler(response) {
+    if(response != null) {
+        if(response.startsWith("https://")) {
+            const doc = document.getElementById("text1");
+            doc.value = doc.value + "<br />" + response;
+        }
+        else
+        {
+            alert('Erreur lors de l\'écriture de l\'image sur le serveur');
+        }
+    }
+    else
+    {
+        alert("Erreur lors de la récupération de l'image");
+    }
+}
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
     jQuery.ajax({
@@ -203,8 +220,7 @@ function sendImageToServer(imageDataBase64){
         },
         // important POST method !
         type:"post",
-        complete:function(){
-            console.log("Successfully sent image to server");
-        }
+        // when complete, call the responseHandler
+        complete:responseHandler
     });
 }
