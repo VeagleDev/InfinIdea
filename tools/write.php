@@ -94,7 +94,7 @@ $db = getDB();
             $author = $_SESSION['id'];
 
             $sql = "INSERT INTO articles (title, description, content, author, tags) 
-            VALUES ($title, $desc, $content, $author, $tags)";
+            VALUES ('$title', '$desc', '$content', $author, '$tags')";
             $result = mysqli_query($db, $sql);
 
             ?>
