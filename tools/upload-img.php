@@ -49,7 +49,7 @@ if(isset($_POST['image']) && isset($_POST['article']))
     }
     else
     {
-        echo("This article doesn't exist");
+
     }
 
 }

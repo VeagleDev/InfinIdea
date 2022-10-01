@@ -84,12 +84,132 @@ $db = getDB();
             <?php
 
         }
+        elseif(isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']) && $_POST['article'])
+        {
+            $title = htmlspecialchars($_POST['title']);
+            $desc = htmlspecialchars($_POST['desc']);
+            $content = htmlspecialchars($_POST['content']);
+            $tags = htmlspecialchars($_POST['tags']);
+            $article = htmlspecialchars($_POST['article']);
+            $author = $_SESSION['id'];
+
+            $sql = "INSERT INTO articles (title, description, content, author, tags) 
+            VALUES ($title, $desc, $content, $author, $tags)";
+            $result = mysqli_query($db, $sql);
+
+            ?>
+
+                <form action="write.php" method="post">
+                    <input type="text" name="title" placeholder="Titre" value="<?php echo $title; ?>">
+                    <input type="text" name="desc" placeholder="Description" value="<?php echo $desc; ?>">
+                    <input type="text" name="content" placeholder="Contenu" value="<?php echo $content; ?>">
+                    <input type="hidden" name="article" value="<?php echo $article; ?>">
+                    <input type="text" name="tags" placeholder="Tags" value="<?php echo $tags; ?>">
+                <input type="submit" value="Envoyer">
+                </form>
+                <style>
+                <!-- make beautiful css for the form -->
+                .form
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+
+                }
+                .input
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+                    color: white;
+                    background-color: black;
+                    border: none;
+                    border-radius: 3px;
+                }
+                input[type="submit"]
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+                    color: white;
+                    background-color: #1e1e1e;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 0.5em;
+
+                }
+            <?php
+            if($result) {
+                echo "<p style='color: green;'>Votre article a bien été publié !</p>";
+            }
+            else
+            {
+                echo "<p style='color: red;'>Une erreur est survenue lors de la publication de votre article.</p>";
+            }
+        }
         else
         {
-            if(isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']))
-            {
+            $sql = "INSERT INTO articles (creator, visibility) VALUES ('" . $_SESSION['id'] . "', 'private')";
 
-            }
+        ?>
 
+            <form action="write.php" method="post">
+                <input type="text" name="title" placeholder="Titre">
+                <input type="text" name="desc" placeholder="Description">
+                <input type="text" name="content" placeholder="Contenu">
+                <input type="text" name="tags" placeholder="Tags">
+                <input type="submit" value="Envoyer">
+            </form>
+            <style>
+                <!-- make beautiful css for the form -->
+                .form
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+
+                }
+                .input
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+                    color: white;
+                    background-color: black;
+                    border: none;
+                    border-radius: 3px;
+                }
+                input[type="submit"]
+                {
+                    display: block;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                    align: center;
+                    color: white;
+                    background-color: #1e1e1e;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 0.5em;
+
+                }
+            </style>
+            <?php
         }
 
