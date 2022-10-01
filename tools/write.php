@@ -22,7 +22,7 @@ $db = getDB();
     <section class="top-page">
         <header>
             <nav class="top-nav">
-                <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
+                <img src="../images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
                 <ul class="main-list">
                     <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
@@ -78,7 +78,6 @@ $db = getDB();
                     text-align: center;
                     font-size: 1.5em;
                     margin-top: 2em;
-                    align: center;
                 }
             </style>
             <?php
@@ -151,11 +150,13 @@ $db = getDB();
                 </style
             <?php
             if($result) {
-                echo "<p style='color: green;'>Votre article a bien été publié !</p>";
+                echo '<p style="color: green;">Votre article a bien été publié !</p>';
+                echo "<style> .input[type='submit'] { backdrop-filter: green; } </style>";
             }
             else
             {
-                echo "<p style='color: red;'>Une erreur est survenue lors de la publication de votre article.</p>";
+                echo '<p style="color: red;">Une erreur est survenue lors de la publication de votre article.</p>';
+                echo "<style> .input[type='submit'] { backdrop-filter: red; } </style>";
             }
         }
         else
