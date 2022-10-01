@@ -183,18 +183,7 @@ window.addEventListener("paste", function(e){
         if(imageDataBase64){
             // data:image/png;base64,iVBORw0KGgoAAAAN......
             let data = imageDataBase64;
-            // if size is too big, resize it
-            if (data.length > 1000000) {
-                reduce_image_file_size(data).then((resized) => {
-                    console.log('New size => ', calc_image_size(resized), 'KB')
-                    console.log('New data => ', resized);
-                    sendImageToServer(resized);
-                });
-            }
-            else
-            {
-                sendImageToServer(imageDataBase64);
-            }
+            sendImageToServer(data);
 
 
 
@@ -206,13 +195,16 @@ window.addEventListener("paste", function(e){
 
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
-    // Create an AJAX call
     $.ajax({
-        type : "POST",  //type of method
-        url  : "https://infinidea.veagle.fr/TESTING/upload-image.php",  //your page
-        data : { image : imageDataBase64},// passing the values
-        success: function(res){
-            console.log('Yes');
+        url:"upload-image.php",
+        // send the base64 post parameter
+        data:{
+            base64: imageDataBase64
+        },
+        // important POST method !
+        type:"post",
+        complete:function(){
+            console.log("Successfully sent image to server");
         }
     });
 }
