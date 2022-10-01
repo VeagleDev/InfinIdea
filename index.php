@@ -178,7 +178,7 @@ $db = getDB();
              data-flickity-options='{ "wrapAround": true }'>
 
             <?php
-            $sql = "SELECT * FROM articles ORDER BY views DESC LIMIT 20;"; // on charge les 50 articles les plus vus
+            $sql = "SELECT * FROM articles WHERE visibility = 'public' ORDER BY views DESC LIMIT 20;"; // on charge les 50 articles les plus vus
             $result = mysqli_query($db, $sql); // on execute la requete
             while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
             {
@@ -215,7 +215,7 @@ $db = getDB();
              data-flickity-options='{ "wrapAround": true }'>
 
             <?php
-            $sql = "SELECT * FROM articles ORDER BY created DESC LIMIT 50;"; // on charge les 50 articles les plus récents
+            $sql = "SELECT * FROM articles WHERE visibility = 'public' ORDER BY created DESC LIMIT 50;"; // on charge les 50 articles les plus récents
             $result = mysqli_query($db, $sql); // on execute la requete
             while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
             {
