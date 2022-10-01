@@ -195,6 +195,9 @@ window.addEventListener("paste", function(e){
 
 
 function responseHandler(response) {
+    // get the response body (the method explained below)
+    response = response.data;
+
     if(response != null) {
         if(response.startsWith("https://")) {
             const doc = document.getElementById("text1");
