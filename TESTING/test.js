@@ -194,22 +194,7 @@ window.addEventListener("paste", function(e){
 }, false);
 
 
-function responseHandler(response) {
-    // get the response body (the method explained below)
-    response = response.data;
 
-    if(response != null) {
-
-        else
-        {
-            alert('Erreur lors de l\'écriture de l\'image sur le serveur');
-        }
-    }
-    else
-    {
-        alert("Erreur lors de la récupération de l'image");
-    }
-}
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
     jQuery.ajax({
