@@ -201,7 +201,8 @@ function sendImageToServer(imageDataBase64){
         url:"upload-image.php",
         // send the base64 post parameter
         data:{
-            base64: imageDataBase64
+            article: 1,
+            image: imageDataBase64
         },
         // important POST method !
         type:"post",
