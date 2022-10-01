@@ -1,33 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@pierrbt
-Mysterious-Developers /
-MyProject
-Private
-
-Code
-Issues 3
-Pull requests
-Actions
-Projects
-Security
-Insights
-
-Settings
-
-MyProject/index.php /
-@pierrbt
-pierrbt nicolas
-Latest commit 372a4aa 5 days ago
-History
-2 contributors
-@pierrbt
-@NicolasFasa
-325 lines (279 sloc) 14.7 KB
 <?php
 // création de la session et chargement des outils complémentaires
 
@@ -353,20 +323,3 @@ $db = getDB();
 <script src="backend/js/flickity.pkgd.min.js"></script>
 </body>
 </html>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-
-MyProject/index.php at 372a4aa28a2c2ba8ff92b3d670654d67adf87abe · Mysterious-Developers/MyProject
