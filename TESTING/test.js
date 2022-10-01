@@ -199,11 +199,7 @@ function responseHandler(response) {
     response = response.data;
 
     if(response != null) {
-        if(response.startsWith("https://")) {
-            const doc = document.getElementById("text1");
-            markdown = "![image](" + response + ")";
-            doc.value = doc.value + "<br />" + markdown;
-        }
+
         else
         {
             alert('Erreur lors de l\'écriture de l\'image sur le serveur');
@@ -225,6 +221,16 @@ function sendImageToServer(imageDataBase64){
         // important POST method !
         type:"post",
         // when complete, call the responseHandler
-        complete:responseHandler
+        success: function (data) {
+                const doc = document.getElementById("text1");
+                markdown = "![image](" + data + ")";
+                doc.value = doc.value + "<br />" + markdown;
+        },
+        error: function (xhr, status) {
+            alert("Erreur durant l'envoi de l'image");
+        },
+        complete: function (xhr, status) {
+            //$('#showresults').slideDown('slow')
+        }
     });
 }
