@@ -198,7 +198,8 @@ function responseHandler(response) {
     if(response != null) {
         if(response.startsWith("https://")) {
             const doc = document.getElementById("text1");
-            doc.value = doc.value + "<br />" + response;
+            markdown = "![image](" + response + ")";
+            doc.value = doc.value + "<br />" + markdown;
         }
         else
         {
