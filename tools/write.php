@@ -159,6 +159,14 @@ $db = getDB();
         else
         {
             $sql = "INSERT INTO articles (creator, visibility) VALUES ('" . $_SESSION['id'] . "', 'private')";
+            $result = mysqli_query($db, $sql);
+            if(!$result)
+            {
+                echo '<p style="color:red;">Erreur lors de la création de l\'article';
+            }
+            else
+            {
+                $aid = mysqli_insert_id($db);
 
         ?>
 
@@ -167,6 +175,7 @@ $db = getDB();
                 <input type="text" name="desc" placeholder="Description">
                 <input type="text" name="content" placeholder="Contenu">
                 <input type="text" name="tags" placeholder="Tags">
+                <input type="hidden" vame="article" value="<?php echo $aid; ?>">
                 <input type="submit" value="Envoyer">
             </form>
             <style>
@@ -211,5 +220,9 @@ $db = getDB();
                 }
             </style>
             <?php
+            }
         }
+        ?>
+</body>
+</html>
 
