@@ -119,6 +119,8 @@ $db = getDB();
                     WHERE id = $article
                     AND creator = $author";
 
+            echo $sql;
+
             $result = mysqli_query($db, $sql);
 
             ?>
