@@ -195,7 +195,7 @@ window.addEventListener("paste", function(e){
 
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
-    $.ajax({
+    jQuery.ajax({
         url:"upload-image.php",
         // send the base64 post parameter
         data:{
