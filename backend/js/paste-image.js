@@ -76,8 +76,16 @@ function sendImageToServer(imageDataBase64){
         type:"post",
         // when complete, call the responseHandler
         success: function (data) {
-            const doc = document.getElementById("content");
-            doc.innerHTML = doc.innerHTML + data;
+            const doc = document.getElementById("content-txt");
+            // get text from the response
+            const text = data;
+            // insert the text at the cursor position
+            const cursorPos = doc.selectionStart;
+            const v = doc.value;
+            const textBefore = v.substring(0,  cursorPos );
+            const textAfter  = v.substring( cursorPos, v.length );
+            doc.value = textBefore + text + textAfter;
+
         },
         error: function (xhr, status) {
             alert("Erreur durant l'envoi de l'image");
