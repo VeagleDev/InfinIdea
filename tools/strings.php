@@ -1,24 +1,3 @@
-<!--
-GNU General Public License version 3 or later.
-Mysterious Developers 2022
-All rights reserved.
-
-Authors :
-- pierrbt
-- nicolasfasa
-
-Last update : 2022/08/08
-
--->
-
-
-<!-- TOUCHE PAS A CE FICHIER C'EST LA OU JE MET LE HTML POUR LES TESTS MAIS JE M'OCCUPERAIS DE FAIRE
-UN TRUC PROPRE QUAND TU AURAS FAIT LE FRONT-END -->
-
-
-
-
-
 <?php
 set_include_path('/var/www/blog');
 function register_form(string $pseudo = '', string $name = '', string $email = '', string $password = '', string $password_confirm = '', string $age = '', string $avatar = '') : string {
