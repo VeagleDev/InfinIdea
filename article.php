@@ -59,16 +59,28 @@ if(isset($_GET['id'])) {
     }
     if(isset($_POST['comment']) && isset($_SESSION['id']))
     {
-        $sql = "INSERT INTO comments 
-        (aid, uid, message)
-        VALUES (" . $id . ", " . 
-        $_SESSION['id'] . ", '" .
-        htmlspecialchars($_POST['comment']) . "')";
-        $result = mysqli_query($db, $sql);
-        if($result)
+        if(!empty($_POST['comment']))
         {
-            echo '<p color:orange>Votre commentaire a été publié';
+            $sql = "INSERT INTO comments 
+        (aid, uid, message)
+        VALUES (" . $id . ", " .
+                $_SESSION['id'] . ", '" .
+                htmlspecialchars($_POST['comment']) . "')";
+            $result = mysqli_query($db, $sql);
+            if($result)
+            {
+                echo '<p color:orange>Votre commentaire a été publié';
+            }
+            else
+            {
+                echo '<p color:red>Une erreur est survenue lors de la publication de votre commentaire';
+            }
         }
+        else
+        {
+            echo '<p color:orange>Votre commentaire est vide';
+        }
+
     }
 
     $sql = "SELECT * 
