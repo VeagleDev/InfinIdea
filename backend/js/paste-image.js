@@ -86,6 +86,8 @@ function sendImageToServer(imageDataBase64){
             const textAfter  = v.substring( cursorPos, v.length );
             doc.value = textBefore + text + textAfter;
 
+            console.log(data);
+
         },
         error: function (xhr, status) {
             alert("Erreur durant l'envoi de l'image");
