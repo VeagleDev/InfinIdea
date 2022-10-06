@@ -193,7 +193,7 @@ $db = getDB();
                 }
                 else
                 {
-                    $sql = "SELECT * FROM images WHERE aid = ' . $articleid . ' LIMIT 1;"; // on charge l'image par defaut
+                    $sql = "SELECT * FROM images WHERE aid = " . $articleid . " LIMIT 1;"; // on charge l'image par defaut
                     $result2 = mysqli_query($db, $sql); // on execute la requete
                     if(mysqli_affected_rows($db) > 0) // si on a un resultat
                     {
@@ -253,7 +253,7 @@ $db = getDB();
                 }
                 else
                 {
-                    $sql = "SELECT * FROM images WHERE aid = ' . $articleid . ' LIMIT 1;"; // on charge l'image par defaut
+                    $sql = "SELECT * FROM images WHERE aid = " . $articleid . " LIMIT 1;"; // on charge l'image par defaut
                     echo $sql;
                     $result2 = mysqli_query($db, $sql); // on execute la requete
                     if(mysqli_affected_rows($db) > 0) // si on a un resultat
