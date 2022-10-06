@@ -23,6 +23,10 @@ if(isset($_POST['image']) && isset($_POST['article']))
             // create an unique id for the image
             $id = uniqid();
             $sql = "INSERT INTO images(uid, aid) VALUES(" . $id . ", " . $article . ")";
+
+            echo $article . ' : ';
+            echo $sql;
+
             $result = mysqli_query($db, $sql);
             if($result)
             {
