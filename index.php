@@ -262,7 +262,14 @@ $db = getDB();
                     }
                     else
                     {
-                        $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                        if(file_exists("/var/www/blog/images/uploads/" . $articleid . ".jpg"))
+                        {
+                            $img = "images/uploads/" . $articleid . ".jpg";
+                        }
+                        else
+                        {
+                            $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                        }
                     }
                 }
                 ?>
