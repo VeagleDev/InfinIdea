@@ -76,7 +76,7 @@ function sendImageToServer(imageDataBase64){
         type:"post",
         // when complete, call the responseHandler
         success: function (data) {
-            const doc = document.getElementById("text1");
+            const doc = document.getElementById("content");
             markdown = "![](" + data + ")";
             doc.value = doc.value + markdown;
         },
