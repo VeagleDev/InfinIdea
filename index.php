@@ -262,11 +262,9 @@ $db = getDB();
                     }
                     else
                     {
-                        if(file_exists("/var/www/blog/images/uploads/" . $articleid . ".jpg"))
-                        {
-                            $img = "images/uploads/" . $articleid . ".jpg";
-                        }
-                        else
+                        // if no image is found, we check if there is a image at uploads/images/aid.jpg
+                        $img = "images/uploads/" . $articleid . ".jpg";
+                        if(!file_exists($img))
                         {
                             $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
                         }
