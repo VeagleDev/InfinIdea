@@ -77,8 +77,7 @@ function sendImageToServer(imageDataBase64){
         // when complete, call the responseHandler
         success: function (data) {
             const doc = document.getElementById("content");
-            markdown = "![](" + data + ")";
-            doc.value = doc.value + markdown;
+            doc.innerHTML = doc.innerHTML + data;
         },
         error: function (xhr, status) {
             alert("Erreur durant l'envoi de l'image");
