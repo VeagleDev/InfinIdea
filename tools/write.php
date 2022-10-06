@@ -21,6 +21,7 @@ $db = getDB();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfinIdea : Bienvenue</title>
     <link rel="stylesheet" href="../css/header.css">
+    <script src="../backend/library/jquery-3.6.1.min.js"></script>
     <script src="../backend/js/paste-image.js"></script>
 </head>
 <body>
