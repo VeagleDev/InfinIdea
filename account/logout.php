@@ -1,18 +1,3 @@
-<!--
-GNU General Public License version 3 or later.
-Mysterious Developers 2022
-All rights reserved.
-
-Authors :
-- pierrbt
-- nicolasfasa
-
-Last update : 2022/08/08
-
--->
-
-
-<!-- Script de déconnexion -->
 <?php
 set_include_path('/var/www/blog');
 require_once 'tools/tools.php';
