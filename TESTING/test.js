@@ -181,14 +181,7 @@ window.addEventListener("paste", function(e){
     retrieveImageFromClipboardAsBase64(e, function(imageDataBase64){
         // If there's an image, open it in the browser as a new window :)
         if(imageDataBase64){
-            // data:image/png;base64,iVBORw0KGgoAAAAN......
-            let data = imageDataBase64;
-            sendImageToServer(data);
-
-
-
-
-
+            sendImageToServer(imageDataBase64);
         }
     });
 }, false);
@@ -197,11 +190,12 @@ window.addEventListener("paste", function(e){
 
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64){
+    const aid = document.getElementById('article-id').value;
     jQuery.ajax({
         url:"upload-image.php",
         // send the base64 post parameter
         data:{
-            article: 1,
+            article: aid,
             image: imageDataBase64
         },
         // important POST method !
@@ -209,14 +203,12 @@ function sendImageToServer(imageDataBase64){
         // when complete, call the responseHandler
         success: function (data) {
                 const doc = document.getElementById("text1");
-                markdown = "![image](" + data + ")";
-                doc.value = doc.value + "<br />" + markdown;
+                markdown = "![](" + data + ")";
+                doc.value = doc.value + markdown;
         },
         error: function (xhr, status) {
             alert("Erreur durant l'envoi de l'image");
         },
-        complete: function (xhr, status) {
-            //$('#showresults').slideDown('slow')
-        }
+        complete: function (xhr, status) {  }
     });
 }
