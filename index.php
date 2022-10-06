@@ -202,7 +202,11 @@ $db = getDB();
                     }
                     else
                     {
-                        $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                        $img = "images/uploads/" . $articleid . ".jpg";
+                        if(!file_exists($img))
+                        {
+                            $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                        }
                     }
                 }
                 ?>
