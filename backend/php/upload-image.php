@@ -32,7 +32,8 @@ if(isset($_POST['image']) && isset($_POST['article']))
                 $path = 'images/uploads/body/' . $id . '.jpg';
                 file_put_contents('/var/www/blog/' . $path, $data);
                 $absolute_path = 'https://infinidea.veagle.fr/' . $path;
-                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = " . $id;
+                // update the path of the image in the database
+                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'";
                 $result = mysqli_query($db, $sql);
                 $markdown = '![](' . $absolute_path . ')';
                 echo($markdown);
