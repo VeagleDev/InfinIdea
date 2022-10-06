@@ -182,9 +182,32 @@ $db = getDB();
             $result = mysqli_query($db, $sql); // on execute la requete
             while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
             {
+                $articleid = $row['id'];
+                $href = "article.php?id=" . $row['id']; // on recupere l'id de l'article
+                $sql = "SELECT * FROM images WHERE type = 'main' AND aid = " . $articleid . " LIMIT 1;"; // on charge l'image de l'article
+                $result2 = mysqli_query($db, $sql); // on execute la requete
+                if(mysqli_affected_rows($db) > 0) // si on a un resultat
+                {
+                    $row2 = mysqli_fetch_assoc($result2); // on recupere le resultat
+                    $img = $row2['path']; // on recupere l'image
+                }
+                else
+                {
+                    $sql = "SELECT * FROM images WHERE aid = ' . $articleid . ' LIMIT 1;"; // on charge l'image par defaut
+                    $result2 = mysqli_query($db, $sql); // on execute la requete
+                    if(mysqli_affected_rows($db) > 0) // si on a un resultat
+                    {
+                        $row2 = mysqli_fetch_assoc($result2); // on recupere le resultat
+                        $img = $row2['path']; // on recupere l'image
+                    }
+                    else
+                    {
+                        $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                    }
+                }
                 ?>
-                <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
-                    <img src="images/uploads/<?php echo($row['id']); ?>.jpg" alt="">
+                <a href="<?php echo $href; ?>" class="gallery-cell">
+                    <img src="<?php echo $img; ?>" alt="">
                     <div class="text">
                         <h1><?php echo($row['name']); ?></h1>
                         <p class="description"><?php echo($row['description']); ?></p>
