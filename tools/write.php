@@ -120,7 +120,7 @@ $db = getDB();
                     WHERE id = $article
                     AND creator = $author";
 
-            echo $sql;
+            echo '<pre><code>' . $sql . '</code></pre>';
 
             $result = mysqli_query($db, $sql);
 
