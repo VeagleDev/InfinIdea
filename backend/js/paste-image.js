@@ -3,6 +3,9 @@
  *
  * @param pasteEvent
  * @param callback
+ * @param {Event} pasteEvent
+ * @param {*} callback
+ * @param {string|string} imageFormat
  */
 
 function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){

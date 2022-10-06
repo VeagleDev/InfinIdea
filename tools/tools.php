@@ -1,21 +1,3 @@
-<!--
-GNU General Public License version 3 or later.
-Mysterious Developers 2022
-All rights reserved.
-
-Authors :
-- pierrbt
-- nicolasfasa
-
-Last update : 2022/08/08
-
--->
-
-
-<!-- TOUCHE PAS NON PLUS A CE FICHIER CE SONT DES FONCTIONS QUI ME SERVENT
-DANS LE BACK-END -->
-
-
 <?php
 set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
