@@ -21,6 +21,7 @@ $db = getDB();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfinIdea : Bienvenue</title>
     <link rel="stylesheet" href="../css/header.css">
+    <script src="../backend/js/paste-image.js"></script>
 </head>
 <body>
     <section class="top-page">
@@ -135,7 +136,7 @@ $db = getDB();
                 <form action="write.php" method="post">
                     <input type="text" name="title" placeholder="Titre" value="<?php echo $title; ?>">
                     <input type="text" name="desc" placeholder="Description" value="<?php echo $desc; ?>">
-                    <textarea type="text" name="content" placeholder="Contenu"><?php echo $content; ?></textarea>
+                    <textarea type="text" name="content" id="content" placeholder="Contenu"><?php echo $content; ?></textarea>
                     <input type="hidden" name="article" value="<?php echo $article; ?>">
                     <!-- add disabled button -->
 
@@ -210,9 +211,9 @@ $db = getDB();
             <form action="write.php" method="post">
                 <input type="text" name="title" placeholder="Titre">
                 <input type="text" name="desc" placeholder="Description">
-                <textarea type="text" name="content" placeholder="Contenu"></textarea>
+                <textarea type="text" name="content" id="content" placeholder="Contenu"></textarea>
                 <input type="text" name="tags" placeholder="Tags">
-                <input type="hidden" name="article" value="<?php echo $aid; ?>">
+                <input type="hidden" name="article" id="article-id" value="<?php echo $aid; ?>">
                 <input type="submit" value="Envoyer">
             </form>
             <style>
