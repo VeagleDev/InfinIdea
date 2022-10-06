@@ -138,7 +138,7 @@ $db = getDB();
                     <input type="text" name="title" placeholder="Titre" value="<?php echo $title; ?>">
                     <input type="text" name="desc" placeholder="Description" value="<?php echo $desc; ?>">
                     <textarea type="text" name="content" id="content-txt" placeholder="Contenu"><?php echo $content; ?></textarea>
-                    <input type="hidden" name="article" value="<?php echo $article; ?>">
+                    <input type="hidden" name="article" id="article-id" value="<?php echo $article; ?>">
                     <!-- add disabled button -->
 
                     <input type="text" name="tags" placeholder="Tags" value="<?php echo $tags; ?>">
