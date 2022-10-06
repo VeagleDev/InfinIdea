@@ -14,6 +14,9 @@ if(isset($_POST['image']) && isset($_POST['article']))
     $img = htmlspecialchars($_POST['image']);
     $article = htmlspecialchars($_POST['article']);
 
+    $base_to_php = explode(',', $img);
+    $data = base64_decode($base_to_php[1]);
+
     if(articleExists($article))
     {
         $sql = "SELECT id FROM articles WHERE id = " . $article . " AND creator = " . $_SESSION['id'];
@@ -22,7 +25,7 @@ if(isset($_POST['image']) && isset($_POST['article']))
         if(mysqli_num_rows($result) == 1) {
             // create an unique id for the image
             $id = uniqid();
-            $sql = "INSERT INTO images(uid, aid) VALUES(" . $id . ", " . $article . ")";
+            $sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")";
 
             echo $article . ' : ';
             echo $sql;
@@ -31,8 +34,6 @@ if(isset($_POST['image']) && isset($_POST['article']))
             if($result)
             {
                 $path = 'images/uploads/body/' . $id . '.jpg';
-                $base_to_php = explode(',', $img);
-                $data = base64_decode($base_to_php[1]);
                 file_put_contents($path, $data);
                 $absolute_path = 'https://infinidea.veagle.fr/' . $path;
                 $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = " . $id;
