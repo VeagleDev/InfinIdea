@@ -107,8 +107,14 @@ $db = getDB();
 
             $content = $converter->convert($content);
 
-            $content = str_replace("'", "\\\'", $content);
-            $content = str_replace("\"", "\\\"", $content);
+
+            // replace quotes and double quotes from text to avoid sql errors
+            $title = str_replace("'", "''", $title);
+            $desc = str_replace("'", "''", $desc);
+            $content = str_replace("'", "''", $content);
+            $tags = str_replace("'", "''", $tags);
+            $article = str_replace("'", "''", $article);
+
 
             // On modifie les valeurs par défaut avec les nouvelles pour l'article
             $sql = "UPDATE articles
