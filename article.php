@@ -183,6 +183,7 @@ $db = getDB();
                                     else
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
+                                        // 300 commits
                                     }
 
                                 }
