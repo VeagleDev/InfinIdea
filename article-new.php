@@ -20,6 +20,12 @@ $db = getDB();
     <script src="backend/js/fontawesome.js"></script>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
+
+    <script src="backend/js/img-explorer.js"></script>
+    <script src="backend/js/article-interaction.js"></script>
+    <script src="backend/js/check-ratio.js"></script>
+
+
 </head>
 <body>
     <section class="top-page">
@@ -169,8 +175,9 @@ $db = getDB();
                             </ul>
                         </nav>
                     </div>
-                    <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
-                </div>             
+
+                </div>
+                <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
             </div>
         </div>
 
@@ -265,26 +272,10 @@ $db = getDB();
             </div>
         </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </section>
 
-    <script src="backend/js/img-explorer.js"></script>
-    <script src="backend/js/article-interaction.js"></script>
-    <script src="backend/js/check-ratio.js"></script>
+
+
+
 </body>
 </html>
