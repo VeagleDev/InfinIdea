@@ -6,15 +6,13 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'tools/strings.php';
 require_once 'vendor/autoload.php';
+
 function getDB()
 {
     if(PHP_SESSION_ACTIVE)
     {
         if(isset($_SESSION['db']))
         {
-            // on regarde si la base a été fermée
-
-
             $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
@@ -81,14 +79,6 @@ function getMail($id) : string
 {
     $db = getDB();
     $query = "SELECT email FROM users WHERE id = $id";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['email'];
-}
-function getMailbyUser($user) : string
-{
-    $db = getDB();
-    $query = "SELECT email FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['email'];
@@ -224,7 +214,6 @@ function updateUserIP($user) : void
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
-    logs('ip', 'updated ip for user ' . $user, $user, $db);
 }
 function logs($action, $details = '', $user = 0) : void
 {
@@ -237,9 +226,7 @@ function logs($action, $details = '', $user = 0) : void
 function logout() : void
 {
     if(session_status() == PHP_SESSION_NONE)
-    {
         session_start(); // On démarre la session AVANT toute chose
-    }
     if(session_status() == PHP_SESSION_ACTIVE)
     {
         logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));

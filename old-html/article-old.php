@@ -18,7 +18,7 @@ $db = getDB();
 <head>
     <meta charset="UTF-8">
     <title>Article</title>
-    <script src="backend/js/like.js"></script>
+    <script src="../backend/js/like.js"></script>
 </head>
 <body>
     <h1>MyProject - Article</h1>

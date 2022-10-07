@@ -13,6 +13,7 @@ if (isset($_GET['article']) && isset($_SESSION['id'])) {
     $id = SQLpurify($_GET['article']);
     $sql = "SELECT * FROM likes WHERE aid = " . $id . " AND uid = " . $_SESSION['id'];
     mysqli_query($db, $sql);
+    
     if (mysqli_affected_rows($db) == 0) {
         $sql = "INSERT INTO likes (aid, uid) VALUES (" . $id . ", " . $_SESSION['id'] . ")";
         mysqli_query($db, $sql);

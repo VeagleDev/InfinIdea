@@ -143,46 +143,6 @@ $db = getDB();
                     <input type="text" name="tags" placeholder="Tags" value="<?php echo $tags; ?>">
                 <input type="submit" value="Envoyer"<?php if($result) echo " disabled"; ?>>
                 </form>
-                <style>
-                .form
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-
-                }
-                .input
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-                    color: white;
-                    background-color: black;
-                    border: none;
-                    border-radius: 3px;
-                }
-                input[type="submit"]
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-                    color: white;
-                    background-color: #1e1e1e;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 0.5em;
-
-                }
-                </style
             <?php
             if($result) {
                 echo '<p style="color: green;">Votre article a bien été publié !</p>';
@@ -216,47 +176,6 @@ $db = getDB();
                 <input type="hidden" name="article" id="article-id" value="<?php echo $aid; ?>">
                 <input type="submit" value="Envoyer">
             </form>
-            <style>
-                <!-- make beautiful css for the form -->
-                .form
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-
-                }
-                .input
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-                    color: white;
-                    background-color: black;
-                    border: none;
-                    border-radius: 3px;
-                }
-                input[type="submit"]
-                {
-                    display: block;
-                    margin: auto;
-                    text-align: center;
-                    font-size: 1.5em;
-                    margin-top: 2em;
-                    align: center;
-                    color: white;
-                    background-color: #1e1e1e;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 0.5em;
-
-                }
-            </style>
             <?php
             }
         }
