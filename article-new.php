@@ -167,9 +167,21 @@ $db = getDB();
                     <div class="interaction-nav">
                         <nav class="nav">
                             <ul class="interaction-container">
+
                                 <li><button><i class="fa-regular fa-user interaction"></i></button></li>
+                                <?php
+                                if(isset($_SESSION['id']))
+                                {
+                                    echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
+                                }
+                                else
+                                {
+                                    echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
+                                }
+                                ?>
                                 <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
                                 <li><button class="open-comment"><i class="fa-regular fa-comment interaction"></i></button></li>
+
                             </ul>
                         </nav>
                     </div>
