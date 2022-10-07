@@ -47,7 +47,7 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
             $comment = array();
             $comment['username'] = getPseudo($row['uid']);
             $comment['message'] = $row['message'];
-            $comment['date'] = $row['date'];
+            $comment['date'] = $row['time'];
             $comments[] = $comment;
         }
         echo json_encode($comments);
