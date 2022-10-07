@@ -173,7 +173,9 @@ $db = getDB();
                                 if(isset($_SESSION['id']))
                                 {
                                     $sql = 'SELECT * FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
+
                                     $result = mysqli_query($db, $sql);
+                                    echo '<p>SQL : ' . $sql . '<br />RESULT : ' . mysqli_affected_rows($db) . '</p>';
                                     if(mysqli_affected_rows($db) > 0)
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
