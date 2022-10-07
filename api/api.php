@@ -47,7 +47,7 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
             $comment = array();
             $comment['username'] = getPseudo($row['uid']);
             $comment['message'] = $row['message'];
-            $comment['date'] = $row['time'];
+            $comment['date'] = correctTimestamp($row['time']);
             $comments[] = $comment;
         }
         header('Content-Type: application/json; charset=utf-8');
