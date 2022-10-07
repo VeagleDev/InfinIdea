@@ -140,14 +140,16 @@ $db = getDB();
                             {
                                 $row = mysqli_fetch_assoc($result);
                                 $firstPath = $row['path'];
+                                echo 'row : ' . $row['path'];
                             }
                             else
                             {
                                 $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png';
                             }
+                            echo $firstPath;
                     ?>
                     <div class="displayed-img">
-                        <img src="<?php $firstPath; ?>" alt="Image de l'article" id="displayed-img">
+                        <img src="<?php $firstPath . ' default'; ?>" alt="Image de l'article" id="displayed-img">
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
