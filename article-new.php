@@ -21,9 +21,7 @@ $db = getDB();
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
 
-    <script src="backend/js/img-explorer.js"></script>
-    <script src="backend/js/article-interaction.js"></script>
-    <script src="backend/js/check-ratio.js"></script>
+
 
 
 </head>
@@ -151,7 +149,7 @@ $db = getDB();
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
-                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview glow"></button></li>
+                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
                             <?php
                             while($row = mysqli_fetch_assoc($result))
                             {
@@ -288,6 +286,14 @@ $db = getDB();
         </footer>
 
     </section>
+
+
+
+
+
+    <script src="backend/js/img-explorer.js"></script>
+    <script src="backend/js/article-interaction.js"></script>
+    <script src="backend/js/check-ratio.js"></script>
 
 
 
