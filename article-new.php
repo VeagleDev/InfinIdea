@@ -1,3 +1,14 @@
+<?php
+set_include_path('/var/www/blog');
+if(session_status() == PHP_SESSION_NONE)
+{
+    session_start(); // On démarre la session AVANT toute chose
+}
+require_once 'account/autoconnect.php';
+require_once 'tools/tools.php';
+$db = getDB();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -74,7 +85,6 @@
                 $aid = HTMLpurify($_GET['id']);
                 if(articleExists($aid))
                 {
-                    $db = getDB();
                     $sql = "SELECT * FROM articles WHERE id = '$aid'";
                     $result = mysqli_query($db, $sql);
                     if(mysqli_affected_rows($db) == 1)
@@ -141,8 +151,9 @@
                     </nav>
                 </div>
                 <div class="txt-container">
-                    <h3 class="title">Lorem ipsum, dolor sit amet consectetur adipisicing.</h3>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ad iusto deserunt voluptates architecto inventore nisi cupiditate praesentium voluptas nam maiores dignissimos, expedita quo optio ratione, recusandae corporis soluta dicta minima libero sunt sint? Fuga illum tenetur sed, dolorem obcaecati earum quos ducimus reprehenderit magni quisquam fugiat id! Nesciunt autem recusandae laboriosam. Minima sint nulla, accusamus maiores inventore quaerat! Soluta eaque provident dolore officiis quibusdam voluptates architecto expedita hic pariatur, alias quisquam facere dignissimos consequuntur omnis, rem inventore. Eius, quas!</p>
+
+                    <h3 class="title"><?php echo $title; ?></h3>
+                    <p class="description"><?php echo $desc; ?></p>
                     <div class="interaction-nav">
                         <nav class="nav">
                             <ul class="interaction-container">
@@ -151,7 +162,8 @@
                                 <li><button class="open-comment"><i class="fa-regular fa-comment interaction"></i></button></li>
                             </ul>
                         </nav>
-                    </div> 
+                    </div>
+                    <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
                 </div>             
             </div>
         </div>
@@ -160,14 +172,34 @@
             <button class="close"><i class="fa-solid fa-xmark "></i></button>
             <nav>
                 <ul>
-                    <li class="comment">
-                        <h1 class="username">LeBGThéo</h1>
-                        <p class="comment-content">Super article, j'adore(ps c théo le dieu) Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui tempore dolorem iste voluptas minima recusandae perspiciatis commodi, similique accusantium magni.</p>
-                        <ul class="comment-user-interaction">
-                            <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
-                            <li><button><i class="fa-regular fa-comment interaction"></i></button></li>
-                        </ul>
-                    </li>
+
+                    <?php
+                        $sql = "SELECT * FROM comments WHERE aid = " . $aid . " ORDER BY created DESC";
+                        $result = mysqli_query($db, $sql);
+                        if(mysqli_affected_rows($db) > 0)
+                        {
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $pseudo = getPseudo($row['uid']);
+                                $message = $row['message'];
+                                ?>
+                                <li class="comment">
+                                    <h1 class="username"><?php echo $pseudo; ?></h1>
+                                    <p class="comment-content"><?php echo $message; ?></p>
+                                    <ul class="comment-user-interaction">
+                                        <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
+                                        <li><button><i class="fa-regular fa-comment interaction"></i></button></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+                        }
+                        else
+                        {
+                            echo('<p color="grey">Il n\'y a pas encore de commentaires !');
+                        }
+                    ?>
+
                 </ul>
             </nav>
         </div>
