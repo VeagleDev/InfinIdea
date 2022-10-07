@@ -114,6 +114,11 @@ $db = getDB();
                     echo('<p color="blue">L\'article que vous avez sélectionné n\'existe pas.</p>');
                 }
             }
+            else
+            {
+                echo('<p color="blue">Pas d\'article sélectionné</p>');
+                die();
+            }
 
         ?>
 
