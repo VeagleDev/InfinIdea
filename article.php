@@ -179,11 +179,10 @@ $db = getDB();
                                     if(mysqli_affected_rows($db) == 1)
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-heart interaction like fa-solid\"></i></button></li>");
-                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
                                     }
                                     else
                                     {
-
+                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
                                     }
 
                                 }
