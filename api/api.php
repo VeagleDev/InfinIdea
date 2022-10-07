@@ -97,7 +97,7 @@ if(isset($_GET['action']) && isset($_GET['type']) && isset($_GET['from']))
         }
         elseif ($type == 'recent')
         {
-            $sql = "SELECT id FROM articles ORDER BY time DESC LIMIT $from, 10";
+            $sql = "SELECT id FROM articles ORDER BY created DESC LIMIT $from, 10";
             $result = mysqli_query($db, $sql);
             $articles = array();
             while($row = mysqli_fetch_assoc($result))
