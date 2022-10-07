@@ -85,6 +85,10 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
         $infos['likes'] = $row['likes'];
         $infos['views'] = $row['views'];
         $infos['tags'] = explode(',', $row['tags']);
+        foreach($infos['tags'] as $key => $tag)
+        {
+            $infos['tags'][$key] = trim($tag);
+        }
 
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($infos);
