@@ -131,9 +131,9 @@ $db = getDB();
 
         <div class="article-container">
             <div class="article">
+
                 <div class="img-nav">
-                    <div class="displayed-img">
-                        <?php
+                    <?php
                             $sql = "SELECT path FROM images WHERE aid = " . $aid;
                             $result = mysqli_query($db, $sql);
                             if(mysqli_affected_rows($db) > 0)
@@ -145,23 +145,23 @@ $db = getDB();
                             {
                                 $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png';
                             }
-                            echo('<img src="' . $firstPath . '" alt="Image de l\'article" id="displayed-img">');
-                        ?>
-
+                    ?>
+                    <div class="displayed-img">
+                        <img src="<?php $firstPath; ?>" alt="Image de l'article" id="displayed-img">
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
+                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
                             <?php
-                                echo('<li class="li-img"><button class="li-img"><img src="' . $firstPath . '" alt="Bouton de prévisualisation" class="preview"></button></li>');
-                                while($row = mysqli_fetch_assoc($result))
-                                {
-                                    echo('<li class="li-img"><button class="li-img"><img src="' . $row['path'] . '" alt="Bouton de prévisualisation" class="preview"></button></li>');
-                                }
-
-                            ?>
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $path = $row['path']; ?>
+                                    <li class="li-img"><button class="li-img"><img src="<?php echo $path; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
+                            <?php } ?>
                         </ul>
                     </nav>
                 </div>
+
                 <div class="txt-container">
 
                     <h3 class="title"><?php echo $title; ?></h3>
@@ -179,6 +179,11 @@ $db = getDB();
                 </div>
 
             </div>
+
+            <br />
+            <hr />
+            <br />
+
             <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
         </div>
 
