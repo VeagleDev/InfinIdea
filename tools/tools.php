@@ -337,8 +337,7 @@ function SQLpurify($string) : string
 
 function HTMLpurify($string) : string
 {
-    $config = HTMLPurifier_Config::createDefault();
-    $purifier = new HTMLPurifier($config);
+    $purifier = new HTMLPurifier();
 
     $string = $purifier->purify($string);
 
