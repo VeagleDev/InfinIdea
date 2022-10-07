@@ -132,7 +132,7 @@ $db = getDB();
 
                 <div class="img-nav">
                     <?php
-                            $sql = "SELECT path FROM images WHERE aid = " . $aid;
+                            $sql = 'SELECT path FROM images WHERE aid = ' . $aid;
                             $result = mysqli_query($db, $sql);
                             if(mysqli_affected_rows($db) > 0)
                             {
@@ -172,7 +172,7 @@ $db = getDB();
                                 <?php
                                 if(isset($_SESSION['id']))
                                 {
-                                    $sql = "SELECT COUNT(id) FROM likes WHERE aid = " . $aid . " AND uid = " . $_SESSION['id'];
+                                    $sql = 'SELECT COUNT(id) FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
                                     $result = mysqli_query($db, $sql);
                                     if(mysqli_affected_rows($db) > 0)
                                     {
@@ -213,7 +213,7 @@ $db = getDB();
                 <ul>
 
                     <?php
-                        $sql = "SELECT * FROM comments WHERE aid = " . $aid . " ORDER BY time DESC";
+                        $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC';
                         $result = mysqli_query($db, $sql);
                         if(mysqli_affected_rows($db) > 0)
                         {
