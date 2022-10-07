@@ -54,6 +54,15 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
         echo json_encode($comments);
         die();
     }
+    elseif($action == 'views')
+    {
+        $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
+        $sql = "SELECT views FROM articles WHERE id = $article";
+        $result = mysqli_query($db, $sql);
+        $views = mysqli_fetch_assoc($result)['views'];
+        echo $views;
+        die();
+    }
 
 }
 
