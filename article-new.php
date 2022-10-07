@@ -177,8 +177,9 @@ $db = getDB();
                     </div>
 
                 </div>
-                <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
+
             </div>
+            <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
         </div>
 
         <div class="comment-section">
