@@ -189,7 +189,6 @@ $db = getDB();
                                     echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
                                 }
                                 ?>
-                                <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
                                 <li><button class="open-comment"><i class="fa-regular fa-comment interaction"></i></button></li>
 
                             </ul>
