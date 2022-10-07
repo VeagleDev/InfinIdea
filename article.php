@@ -172,7 +172,7 @@ $db = getDB();
                                 <?php
                                 if(isset($_SESSION['id']))
                                 {
-                                    $sql = 'SELECT COUNT(id) FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
+                                    $sql = 'SELECT * FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
                                     $result = mysqli_query($db, $sql);
                                     if(mysqli_affected_rows($db) > 0)
                                     {
