@@ -167,7 +167,6 @@ $db = getDB();
                     <div class="interaction-nav">
                         <nav class="nav">
                             <ul class="interaction-container">
-
                                 <li><button><i class="fa-regular fa-user interaction"></i></button></li>
                                 <?php
                                 if(isset($_SESSION['id']))
@@ -175,7 +174,6 @@ $db = getDB();
                                     $sql = 'SELECT * FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
 
                                     $result = mysqli_query($db, $sql);
-                                    echo '<p>SQL : ' . $sql . '<br />RESULT : ' . mysqli_affected_rows($db) . '</p>';
                                     if(mysqli_affected_rows($db) == 1)
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-heart interaction like fa-solid\"></i></button></li>");
@@ -183,7 +181,6 @@ $db = getDB();
                                     else
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
-                                        // 300 commits
                                     }
 
                                 }
