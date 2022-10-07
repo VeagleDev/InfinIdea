@@ -6,6 +6,7 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
+require_once 'vendor/autoload.php';
 $db = getDB();
 ?>
 
