@@ -84,7 +84,7 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
         $infos['date'] = correctTimestamp($row['created']);
         $infos['likes'] = $row['likes'];
         $infos['views'] = $row['views'];
-        $infos['tags'] = $row['tags'];
+        $infos['tags'] = explode(',', $row['tags']);
 
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($infos);
