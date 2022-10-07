@@ -15,7 +15,7 @@ if(isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']
     $article = SQLpurify($_POST['article']);
     $action = HTMLPurify($_GET['action']);
 
-    if($action = 'comment')
+    if($action == 'comment')
     {
         $sql = "INSERT INTO comments (aid, uid, message) VALUES ($article, " . $_SESSION['id'] . ", '$comment')";
         mysqli_query($db, $sql);
@@ -25,7 +25,7 @@ if(isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']
 
 if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action']))
 {
-    if($action = 'likes')
+    if($action == 'likes')
     {
         $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
         $sql = "SELECT likes FROM articles WHERE id = $article";
@@ -34,6 +34,25 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
         echo $likes;
         die();
     }
+    elseif($action == 'comments')
+    {
+        $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
+        $sql = "SELECT * FROM comments WHERE aid = $article";
+        $result = mysqli_query($db, $sql);
+        // make json array of username, message, date
+        $comments = array();
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $comment = array();
+            $comment['username'] = getPseudo($row['uid']);
+            $comment['message'] = $row['message'];
+            $comment['date'] = $row['date'];
+            $comments[] = $comment;
+        }
+        echo json_encode($comments);
+        die();
+    }
+
 }
 
 
