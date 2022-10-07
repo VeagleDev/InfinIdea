@@ -25,6 +25,7 @@ if(isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']
 
 if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action']))
 {
+    $action = HTMLPurify($_GET['action']);
     if($action == 'likes')
     {
         $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
