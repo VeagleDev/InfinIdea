@@ -66,34 +66,79 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
     elseif($action == 'article')
     {
         $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
-        $sql = "SELECT * FROM articles WHERE id = $article";
-        $result = mysqli_query($db, $sql);
-        $row = mysqli_fetch_assoc($result);
-
-        if($row['blocked'] == 1 || $row['visibility'] != 'public')
-        {
-            echo json_encode(array());
-            die();
-        }
-
-        $infos = array();
-        $infos['title'] = $row['name'];
-        $infos['description'] = $row['description'];
-        $infos['content'] = $row['content'];
-        $infos['author'] = getPseudo($row['creator']);
-        $infos['date'] = correctTimestamp($row['created']);
-        $infos['likes'] = $row['likes'];
-        $infos['views'] = $row['views'];
-        $infos['tags'] = explode(',', $row['tags']);
-        foreach($infos['tags'] as $key => $tag)
-        {
-            $infos['tags'][$key] = trim($tag);
-        }
-
+        $infos = getArticleInfos($article);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($infos);
         die();
     }
 
+}
+
+if(isset($_GET['action']) && isset($_GET['type']) && isset($_GET['from']))
+{
+    $action = HTMLPurify($_GET['action']);
+    if($action == 'news')
+    {
+        $type = HTMLPurify($_GET['type']);
+        $from = SQLpurify($_GET['from']);
+
+        if($type == 'recommanded')
+        {
+            $sql = "SELECT id FROM articles ORDER BY views DESC LIMIT $from, 10";
+            $result = mysqli_query($db, $sql);
+            $articles = array();
+            while($row = mysqli_fetch_assoc($result))
+            {
+                $articles[] = getArticleInfos($row['id']);
+            }
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($articles);
+            die();
+        }
+        elseif ($type == 'recent')
+        {
+            $sql = "SELECT id FROM articles ORDER BY time DESC LIMIT $from, 10";
+            $result = mysqli_query($db, $sql);
+            $articles = array();
+            while($row = mysqli_fetch_assoc($result))
+            {
+                $articles[] = getArticleInfos($row['id']);
+            }
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($articles);
+            die();
+        }
+
+
+    }
+}
+
+function getArticleInfos($article) : array
+{
+    $db = getDB();
+    $sql = "SELECT * FROM articles WHERE id = $article";
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if($row['blocked'] == 1 || $row['visibility'] != 'public')
+    {
+        echo json_encode(array());
+        die();
+    }
+
+    $infos = array();
+    $infos['title'] = $row['name'];
+    $infos['description'] = $row['description'];
+    $infos['content'] = $row['content'];
+    $infos['author'] = getPseudo($row['creator']);
+    $infos['date'] = correctTimestamp($row['created']);
+    $infos['likes'] = $row['likes'];
+    $infos['views'] = $row['views'];
+    $infos['tags'] = explode(',', $row['tags']);
+    foreach($infos['tags'] as $key => $tag)
+    {
+        $infos['tags'][$key] = trim($tag);
+    }
+    return $infos;
 }
 
