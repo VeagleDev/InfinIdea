@@ -50,6 +50,7 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
             $comment['date'] = $row['time'];
             $comments[] = $comment;
         }
+        header('Content-Type: application/json; charset=utf-8');
         echo json_encode($comments);
         die();
     }
