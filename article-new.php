@@ -191,7 +191,7 @@ $db = getDB();
                 <ul>
 
                     <?php
-                        $sql = "SELECT * FROM comments WHERE aid = " . $aid . " ORDER BY created DESC";
+                        $sql = "SELECT * FROM comments WHERE aid = " . $aid . " ORDER BY time DESC";
                         $result = mysqli_query($db, $sql);
                         if(mysqli_affected_rows($db) > 0)
                         {
