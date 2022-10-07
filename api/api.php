@@ -63,7 +63,33 @@ if((isset($_POST['article']) || isset($_GET['article'])) && isset($_GET['action'
         echo $views;
         die();
     }
+    elseif($action == 'article')
+    {
+        $article = SQLpurify(isset($_POST['article']) ? $_POST['article'] : $_GET['article']);
+        $sql = "SELECT * FROM articles WHERE id = $article";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        if($row['blocked'] == 1 || $row['visibility'] != 'public')
+        {
+            echo json_encode(array());
+            die();
+        }
+
+        $infos = array();
+        $infos['title'] = $row['name'];
+        $infos['description'] = $row['description'];
+        $infos['content'] = $row['content'];
+        $infos['author'] = getPseudo($row['creator']);
+        $infos['date'] = correctTimestamp($row['created']);
+        $infos['likes'] = $row['likes'];
+        $infos['views'] = $row['views'];
+        $infos['tags'] = $row['tags'];
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($infos);
+        die();
+    }
 
 }
-
 
