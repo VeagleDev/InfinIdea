@@ -182,7 +182,6 @@ $db = getDB();
                                     {
                                         echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
                                     }
-
                                 }
                                 else
                                 {
