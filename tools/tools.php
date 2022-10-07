@@ -25,7 +25,8 @@ function getDB()
     }
     else
     {
-        echo "Veillez activer les SESSIONS";
+        echo "Ce site requiert l'activation des cookies";
+        die();
     }
 
 }
@@ -314,4 +315,32 @@ function articleExists($id) : bool
     {
         return false;
     }
+}
+
+function SQLpurify($string) : string
+{
+    $db = getDB();
+
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+
+    $string = $purifier->purify($string);
+
+    $string =  str_replace("'", "''", $string);
+    $string = str_replace('"', '""', $string);
+    $string = str_replace('`', '``', $string);
+
+    $string = mysqli_real_escape_string($db, $string);
+
+    return $string;
+}
+
+function HTMLpurify($string) : string
+{
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+
+    $string = $purifier->purify($string);
+
+    return $string;
 }
