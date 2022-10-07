@@ -8,6 +8,9 @@ require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 
 
+echo '<p style="color:blue;">Cette page n\'est malheureusement pas encore disponible ...</p>';
+die();
+
 // si l'utilisateur est connecté
 if(!isset($_SESSION['id']))
 {
