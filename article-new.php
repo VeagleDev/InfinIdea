@@ -146,12 +146,12 @@ $db = getDB();
                                 $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png';
                             }
                     ?>
-                    <div class="displayed-img">
+                    <div class="displayed-img-div">
                         <img src="<?php echo $firstPath; ?>" alt="Image de l'article" id="displayed-img">
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
-                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
+                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview glow"></button></li>
                             <?php
                             while($row = mysqli_fetch_assoc($result))
                             {
