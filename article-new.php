@@ -215,7 +215,16 @@ $db = getDB();
                         }
                         else
                         {
-                            echo('<p color="grey">Il n\'y a pas encore de commentaires !');
+                            ?>
+                            <li class="comment">
+                                <h1 class="username"></h1>
+                                <p class="comment-content">Il n'y a pas encore de commentaires !</p>
+                                <ul class="comment-user-interaction">
+                                    <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
+                                    <li><button><i class="fa-regular fa-comment interaction"></i></button></li>
+                                </ul>
+                            </li>
+                            <?php
                         }
                     ?>
 
