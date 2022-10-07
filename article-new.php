@@ -172,7 +172,17 @@ $db = getDB();
                                 <?php
                                 if(isset($_SESSION['id']))
                                 {
-                                    echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
+                                    $sql = "SELECT COUNT(id) FROM likes WHERE aid = " . $aid . " AND uid = " . $_SESSION['id'];
+                                    $result = mysqli_query($db, $sql);
+                                    if(mysqli_affected_rows($db) > 0)
+                                    {
+                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
+                                    }
+                                    else
+                                    {
+                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-heart interaction like fa-solid\"></i></button></li>");
+                                    }
+
                                 }
                                 else
                                 {
@@ -191,7 +201,8 @@ $db = getDB();
             </div>
 
             <br />
-            <hr />
+            <br />
+            <br />
             <br />
 
             <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
@@ -306,6 +317,7 @@ $db = getDB();
     <script src="backend/js/img-explorer.js"></script>
     <script src="backend/js/article-interaction.js"></script>
     <script src="backend/js/check-ratio.js"></script>
+    <script src="backend/js/like.js"></script>
 
 
 

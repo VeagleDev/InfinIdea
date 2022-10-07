@@ -1,9 +1,10 @@
 const LikeMachine = new XMLHttpRequest();
 const LikeRefresher = new XMLHttpRequest();
 aid = 0;
+
 function performLike( id ) {
     aid = id;
-    const url = "https://infinidea.veagle.fr/article.php?id=" + id + "&action=like";
+    const url = "https://infinidea.veagle.fr/backend/php/add-like.php?article=" + aid;
     console.log("[INFO] Sending like request to " + url);
     LikeMachine.open("GET", url);
     LikeMachine.send();
@@ -16,11 +17,10 @@ LikeMachine.onreadystatechange = function() {
         // we get the response
         const response = this.responseText;
         console.log("[INFO] Like request response received");
-        // we refresh the like counter
-        refreshLikeCounter();
+
     }
 }
-
+/*
 function refreshLikeCounter( id ) {
     const url = "https://infinidea.veagle.fr/tools/infos.php?like=" + aid;
     console.log("[INFO] Refreshing like counter");
@@ -49,5 +49,5 @@ LikeRefresher.onreadystatechange = function() {
         }
     }
 }
-
+*/
 
