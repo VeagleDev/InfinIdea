@@ -1,21 +1,3 @@
-<!--
-GNU General Public License version 3 or later.
-Mysterious Developers 2022
-All rights reserved.
-
-Authors :
-- pierrbt
-- nicolasfasa
-
-Last update : 2022/08/08
-
--->
-
-
-<!-- TOUCHE PAS NON PLUS A CE FICHIER CE SONT DES FONCTIONS QUI ME SERVENT
-DANS LE BACK-END -->
-
-
 <?php
 set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
@@ -23,15 +5,14 @@ if(session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'tools/strings.php';
+require_once 'vendor/autoload.php';
+
 function getDB()
 {
     if(PHP_SESSION_ACTIVE)
     {
         if(isset($_SESSION['db']))
         {
-            // on regarde si la base a été fermée
-
-
             $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', '***REMOVED***', 'blog');
             return $_SESSION['db'];
         }
@@ -43,7 +24,8 @@ function getDB()
     }
     else
     {
-        echo "Veillez activer les SESSIONS";
+        echo "Ce site requiert l'activation des cookies";
+        die();
     }
 
 }
@@ -97,14 +79,6 @@ function getMail($id) : string
 {
     $db = getDB();
     $query = "SELECT email FROM users WHERE id = $id";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['email'];
-}
-function getMailbyUser($user) : string
-{
-    $db = getDB();
-    $query = "SELECT email FROM users WHERE pseudo = '$user'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_assoc($result);
     return $row['email'];
@@ -240,7 +214,6 @@ function updateUserIP($user) : void
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
-    logs('ip', 'updated ip for user ' . $user, $user, $db);
 }
 function logs($action, $details = '', $user = 0) : void
 {
@@ -253,9 +226,7 @@ function logs($action, $details = '', $user = 0) : void
 function logout() : void
 {
     if(session_status() == PHP_SESSION_NONE)
-    {
         session_start(); // On démarre la session AVANT toute chose
-    }
     if(session_status() == PHP_SESSION_ACTIVE)
     {
         logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
@@ -317,4 +288,46 @@ function getClientUID() : string
     $hash = hash('sha1', $key);
 
     return $hash;
+}
+
+function articleExists($id) : bool
+{
+    $db = getDB();
+    $query = "SELECT * FROM articles WHERE id = '$id'";
+    $result = mysqli_query($db, $query);
+    if(mysqli_num_rows($result) == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function SQLpurify($string) : string
+{
+    $db = getDB();
+
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+
+    $string = $purifier->purify($string);
+
+    $string =  str_replace("'", "''", $string);
+    $string = str_replace('"', '""', $string);
+    $string = str_replace('`', '``', $string);
+
+    $string = mysqli_real_escape_string($db, $string);
+
+    return $string;
+}
+
+function HTMLpurify($string) : string
+{
+    $purifier = new HTMLPurifier();
+
+    $string = $purifier->purify($string);
+
+    return $string;
 }

@@ -2,9 +2,11 @@ const interactionContainer = document.getElementsByClassName("interaction-contai
 
 interactionContainer.addEventListener('click', (event) => {
     if(event.target.classList.contains("like") && event.target.classList.contains("fa-regular")) {
+        // like
         event.target.classList.add("fa-solid")
         event.target.classList.remove("fa-regular")
     } else if(event.target.classList.contains("like") && event.target.classList.contains("fa-solid")) {
+        // delike
         event.target.classList.add("fa-regular")
         event.target.classList.remove("fa-solid")
     }
