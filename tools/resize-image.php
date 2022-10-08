@@ -14,8 +14,18 @@ function process_image(string $path, string $id)
     $hd_image = imagecreatetruecolor($hd_size[0], $hd_size[1]);
     $sd_image = imagecreatetruecolor($sd_size[0], $sd_size[1]);
     $thumb_image = imagecreatetruecolor($thumb_size[0], $thumb_size[1]);
-    echo $path;
-    $source = imagecreatefromjpeg($path);
+
+    // get source image which is png or jpg
+    if ($type == IMAGETYPE_JPEG) {
+        $source = imagecreatefromjpeg($path);
+    } else if ($type == IMAGETYPE_PNG) {
+        $source = imagecreatefrompng($path);
+    }
+    else
+    {
+        echo "Error while processing the image";
+        die();
+    }
 
     imagecopyresized($hd_image, $source, 0, 0, 0, 0, $hd_size[0], $hd_size[1], $width, $height);
     imagecopyresized($sd_image, $source, 0, 0, 0, 0, $sd_size[0], $sd_size[1], $width, $height);
