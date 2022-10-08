@@ -87,7 +87,7 @@ $db = getDB();
                         <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
 
                             <div class="img-container">
-                                <div><img class="img-article" src="images/uploads/<?php echo($row['id']); ?>.jpg" alt="" ></div>
+                                <div><img class="img-article" src="images/uploads/<?php echo($row['id']); ?>.jpg" alt="Image" ></div>
                             </div>
 
                             <div class="text">
