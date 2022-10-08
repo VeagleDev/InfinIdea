@@ -84,7 +84,7 @@ $db = getDB();
                     $result = mysqli_query($db, $sql);
                     while($row = mysqli_fetch_assoc($result))
                     { ?>
-                        <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
+                        <a href="article.php?id=<?php echo($row['uid']); ?>" class="gallery-cell">
 
                             <div class="img-container">
                                 <?php
