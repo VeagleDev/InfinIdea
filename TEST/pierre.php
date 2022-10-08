@@ -10,5 +10,15 @@ $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 foreach($articles as $article)
 {
     $aid = $article['id'];
-    echo "<p style='color:blue;'>" . $aid . "</p>";
+    $uid = uniqid();
+    $sql = "UPDATE articles SET uid = " . $uid;
+    $result = mysqli_query($db, $sql);
+    if($result)
+    {
+        echo '<p style="color:black">Le UID de l\'article n°' . $aid . ' à été mis à ' . $uid;
+    }
+    else
+    {
+        echo '<p style="color:red;">Erreur lors du changement de l\'UID de ' . $aid . ' : ' . mysqli_error($db);
+    }
 }
