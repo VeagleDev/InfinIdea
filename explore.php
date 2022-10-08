@@ -91,7 +91,7 @@ $db = getDB();
                                 $filename = 'images/uploads/' . $row['id'] . '.jpg';
                                 if(file_exists($filename))
                                 {
-                                    echo('<div><img class="img-article" src="images/uploads/'. $row['id'] .'jpg" alt="Image" ></div>');
+                                    echo('<div><img class="img-article" src="images/uploads/'. $row['id'] .'.jpg" alt="Image" ></div>');
                                     $sql = "SELECT path FROM images WHERE aid = " . $row['id'] . " LIMIT 3";
                                 }
                                 else
