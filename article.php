@@ -31,7 +31,7 @@ $db = getDB();
             <nav class="top-nav">
                 <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
                 <ul class="main-list">
-                    <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
+                    <li class="first-child"><a href="index.php"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
                     <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
@@ -274,17 +274,17 @@ $db = getDB();
                 <nav>
                     <ul>
                         <li><p class="nav-title">Contactez-nous</p></li>
-                        <li><a href=""><p>Discord</p></a></li>
+                        <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
                         <li><a href=""><p>Mail</p></a></li>
-                        <li><a href=""><p>Instagram</p></a></li>
+                        <li><a href="https://veagle.fr" target="_blank"><p>Instagram</p></a></li>
                     </ul>
                 </nav>
                 <nav>
                     <ul>
                         <li><p class="nav-title">Rejoignez-nous</p></li>
-                        <li><a href=""><p>veagle.fr</p></a></li>
-                        <li><a href=""><p>Discord</p></a></li>
-                        <li><a href=""><p>Instagram</p></a></li>
+                        <li><a href="https://veagle.fr" target="_blank"><p>veagle.fr</p></a></li>
+                        <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
+                        <li><a href="https://veagle.fr" target="_blank"><p>Instagram</p></a></li>
                     </ul>
                 </nav>
             </div>
@@ -300,7 +300,7 @@ $db = getDB();
                         <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><i class="fa-brands fa-discord"></i></a></li>
                         <li><a href="https://www.instagram.com/nicolas_fsn_/"><i class="fa-brands fa-instagram"></i></a></li>
                         <li><a href="https://github.com/Mysterious-Developers"><i class="fa-brands fa-github"></i></a></li>
-                        <li><a href="https://mysteriousdev.fr" target="_blank"><i class="fa-solid fa-window-restore"></i></a></li>
+                        <li><a href="https://veagle.fr" target="_blank"><i class="fa-solid fa-window-restore"></i></a></li>
                     </ul>
                 </nav>
             </div>
@@ -314,7 +314,7 @@ $db = getDB();
 
     <script src="backend/js/img-explorer.js"></script>
     <script src="backend/js/article-interaction.js"></script>
-    <script src="backend/js/check-ratio.js"></script>
+    <script defer src="backend/js/check-ratio.js"></script>
     <script src="backend/js/like.js"></script>
 
 

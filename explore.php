@@ -155,6 +155,6 @@ $db = getDB();
 
     <script src="backend/js/main.js"></script>
     <script src="backend/js/flickity.pkgd.min.js"></script>
-    <script src="backend/js/grid-check-ratio.js"></script>
+    <script defer src="backend/js/grid-check-ratio.js"></script>
 </body>
 </html>
