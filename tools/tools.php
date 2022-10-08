@@ -11,16 +11,8 @@ function getDB()
 {
     if(PHP_SESSION_ACTIVE)
     {
-        if(isset($_SESSION['db']))
-        {
-            $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', 'tta55tty4!_AL', 'blog');
-            return $_SESSION['db'];
-        }
-        else
-        {
-            $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'root', 'tta55tty4!_AL', 'blog');
-            return $_SESSION['db'];
-        }
+        $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'blog', 'youllneverknow', 'blog');
+        return $_SESSION['db'];
     }
     else
     {
