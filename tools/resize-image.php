@@ -36,7 +36,7 @@ function process_image(string $path, string $id)
 
 }
 
-process_image("/var/www/blog/images/uploads/1.jpg", "1");
+process_image("/var/www/blog/images/Capture.PNG", "1");
 
 /*$filename = "panda.jpeg";
 list($width, $height, $type) = getimagesize($filename);
