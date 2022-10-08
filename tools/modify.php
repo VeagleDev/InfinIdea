@@ -104,6 +104,7 @@ elseif(isset($_GET['article']))
                     margin: 0 auto;
                 }
                 form label {
+
                     margin-top: 10px;
                 }
                 form input, form textarea {
