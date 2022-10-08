@@ -91,7 +91,6 @@ $db = getDB();
                 if(articleExists($aid))
                 {
                     $sql = "SELECT * FROM articles WHERE uid = '$aid'";
-                    echo $sql;
                     $result = mysqli_query($db, $sql);
                     if(mysqli_affected_rows($db) == 1)
                     {
