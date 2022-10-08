@@ -12,8 +12,8 @@ while($row = mysqli_fetch_assoc($result))
     $aid = $row['id'];
     $uid = uniqid();
     $sql = "UPDATE articles SET uid = '" . $uid . "'";
-    $result = mysqli_query($db, $sql);
-    if($result)
+    $result2 = mysqli_query($db, $sql);
+    if($result2)
     {
         echo '<p style="color:black">Le UID de l\'article n°' . $aid . ' à été mis à ' . $uid;
         sleep(0.25);
