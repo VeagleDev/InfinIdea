@@ -6,6 +6,7 @@ $db = getDB();
 
 $sql = "SELECT * FROM articles";
 $result = mysqli_query($db, $sql);
+echo mysqli_num_rows($result);
 while($row = mysqli_fetch_assoc($result))
 {
     $aid = $row['id'];
