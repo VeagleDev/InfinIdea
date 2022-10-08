@@ -1,0 +1,4 @@
+# exlude .idea and .vscode folders in the root of the project
+.idea/
+.vscode/
+images/uploads/body/*
