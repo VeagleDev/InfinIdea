@@ -6,10 +6,8 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'autoconnect.php';
 require_once 'tools/tools.php';
-?> <!-- On appelle le fichier tools.php -->
+?>
 
-
-<!-- DERNIER TRUC A FAIRE !! -->
 
 <!DOCTYPE html>
 <html lang="fr">
