@@ -25,13 +25,13 @@ function process_image(string $path, string $id)
     $sd_path = "/var/www/blog/images/uploads/sd/" . $id . ".jpg";
     $thumb_path = "/var/www/blog/images/uploads/thumb/" . $id . ".jpg";
 
-    $hd_size = ($width > $height ? array(1440, $height * 1440 / $width) : array($width * 1440 / $height, 1440));
-    $sd_size = ($width > $height ? array(720, $height * 720 / $width) : array($width * 720 / $height, 720));
-    $thumb_size = ($width > $height ? array(360, $height * 360 / $width) : array($width * 360 / $height, 360));
+    $hd_size = ($width > $height ? array(1440, round($height * 1440 / $width)) : array(round($width * 1440 / $height), 1440));
+    $sd_size = ($width > $height ? array(720, round($height * 720 / $width)) : array(round($width * 720 / $height), 720));
+    $thumb_size = ($width > $height ? array(360, round($height * 360 / $width)) : array(round($width * 360 / $height), 360));
 
-    echo "hd_size: " . $hd_size[0] . "x" . $hd_size[1];
-    echo "sd_size: " . $sd_size[0] . "x" . $sd_size[1];
-    echo "thumb_size: " . $thumb_size[0] . "x" . $thumb_size[1];
+    echo "hd_size: " . $hd_size[0] . "x" . $hd_size[1] . "<br />";
+    echo "sd_size: " . $sd_size[0] . "x" . $sd_size[1] . "<br />";
+    echo "thumb_size: " . $thumb_size[0] . "x" . $thumb_size[1] . "<br />";
     echo "default_size: " . $width . "x" . $height;
 
 }
