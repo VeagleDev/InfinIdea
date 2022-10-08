@@ -8,7 +8,7 @@
 
 .article-result {
     width: 100%;
-    height: 1000px;
+    height: 1000px auto;
     background: rgb(79, 79, 79);
 }
 
@@ -18,6 +18,18 @@
     font-family: 'Rubik';
     letter-spacing: .5px;
     padding: 20px;
+}
+
+.article-result a {
+    font-size: 20px;
+    font-family: 'Rubik';
+    letter-spacing: .5px;
+    padding: 20px;
+}
+
+.article-result img {
+    margin: 20px;
+    width: 30%;
 }
 
 
@@ -30,3 +42,13 @@
     height: 50px;
 }
 
+.row {
+    width: 95%;
+    height: 2px;
+
+    margin: 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    
+    background: #FFF;
+}
