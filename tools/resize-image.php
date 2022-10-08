@@ -27,6 +27,6 @@ function process_image(string $path, string $id)
 
     unlink($path);
 
-    return array($hd_path, $sd_path, $thumb_path);
+    return array('images/uploads/hd/' . $id . '.jpg', 'images/uploads/sd/' . $id . '.jpg', 'images/uploads/thumb/' . $id . '.jpg');
 }
 
