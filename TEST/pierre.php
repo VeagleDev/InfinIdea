@@ -16,6 +16,7 @@ foreach($articles as $article)
     if($result)
     {
         echo '<p style="color:black">Le UID de l\'article n°' . $aid . ' à été mis à ' . $uid;
+        sleep(0.25);
     }
     else
     {
