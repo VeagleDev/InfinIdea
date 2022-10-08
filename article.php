@@ -90,11 +90,12 @@ $db = getDB();
                 $aid = HTMLpurify($_GET['id']);
                 if(articleExists($aid))
                 {
-                    $sql = "SELECT * FROM articles WHERE id = '$aid'";
+                    $sql = "SELECT * FROM articles WHERE uid = '$aid'";
                     $result = mysqli_query($db, $sql);
                     if(mysqli_affected_rows($db) == 1)
                     {
                         $row = mysqli_fetch_assoc($result);
+                        $aid = $row['id'];
                         $title = $row['name'];
                         $desc = $row['description'];
                         $body = $row['content'];
