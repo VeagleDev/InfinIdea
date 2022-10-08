@@ -10,7 +10,7 @@ $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 foreach($articles as $article)
 {
     $aid = $article['id'];
-    $uid = uniqid('', true);
+    $uid = uniqid();
     $sql = "UPDATE articles SET uid = '" . $uid . "'";
     $result = mysqli_query($db, $sql);
     if($result)
