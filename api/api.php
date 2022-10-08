@@ -8,6 +8,8 @@ require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 $db = getDB();
 
+
+
 if(isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']) && isset($_GET['action']))
 {
     $comment = SQLpurify($_POST['comment']);
