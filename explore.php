@@ -103,6 +103,7 @@ $db = getDB();
                                 {
                                     echo('<div><img class="img-article" src="' . $row2['path'] . '" alt="Image" ></div>');
                                 }
+
                                 ?>
                             </div>
 
