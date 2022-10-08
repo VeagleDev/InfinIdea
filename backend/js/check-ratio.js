@@ -28,7 +28,6 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
     for(var i = 0; i < 2; i++) {
         var newWidth = document.getElementById("displayed-img").offsetWidth
         var newHeight = document.getElementById("displayed-img").offsetHeight
-        console.log(document.getElementsByClassName("displayed-img")[0].offsetHeight)
         if(newWidth / newHeight <= 1) {
             displayedImg.style.height = "100%"
             displayedImg.style.width = "auto"
