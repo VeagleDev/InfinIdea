@@ -133,7 +133,7 @@ $db = getDB();
 
                 <div class="img-nav">
                     <?php
-                            $sql = 'SELECT path FROM images WHERE aid = ' . $aid;
+                            $sql = 'SELECT path FROM images WHERE aid = \'' . $aid . '\'';
                             $result = mysqli_query($db, $sql);
                             if(mysqli_affected_rows($db) > 0)
                             {
