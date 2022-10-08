@@ -20,33 +20,3 @@ LikeMachine.onreadystatechange = function() {
 
     }
 }
-/*
-function refreshLikeCounter( id ) {
-    const url = "https://infinidea.veagle.fr/tools/infos.php?like=" + aid;
-    console.log("[INFO] Refreshing like counter");
-    LikeRefresher.open("GET", url);
-    LikeRefresher.send();
-}
-
-// when the request is done, refresh the like counter
-LikeRefresher.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        // we get the response
-        const response = this.responseText;
-        console.log("[INFO] Like counter responce received");
-        // we set the paragraph with the id likeCounter to the response
-        document.getElementById("likeCounter").innerHTML = response;
-
-        // read the content of likeButton
-        const likeButton = document.getElementById("likeButton");
-        console.log ("[INFO] Like button content: " + likeButton.innerHTML);
-
-        if(likeButton.innerHTML == 'Like') {
-            likeButton.innerHTML = "Unlike";
-        }
-        else {
-            likeButton.innerHTML = "Like";
-        }
-    }
-}
-*/
