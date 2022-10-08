@@ -11,7 +11,7 @@ while($row = mysqli_fetch_assoc($result))
 {
     $aid = $row['id'];
     $uid = uniqid();
-    $sql = "UPDATE articles SET uid = '" . $uid . "'";
+    $sql = "UPDATE articles SET uid = '" . $uid . "' WHERE id = " . $aid;
     $result2 = mysqli_query($db, $sql);
     if($result2)
     {
