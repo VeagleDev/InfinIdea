@@ -10,3 +10,9 @@ document.querySelectorAll(".img-article").forEach((el) => {
         console.log("horizontal")
     }
 })
+
+var ra = document.getElementsByClassName("img-article").offsetWidth
+
+if(document.getElementsByClassName("img-article")[0].offsetWidth / document.getElementsByClassName("img-article")[0].offsetHeight) {
+    console.log(document.getElementsByClassName("img-article")[0].offsetHeight)
+}
