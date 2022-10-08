@@ -80,7 +80,7 @@ $db = getDB();
             data-flickity-options='{ "wrapAround": true }'>
 
                 <?php
-                    $sql = "SELECT * FROM articles ORDER BY views DESC LIMIT 20";
+                    $sql = "SELECT * FROM articles WHERE visibility = 'public' ORDER BY views DESC LIMIT 20";
                     $result = mysqli_query($db, $sql);
                     while($row = mysqli_fetch_assoc($result))
                     { ?>
