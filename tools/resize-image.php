@@ -14,7 +14,7 @@ function process_image(string $path, string $id)
     $hd_image = imagecreatetruecolor($hd_size[0], $hd_size[1]);
     $sd_image = imagecreatetruecolor($sd_size[0], $sd_size[1]);
     $thumb_image = imagecreatetruecolor($thumb_size[0], $thumb_size[1]);
-
+    echo $path;
     $source = imagecreatefromjpeg($path);
 
     imagecopyresized($hd_image, $source, 0, 0, 0, 0, $hd_size[0], $hd_size[1], $width, $height);
