@@ -309,9 +309,6 @@ $db = getDB();
     </section>
 
 
-
-
-
     <script src="backend/js/img-explorer.js"></script>
     <script src="backend/js/article-interaction.js"></script>
     <script src="backend/js/like.js"></script>
