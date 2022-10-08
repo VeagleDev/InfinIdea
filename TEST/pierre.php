@@ -11,7 +11,7 @@ foreach($articles as $article)
 {
     $aid = $article['id'];
     $uid = uniqid();
-    $sql = "UPDATE articles SET uid = " . $uid;
+    $sql = "UPDATE articles SET uid = '" . $uid . "'";
     $result = mysqli_query($db, $sql);
     if($result)
     {
