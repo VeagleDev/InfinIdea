@@ -110,7 +110,6 @@ $db = getDB();
                             <div class="text">
                                 <h1><?php echo($row['name']); ?></h1>
                                 <p class="description"><?php echo($row['description']); ?></p>
-                                <p class="description"><?php echo($row['content']); ?></p>
                             </div>
                         </a>
                     <?php }
