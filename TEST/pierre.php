@@ -6,10 +6,9 @@ $db = getDB();
 
 $sql = "SELECT id FROM articles";
 $result = mysqli_query($db, $sql);
-$articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
-foreach($articles as $article)
+while($row = mysqli_fetch_assoc($result))
 {
-    $aid = $article['id'];
+    $aid = $row['id'];
     $uid = uniqid();
     $sql = "UPDATE articles SET uid = '" . $uid . "'";
     $result = mysqli_query($db, $sql);
@@ -22,4 +21,5 @@ foreach($articles as $article)
     {
         echo '<p style="color:red;">Erreur lors du changement de l\'UID de ' . $aid . ' : ' . mysqli_error($db);
     }
+    sleep(0.1);
 }
