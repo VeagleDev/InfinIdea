@@ -29,12 +29,14 @@ if(isset($_POST['image']) && isset($_POST['article']))
             $result = mysqli_query($db, $sql);
             if($result)
             {
-                $path = 'images/uploads/body/' . $id . '.jpg';
-                file_put_contents('/var/www/blog/' . $path, $data);
-                $absolute_path = 'https://infinidea.veagle.fr/' . $path;
-                // update the path of the image in the database
-                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'";
+                $path = '/var/www/blog/images/uploads/temp/' . $id . '.jpg';
+                file_put_contents($path, $data);
+                require_once 'tools/resize-image.php';
+                list($hd, $sd, $td) = process_image($path, $id);
+                $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'";
                 $result = mysqli_query($db, $sql);
+                $absolute_path = 'https://infinidea.veagle.fr/' . $hd;
+                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'";
                 $markdown = '![](' . $absolute_path . ')';
                 echo($markdown);
             }
