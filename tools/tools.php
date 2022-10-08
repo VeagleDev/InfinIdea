@@ -285,7 +285,14 @@ function getClientUID() : string
 function articleExists($id) : bool
 {
     $db = getDB();
-    $query = "SELECT * FROM articles WHERE id = '$id'";
+    if(is_numeric($id))
+    {
+        $query = "SELECT id FROM articles WHERE id = $id";
+    }
+    else
+    {
+        $query = "SELECT id FROM articles WHERE uid = '$id'";
+    }
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) == 1)
     {
