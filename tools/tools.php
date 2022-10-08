@@ -293,6 +293,7 @@ function articleExists($id) : bool
     {
         $query = "SELECT id FROM articles WHERE uid = '" . $id . "'";
     }
+    echo $query;
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) == 1)
     {
