@@ -4,7 +4,7 @@ require_once 'tools/tools.php';
 
 $db = getDB();
 
-$sql = "SELECT id FROM articles";
+$sql = "SELECT * FROM articles";
 $result = mysqli_query($db, $sql);
 while($row = mysqli_fetch_assoc($result))
 {
