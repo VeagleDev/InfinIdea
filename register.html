@@ -8,33 +8,59 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/register.css">
     <script src="backend/js/fontawesome.js"></script>
-    <script defer src="backend/js/login.js"></script>
+    <script defer src="backend/js/register.js"></script>
 </head>
 <body>   
     <section class="page-content">
         <div class="steps">
             <div class="step step-one">
-                <p class="type-effect">Vous revoilà ! Reconnectez-vous, où étiez-vous passé ?</p>
-                <p class="type-effect before-append-input">Veuillez mettre votre E-mail;</p>
+                <p class="type-effect">Bienvenue dans la création de votre compte Infinidea avec VeagleConnect</p>
+                <p class="type-effect before-append-input">Pour commencer, veuillez renseignez votre pseudo;</p>
+                <div class="input-container">
+                    <input type="text" class="pseudo-value">
+                    <button class="submit-pseudo">soumettre</button>
+                </div>
+                <p class="error">Ce pseudo est déjà utilisé ou est incorrect.</p>
+            </div>
+
+            <div class="step step-two">
+                <p class="type-effect before-append-input">Maintenant, votre prénom;</p>
+                <div class="input-container">
+                    <input type="text" class="name-value">
+                    <button class="submit-name">soumettre</button>
+                </div>
+                <p class="error">Votre nom fait vraiment moins de 3 caractères ? Vérifiez ce que vous avez renseignez !</p>
+            </div>
+
+            <div class="step step-three">
+                <p class="type-effect before-append-input">Bien ! Veuillez désormais inscrire votre E-mail;</p>
                 <div class="input-container">
                     <input type="text" class="email-value">
                     <button class="submit-email">soumettre</button>
                 </div>
-                <p class="error">L'E-mail renseignée n'est pas correct.</p>
+                <p class="error">L'E-mail renseignez est incorrect.</p>
             </div>
 
-            <div class="step step-two">
-                <p class="type-effect before-append-input">Et enfin votre mot de passe;</p>
+            <div class="step step-four">
+                <p class="type-effect before-append-input">Pour finir, la sécurité ! Renseignez votre mot de passe et confirmez-le. Prennez-en un sécurisé, c'est le plus important;</p>
                 <div class="input-container">
                     <input type="text" class="password-value">
                     <button class="submit-password">soumettre</button>
                 </div>
-                <p class="error">Le mot de passe renseigné ne correspond pas à l'E-mail.</p>
+                <p class="error">Votre mot de passe doit contenir au moins 8 caractères.</p>
+            </div>
+
+            <div class="step step-five">
+                <p class="type-effect before-append-input">Confirmez votre mot de passe;</p>
+                <div class="input-container">
+                    <input type="text" class="confirm-password-value">
+                    <button class="confirm-password">Valider l'inscription</button>
+                </div>
+                <p class="error">Le mot de passe renseigné n'est pas le même !</p>
             </div>
 
             <div class="other-interaction">
-                <p>Retourner à l'<a href="index.php">accueil</a>.</p>
-                <p>Vous n'avez pas encore de compte VeagleConnect ? <a href="register.html">Inscrivez-vous</a>, ça prend 1 minute !</p>
+                <p>Déjà un compte VeagleConnect ? <a href="login.html">Connectez-vous</a>, c'est plus simple !</p>
             </div>
         </div>  
     </section>
