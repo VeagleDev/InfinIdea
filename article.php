@@ -316,7 +316,6 @@ $db = getDB();
     <script src="backend/js/article-interaction.js"></script>
     <script src="backend/js/like.js"></script>
     <script defer src="backend/js/check-ratio.js"></script>
-    <script src="backend/js/like.js"></script>
 
 
 
