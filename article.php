@@ -144,7 +144,7 @@ $db = getDB();
                                 $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png';
                             }
                     ?>
-                    <div class="displayed-img-div">
+                    <div class="displayed-img">
                         <img src="<?php echo $firstPath; ?>" alt="Image de l'article" id="displayed-img">
                     </div>
                     <nav class="nav">
