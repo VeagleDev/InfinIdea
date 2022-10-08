@@ -27,16 +27,25 @@ var el = 0
 
 var codeDisplayViewport = true
 
-window.addEventListener("scroll", effect);
+// window.addEventListener("scroll", effect);
 
-function effect() {
-    if((window.pageYOffset * 10) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
-        if(codeDisplayViewport === true) {
-          typeEffect(document.getElementsByClassName("o")[el], 20)
+// function effect() {
+//     if((window.pageYOffset * 10) >= document.getElementsByClassName("welcom-display")[0].offsetTop) {
+//         if(codeDisplayViewport === true) {
+//           typeEffect(document.getElementsByClassName("o")[el], 20)
+//           codeDisplayViewport = false
+//         }
+//     }
+// }
 
-          document.getElementsByClassName("welcom-display")[0].style.animation = "welcomCodeDisplay 1500ms forwards"
-  
-          codeDisplayViewport = false
-        }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if(entry.isIntersecting) {
+      typeEffect(entry.target, 20)
+      typeEffect(entry.target + 1, 20)
     }
-}
+  })
+})
+
+const hiddenElements = document.querySelectorAll(".o")
+hiddenElements.forEach((el) => observer.observe(el))

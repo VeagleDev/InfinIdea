@@ -265,7 +265,7 @@ background-color: #9c9c9c;
 }
 
 .user-menu:hover .user-connection-scrolling-menu {
-    animation: growDown 800ms forwards;
+    animation: growDown 400ms forwards;
 }
 
 .first-child {
