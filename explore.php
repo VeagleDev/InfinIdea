@@ -87,13 +87,29 @@ $db = getDB();
                         <a href="article.php?id=<?php echo($row['id']); ?>" class="gallery-cell">
 
                             <div class="img-container">
-                                <div><img src="images/uploads/<?php echo($row['id']); ?>.jpg" alt=""></div>
+                                <?php
+                                $filename = 'images/uploads/' . $row['id'] . '.jpg';
+                                if(file_exists($filename))
+                                {
+                                    echo('<div><img class="img-article" src="images/uploads/'. $row['id'] .'.jpg" alt="Image" ></div>');
+                                    $sql = "SELECT path FROM images WHERE aid = " . $row['id'] . " LIMIT 3";
+                                }
+                                else
+                                {
+                                    $sql = "SELECT path FROM images WHERE aid = " . $row['id'] . " LIMIT 4";
+                                }
+                                $result2 = mysqli_query($db, $sql);
+                                while($row2 = mysqli_fetch_assoc($result2))
+                                {
+                                    echo('<div><img class="img-article" src="' . $row2['path'] . '" alt="Image" ></div>');
+                                }
+
+                                ?>
                             </div>
 
                             <div class="text">
                                 <h1><?php echo($row['name']); ?></h1>
                                 <p class="description"><?php echo($row['description']); ?></p>
-                                <p class="description"><?php echo($row['content']); ?></p>
                             </div>
                         </a>
                     <?php }
