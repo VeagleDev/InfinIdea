@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace League\CommonMark\Normalizer;
 
 // phpcs:disable Squiz.Strings.DoubleQuoteUsage.ContainsVar
+use function array_key_exists;
+
 final class UniqueSlugNormalizer implements UniqueSlugNormalizerInterface
 {
     private TextNormalizerInterface $innerNormalizer;
@@ -40,11 +42,11 @@ final class UniqueSlugNormalizer implements UniqueSlugNormalizerInterface
         $normalized = $this->innerNormalizer->normalize($text, $context);
 
         // If it's not unique, add an incremental number to the end until we get a unique version
-        if (\array_key_exists($normalized, $this->alreadyUsed)) {
+        if (array_key_exists($normalized, $this->alreadyUsed)) {
             $suffix = 0;
             do {
                 ++$suffix;
-            } while (\array_key_exists("$normalized-$suffix", $this->alreadyUsed));
+            } while (array_key_exists("$normalized-$suffix", $this->alreadyUsed));
 
             $normalized = "$normalized-$suffix";
         }

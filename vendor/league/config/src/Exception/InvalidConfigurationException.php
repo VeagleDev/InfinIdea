@@ -13,7 +13,13 @@ declare(strict_types=1);
 
 namespace League\Config\Exception;
 
-class InvalidConfigurationException extends \UnexpectedValueException implements ConfigurationExceptionInterface
+use UnexpectedValueException;
+use function get_class;
+use function is_object;
+use function print_r;
+use function sprintf;
+
+class InvalidConfigurationException extends UnexpectedValueException implements ConfigurationExceptionInterface
 {
     /**
      * @param string  $option      Name/path of the option
@@ -22,9 +28,9 @@ class InvalidConfigurationException extends \UnexpectedValueException implements
      */
     public static function forConfigOption(string $option, $valueGiven, ?string $description = null): self
     {
-        $message = \sprintf('Invalid config option for "%s": %s', $option, self::getDebugValue($valueGiven));
+        $message = sprintf('Invalid config option for "%s": %s', $option, self::getDebugValue($valueGiven));
         if ($description !== null) {
-            $message .= \sprintf(' (%s)', $description);
+            $message .= sprintf(' (%s)', $description);
         }
 
         return new self($message);
@@ -37,10 +43,10 @@ class InvalidConfigurationException extends \UnexpectedValueException implements
      */
     private static function getDebugValue($value): string
     {
-        if (\is_object($value)) {
-            return \get_class($value);
+        if (is_object($value)) {
+            return get_class($value);
         }
 
-        return \print_r($value, true);
+        return print_r($value, true);
     }
 }

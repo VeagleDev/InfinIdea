@@ -14,6 +14,18 @@ declare(strict_types=1);
 namespace League\CommonMark\Parser;
 
 use League\CommonMark\Exception\UnexpectedEncodingException;
+use function mb_check_encoding;
+use function mb_str_split;
+use function mb_strlen;
+use function mb_substr;
+use function min;
+use function preg_match;
+use function str_repeat;
+use function str_split;
+use function strlen;
+use function strpos;
+use function substr;
+use const PREG_OFFSET_CAPTURE;
 
 class Cursor
 {
@@ -57,14 +69,14 @@ class Cursor
      */
     public function __construct(string $line)
     {
-        if (! \mb_check_encoding($line, 'UTF-8')) {
+        if (! mb_check_encoding($line, 'UTF-8')) {
             throw new UnexpectedEncodingException('Unexpected encoding - UTF-8 or ASCII was expected');
         }
 
         $this->line             = $line;
-        $this->length           = \mb_strlen($line, 'UTF-8') ?: 0;
-        $this->isMultibyte      = $this->length !== \strlen($line);
-        $this->lineContainsTabs = \strpos($line, "\t") !== false;
+        $this->length           = mb_strlen($line, 'UTF-8') ?: 0;
+        $this->isMultibyte      = $this->length !== strlen($line);
+        $this->lineContainsTabs = strpos($line, "\t") !== false;
     }
 
     /**
@@ -142,7 +154,7 @@ class Cursor
         }
 
         if ($this->isMultibyte) {
-            return $this->charCache[$index] ??= \mb_substr($this->line, $index, 1, 'UTF-8');
+            return $this->charCache[$index] ??= mb_substr($this->line, $index, 1, 'UTF-8');
         }
 
         return $this->line[$index];
@@ -158,7 +170,7 @@ class Cursor
         }
 
         if ($this->isMultibyte) {
-            return $this->charCache[$this->currentPosition] ??= \mb_substr($this->line, $this->currentPosition, 1, 'UTF-8');
+            return $this->charCache[$this->currentPosition] ??= mb_substr($this->line, $this->currentPosition, 1, 'UTF-8');
         }
 
         return $this->line[$this->currentPosition];
@@ -208,15 +220,15 @@ class Cursor
         }
 
         $nextFewChars = $this->isMultibyte ?
-            \mb_substr($this->line, $this->currentPosition, $characters, 'UTF-8') :
-            \substr($this->line, $this->currentPosition, $characters);
+            mb_substr($this->line, $this->currentPosition, $characters, 'UTF-8') :
+            substr($this->line, $this->currentPosition, $characters);
 
         if ($nextFewChars === '') {
             return;
         }
 
         // Optimization to avoid tab handling logic if we have no tabs
-        if (\strpos($nextFewChars, "\t") === false) {
+        if (strpos($nextFewChars, "\t") === false) {
             $this->advanceWithoutTabCharacters($characters);
 
             return;
@@ -226,9 +238,9 @@ class Cursor
             $asArray = [$nextFewChars];
         } elseif ($this->isMultibyte) {
             /** @var string[] $asArray */
-            $asArray = \mb_str_split($nextFewChars, 1, 'UTF-8');
+            $asArray = mb_str_split($nextFewChars, 1, 'UTF-8');
         } else {
-            $asArray = \str_split($nextFewChars);
+            $asArray = str_split($nextFewChars);
         }
 
         foreach ($asArray as $c) {
@@ -261,7 +273,7 @@ class Cursor
 
     private function advanceWithoutTabCharacters(int $characters): void
     {
-        $length                     = \min($characters, $this->length - $this->currentPosition);
+        $length                     = min($characters, $this->length - $this->currentPosition);
         $this->partiallyConsumedTab = false;
         $this->currentPosition     += $length;
         $this->column              += $length;
@@ -326,11 +338,11 @@ class Cursor
         }
 
         $matches = [];
-        \preg_match('/^ *(?:\n *)?/', $remainder, $matches, \PREG_OFFSET_CAPTURE);
+        preg_match('/^ *(?:\n *)?/', $remainder, $matches, PREG_OFFSET_CAPTURE);
 
         // [0][0] contains the matched text
         // [0][1] contains the index of that match
-        $increment = $matches[0][1] + \strlen($matches[0][0]);
+        $increment = $matches[0][1] + strlen($matches[0][0]);
 
         $this->advanceBy($increment);
 
@@ -363,12 +375,12 @@ class Cursor
         if ($this->partiallyConsumedTab) {
             $position++;
             $charsToTab = 4 - ($this->column % 4);
-            $prefix     = \str_repeat(' ', $charsToTab);
+            $prefix     = str_repeat(' ', $charsToTab);
         }
 
         $subString = $this->isMultibyte ?
-            \mb_substr($this->line, $position, null, 'UTF-8') :
-            \substr($this->line, $position);
+            mb_substr($this->line, $position, null, 'UTF-8') :
+            substr($this->line, $position);
 
         return $prefix . $subString;
     }
@@ -392,7 +404,7 @@ class Cursor
     {
         $subject = $this->getRemainder();
 
-        if (! \preg_match($regex, $subject, $matches, \PREG_OFFSET_CAPTURE)) {
+        if (! preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
             return null;
         }
 
@@ -401,11 +413,11 @@ class Cursor
 
         if ($this->isMultibyte) {
             // PREG_OFFSET_CAPTURE always returns the byte offset, not the char offset, which is annoying
-            $offset      = \mb_strlen(\substr($subject, 0, $matches[0][1]), 'UTF-8');
-            $matchLength = \mb_strlen($matches[0][0], 'UTF-8');
+            $offset      = mb_strlen(substr($subject, 0, $matches[0][1]), 'UTF-8');
+            $matchLength = mb_strlen($matches[0][0], 'UTF-8');
         } else {
             $offset      = $matches[0][1];
-            $matchLength = \strlen($matches[0][0]);
+            $matchLength = strlen($matches[0][0]);
         }
 
         // [0][0] contains the matched text
@@ -458,20 +470,20 @@ class Cursor
 
     public function getPreviousText(): string
     {
-        return \mb_substr($this->line, $this->previousPosition, $this->currentPosition - $this->previousPosition, 'UTF-8');
+        return mb_substr($this->line, $this->previousPosition, $this->currentPosition - $this->previousPosition, 'UTF-8');
     }
 
     public function getSubstring(int $start, ?int $length = null): string
     {
         if ($this->isMultibyte) {
-            return \mb_substr($this->line, $start, $length, 'UTF-8');
+            return mb_substr($this->line, $start, $length, 'UTF-8');
         }
 
         if ($length !== null) {
-            return \substr($this->line, $start, $length);
+            return substr($this->line, $start, $length);
         }
 
-        return \substr($this->line, $start);
+        return substr($this->line, $start);
     }
 
     public function getColumn(): int

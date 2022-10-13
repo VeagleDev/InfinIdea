@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Nette\Utils;
 
 use Nette;
+use stdClass;
 use function is_array, is_int, is_object, count;
 
 
@@ -239,7 +240,7 @@ class Arrays
 	/**
 	 * Reformats table to associative tree. Path looks like 'field|field[]field->field=field'.
 	 * @param  string|string[]  $path
-	 * @return array|\stdClass
+	 * @return array|stdClass
 	 */
 	public static function associate(array $array, $path)
 	{
@@ -251,7 +252,7 @@ class Arrays
 			throw new Nette\InvalidArgumentException("Invalid path '$path'.");
 		}
 
-		$res = $parts[0] === '->' ? new \stdClass : [];
+		$res = $parts[0] === '->' ? new stdClass : [];
 
 		foreach ($array as $rowOrig) {
 			$row = (array) $rowOrig;
@@ -270,7 +271,7 @@ class Arrays
 				} elseif ($part === '->') {
 					if (isset($parts[++$i])) {
 						if ($x === null) {
-							$x = new \stdClass;
+							$x = new stdClass;
 						}
 
 						$x = &$x->{$row[$parts[$i]]};

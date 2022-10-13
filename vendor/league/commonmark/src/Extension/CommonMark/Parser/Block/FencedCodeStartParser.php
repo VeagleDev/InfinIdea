@@ -17,12 +17,15 @@ use League\CommonMark\Parser\Block\BlockStart;
 use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
+use function in_array;
+use function ltrim;
+use function strlen;
 
 final class FencedCodeStartParser implements BlockStartParserInterface
 {
     public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
     {
-        if ($cursor->isIndented() || ! \in_array($cursor->getNextNonSpaceCharacter(), ['`', '~'], true)) {
+        if ($cursor->isIndented() || ! in_array($cursor->getNextNonSpaceCharacter(), ['`', '~'], true)) {
             return BlockStart::none();
         }
 
@@ -33,8 +36,8 @@ final class FencedCodeStartParser implements BlockStartParserInterface
         }
 
         // fenced code block
-        $fence = \ltrim($fence, " \t");
+        $fence = ltrim($fence, " \t");
 
-        return BlockStart::of(new FencedCodeParser(\strlen($fence), $fence[0], $indent))->at($cursor);
+        return BlockStart::of(new FencedCodeParser(strlen($fence), $fence[0], $indent))->at($cursor);
     }
 }

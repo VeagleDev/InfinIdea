@@ -17,6 +17,9 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Parser\Inline\InlineParserMatch;
 use League\CommonMark\Parser\InlineParserContext;
+use function in_array;
+use function strlen;
+use function substr;
 
 final class EmailAutolinkParser implements InlineParserInterface
 {
@@ -31,16 +34,16 @@ final class EmailAutolinkParser implements InlineParserInterface
     {
         $email = $inlineContext->getFullMatch();
         // The last character cannot be - or _
-        if (\in_array(\substr($email, -1), ['-', '_'], true)) {
+        if (in_array(substr($email, -1), ['-', '_'], true)) {
             return false;
         }
 
         // Does the URL end with punctuation that should be stripped?
-        if (\substr($email, -1) === '.') {
-            $email = \substr($email, 0, -1);
+        if (substr($email, -1) === '.') {
+            $email = substr($email, 0, -1);
         }
 
-        $inlineContext->getCursor()->advanceBy(\strlen($email));
+        $inlineContext->getCursor()->advanceBy(strlen($email));
         $inlineContext->getContainer()->appendChild(new Link('mailto:' . $email, $email));
 
         return true;

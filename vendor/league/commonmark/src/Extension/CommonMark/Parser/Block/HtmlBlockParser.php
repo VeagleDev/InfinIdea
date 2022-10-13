@@ -19,6 +19,8 @@ use League\CommonMark\Parser\Block\BlockContinue;
 use League\CommonMark\Parser\Block\BlockContinueParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Util\RegexHelper;
+use function in_array;
+use function preg_match;
 
 final class HtmlBlockParser extends AbstractBlockContinueParser
 {
@@ -50,7 +52,7 @@ final class HtmlBlockParser extends AbstractBlockContinueParser
             return BlockContinue::none();
         }
 
-        if ($cursor->isBlank() && \in_array($this->block->getType(), [HtmlBlock::TYPE_6_BLOCK_ELEMENT, HtmlBlock::TYPE_7_MISC_ELEMENT], true)) {
+        if ($cursor->isBlank() && in_array($this->block->getType(), [HtmlBlock::TYPE_6_BLOCK_ELEMENT, HtmlBlock::TYPE_7_MISC_ELEMENT], true)) {
             return BlockContinue::none();
         }
 
@@ -68,7 +70,7 @@ final class HtmlBlockParser extends AbstractBlockContinueParser
         // Check for end condition
         // phpcs:disable SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed
         if ($this->block->getType() <= HtmlBlock::TYPE_5_CDATA) {
-            if (\preg_match(RegexHelper::getHtmlBlockCloseRegex($this->block->getType()), $line) === 1) {
+            if (preg_match(RegexHelper::getHtmlBlockCloseRegex($this->block->getType()), $line) === 1) {
                 $this->finished = true;
             }
         }

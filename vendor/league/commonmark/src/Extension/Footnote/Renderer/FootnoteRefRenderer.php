@@ -22,6 +22,8 @@ use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use Stringable;
+use function mb_strtolower;
 
 final class FootnoteRefRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
@@ -34,13 +36,13 @@ final class FootnoteRefRenderer implements NodeRendererInterface, XmlNodeRendere
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         FootnoteRef::assertInstanceOf($node);
 
         $attrs = $node->data->getData('attributes');
         $attrs->append('class', $this->config->get('footnote/ref_class'));
-        $attrs->set('href', \mb_strtolower($node->getReference()->getDestination()));
+        $attrs->set('href', mb_strtolower($node->getReference()->getDestination()));
         $attrs->set('role', 'doc-noteref');
 
         $idPrefix = $this->config->get('footnote/ref_id_prefix');
@@ -48,7 +50,7 @@ final class FootnoteRefRenderer implements NodeRendererInterface, XmlNodeRendere
         return new HtmlElement(
             'sup',
             [
-                'id' => $idPrefix . \mb_strtolower($node->getReference()->getLabel()),
+                'id' => $idPrefix . mb_strtolower($node->getReference()->getLabel()),
             ],
             new HtmlElement(
                 'a',

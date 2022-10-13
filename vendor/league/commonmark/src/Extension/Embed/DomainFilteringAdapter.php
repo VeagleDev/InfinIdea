@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Extension\Embed;
 
+use function array_filter;
+use function array_map;
+use function array_values;
+use function implode;
+use function preg_match;
+
 class DomainFilteringAdapter implements EmbedAdapterInterface
 {
     private EmbedAdapterInterface $decorated;
@@ -33,8 +39,8 @@ class DomainFilteringAdapter implements EmbedAdapterInterface
      */
     public function updateEmbeds(array $embeds): void
     {
-        $this->decorated->updateEmbeds(\array_values(\array_filter($embeds, function (Embed $embed): bool {
-            return \preg_match($this->regex, $embed->getUrl()) === 1;
+        $this->decorated->updateEmbeds(array_values(array_filter($embeds, function (Embed $embed): bool {
+            return preg_match($this->regex, $embed->getUrl()) === 1;
         })));
     }
 
@@ -43,8 +49,8 @@ class DomainFilteringAdapter implements EmbedAdapterInterface
      */
     private static function createRegex(array $allowedDomains): string
     {
-        $allowedDomains = \array_map('preg_quote', $allowedDomains);
+        $allowedDomains = array_map('preg_quote', $allowedDomains);
 
-        return '/^(?:https?:\/\/)?(?:[^.]+\.)*(' . \implode('|', $allowedDomains) . ')/';
+        return '/^(?:https?:\/\/)?(?:[^.]+\.)*(' . implode('|', $allowedDomains) . ')/';
     }
 }

@@ -24,6 +24,10 @@ use League\CommonMark\Node\Block\Document;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Output\RenderedContent;
 use League\CommonMark\Output\RenderedContentInterface;
+use RuntimeException;
+use Stringable;
+use function assert;
+use function get_class;
 
 final class HtmlRenderer implements DocumentRendererInterface, ChildNodeRendererInterface
 {
@@ -70,22 +74,22 @@ final class HtmlRenderer implements DocumentRendererInterface, ChildNodeRenderer
     }
 
     /**
-     * @return \Stringable|string
+     * @return Stringable|string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     private function renderNode(Node $node)
     {
-        $renderers = $this->environment->getRenderersForClass(\get_class($node));
+        $renderers = $this->environment->getRenderersForClass(get_class($node));
 
         foreach ($renderers as $renderer) {
-            \assert($renderer instanceof NodeRendererInterface);
+            assert($renderer instanceof NodeRendererInterface);
             if (($result = $renderer->render($node, $this)) !== null) {
                 return $result;
             }
         }
 
-        throw new \RuntimeException('Unable to find corresponding renderer for node type ' . \get_class($node));
+        throw new RuntimeException('Unable to find corresponding renderer for node type ' . get_class($node));
     }
 
     public function getBlockSeparator(): string

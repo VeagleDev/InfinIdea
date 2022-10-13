@@ -16,6 +16,7 @@ namespace League\CommonMark;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use function assert;
 
 /**
  * Converts GitHub Flavored Markdown to HTML.
@@ -38,7 +39,7 @@ final class GithubFlavoredMarkdownConverter extends MarkdownConverter
 
     public function getEnvironment(): Environment
     {
-        \assert($this->environment instanceof Environment);
+        assert($this->environment instanceof Environment);
 
         return $this->environment;
     }

@@ -13,6 +13,17 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Util;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use ReturnTypeWillChange;
+use function array_key_exists;
+use function array_slice;
+use function count;
+use function end;
+use function reset;
+
 /**
  * Array collection
  *
@@ -21,10 +32,10 @@ namespace League\CommonMark\Util;
  * @internal
  *
  * @phpstan-template T
- * @phpstan-implements \IteratorAggregate<int, T>
- * @phpstan-implements \ArrayAccess<int, T>
+ * @phpstan-implements IteratorAggregate<int, T>
+ * @phpstan-implements ArrayAccess<int, T>
  */
-final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAccess
+final class ArrayCollection implements IteratorAggregate, Countable, ArrayAccess
 {
     /**
      * @var array<int, mixed>
@@ -51,7 +62,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      */
     public function first()
     {
-        return \reset($this->elements);
+        return reset($this->elements);
     }
 
     /**
@@ -61,20 +72,20 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      */
     public function last()
     {
-        return \end($this->elements);
+        return end($this->elements);
     }
 
     /**
      * Retrieve an external iterator
      *
-     * @return \ArrayIterator<int, mixed>
+     * @return ArrayIterator<int, mixed>
      *
-     * @phpstan-return \ArrayIterator<int, T>
+     * @phpstan-return ArrayIterator<int, T>
      */
-    #[\ReturnTypeWillChange]
-    public function getIterator(): \ArrayIterator
+    #[ReturnTypeWillChange]
+    public function getIterator(): ArrayIterator
     {
-        return new \ArrayIterator($this->elements);
+        return new ArrayIterator($this->elements);
     }
 
     /**
@@ -84,7 +95,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      */
     public function count(): int
     {
-        return \count($this->elements);
+        return count($this->elements);
     }
 
     /**
@@ -96,7 +107,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      */
     public function offsetExists($offset): bool
     {
-        return \array_key_exists($offset, $this->elements);
+        return array_key_exists($offset, $this->elements);
     }
 
     /**
@@ -108,7 +119,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      *
      * @phpstan-return T|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->elements[$offset] ?? null;
@@ -122,7 +133,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      * @phpstan-param int|null $offset
      * @phpstan-param T        $value
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value): void
     {
         if ($offset === null) {
@@ -139,10 +150,10 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      *
      * @phpstan-param int $offset
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset): void
     {
-        if (! \array_key_exists($offset, $this->elements)) {
+        if (! array_key_exists($offset, $this->elements)) {
             return;
         }
 
@@ -158,7 +169,7 @@ final class ArrayCollection implements \IteratorAggregate, \Countable, \ArrayAcc
      */
     public function slice(int $offset, ?int $length = null): array
     {
-        return \array_slice($this->elements, $offset, $length, true);
+        return array_slice($this->elements, $offset, $length, true);
     }
 
     /**

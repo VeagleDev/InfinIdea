@@ -17,6 +17,15 @@ namespace League\CommonMark\Extension\Attributes\Util;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Util\RegexHelper;
+use function array_filter;
+use function array_merge;
+use function explode;
+use function implode;
+use function is_string;
+use function strlen;
+use function strtolower;
+use function substr;
+use function trim;
 
 /**
  * @internal
@@ -44,33 +53,33 @@ final class AttributesHelper
         }
 
         $attributes = [];
-        while ($attribute = \trim((string) $cursor->match(self::REGEX))) {
+        while ($attribute = trim((string) $cursor->match(self::REGEX))) {
             if ($attribute[0] === '#') {
-                $attributes['id'] = \substr($attribute, 1);
+                $attributes['id'] = substr($attribute, 1);
 
                 continue;
             }
 
             if ($attribute[0] === '.') {
-                $attributes['class'][] = \substr($attribute, 1);
+                $attributes['class'][] = substr($attribute, 1);
 
                 continue;
             }
 
-            [$name, $value] = \explode('=', $attribute, 2);
+            [$name, $value] = explode('=', $attribute, 2);
 
             $first = $value[0];
-            $last  = \substr($value, -1);
-            if (($first === '"' && $last === '"') || ($first === "'" && $last === "'") && \strlen($value) > 1) {
-                $value = \substr($value, 1, -1);
+            $last  = substr($value, -1);
+            if (($first === '"' && $last === '"') || ($first === "'" && $last === "'") && strlen($value) > 1) {
+                $value = substr($value, 1, -1);
             }
 
-            if (\strtolower(\trim($name)) === 'class') {
-                foreach (\array_filter(\explode(' ', \trim($value))) as $class) {
+            if (strtolower(trim($name)) === 'class') {
+                foreach (array_filter(explode(' ', trim($value))) as $class) {
                     $attributes['class'][] = $class;
                 }
             } else {
-                $attributes[\trim($name)] = \trim($value);
+                $attributes[trim($name)] = trim($value);
             }
         }
 
@@ -87,7 +96,7 @@ final class AttributesHelper
         }
 
         if (isset($attributes['class'])) {
-            $attributes['class'] = \implode(' ', (array) $attributes['class']);
+            $attributes['class'] = implode(' ', (array) $attributes['class']);
         }
 
         return $attributes;
@@ -110,8 +119,8 @@ final class AttributesHelper
             /** @var array<string, mixed> $arg */
             $arg = (array) $arg;
             if (isset($arg['class'])) {
-                if (\is_string($arg['class'])) {
-                    $arg['class'] = \array_filter(\explode(' ', \trim($arg['class'])));
+                if (is_string($arg['class'])) {
+                    $arg['class'] = array_filter(explode(' ', trim($arg['class'])));
                 }
 
                 foreach ($arg['class'] as $class) {
@@ -121,11 +130,11 @@ final class AttributesHelper
                 unset($arg['class']);
             }
 
-            $attributes = \array_merge($attributes, $arg);
+            $attributes = array_merge($attributes, $arg);
         }
 
         if (isset($attributes['class'])) {
-            $attributes['class'] = \implode(' ', $attributes['class']);
+            $attributes['class'] = implode(' ', $attributes['class']);
         }
 
         return $attributes;

@@ -23,6 +23,9 @@ use League\CommonMark\Node\NodeIterator;
 use League\CommonMark\Reference\Reference;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function count;
+use function ksort;
+use const PHP_INT_MAX;
 
 final class GatherFootnotesListener implements ConfigurationAwareInterface
 {
@@ -45,7 +48,7 @@ final class GatherFootnotesListener implements ConfigurationAwareInterface
                 $footnotes[(int) $ref->getTitle()] = $node;
             } else {
                 // Footnote call is missing, append footnote at the end
-                $footnotes[\PHP_INT_MAX] = $node;
+                $footnotes[PHP_INT_MAX] = $node;
             }
 
             $key = '#' . $this->config->get('footnote/footnote_id_prefix') . $node->getReference()->getDestination();
@@ -55,13 +58,13 @@ final class GatherFootnotesListener implements ConfigurationAwareInterface
         }
 
         // Only add a footnote container if there are any
-        if (\count($footnotes) === 0) {
+        if (count($footnotes) === 0) {
             return;
         }
 
         $container = $this->getFootnotesContainer($document);
 
-        \ksort($footnotes);
+        ksort($footnotes);
         foreach ($footnotes as $footnote) {
             $container->appendChild($footnote);
         }

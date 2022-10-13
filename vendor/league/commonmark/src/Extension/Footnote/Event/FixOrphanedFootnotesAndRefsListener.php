@@ -18,6 +18,7 @@ use League\CommonMark\Extension\Footnote\Node\Footnote;
 use League\CommonMark\Extension\Footnote\Node\FootnoteRef;
 use League\CommonMark\Node\Block\Document;
 use League\CommonMark\Node\Inline\Text;
+use function sprintf;
 
 final class FixOrphanedFootnotesAndRefsListener
 {
@@ -30,7 +31,7 @@ final class FixOrphanedFootnotesAndRefsListener
             if ($node instanceof FootnoteRef && ! isset($map[Footnote::class][$node->getReference()->getLabel()])) {
                 // Found an orphaned FootnoteRef without a corresponding Footnote
                 // Restore the original footnote ref text
-                $node->replaceWith(new Text(\sprintf('[^%s]', $node->getReference()->getLabel())));
+                $node->replaceWith(new Text(sprintf('[^%s]', $node->getReference()->getLabel())));
             }
 
             // phpcs:disable SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed

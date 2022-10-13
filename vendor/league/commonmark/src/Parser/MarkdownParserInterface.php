@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace League\CommonMark\Parser;
 
 use League\CommonMark\Node\Block\Document;
+use RuntimeException;
 
 interface MarkdownParserInterface
 {
     /**
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function parse(string $input): Document;
 }

@@ -18,6 +18,7 @@ namespace League\CommonMark\Extension\CommonMark\Node\Block;
 
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Node\StringContainerInterface;
+use function preg_split;
 
 final class FencedCode extends AbstractBlock implements StringContainerInterface
 {
@@ -50,7 +51,7 @@ final class FencedCode extends AbstractBlock implements StringContainerInterface
      */
     public function getInfoWords(): array
     {
-        return \preg_split('/\s+/', $this->info ?? '') ?: [];
+        return preg_split('/\s+/', $this->info ?? '') ?: [];
     }
 
     public function setInfo(string $info): void

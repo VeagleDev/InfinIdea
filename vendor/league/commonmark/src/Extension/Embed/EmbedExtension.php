@@ -18,6 +18,7 @@ use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\ConfigurableExtensionInterface;
 use League\Config\ConfigurationBuilderInterface;
 use Nette\Schema\Expect;
+use function assert;
 
 final class EmbedExtension implements ConfigurableExtensionInterface
 {
@@ -33,7 +34,7 @@ final class EmbedExtension implements ConfigurableExtensionInterface
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $adapter = $environment->getConfiguration()->get('embed.adapter');
-        \assert($adapter instanceof EmbedAdapterInterface);
+        assert($adapter instanceof EmbedAdapterInterface);
 
         $allowedDomains = $environment->getConfiguration()->get('embed.allowed_domains');
         if ($allowedDomains !== []) {

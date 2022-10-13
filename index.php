@@ -246,8 +246,8 @@ $db = getDB();
             $result = mysqli_query($db, $sql); // on execute la requete
             while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
             {
-                $articleid = $row['uid'];
-                $href = "article.php?id=" . $row['id']; // on recupere l'id de l'article
+                $articleid = $row['id'];
+                $href = "article.php?id=" . $row['uid']; // on recupere l'id de l'article
                 $sql = "SELECT * FROM images WHERE type = 'main' AND aid = " . $articleid . " LIMIT 1;"; // on charge l'image de l'article
                 $result2 = mysqli_query($db, $sql); // on execute la requete
                 if(mysqli_affected_rows($db) > 0) // si on a un resultat
@@ -266,7 +266,6 @@ $db = getDB();
                     }
                     else
                     {
-                        // if no image is found, we check if there is a image at uploads/images/aid.jpg
                         $img = "images/uploads/" . $articleid . ".jpg";
                         if(!file_exists($img))
                         {

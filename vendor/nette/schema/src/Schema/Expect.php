@@ -13,6 +13,7 @@ use Nette;
 use Nette\Schema\Elements\AnyOf;
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Elements\Type;
+use ReflectionObject;
 
 
 /**
@@ -73,7 +74,7 @@ final class Expect
 	 */
 	public static function from($object, array $items = []): Structure
 	{
-		$ro = new \ReflectionObject($object);
+		$ro = new ReflectionObject($object);
 		foreach ($ro->getProperties() as $prop) {
 			$type = Helpers::getPropertyType($prop) ?? 'mixed';
 			$item = &$items[$prop->getName()];

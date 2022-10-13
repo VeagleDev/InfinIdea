@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Xml;
 
+use InvalidArgumentException;
 use League\CommonMark\Environment\EnvironmentInterface;
 use League\CommonMark\Event\DocumentPreRenderEvent;
 use League\CommonMark\Node\Block\Document;
@@ -13,6 +14,14 @@ use League\CommonMark\Output\RenderedContent;
 use League\CommonMark\Output\RenderedContentInterface;
 use League\CommonMark\Renderer\DocumentRendererInterface;
 use League\CommonMark\Util\Xml;
+use function array_key_exists;
+use function get_class;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_string;
+use function sprintf;
+use function str_repeat;
 
 final class XmlRenderer implements DocumentRendererInterface
 {
@@ -51,7 +60,7 @@ final class XmlRenderer implements DocumentRendererInterface
             if ($event->isEntering()) {
                 $attrs = $renderer->getXmlAttributes($node);
 
-                $xml .= "\n" . \str_repeat(self::INDENTATION, $indent);
+                $xml .= "\n" . str_repeat(self::INDENTATION, $indent);
                 $xml .= self::tag($tagName, $attrs, $selfClosing);
 
                 if ($node instanceof StringContainerInterface) {
@@ -67,7 +76,7 @@ final class XmlRenderer implements DocumentRendererInterface
                 }
             } elseif (! $closeImmediately) {
                 $indent--;
-                $xml .= "\n" . \str_repeat(self::INDENTATION, $indent);
+                $xml .= "\n" . str_repeat(self::INDENTATION, $indent);
                 $xml .= self::tag('/' . $tagName);
             }
         }
@@ -78,11 +87,11 @@ final class XmlRenderer implements DocumentRendererInterface
     /**
      * @param array<string, string|int|float|bool> $attrs
      */
-    private static function tag(string $name, array $attrs = [], bool $selfClosing = \false): string
+    private static function tag(string $name, array $attrs = [], bool $selfClosing = false): string
     {
         $result = '<' . $name;
         foreach ($attrs as $key => $value) {
-            $result .= \sprintf(' %s="%s"', $key, self::convertAndEscape($value));
+            $result .= sprintf(' %s="%s"', $key, self::convertAndEscape($value));
         }
 
         if ($selfClosing) {
@@ -99,27 +108,27 @@ final class XmlRenderer implements DocumentRendererInterface
      */
     private static function convertAndEscape($value): string
     {
-        if (\is_string($value)) {
+        if (is_string($value)) {
             return Xml::escape($value);
         }
 
-        if (\is_int($value) || \is_float($value)) {
+        if (is_int($value) || is_float($value)) {
             return (string) $value;
         }
 
-        if (\is_bool($value)) {
+        if (is_bool($value)) {
             return $value ? 'true' : 'false';
         }
 
         // @phpstan-ignore-next-line
-        throw new \InvalidArgumentException('$value must be a string, int, float, or bool');
+        throw new InvalidArgumentException('$value must be a string, int, float, or bool');
     }
 
     private function findXmlRenderer(Node $node): XmlNodeRendererInterface
     {
-        $class = \get_class($node);
+        $class = get_class($node);
 
-        if (\array_key_exists($class, $this->rendererCache)) {
+        if (array_key_exists($class, $this->rendererCache)) {
             return $this->rendererCache[$class];
         }
 

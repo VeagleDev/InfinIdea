@@ -9,14 +9,20 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
 use Nette;
+use RecursiveArrayIterator;
+use ReturnTypeWillChange;
+use stdClass;
 
 
 /**
  * Provides objects to work as array.
  * @template T
  */
-class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \IteratorAggregate
+class ArrayHash extends stdClass implements ArrayAccess, Countable, IteratorAggregate
 {
 	/**
 	 * Transforms array to ArrayHash.
@@ -38,11 +44,11 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Returns an iterator over all items.
-	 * @return \RecursiveArrayIterator<array-key, T>
+	 * @return RecursiveArrayIterator<array-key, T>
 	 */
-	public function getIterator(): \RecursiveArrayIterator
+	public function getIterator(): RecursiveArrayIterator
 	{
-		return new \RecursiveArrayIterator((array) $this);
+		return new RecursiveArrayIterator((array) $this);
 	}
 
 
@@ -75,7 +81,7 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 	 * @param  string|int  $key
 	 * @return T
 	 */
-	#[\ReturnTypeWillChange]
+	#[ReturnTypeWillChange]
 	public function offsetGet($key)
 	{
 		return $this->$key;

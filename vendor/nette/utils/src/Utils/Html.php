@@ -9,8 +9,14 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
 use Nette;
 use Nette\HtmlStringable;
+use ReturnTypeWillChange;
+use Throwable;
 use function is_array, is_float, is_object, is_string;
 
 
@@ -231,7 +237,7 @@ use function is_array, is_float, is_object, is_string;
  * @method self width(?int $val)
  * @method self wrap(?string $val)
  */
-class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringable
+class Html implements ArrayAccess, Countable, IteratorAggregate, HtmlStringable
 {
 	use Nette\SmartObject;
 
@@ -670,7 +676,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringab
 	 * @param  int  $index
 	 * @return HtmlStringable|string
 	 */
-	#[\ReturnTypeWillChange]
+	#[ReturnTypeWillChange]
 	final public function offsetGet($index)
 	{
 		return $this->children[$index];
@@ -719,11 +725,11 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringab
 
 	/**
 	 * Iterates over elements.
-	 * @return \ArrayIterator<int, HtmlStringable|string>
+	 * @return ArrayIterator<int, HtmlStringable|string>
 	 */
-	final public function getIterator(): \ArrayIterator
+	final public function getIterator(): ArrayIterator
 	{
-		return new \ArrayIterator($this->children);
+		return new ArrayIterator($this->children);
 	}
 
 
@@ -773,7 +779,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringab
 	{
 		try {
 			return $this->render();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			if (PHP_VERSION_ID >= 70400) {
 				throw $e;
 			}
