@@ -19,6 +19,7 @@ use League\CommonMark\Parser\Block\BlockStart;
 use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
+use function explode;
 
 final class DescriptionStartParser implements BlockStartParserInterface
 {
@@ -64,7 +65,7 @@ final class DescriptionStartParser implements BlockStartParserInterface
     private static function splitTerms(string $terms): array
     {
         $ret = [];
-        foreach (\explode("\n", $terms) as $term) {
+        foreach (explode("\n", $terms) as $term) {
             $ret[] = new DescriptionTermContinueParser($term);
         }
 

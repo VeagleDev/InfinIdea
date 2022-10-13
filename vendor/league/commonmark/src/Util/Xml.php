@@ -16,6 +16,8 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Util;
 
+use function str_replace;
+
 /**
  * Utility class for handling/generating XML and HTML
  *
@@ -28,6 +30,6 @@ final class Xml
      */
     public static function escape(string $string): string
     {
-        return \str_replace(['&', '<', '>', '"'], ['&amp;', '&lt;', '&gt;', '&quot;'], $string);
+        return str_replace(['&', '<', '>', '"'], ['&amp;', '&lt;', '&gt;', '&quot;'], $string);
     }
 }

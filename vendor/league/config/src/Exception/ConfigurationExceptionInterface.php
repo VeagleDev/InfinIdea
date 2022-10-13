@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace League\Config\Exception;
 
+use Throwable;
+
 /**
  * Marker interface for any/all exceptions thrown by this library
  */
-interface ConfigurationExceptionInterface extends \Throwable
+interface ConfigurationExceptionInterface extends Throwable
 {
 }

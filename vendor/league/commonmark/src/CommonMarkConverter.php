@@ -18,6 +18,7 @@ namespace League\CommonMark;
 
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use function assert;
 
 /**
  * Converts CommonMark-compatible Markdown to HTML.
@@ -39,7 +40,7 @@ final class CommonMarkConverter extends MarkdownConverter
 
     public function getEnvironment(): Environment
     {
-        \assert($this->environment instanceof Environment);
+        assert($this->environment instanceof Environment);
 
         return $this->environment;
     }

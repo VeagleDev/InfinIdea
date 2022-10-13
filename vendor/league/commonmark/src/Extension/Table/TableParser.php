@@ -22,6 +22,9 @@ use League\CommonMark\Parser\Block\BlockContinueParserWithInlinesInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\InlineParserEngineInterface;
 use League\CommonMark\Util\ArrayCollection;
+use function count;
+use function strpos;
+use function trim;
 
 final class TableParser extends AbstractBlockContinueParser implements BlockContinueParserWithInlinesInterface
 {
@@ -82,7 +85,7 @@ final class TableParser extends AbstractBlockContinueParser implements BlockCont
 
     public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): ?BlockContinue
     {
-        if (\strpos($cursor->getLine(), '|') === false) {
+        if (strpos($cursor->getLine(), '|') === false) {
             return BlockContinue::none();
         }
 
@@ -100,7 +103,7 @@ final class TableParser extends AbstractBlockContinueParser implements BlockCont
 
     public function parseInlines(InlineParserEngineInterface $inlineParser): void
     {
-        $headerColumns = \count($this->headerCells);
+        $headerColumns = count($this->headerCells);
 
         $head = new TableSection(TableSection::TYPE_HEAD);
         $this->block->appendChild($head);
@@ -140,11 +143,11 @@ final class TableParser extends AbstractBlockContinueParser implements BlockCont
     {
         $tableCell = new TableCell();
 
-        if ($column < \count($this->columns)) {
+        if ($column < count($this->columns)) {
             $tableCell->setAlign($this->columns[$column]);
         }
 
-        $inlineParser->parse(\trim($cell), $tableCell);
+        $inlineParser->parse(trim($cell), $tableCell);
 
         return $tableCell;
     }
@@ -156,7 +159,7 @@ final class TableParser extends AbstractBlockContinueParser implements BlockCont
      */
     public static function split(string $line): array
     {
-        $cursor = new Cursor(\trim($line));
+        $cursor = new Cursor(trim($line));
 
         if ($cursor->getCurrentCharacter() === '|') {
             $cursor->advanceBy(1);

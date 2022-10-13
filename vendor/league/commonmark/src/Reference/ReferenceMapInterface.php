@@ -16,12 +16,15 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Reference;
 
+use Countable;
+use IteratorAggregate;
+
 /**
  * A collection of references
  *
- * @phpstan-extends \IteratorAggregate<ReferenceInterface>
+ * @phpstan-extends IteratorAggregate<ReferenceInterface>
  */
-interface ReferenceMapInterface extends \IteratorAggregate, \Countable
+interface ReferenceMapInterface extends IteratorAggregate, Countable
 {
     public function add(ReferenceInterface $reference): void;
 

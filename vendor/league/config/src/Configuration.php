@@ -23,6 +23,11 @@ use Nette\Schema\Expect;
 use Nette\Schema\Processor;
 use Nette\Schema\Schema;
 use Nette\Schema\ValidationException as NetteValidationException;
+use stdClass;
+use function array_key_exists;
+use function is_array;
+use function trigger_error;
+use const E_USER_DEPRECATED;
 
 final class Configuration implements ConfigurationBuilderInterface, ConfigurationInterface
 {
@@ -109,7 +114,7 @@ final class Configuration implements ConfigurationBuilderInterface, Configuratio
     {
         if ($this->finalConfig === null) {
             $this->finalConfig = $this->build();
-        } elseif (\array_key_exists($key, $this->cache)) {
+        } elseif (array_key_exists($key, $this->cache)) {
             return $this->cache[$key];
         }
 
@@ -129,7 +134,7 @@ final class Configuration implements ConfigurationBuilderInterface, Configuratio
     {
         if ($this->finalConfig === null) {
             $this->finalConfig = $this->build();
-        } elseif (\array_key_exists($key, $this->cache)) {
+        } elseif (array_key_exists($key, $this->cache)) {
             return true;
         }
 
@@ -190,11 +195,11 @@ final class Configuration implements ConfigurationBuilderInterface, Configuratio
      */
     private static function convertStdClassesToArrays($data)
     {
-        if ($data instanceof \stdClass) {
+        if ($data instanceof stdClass) {
             $data = (array) $data;
         }
 
-        if (\is_array($data)) {
+        if (is_array($data)) {
             foreach ($data as $k => $v) {
                 $data[$k] = self::convertStdClassesToArrays($v);
             }
@@ -209,7 +214,7 @@ final class Configuration implements ConfigurationBuilderInterface, Configuratio
     private function raiseAnyDeprecationNotices(array $warnings): void
     {
         foreach ($warnings as $warning) {
-            @\trigger_error($warning, \E_USER_DEPRECATED);
+            @trigger_error($warning, E_USER_DEPRECATED);
         }
     }
 }

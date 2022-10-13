@@ -18,6 +18,10 @@ namespace League\CommonMark\Reference;
 
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Util\LinkParserHelper;
+use function assert;
+use function mb_strlen;
+use function substr;
+use function trim;
 
 final class ReferenceParser
 {
@@ -157,7 +161,7 @@ final class ReferenceParser
             return false;
         }
 
-        \assert($this->label !== null);
+        assert($this->label !== null);
         $this->label .= $partialLabel;
 
         if ($cursor->isAtEnd()) {
@@ -181,12 +185,12 @@ final class ReferenceParser
         $cursor->advance();
 
         // spec: A link label can have at most 999 characters inside the square brackets
-        if (\mb_strlen($this->label, 'utf-8') > 999) {
+        if (mb_strlen($this->label, 'utf-8') > 999) {
             return false;
         }
 
         // spec: A link label must contain at least one non-whitespace character
-        if (\trim($this->label) === '') {
+        if (trim($this->label) === '') {
             return false;
         }
 
@@ -264,7 +268,7 @@ final class ReferenceParser
 
     private function parseTitle(Cursor $cursor): bool
     {
-        \assert($this->titleDelimiter !== null);
+        assert($this->titleDelimiter !== null);
         $title = LinkParserHelper::parsePartialLinkTitle($cursor, $this->titleDelimiter);
 
         if ($title === null) {
@@ -274,10 +278,10 @@ final class ReferenceParser
 
         // Did we find the end delimiter?
         $endDelimiterFound = false;
-        if (\substr($title, -1) === $this->titleDelimiter) {
+        if (substr($title, -1) === $this->titleDelimiter) {
             $endDelimiterFound = true;
             // Chop it off
-            $title = \substr($title, 0, -1);
+            $title = substr($title, 0, -1);
         }
 
         $this->title .= $title;

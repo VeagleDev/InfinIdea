@@ -18,12 +18,18 @@ use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
 use League\CommonMark\Util\RegexHelper;
+use function assert;
+use function in_array;
+use function is_string;
+use function preg_replace;
+use function strlen;
+use function trim;
 
 class HeadingStartParser implements BlockStartParserInterface
 {
     public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
     {
-        if ($cursor->isIndented() || ! \in_array($cursor->getNextNonSpaceCharacter(), ['#', '-', '='], true)) {
+        if ($cursor->isIndented() || ! in_array($cursor->getNextNonSpaceCharacter(), ['#', '-', '='], true)) {
             return BlockStart::none();
         }
 
@@ -56,14 +62,14 @@ class HeadingStartParser implements BlockStartParserInterface
         }
 
         $cursor->advanceToNextNonSpaceOrTab();
-        $cursor->advanceBy(\strlen($match[0]));
+        $cursor->advanceBy(strlen($match[0]));
 
-        $level = \strlen(\trim($match[0]));
+        $level = strlen(trim($match[0]));
         $str   = $cursor->getRemainder();
-        $str   = \preg_replace('/^[ \t]*#+[ \t]*$/', '', $str);
-        \assert(\is_string($str));
-        $str = \preg_replace('/[ \t]+#+[ \t]*$/', '', $str);
-        \assert(\is_string($str));
+        $str   = preg_replace('/^[ \t]*#+[ \t]*$/', '', $str);
+        assert(is_string($str));
+        $str = preg_replace('/[ \t]+#+[ \t]*$/', '', $str);
+        assert(is_string($str));
 
         return new HeadingParser($level, $str);
     }

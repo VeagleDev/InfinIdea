@@ -29,6 +29,7 @@ use League\CommonMark\Node\NodeIterator;
 use League\CommonMark\Node\RawMarkupContainerInterface;
 use League\CommonMark\Node\StringContainerHelper;
 use League\Config\Exception\InvalidConfigurationException;
+use function sprintf;
 
 final class TableOfContentsGenerator implements TableOfContentsGeneratorInterface
 {
@@ -123,7 +124,7 @@ final class TableOfContentsGenerator implements TableOfContentsGeneratorInterfac
         } elseif ($this->style === self::STYLE_ORDERED) {
             $listData->type = ListBlock::TYPE_ORDERED;
         } else {
-            throw new InvalidConfigurationException(\sprintf('Invalid table of contents list style: "%s"', $this->style));
+            throw new InvalidConfigurationException(sprintf('Invalid table of contents list style: "%s"', $this->style));
         }
 
         $toc = new TableOfContents($listData);
@@ -162,7 +163,7 @@ final class TableOfContentsGenerator implements TableOfContentsGeneratorInterfac
             case self::NORMALIZE_FLAT:
                 return new FlatNormalizerStrategy($toc);
             default:
-                throw new InvalidConfigurationException(\sprintf('Invalid table of contents normalization strategy: "%s"', $this->normalizationStrategy));
+                throw new InvalidConfigurationException(sprintf('Invalid table of contents normalization strategy: "%s"', $this->normalizationStrategy));
         }
     }
 }

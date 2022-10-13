@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace League\CommonMark\Extension\FrontMatter\Data;
 
 use League\CommonMark\Extension\FrontMatter\Exception\InvalidFrontMatterException;
+use RuntimeException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
+use function class_exists;
 
 final class SymfonyYamlFrontMatterParser implements FrontMatterDataParserInterface
 {
@@ -24,8 +26,8 @@ final class SymfonyYamlFrontMatterParser implements FrontMatterDataParserInterfa
      */
     public function parse(string $frontMatter)
     {
-        if (! \class_exists(Yaml::class)) {
-            throw new \RuntimeException('Failed to parse yaml: "symfony/yaml" library is missing');
+        if (! class_exists(Yaml::class)) {
+            throw new RuntimeException('Failed to parse yaml: "symfony/yaml" library is missing');
         }
 
         try {

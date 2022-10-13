@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use LogicException;
 use Nette;
 
 
@@ -36,12 +37,12 @@ class Floats
 
 	/**
 	 * Compare two floats. If $a < $b it returns -1, if they are equal it returns 0 and if $a > $b it returns 1
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function compare(float $a, float $b): int
 	{
 		if (is_nan($a) || is_nan($b)) {
-			throw new \LogicException('Trying to compare NAN');
+			throw new LogicException('Trying to compare NAN');
 
 		} elseif (!is_finite($a) && !is_finite($b) && $a === $b) {
 			return 0;
@@ -58,7 +59,7 @@ class Floats
 
 	/**
 	 * Returns true if $a = $b
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function areEqual(float $a, float $b): bool
 	{
@@ -68,7 +69,7 @@ class Floats
 
 	/**
 	 * Returns true if $a < $b
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function isLessThan(float $a, float $b): bool
 	{
@@ -78,7 +79,7 @@ class Floats
 
 	/**
 	 * Returns true if $a <= $b
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function isLessThanOrEqualTo(float $a, float $b): bool
 	{
@@ -88,7 +89,7 @@ class Floats
 
 	/**
 	 * Returns true if $a > $b
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function isGreaterThan(float $a, float $b): bool
 	{
@@ -98,7 +99,7 @@ class Floats
 
 	/**
 	 * Returns true if $a >= $b
-	 * @throws \LogicException if one of parameters is NAN
+	 * @throws LogicException if one of parameters is NAN
 	 */
 	public static function isGreaterThanOrEqualTo(float $a, float $b): bool
 	{

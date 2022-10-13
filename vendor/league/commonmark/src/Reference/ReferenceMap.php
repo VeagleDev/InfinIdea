@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace League\CommonMark\Reference;
 
 use League\CommonMark\Normalizer\TextNormalizer;
+use Traversable;
+use function count;
 
 /**
  * A collection of references, indexed by label
@@ -61,9 +63,9 @@ final class ReferenceMap implements ReferenceMapInterface
     }
 
     /**
-     * @return \Traversable<string, ReferenceInterface>
+     * @return Traversable<string, ReferenceInterface>
      */
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
         foreach ($this->references as $normalizedLabel => $reference) {
             yield $normalizedLabel => $reference;
@@ -72,6 +74,6 @@ final class ReferenceMap implements ReferenceMapInterface
 
     public function count(): int
     {
-        return \count($this->references);
+        return count($this->references);
     }
 }

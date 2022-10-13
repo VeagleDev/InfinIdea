@@ -21,6 +21,10 @@ namespace League\CommonMark\Delimiter;
 
 use League\CommonMark\Delimiter\Processor\DelimiterProcessorCollection;
 use League\CommonMark\Node\Inline\AdjacentTextMerger;
+use function assert;
+use function in_array;
+use function is_array;
+use function substr;
 
 final class DelimiterStack
 {
@@ -104,13 +108,13 @@ final class DelimiterStack
      */
     public function searchByCharacter($characters): ?DelimiterInterface
     {
-        if (! \is_array($characters)) {
+        if (! is_array($characters)) {
             $characters = [$characters];
         }
 
         $opener = $this->top;
         while ($opener !== null) {
-            if (\in_array($opener->getChar(), $characters, true)) {
+            if (in_array($opener->getChar(), $characters, true)) {
                 break;
             }
 
@@ -177,7 +181,7 @@ final class DelimiterStack
                 continue;
             }
 
-            \assert($opener !== null);
+            assert($opener !== null);
 
             $openerNode = $opener->getInlineNode();
             $closerNode = $closer->getInlineNode();
@@ -186,8 +190,8 @@ final class DelimiterStack
             $opener->setLength($opener->getLength() - $useDelims);
             $closer->setLength($closer->getLength() - $useDelims);
 
-            $openerNode->setLiteral(\substr($openerNode->getLiteral(), 0, -$useDelims));
-            $closerNode->setLiteral(\substr($closerNode->getLiteral(), 0, -$useDelims));
+            $openerNode->setLiteral(substr($openerNode->getLiteral(), 0, -$useDelims));
+            $closerNode->setLiteral(substr($closerNode->getLiteral(), 0, -$useDelims));
 
             $this->removeDelimitersBetween($opener, $closer);
             // The delimiter processor can re-parent the nodes between opener and closer,

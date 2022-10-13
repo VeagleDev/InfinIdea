@@ -16,6 +16,10 @@ namespace League\CommonMark\Extension\ExternalLink;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use League\Config\ConfigurationInterface;
+use function is_string;
+use function parse_url;
+use function preg_match;
+use function strpos;
 
 final class ExternalLinkProcessor
 {
@@ -43,8 +47,8 @@ final class ExternalLinkProcessor
                 continue;
             }
 
-            $host = \parse_url($link->getUrl(), PHP_URL_HOST);
-            if (! \is_string($host)) {
+            $host = parse_url($link->getUrl(), PHP_URL_HOST);
+            if (! is_string($host)) {
                 // Something is terribly wrong with this URL
                 continue;
             }
@@ -100,8 +104,8 @@ final class ExternalLinkProcessor
     public static function hostMatches(string $host, $compareTo): bool
     {
         foreach ((array) $compareTo as $c) {
-            if (\strpos($c, '/') === 0) {
-                if (\preg_match($c, $host)) {
+            if (strpos($c, '/') === 0) {
+                if (preg_match($c, $host)) {
                     return true;
                 }
             } elseif ($c === $host) {

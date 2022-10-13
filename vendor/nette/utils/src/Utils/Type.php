@@ -10,6 +10,14 @@ declare(strict_types=1);
 namespace Nette\Utils;
 
 use Nette;
+use ReflectionFunction;
+use ReflectionFunctionAbstract;
+use ReflectionIntersectionType;
+use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionParameter;
+use ReflectionProperty;
+use ReflectionUnionType;
 
 
 /**
@@ -30,16 +38,16 @@ final class Type
 	/**
 	 * Creates a Type object based on reflection. Resolves self, static and parent to the actual class name.
 	 * If the subject has no type, it returns null.
-	 * @param  \ReflectionFunctionAbstract|\ReflectionParameter|\ReflectionProperty  $reflection
+	 * @param  ReflectionFunctionAbstract|ReflectionParameter|ReflectionProperty  $reflection
 	 */
 	public static function fromReflection($reflection): ?self
 	{
-		if ($reflection instanceof \ReflectionProperty && PHP_VERSION_ID < 70400) {
+		if ($reflection instanceof ReflectionProperty && PHP_VERSION_ID < 70400) {
 			return null;
-		} elseif ($reflection instanceof \ReflectionMethod) {
+		} elseif ($reflection instanceof ReflectionMethod) {
 			$type = $reflection->getReturnType() ?? (PHP_VERSION_ID >= 80100 ? $reflection->getTentativeReturnType() : null);
 		} else {
-			$type = $reflection instanceof \ReflectionFunctionAbstract
+			$type = $reflection instanceof ReflectionFunctionAbstract
 				? $reflection->getReturnType()
 				: $reflection->getType();
 		}
@@ -47,17 +55,17 @@ final class Type
 		if ($type === null) {
 			return null;
 
-		} elseif ($type instanceof \ReflectionNamedType) {
+		} elseif ($type instanceof ReflectionNamedType) {
 			$name = self::resolve($type->getName(), $reflection);
 			return new self($type->allowsNull() && $type->getName() !== 'mixed' ? [$name, 'null'] : [$name]);
 
-		} elseif ($type instanceof \ReflectionUnionType || $type instanceof \ReflectionIntersectionType) {
+		} elseif ($type instanceof ReflectionUnionType || $type instanceof ReflectionIntersectionType) {
 			return new self(
 				array_map(
 					function ($t) use ($reflection) { return self::resolve($t->getName(), $reflection); },
 					$type->getTypes()
 				),
-				$type instanceof \ReflectionUnionType ? '|' : '&'
+				$type instanceof ReflectionUnionType ? '|' : '&'
 			);
 
 		} else {
@@ -91,12 +99,12 @@ final class Type
 
 	/**
 	 * Resolves 'self', 'static' and 'parent' to the actual class name.
-	 * @param  \ReflectionFunctionAbstract|\ReflectionParameter|\ReflectionProperty  $reflection
+	 * @param  ReflectionFunctionAbstract|ReflectionParameter|ReflectionProperty  $reflection
 	 */
 	public static function resolve(string $type, $reflection): string
 	{
 		$lower = strtolower($type);
-		if ($reflection instanceof \ReflectionFunction) {
+		if ($reflection instanceof ReflectionFunction) {
 			return $type;
 		} elseif ($lower === 'self' || $lower === 'static') {
 			return $reflection->getDeclaringClass()->name;
