@@ -295,13 +295,9 @@ function articleExists($id) : bool
     }
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) == 1)
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 function SQLpurify($string) : string
