@@ -1,9 +1,7 @@
 <?php
 set_include_path('/var/www/blog');
 if(session_status() == PHP_SESSION_NONE)
-{
     session_start(); // On démarre la session AVANT toute chose
-}
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 require_once 'vendor/autoload.php';
@@ -20,10 +18,6 @@ $db = getDB();
     <script src="backend/js/fontawesome.js"></script>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
-
-
-
-
 </head>
 <body>
     <section class="top-page">
@@ -74,13 +68,6 @@ $db = getDB();
             </nav>
         </header>
     </section>
-
-
-
-
-
-
-
 
     <section class="contents-page">
 
@@ -253,15 +240,6 @@ $db = getDB();
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
     <section class="bottom-page">
         <footer>
             <div class="site-nav">
@@ -314,9 +292,5 @@ $db = getDB();
     <script src="backend/js/article-interaction.js"></script>
     <script src="backend/js/like.js"></script>
     <script defer src="backend/js/check-ratio.js"></script>
-
-
-
-
 </body>
 </html>
