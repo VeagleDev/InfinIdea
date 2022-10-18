@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Nette;
 
 
+use Error;
+
 /**
  * Static class.
  */
@@ -17,11 +19,11 @@ trait StaticClass
 {
 	/**
 	 * @return never
-	 * @throws \Error
+	 * @throws Error
 	 */
 	final public function __construct()
 	{
-		throw new \Error('Class ' . static::class . ' is static and cannot be instantiated.');
+		throw new Error('Class ' . static::class . ' is static and cannot be instantiated.');
 	}
 
 

@@ -16,6 +16,14 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Util;
 
+use function hexdec;
+use function html_entity_decode;
+use function mb_decode_numericentity;
+use function strtolower;
+use function substr;
+use const ENT_HTML5;
+use const ENT_QUOTES;
+
 /**
  * @psalm-immutable
  */
@@ -26,19 +34,19 @@ final class Html5EntityDecoder
      */
     public static function decode(string $entity): string
     {
-        if (\substr($entity, -1) !== ';') {
+        if (substr($entity, -1) !== ';') {
             return $entity;
         }
 
-        if (\substr($entity, 0, 2) === '&#') {
-            if (\strtolower(\substr($entity, 2, 1)) === 'x') {
-                return self::fromHex(\substr($entity, 3, -1));
+        if (substr($entity, 0, 2) === '&#') {
+            if (strtolower(substr($entity, 2, 1)) === 'x') {
+                return self::fromHex(substr($entity, 3, -1));
             }
 
-            return self::fromDecimal(\substr($entity, 2, -1));
+            return self::fromDecimal(substr($entity, 2, -1));
         }
 
-        return \html_entity_decode($entity, \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+        return html_entity_decode($entity, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 
     /**
@@ -56,7 +64,7 @@ final class Html5EntityDecoder
 
         $entity = '&#' . $number . ';';
 
-        $converted = \mb_decode_numericentity($entity, [0x0, 0x2FFFF, 0, 0xFFFF], 'UTF-8');
+        $converted = mb_decode_numericentity($entity, [0x0, 0x2FFFF, 0, 0xFFFF], 'UTF-8');
 
         if ($converted === $entity) {
             return self::fromHex('fffd');
@@ -70,6 +78,6 @@ final class Html5EntityDecoder
      */
     private static function fromHex(string $hexChars): string
     {
-        return self::fromDecimal(\hexdec($hexChars));
+        return self::fromDecimal(hexdec($hexChars));
     }
 }

@@ -25,6 +25,7 @@ use League\CommonMark\Util\RegexHelper;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use Stringable;
 
 final class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
@@ -38,7 +39,7 @@ final class LinkRenderer implements NodeRendererInterface, XmlNodeRendererInterf
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         Link::assertInstanceOf($node);
 

@@ -9,14 +9,19 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
 use Nette;
+use ReturnTypeWillChange;
 
 
 /**
  * Provides the base class for a generic list (items can be accessed by index).
  * @template T
  */
-class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
+class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 {
 	use Nette\SmartObject;
 
@@ -43,11 +48,11 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
 
 	/**
 	 * Returns an iterator over all items.
-	 * @return \ArrayIterator<int, T>
+	 * @return ArrayIterator<int, T>
 	 */
-	public function getIterator(): \ArrayIterator
+	public function getIterator(): ArrayIterator
 	{
-		return new \ArrayIterator($this->list);
+		return new ArrayIterator($this->list);
 	}
 
 
@@ -86,7 +91,7 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
 	 * @return T
 	 * @throws Nette\OutOfRangeException
 	 */
-	#[\ReturnTypeWillChange]
+	#[ReturnTypeWillChange]
 	public function offsetGet($index)
 	{
 		if (!is_int($index) || $index < 0 || $index >= count($this->list)) {

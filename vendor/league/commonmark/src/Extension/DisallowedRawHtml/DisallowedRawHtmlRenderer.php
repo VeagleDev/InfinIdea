@@ -18,6 +18,11 @@ use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function array_map;
+use function count;
+use function implode;
+use function preg_replace;
+use function sprintf;
 
 final class DisallowedRawHtmlRenderer implements NodeRendererInterface, ConfigurationAwareInterface
 {
@@ -41,14 +46,14 @@ final class DisallowedRawHtmlRenderer implements NodeRendererInterface, Configur
         }
 
         $tags = (array) $this->config->get('disallowed_raw_html/disallowed_tags');
-        if (\count($tags) === 0) {
+        if (count($tags) === 0) {
             return $rendered;
         }
 
-        $regex = \sprintf('/<(\/?(?:%s)[ \/>])/i', \implode('|', \array_map('preg_quote', $tags)));
+        $regex = sprintf('/<(\/?(?:%s)[ \/>])/i', implode('|', array_map('preg_quote', $tags)));
 
         // Match these types of tags: <title> </title> <title x="sdf"> <title/> <title />
-        return \preg_replace($regex, '&lt;$1', $rendered);
+        return preg_replace($regex, '&lt;$1', $rendered);
     }
 
     public function setConfiguration(ConfigurationInterface $configuration): void

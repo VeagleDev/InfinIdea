@@ -19,6 +19,8 @@ namespace League\CommonMark\Parser;
 use League\CommonMark\Delimiter\DelimiterStack;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Reference\ReferenceMapInterface;
+use function array_slice;
+use function mb_strlen;
 
 final class InlineParserContext
 {
@@ -83,7 +85,7 @@ final class InlineParserContext
      */
     public function getFullMatchLength(): int
     {
-        return \mb_strlen($this->matches[0]);
+        return mb_strlen($this->matches[0]);
     }
 
     /**
@@ -101,7 +103,7 @@ final class InlineParserContext
      */
     public function getSubMatches(): array
     {
-        return \array_slice($this->matches, 1);
+        return array_slice($this->matches, 1);
     }
 
     /**

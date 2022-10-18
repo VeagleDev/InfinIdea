@@ -19,6 +19,7 @@ use League\CommonMark\Output\RenderedContentInterface;
 use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Parser\MarkdownParserInterface;
 use League\CommonMark\Renderer\DocumentRendererInterface;
+use RuntimeException;
 
 final class MarkdownToXmlConverter implements ConverterInterface
 {
@@ -37,7 +38,7 @@ final class MarkdownToXmlConverter implements ConverterInterface
     /**
      * Converts Markdown to XML
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function convert(string $input): RenderedContentInterface
     {
@@ -49,7 +50,7 @@ final class MarkdownToXmlConverter implements ConverterInterface
      *
      * @see MarkdownToXmlConverter::convert()
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function __invoke(string $input): RenderedContentInterface
     {

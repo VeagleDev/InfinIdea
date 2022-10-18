@@ -19,6 +19,10 @@ use League\CommonMark\Extension\Mention\Generator\MentionGeneratorInterface;
 use League\Config\ConfigurationBuilderInterface;
 use League\Config\Exception\InvalidConfigurationException;
 use Nette\Schema\Expect;
+use function is_callable;
+use function is_string;
+use function preg_match;
+use function sprintf;
 
 final class MentionExtension implements ConfigurableExtensionInterface
 {
@@ -27,7 +31,7 @@ final class MentionExtension implements ConfigurableExtensionInterface
         $isAValidPartialRegex = static function (string $regex): bool {
             $regex = '/' . $regex . '/i';
 
-            return @\preg_match($regex, '') !== false;
+            return @preg_match($regex, '') !== false;
         };
 
         $builder->addSchema('mentions', Expect::arrayOf(
@@ -49,12 +53,12 @@ final class MentionExtension implements ConfigurableExtensionInterface
         foreach ($mentions as $name => $mention) {
             if ($mention['generator'] instanceof MentionGeneratorInterface) {
                 $environment->addInlineParser(new MentionParser($name, $mention['prefix'], $mention['pattern'], $mention['generator']));
-            } elseif (\is_string($mention['generator'])) {
+            } elseif (is_string($mention['generator'])) {
                 $environment->addInlineParser(MentionParser::createWithStringTemplate($name, $mention['prefix'], $mention['pattern'], $mention['generator']));
-            } elseif (\is_callable($mention['generator'])) {
+            } elseif (is_callable($mention['generator'])) {
                 $environment->addInlineParser(MentionParser::createWithCallback($name, $mention['prefix'], $mention['pattern'], $mention['generator']));
             } else {
-                throw new InvalidConfigurationException(\sprintf('The "generator" provided for the "%s" MentionParser configuration must be a string template, callable, or an object that implements %s.', $name, MentionGeneratorInterface::class));
+                throw new InvalidConfigurationException(sprintf('The "generator" provided for the "%s" MentionParser configuration must be a string template, callable, or an object that implements %s.', $name, MentionGeneratorInterface::class));
             }
         }
     }

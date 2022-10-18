@@ -17,6 +17,11 @@ use ArrayAccess;
 use Dflydev\DotAccessData\Exception\DataException;
 use Dflydev\DotAccessData\Exception\InvalidPathException;
 use Dflydev\DotAccessData\Exception\MissingPathException;
+use ReturnTypeWillChange;
+use function explode;
+use function func_num_args;
+use function str_replace;
+use function strlen;
 
 /**
  * @implements ArrayAccess<string, mixed>
@@ -118,7 +123,7 @@ class Data implements DataInterface, ArrayAccess
     public function get(string $key, $default = null)
     {
         /** @psalm-suppress ImpureFunctionCall */
-        $hasDefault = \func_num_args() > 1;
+        $hasDefault = func_num_args() > 1;
 
         $currentValue = $this->data;
         $keyPath = self::keyToPathArray($key);
@@ -204,7 +209,7 @@ class Data implements DataInterface, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return $this->has($key);
@@ -213,7 +218,7 @@ class Data implements DataInterface, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return $this->get($key, null);
@@ -224,7 +229,7 @@ class Data implements DataInterface, ArrayAccess
      *
      * @param string $key
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->set($key, $value);
@@ -233,7 +238,7 @@ class Data implements DataInterface, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         $this->remove($key);
@@ -250,13 +255,13 @@ class Data implements DataInterface, ArrayAccess
      */
     protected static function keyToPathArray(string $path): array
     {
-        if (\strlen($path) === 0) {
+        if (strlen($path) === 0) {
             throw new InvalidPathException('Path cannot be an empty string');
         }
 
-        $path = \str_replace(self::DELIMITERS, '.', $path);
+        $path = str_replace(self::DELIMITERS, '.', $path);
 
-        return \explode('.', $path);
+        return explode('.', $path);
     }
 
     /**

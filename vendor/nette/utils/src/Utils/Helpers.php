@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Nette\Utils;
 
 use Nette;
+use Throwable;
 
 
 class Helpers
@@ -23,7 +24,7 @@ class Helpers
 		try {
 			$func();
 			return ob_get_clean();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			ob_end_clean();
 			throw $e;
 		}

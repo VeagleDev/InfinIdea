@@ -20,6 +20,10 @@ use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use Stringable;
+use function assert;
+use function htmlspecialchars;
+use function is_string;
 
 /**
  * Renders the HeadingPermalink elements
@@ -43,7 +47,7 @@ final class HeadingPermalinkRenderer implements NodeRendererInterface, XmlNodeRe
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         HeadingPermalink::assertInstanceOf($node);
 
@@ -72,9 +76,9 @@ final class HeadingPermalinkRenderer implements NodeRendererInterface, XmlNodeRe
         $attrs->set('title', $this->config->get('heading_permalink/title'));
 
         $symbol = $this->config->get('heading_permalink/symbol');
-        \assert(\is_string($symbol));
+        assert(is_string($symbol));
 
-        return new HtmlElement('a', $attrs->export(), \htmlspecialchars($symbol), false);
+        return new HtmlElement('a', $attrs->export(), htmlspecialchars($symbol), false);
     }
 
     public function getXmlTagName(Node $node): string

@@ -16,7 +16,13 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Util;
 
-final class HtmlElement implements \Stringable
+use Stringable;
+use function array_unique;
+use function implode;
+use function is_array;
+use function is_string;
+
+final class HtmlElement implements Stringable
 {
     /** @psalm-readonly */
     private string $tagName;
@@ -24,7 +30,7 @@ final class HtmlElement implements \Stringable
     /** @var array<string, string|bool> */
     private array $attributes = [];
 
-    /** @var \Stringable|\Stringable[]|string */
+    /** @var Stringable|Stringable[]|string */
     private $contents;
 
     /** @psalm-readonly */
@@ -33,7 +39,7 @@ final class HtmlElement implements \Stringable
     /**
      * @param string                                $tagName     Name of the HTML tag
      * @param array<string, string|string[]|bool>   $attributes  Array of attributes (values should be unescaped)
-     * @param \Stringable|\Stringable[]|string|null $contents    Inner contents, pre-escaped if needed
+     * @param Stringable|Stringable[]|string|null $contents    Inner contents, pre-escaped if needed
      * @param bool                                  $selfClosing Whether the tag is self-closing
      */
     public function __construct(string $tagName, array $attributes = [], $contents = '', bool $selfClosing = false)
@@ -79,8 +85,8 @@ final class HtmlElement implements \Stringable
      */
     public function setAttribute(string $key, $value): self
     {
-        if (\is_array($value)) {
-            $this->attributes[$key] = \implode(' ', \array_unique($value));
+        if (is_array($value)) {
+            $this->attributes[$key] = implode(' ', array_unique($value));
         } else {
             $this->attributes[$key] = $value;
         }
@@ -89,7 +95,7 @@ final class HtmlElement implements \Stringable
     }
 
     /**
-     * @return \Stringable|\Stringable[]|string
+     * @return Stringable|Stringable[]|string
      *
      * @psalm-immutable
      */
@@ -105,7 +111,7 @@ final class HtmlElement implements \Stringable
     /**
      * Sets the inner contents of the tag (must be pre-escaped if needed)
      *
-     * @param \Stringable|\Stringable[]|string $contents
+     * @param Stringable|Stringable[]|string $contents
      *
      * @return $this
      */
@@ -147,12 +153,12 @@ final class HtmlElement implements \Stringable
     /** @psalm-immutable */
     private function getContentsAsString(): string
     {
-        if (\is_string($this->contents)) {
+        if (is_string($this->contents)) {
             return $this->contents;
         }
 
-        if (\is_array($this->contents)) {
-            return \implode('', $this->contents);
+        if (is_array($this->contents)) {
+            return implode('', $this->contents);
         }
 
         return (string) $this->contents;

@@ -22,6 +22,12 @@ use League\CommonMark\Parser\MarkdownParserStateInterface;
 use League\CommonMark\Util\RegexHelper;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function assert;
+use function implode;
+use function is_array;
+use function preg_match;
+use function preg_quote;
+use function strlen;
 
 final class ListBlockStartParser implements BlockStartParserInterface, ConfigurationAwareInterface
 {
@@ -70,7 +76,7 @@ final class ListBlockStartParser implements BlockStartParserInterface, Configura
         $tmpCursor->advanceToNextNonSpaceOrTab();
         $rest = $tmpCursor->getRemainder();
 
-        if (\preg_match($this->listMarkerRegex ?? $this->generateListMarkerRegex(), $rest) === 1) {
+        if (preg_match($this->listMarkerRegex ?? $this->generateListMarkerRegex(), $rest) === 1) {
             $data               = new ListData();
             $data->markerOffset = $indent;
             $data->type         = ListBlock::TYPE_BULLET;
@@ -84,7 +90,7 @@ final class ListBlockStartParser implements BlockStartParserInterface, Configura
             $data->start        = (int) $matches[1];
             $data->delimiter    = $matches[2] === '.' ? ListBlock::DELIM_PERIOD : ListBlock::DELIM_PAREN;
             $data->bulletChar   = null;
-            $markerLength       = \strlen($matches[0]);
+            $markerLength       = strlen($matches[0]);
         } else {
             return null;
         }
@@ -139,8 +145,8 @@ final class ListBlockStartParser implements BlockStartParserInterface, Configura
         }
 
         $markers = $this->config->get('commonmark/unordered_list_markers');
-        \assert(\is_array($markers));
+        assert(is_array($markers));
 
-        return $this->listMarkerRegex = '/^[' . \preg_quote(\implode('', $markers), '/') . ']/';
+        return $this->listMarkerRegex = '/^[' . preg_quote(implode('', $markers), '/') . ']/';
     }
 }

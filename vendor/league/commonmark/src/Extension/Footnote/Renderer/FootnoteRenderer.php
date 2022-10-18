@@ -22,6 +22,8 @@ use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use Stringable;
+use function mb_strtolower;
 
 final class FootnoteRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
@@ -34,14 +36,14 @@ final class FootnoteRenderer implements NodeRendererInterface, XmlNodeRendererIn
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         Footnote::assertInstanceOf($node);
 
         $attrs = $node->data->getData('attributes');
 
         $attrs->append('class', $this->config->get('footnote/footnote_class'));
-        $attrs->set('id', $this->config->get('footnote/footnote_id_prefix') . \mb_strtolower($node->getReference()->getLabel()));
+        $attrs->set('id', $this->config->get('footnote/footnote_id_prefix') . mb_strtolower($node->getReference()->getLabel()));
         $attrs->set('role', 'doc-endnote');
 
         return new HtmlElement(

@@ -9,7 +9,11 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use GdImage;
 use Nette;
+use Throwable;
+use function imagecolorat;
+use function imagesetpixel;
 
 
 /**
@@ -92,7 +96,7 @@ use Nette;
  * @method array ttfText($size, $angle, $x, $y, $color, string $fontfile, string $text)
  * @property-read int $width
  * @property-read int $height
- * @property-read resource|\GdImage $imageResource
+ * @property-read resource|GdImage $imageResource
  */
 class Image
 {
@@ -126,7 +130,7 @@ class Image
 
 	private const Formats = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp', self::AVIF => 'avif', self::BMP => 'bmp'];
 
-	/** @var resource|\GdImage */
+	/** @var resource|GdImage */
 	private $image;
 
 
@@ -290,7 +294,7 @@ class Image
 
 	/**
 	 * Wraps GD image.
-	 * @param  resource|\GdImage  $image
+	 * @param  resource|GdImage  $image
 	 */
 	public function __construct($image)
 	{
@@ -319,12 +323,12 @@ class Image
 
 	/**
 	 * Sets image resource.
-	 * @param  resource|\GdImage  $image
+	 * @param  resource|GdImage  $image
 	 * @return static
 	 */
 	protected function setImageResource($image)
 	{
-		if (!$image instanceof \GdImage && !(is_resource($image) && get_resource_type($image) === 'gd')) {
+		if (!$image instanceof GdImage && !(is_resource($image) && get_resource_type($image) === 'gd')) {
 			throw new Nette\InvalidArgumentException('Image is not valid.');
 		}
 
@@ -335,7 +339,7 @@ class Image
 
 	/**
 	 * Returns image GD resource.
-	 * @return resource|\GdImage
+	 * @return resource|GdImage
 	 */
 	public function getImageResource()
 	{
@@ -573,9 +577,9 @@ class Image
 
 			for ($x = 0; $x < $width; $x++) {
 				for ($y = 0; $y < $height; $y++) {
-					$c = \imagecolorat($input, $x, $y);
+					$c = imagecolorat($input, $x, $y);
 					$c = ($c & 0xFFFFFF) + ($tbl[$c >> 24] << 24);
-					\imagesetpixel($output, $x, $y, $c);
+					imagesetpixel($output, $x, $y, $c);
 				}
 			}
 
@@ -625,7 +629,7 @@ class Image
 	{
 		try {
 			return $this->toString();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			if (func_num_args() || PHP_VERSION_ID >= 70400) {
 				throw $e;
 			}
@@ -726,7 +730,7 @@ class Image
 		}
 
 		$res = $function($this->image, ...$args);
-		return $res instanceof \GdImage || (is_resource($res) && get_resource_type($res) === 'gd')
+		return $res instanceof GdImage || (is_resource($res) && get_resource_type($res) === 'gd')
 			? $this->setImageResource($res)
 			: $res;
 	}
