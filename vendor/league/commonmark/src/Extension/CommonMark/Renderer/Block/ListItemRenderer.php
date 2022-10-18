@@ -24,6 +24,8 @@ use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
+use Stringable;
+use function substr;
 
 final class ListItemRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
@@ -34,16 +36,16 @@ final class ListItemRenderer implements NodeRendererInterface, XmlNodeRendererIn
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         ListItem::assertInstanceOf($node);
 
         $contents = $childRenderer->renderNodes($node->children());
-        if (\substr($contents, 0, 1) === '<' && ! $this->startsTaskListItem($node)) {
+        if (substr($contents, 0, 1) === '<' && ! $this->startsTaskListItem($node)) {
             $contents = "\n" . $contents;
         }
 
-        if (\substr($contents, -1, 1) === '>') {
+        if (substr($contents, -1, 1) === '>') {
             $contents .= "\n";
         }
 

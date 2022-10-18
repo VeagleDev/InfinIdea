@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Nette\Utils;
 
 use Nette;
+use Normalizer;
+use Transliterator;
 use function is_array, is_object, strlen;
 
 
@@ -112,7 +114,7 @@ class Strings
 	public static function normalize(string $s): string
 	{
 		// convert to compressed normal form (NFC)
-		if (class_exists('Normalizer', false) && ($n = \Normalizer::normalize($s, \Normalizer::FORM_C)) !== false) {
+		if (class_exists('Normalizer', false) && ($n = Normalizer::normalize($s, Normalizer::FORM_C)) !== false) {
 			$s = $n;
 		}
 
@@ -149,7 +151,7 @@ class Strings
 		static $transliterator = null;
 		if ($transliterator === null) {
 			if (class_exists('Transliterator', false)) {
-				$transliterator = \Transliterator::create('Any-Latin; Latin-ASCII');
+				$transliterator = Transliterator::create('Any-Latin; Latin-ASCII');
 			} else {
 				trigger_error(__METHOD__ . "(): it is recommended to enable PHP extensions 'intl'.", E_USER_NOTICE);
 				$transliterator = false;
@@ -312,8 +314,8 @@ class Strings
 	public static function compare(string $left, string $right, ?int $length = null): bool
 	{
 		if (class_exists('Normalizer', false)) {
-			$left = \Normalizer::normalize($left, \Normalizer::FORM_D); // form NFD is faster
-			$right = \Normalizer::normalize($right, \Normalizer::FORM_D); // form NFD is faster
+			$left = Normalizer::normalize($left, Normalizer::FORM_D); // form NFD is faster
+			$right = Normalizer::normalize($right, Normalizer::FORM_D); // form NFD is faster
 		}
 
 		if ($length < 0) {

@@ -1,0 +1,47 @@
+@import url(import-fonts.css);
+
+.user-account-options p.infos-nav-title {
+    font-family: 'Poppins';
+    font-size: 25px;
+}
+
+.user-account-options ul li {
+    display: flex;
+
+    font-family: 'Rubik';
+    font-size: 18px;
+
+    margin-top: 10px;
+}
+
+.user-account-options ul li input {
+    outline: none;
+    border: #000 1px solid;
+    background: #FFF;
+
+    font-family: 'Rubik';
+    font-size: 18px;
+
+    border-radius: 3px;
+    box-shadow: #000 0 0 20px -7px;
+}
+
+.user-account-options ul li p {
+    margin-right: 20px;
+}
+
+.user-account-options ul li button {
+    outline: none;
+    border: #000 1px solid;
+    background: #FFF;
+    font-family: 'Rubik';
+    font-size: 15px;
+
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    border-radius: 3px;
+
+    box-shadow: #000 0 0 20px -7px;
+}

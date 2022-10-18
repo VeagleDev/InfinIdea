@@ -19,6 +19,8 @@ use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Parser\MarkdownParserInterface;
 use League\CommonMark\Renderer\HtmlRenderer;
 use League\CommonMark\Renderer\MarkdownRendererInterface;
+use RuntimeException;
+use function trigger_deprecation;
 
 class MarkdownConverter implements ConverterInterface, MarkdownConverterInterface
 {
@@ -51,7 +53,7 @@ class MarkdownConverter implements ConverterInterface, MarkdownConverterInterfac
      *
      * @return RenderedContentInterface Rendered HTML
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function convert(string $input): RenderedContentInterface
     {
@@ -69,11 +71,11 @@ class MarkdownConverter implements ConverterInterface, MarkdownConverterInterfac
      *
      * @return RenderedContentInterface Rendered HTML
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function convertToHtml(string $markdown): RenderedContentInterface
     {
-        \trigger_deprecation('league/commonmark', '2.2.0', 'Calling "convertToHtml()" on a %s class is deprecated, use "convert()" instead.', self::class);
+        trigger_deprecation('league/commonmark', '2.2.0', 'Calling "convertToHtml()" on a %s class is deprecated, use "convert()" instead.', self::class);
 
         return $this->convert($markdown);
     }
@@ -83,7 +85,7 @@ class MarkdownConverter implements ConverterInterface, MarkdownConverterInterfac
      *
      * @see MarkdownConverter::convert()
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function __invoke(string $markdown): RenderedContentInterface
     {

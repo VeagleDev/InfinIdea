@@ -17,6 +17,9 @@ use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\Attributes\Util\AttributesHelper;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function count;
+use function get_class;
+use function is_callable;
 
 final class ApplyDefaultAttributesProcessor implements ConfigurationAwareInterface
 {
@@ -34,13 +37,13 @@ final class ApplyDefaultAttributesProcessor implements ConfigurationAwareInterfa
 
         foreach ($event->getDocument()->iterator() as $node) {
             // Check to see if any default attributes were defined
-            if (($attributesToApply = $map[\get_class($node)] ?? []) === []) {
+            if (($attributesToApply = $map[get_class($node)] ?? []) === []) {
                 continue;
             }
 
             $newAttributes = [];
             foreach ($attributesToApply as $name => $value) {
-                if (\is_callable($value)) {
+                if (is_callable($value)) {
                     $value = $value($node);
                     // Callables are allowed to return `null` indicating that no changes should be made
                     if ($value !== null) {
@@ -52,7 +55,7 @@ final class ApplyDefaultAttributesProcessor implements ConfigurationAwareInterfa
             }
 
             // Merge these attributes into the node
-            if (\count($newAttributes) > 0) {
+            if (count($newAttributes) > 0) {
                 $node->data->set('attributes', AttributesHelper::mergeAttributes($node, $newAttributes));
             }
         }

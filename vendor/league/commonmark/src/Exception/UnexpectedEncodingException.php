@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Exception;
 
-final class UnexpectedEncodingException extends \RuntimeException
+use RuntimeException;
+
+final class UnexpectedEncodingException extends RuntimeException
 {
 }

@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Node;
 
+use Generator;
+use IteratorAggregate;
 use League\CommonMark\Node\Block\AbstractBlock;
+use function array_pop;
 
 /**
- * @implements \IteratorAggregate<int, Node>
+ * @implements IteratorAggregate<int, Node>
  */
-final class NodeIterator implements \IteratorAggregate
+final class NodeIterator implements IteratorAggregate
 {
     public const FLAG_BLOCKS_ONLY = 1;
 
@@ -32,15 +35,15 @@ final class NodeIterator implements \IteratorAggregate
     }
 
     /**
-     * @return \Generator<int, Node>
+     * @return Generator<int, Node>
      */
-    public function getIterator(): \Generator
+    public function getIterator(): Generator
     {
         $stack = [$this->node];
         $index = 0;
 
         while ($stack) {
-            $node = \array_pop($stack);
+            $node = array_pop($stack);
 
             yield $index++ => $node;
 

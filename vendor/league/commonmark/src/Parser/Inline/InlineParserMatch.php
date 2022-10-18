@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Parser\Inline;
 
+use LogicException;
+use function array_map;
+use function implode;
+use function preg_quote;
+
 final class InlineParserMatch
 {
     private string $regex;
@@ -45,7 +50,7 @@ final class InlineParserMatch
      */
     public static function string(string $str): self
     {
-        return new self(\preg_quote($str, '/'));
+        return new self(preg_quote($str, '/'));
     }
 
     /**
@@ -53,7 +58,7 @@ final class InlineParserMatch
      */
     public static function oneOf(string ...$str): self
     {
-        return new self(\implode('|', \array_map(static fn (string $str): string => \preg_quote($str, '/'), $str)));
+        return new self(implode('|', array_map(static fn (string $str): string => preg_quote($str, '/'), $str)));
     }
 
     /**
@@ -74,7 +79,7 @@ final class InlineParserMatch
             if ($caseSensitive === null) {
                 $caseSensitive = $definition->caseSensitive;
             } elseif ($caseSensitive !== $definition->caseSensitive) {
-                throw new \LogicException('Case-sensitive and case-insensitive defintions cannot be comined');
+                throw new LogicException('Case-sensitive and case-insensitive defintions cannot be comined');
             }
         }
 

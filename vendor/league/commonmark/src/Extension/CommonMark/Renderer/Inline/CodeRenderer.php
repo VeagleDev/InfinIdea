@@ -23,6 +23,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Util\Xml;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
+use Stringable;
 
 final class CodeRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
@@ -33,7 +34,7 @@ final class CodeRenderer implements NodeRendererInterface, XmlNodeRendererInterf
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         Code::assertInstanceOf($node);
 

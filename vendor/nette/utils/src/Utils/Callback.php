@@ -9,7 +9,13 @@ declare(strict_types=1);
 
 namespace Nette\Utils;
 
+use Closure;
 use Nette;
+use ReflectionException;
+use ReflectionFunction;
+use ReflectionFunctionAbstract;
+use ReflectionMethod;
+use TypeError;
 use function is_array, is_object, is_string;
 
 
@@ -24,12 +30,12 @@ final class Callback
 	 * @param  string|object|callable  $callable  class, object, callable
 	 * @deprecated use Closure::fromCallable()
 	 */
-	public static function closure($callable, ?string $method = null): \Closure
+	public static function closure($callable, ?string $method = null): Closure
 	{
 		trigger_error(__METHOD__ . '() is deprecated, use Closure::fromCallable().', E_USER_DEPRECATED);
 		try {
-			return \Closure::fromCallable($method === null ? $callable : [$callable, $method]);
-		} catch (\TypeError $e) {
+			return Closure::fromCallable($method === null ? $callable : [$callable, $method]);
+		} catch (TypeError $e) {
 			throw new Nette\InvalidArgumentException($e->getMessage());
 		}
 	}
@@ -116,9 +122,9 @@ final class Callback
 	 */
 	public static function toString($callable): string
 	{
-		if ($callable instanceof \Closure) {
+		if ($callable instanceof Closure) {
 			$inner = self::unwrap($callable);
-			return '{closure' . ($inner instanceof \Closure ? '}' : ' ' . self::toString($inner) . '}');
+			return '{closure' . ($inner instanceof Closure ? '}' : ' ' . self::toString($inner) . '}');
 		} elseif (is_string($callable) && $callable[0] === "\0") {
 			return '{lambda}';
 		} else {
@@ -131,23 +137,23 @@ final class Callback
 	/**
 	 * Returns reflection for method or function used in PHP callback.
 	 * @param  callable  $callable  type check is escalated to ReflectionException
-	 * @return \ReflectionMethod|\ReflectionFunction
-	 * @throws \ReflectionException  if callback is not valid
+	 * @return ReflectionMethod|ReflectionFunction
+	 * @throws ReflectionException  if callback is not valid
 	 */
-	public static function toReflection($callable): \ReflectionFunctionAbstract
+	public static function toReflection($callable): ReflectionFunctionAbstract
 	{
-		if ($callable instanceof \Closure) {
+		if ($callable instanceof Closure) {
 			$callable = self::unwrap($callable);
 		}
 
 		if (is_string($callable) && strpos($callable, '::')) {
-			return new \ReflectionMethod($callable);
+			return new ReflectionMethod($callable);
 		} elseif (is_array($callable)) {
-			return new \ReflectionMethod($callable[0], $callable[1]);
-		} elseif (is_object($callable) && !$callable instanceof \Closure) {
-			return new \ReflectionMethod($callable, '__invoke');
+			return new ReflectionMethod($callable[0], $callable[1]);
+		} elseif (is_object($callable) && !$callable instanceof Closure) {
+			return new ReflectionMethod($callable, '__invoke');
 		} else {
-			return new \ReflectionFunction($callable);
+			return new ReflectionFunction($callable);
 		}
 	}
 
@@ -165,9 +171,9 @@ final class Callback
 	 * Unwraps closure created by Closure::fromCallable().
 	 * @return callable|array
 	 */
-	public static function unwrap(\Closure $closure)
+	public static function unwrap(Closure $closure)
 	{
-		$r = new \ReflectionFunction($closure);
+		$r = new ReflectionFunction($closure);
 		if (substr($r->name, -1) === '}') {
 			return $closure;
 

@@ -15,6 +15,7 @@ namespace League\CommonMark\Node;
 
 use League\CommonMark\Node\Query\AndExpr;
 use League\CommonMark\Node\Query\OrExpr;
+use function call_user_func;
 
 final class Query
 {
@@ -60,7 +61,7 @@ final class Query
     public function findOne(Node $node): ?Node
     {
         foreach ($node->iterator() as $n) {
-            if (\call_user_func($this->condition, $n)) {
+            if (call_user_func($this->condition, $n)) {
                 return $n;
             }
         }
@@ -80,7 +81,7 @@ final class Query
                 break;
             }
 
-            if (! \call_user_func($this->condition, $n)) {
+            if (! call_user_func($this->condition, $n)) {
                 continue;
             }
 

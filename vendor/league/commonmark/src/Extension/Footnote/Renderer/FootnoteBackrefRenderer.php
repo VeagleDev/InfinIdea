@@ -22,6 +22,10 @@ use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function assert;
+use function htmlspecialchars;
+use function is_string;
+use function mb_strtolower;
 
 final class FootnoteBackrefRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {
@@ -44,13 +48,13 @@ final class FootnoteBackrefRenderer implements NodeRendererInterface, XmlNodeRen
 
         $attrs->append('class', $this->config->get('footnote/backref_class'));
         $attrs->set('rev', 'footnote');
-        $attrs->set('href', \mb_strtolower($node->getReference()->getDestination()));
+        $attrs->set('href', mb_strtolower($node->getReference()->getDestination()));
         $attrs->set('role', 'doc-backlink');
 
         $symbol = $this->config->get('footnote/backref_symbol');
-        \assert(\is_string($symbol));
+        assert(is_string($symbol));
 
-        return '&nbsp;' . new HtmlElement('a', $attrs->export(), \htmlspecialchars($symbol), true);
+        return '&nbsp;' . new HtmlElement('a', $attrs->export(), htmlspecialchars($symbol), true);
     }
 
     public function setConfiguration(ConfigurationInterface $configuration): void

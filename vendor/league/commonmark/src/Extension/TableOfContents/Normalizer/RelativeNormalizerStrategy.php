@@ -16,6 +16,9 @@ namespace League\CommonMark\Extension\TableOfContents\Normalizer;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListBlock;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
+use function array_key_last;
+use function array_pop;
+use function end;
 
 final class RelativeNormalizerStrategy implements NormalizerStrategyInterface
 {
@@ -36,15 +39,15 @@ final class RelativeNormalizerStrategy implements NormalizerStrategyInterface
 
     public function addItem(int $level, ListItem $listItemToAdd): void
     {
-        $previousLevel = \array_key_last($this->listItemStack);
+        $previousLevel = array_key_last($this->listItemStack);
 
         // Pop the stack if we're too deep
         while ($previousLevel !== null && $level < $previousLevel) {
-            \array_pop($this->listItemStack);
-            $previousLevel = \array_key_last($this->listItemStack);
+            array_pop($this->listItemStack);
+            $previousLevel = array_key_last($this->listItemStack);
         }
 
-        $lastListItem = \end($this->listItemStack);
+        $lastListItem = end($this->listItemStack);
 
         // Need to go one level deeper? Add that level
         if ($lastListItem !== false && $level > $previousLevel) {

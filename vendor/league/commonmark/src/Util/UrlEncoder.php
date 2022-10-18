@@ -17,6 +17,12 @@ declare(strict_types=1);
 namespace League\CommonMark\Util;
 
 use League\CommonMark\Exception\UnexpectedEncodingException;
+use function count;
+use function mb_check_encoding;
+use function mb_str_split;
+use function ord;
+use function preg_match;
+use function rawurlencode;
 
 /**
  * @psalm-immutable
@@ -33,35 +39,35 @@ final class UrlEncoder
     public static function unescapeAndEncode(string $uri): string
     {
         // Optimization: if the URL only includes characters we know will be kept as-is, then just return the URL as-is.
-        if (\preg_match('/^[A-Za-z0-9~!@#$&*()\-_=+;:,.\/?]+$/', $uri)) {
+        if (preg_match('/^[A-Za-z0-9~!@#$&*()\-_=+;:,.\/?]+$/', $uri)) {
             return $uri;
         }
 
-        if (! \mb_check_encoding($uri, 'UTF-8')) {
+        if (! mb_check_encoding($uri, 'UTF-8')) {
             throw new UnexpectedEncodingException('Unexpected encoding - UTF-8 or ASCII was expected');
         }
 
         $result = '';
 
-        $chars = \mb_str_split($uri, 1, 'UTF-8');
+        $chars = mb_str_split($uri, 1, 'UTF-8');
 
-        $l = \count($chars);
+        $l = count($chars);
         for ($i = 0; $i < $l; $i++) {
             $code = $chars[$i];
             if ($code === '%' && $i + 2 < $l) {
-                if (\preg_match('/^[0-9a-f]{2}$/i', $chars[$i + 1] . $chars[$i + 2]) === 1) {
+                if (preg_match('/^[0-9a-f]{2}$/i', $chars[$i + 1] . $chars[$i + 2]) === 1) {
                     $result .= '%' . $chars[$i + 1] . $chars[$i + 2];
                     $i      += 2;
                     continue;
                 }
             }
 
-            if (\ord($code) < 128) {
-                $result .= self::ENCODE_CACHE[\ord($code)];
+            if (ord($code) < 128) {
+                $result .= self::ENCODE_CACHE[ord($code)];
                 continue;
             }
 
-            $result .= \rawurlencode($code);
+            $result .= rawurlencode($code);
         }
 
         return $result;

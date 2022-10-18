@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace League\CommonMark;
 
 use League\CommonMark\Output\RenderedContentInterface;
+use RuntimeException;
 
 /**
  * Interface for a service which converts Markdown to HTML.
@@ -27,7 +28,7 @@ interface MarkdownConverterInterface
      *
      * @deprecated since 2.2; use {@link ConverterInterface::convert()} instead
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function convertToHtml(string $markdown): RenderedContentInterface;
 }

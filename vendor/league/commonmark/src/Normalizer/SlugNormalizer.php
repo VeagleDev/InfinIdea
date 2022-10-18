@@ -15,6 +15,10 @@ namespace League\CommonMark\Normalizer;
 
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
+use function mb_strtolower;
+use function mb_substr;
+use function preg_replace;
+use function trim;
 
 /**
  * Creates URL-friendly strings based on the given string input
@@ -39,16 +43,16 @@ final class SlugNormalizer implements TextNormalizerInterface, ConfigurationAwar
         // Add any requested prefix
         $slug = ($context['prefix'] ?? '') . $text;
         // Trim whitespace
-        $slug = \trim($slug);
+        $slug = trim($slug);
         // Convert to lowercase
-        $slug = \mb_strtolower($slug);
+        $slug = mb_strtolower($slug);
         // Try replacing whitespace with a dash
-        $slug = \preg_replace('/\s+/u', '-', $slug) ?? $slug;
+        $slug = preg_replace('/\s+/u', '-', $slug) ?? $slug;
         // Try removing characters other than letters, numbers, and marks.
-        $slug = \preg_replace('/[^\p{L}\p{Nd}\p{Nl}\p{M}-]+/u', '', $slug) ?? $slug;
+        $slug = preg_replace('/[^\p{L}\p{Nd}\p{Nl}\p{M}-]+/u', '', $slug) ?? $slug;
         // Trim to requested length if given
         if ($length = $context['length'] ?? $this->defaultMaxLength) {
-            $slug = \mb_substr($slug, 0, $length);
+            $slug = mb_substr($slug, 0, $length);
         }
 
         return $slug;

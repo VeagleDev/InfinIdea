@@ -16,6 +16,8 @@ namespace League\CommonMark\Extension\FrontMatter;
 use League\CommonMark\Extension\FrontMatter\Data\FrontMatterDataParserInterface;
 use League\CommonMark\Extension\FrontMatter\Input\MarkdownInputWithFrontMatter;
 use League\CommonMark\Parser\Cursor;
+use function preg_match_all;
+use function preg_replace;
 
 final class FrontMatterParser implements FrontMatterParserInterface
 {
@@ -40,7 +42,7 @@ final class FrontMatterParser implements FrontMatterParserInterface
         }
 
         // Trim the last line (ending ---s and newline)
-        $frontMatter = \preg_replace('/---\R$/', '', $frontMatter);
+        $frontMatter = preg_replace('/---\R$/', '', $frontMatter);
         if ($frontMatter === null) {
             return new MarkdownInputWithFrontMatter($markdownContent);
         }
@@ -53,7 +55,7 @@ final class FrontMatterParser implements FrontMatterParserInterface
 
         // Calculate how many lines the Markdown is offset from the front matter by counting the number of newlines
         // Don't forget to add 1 because we stripped one out when trimming the trailing delims
-        $lineOffset = \preg_match_all('/\R/', $frontMatter . $trailingNewlines) + 1;
+        $lineOffset = preg_match_all('/\R/', $frontMatter . $trailingNewlines) + 1;
 
         return new MarkdownInputWithFrontMatter($cursor->getRemainder(), $lineOffset, $data);
     }

@@ -19,6 +19,10 @@ use League\CommonMark\Parser\Block\BlockContinue;
 use League\CommonMark\Parser\Block\BlockContinueParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Util\ArrayCollection;
+use function array_reverse;
+use function implode;
+use function preg_match;
+use function substr;
 
 final class IndentedCodeParser extends AbstractBlockContinueParser
 {
@@ -63,18 +67,18 @@ final class IndentedCodeParser extends AbstractBlockContinueParser
 
     public function closeBlock(): void
     {
-        $reversed = \array_reverse($this->strings->toArray(), true);
+        $reversed = array_reverse($this->strings->toArray(), true);
         foreach ($reversed as $index => $line) {
-            if ($line !== '' && $line !== "\n" && ! \preg_match('/^(\n *)$/', $line)) {
+            if ($line !== '' && $line !== "\n" && ! preg_match('/^(\n *)$/', $line)) {
                 break;
             }
 
             unset($reversed[$index]);
         }
 
-        $fixed = \array_reverse($reversed);
-        $tmp   = \implode("\n", $fixed);
-        if (\substr($tmp, -1) !== "\n") {
+        $fixed = array_reverse($reversed);
+        $tmp   = implode("\n", $fixed);
+        if (substr($tmp, -1) !== "\n") {
             $tmp .= "\n";
         }
 

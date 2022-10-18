@@ -20,6 +20,9 @@ use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
 use League\CommonMark\Reference\Reference;
 use League\CommonMark\Util\RegexHelper;
+use function preg_match;
+use function preg_replace;
+use function strlen;
 
 final class FootnoteStartParser implements BlockStartParserInterface
 {
@@ -40,11 +43,11 @@ final class FootnoteStartParser implements BlockStartParserInterface
         }
 
         $cursor->advanceToNextNonSpaceOrTab();
-        $cursor->advanceBy(\strlen($match[0]));
+        $cursor->advanceBy(strlen($match[0]));
         $str = $cursor->getRemainder();
-        \preg_replace('/^\[\^([^\s^\]]+)\]\:(?:\s|$)/', '', $str);
+        preg_replace('/^\[\^([^\s^\]]+)\]\:(?:\s|$)/', '', $str);
 
-        if (\preg_match('/^\[\^([^\s^\]]+)\]\:(?:\s|$)/', $match[0], $matches) !== 1) {
+        if (preg_match('/^\[\^([^\s^\]]+)\]\:(?:\s|$)/', $match[0], $matches) !== 1) {
             return BlockStart::none();
         }
 

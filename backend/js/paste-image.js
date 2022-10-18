@@ -13,13 +13,13 @@ function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
         if(typeof(callback) == "function"){
             callback(undefined);
         }
-    };
+    }
     var items = pasteEvent.clipboardData.items;
     if(items == undefined){
         if(typeof(callback) == "function"){
             callback(undefined);
         }
-    };
+    }
     for (var i = 0; i < items.length; i++) {
         // Skip content if not image
         if (items[i].type.indexOf("image") == -1) continue;

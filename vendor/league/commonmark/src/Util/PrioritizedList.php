@@ -16,13 +16,19 @@ declare(strict_types=1);
 
 namespace League\CommonMark\Util;
 
+use ArrayIterator;
+use IteratorAggregate;
+use ReturnTypeWillChange;
+use Traversable;
+use function krsort;
+
 /**
  * @internal
  *
  * @phpstan-template T
- * @phpstan-implements \IteratorAggregate<T>
+ * @phpstan-implements IteratorAggregate<T>
  */
-final class PrioritizedList implements \IteratorAggregate
+final class PrioritizedList implements IteratorAggregate
 {
     /**
      * @var array<int, array<mixed>>
@@ -31,10 +37,10 @@ final class PrioritizedList implements \IteratorAggregate
     private array $list = [];
 
     /**
-     * @var \Traversable<mixed>|null
-     * @phpstan-var \Traversable<T>|null
+     * @var Traversable<mixed>|null
+     * @phpstan-var Traversable<T>|null
      */
-    private ?\Traversable $optimized = null;
+    private ?Traversable $optimized = null;
 
     /**
      * @param mixed $item
@@ -48,15 +54,15 @@ final class PrioritizedList implements \IteratorAggregate
     }
 
     /**
-     * @return \Traversable<int, mixed>
+     * @return Traversable<int, mixed>
      *
-     * @phpstan-return \Traversable<int, T>
+     * @phpstan-return Traversable<int, T>
      */
-    #[\ReturnTypeWillChange]
-    public function getIterator(): \Traversable
+    #[ReturnTypeWillChange]
+    public function getIterator(): Traversable
     {
         if ($this->optimized === null) {
-            \krsort($this->list);
+            krsort($this->list);
 
             $sorted = [];
             foreach ($this->list as $group) {
@@ -65,7 +71,7 @@ final class PrioritizedList implements \IteratorAggregate
                 }
             }
 
-            $this->optimized = new \ArrayIterator($sorted);
+            $this->optimized = new ArrayIterator($sorted);
         }
 
         return $this->optimized;

@@ -11,6 +11,8 @@ namespace Nette\Schema;
 
 use Nette;
 use Nette\Utils\Reflection;
+use ReflectionProperty;
+use Reflector;
 
 
 /**
@@ -55,7 +57,7 @@ final class Helpers
 	}
 
 
-	public static function getPropertyType(\ReflectionProperty $prop): ?string
+	public static function getPropertyType(ReflectionProperty $prop): ?string
 	{
 		if (!class_exists(Nette\Utils\Type::class)) {
 			throw new Nette\NotSupportedException('Expect::from() requires nette/utils 3.x');
@@ -73,9 +75,9 @@ final class Helpers
 
 	/**
 	 * Returns an annotation value.
-	 * @param  \ReflectionProperty  $ref
+	 * @param  ReflectionProperty  $ref
 	 */
-	public static function parseAnnotation(\Reflector $ref, string $name): ?string
+	public static function parseAnnotation(Reflector $ref, string $name): ?string
 	{
 		if (!Reflection::areCommentsAvailable()) {
 			throw new Nette\InvalidStateException('You have to enable phpDoc comments in opcode cache.');

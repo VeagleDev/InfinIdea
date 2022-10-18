@@ -22,6 +22,17 @@ use League\CommonMark\Node\Inline\AdjacentTextMerger;
 use League\CommonMark\Node\Inline\Text;
 use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Reference\ReferenceMapInterface;
+use function array_column;
+use function assert;
+use function intval;
+use function ksort;
+use function mb_strlen;
+use function preg_match_all;
+use function strlen;
+use function substr;
+use function trim;
+use const PREG_OFFSET_CAPTURE;
+use const PREG_SET_ORDER;
 
 /**
  * @internal
@@ -47,16 +58,16 @@ final class InlineParserEngine implements InlineParserEngineInterface
         $this->referenceMap = $referenceMap;
 
         foreach ($environment->getInlineParsers() as $parser) {
-            \assert($parser instanceof InlineParserInterface);
+            assert($parser instanceof InlineParserInterface);
             $regex = $parser->getMatchDefinition()->getRegex();
 
-            $this->parsers[] = [$parser, $regex, \strlen($regex) !== \mb_strlen($regex)];
+            $this->parsers[] = [$parser, $regex, strlen($regex) !== mb_strlen($regex)];
         }
     }
 
     public function parse(string $contents, AbstractBlock $block): void
     {
-        $contents = \trim($contents);
+        $contents = trim($contents);
         $cursor   = new Cursor($contents);
 
         $inlineParserContext = new InlineParserContext($cursor, $block, $this->referenceMap);
@@ -78,7 +89,7 @@ final class InlineParserEngine implements InlineParserEngineInterface
             // We're now at a potential start - see which of the current parsers can handle it
             $parsed = false;
             foreach ($parsers as [$parser, $matches]) {
-                \assert($parser instanceof InlineParserInterface);
+                assert($parser instanceof InlineParserInterface);
                 if ($parser->parse($inlineParserContext->withMatches($matches))) {
                     // A parser has successfully handled the text at the given position; don't consider any others at this position
                     $parsed = true;
@@ -133,8 +144,8 @@ final class InlineParserEngine implements InlineParserEngineInterface
      */
     private function matchParsers(string $contents): array
     {
-        $contents    = \trim($contents);
-        $isMultibyte = \mb_strlen($contents) !== \strlen($contents);
+        $contents    = trim($contents);
+        $isMultibyte = mb_strlen($contents) !== strlen($contents);
 
         $ret = [];
 
@@ -144,7 +155,7 @@ final class InlineParserEngine implements InlineParserEngineInterface
             }
 
             // See if the parser's InlineParserMatch regex matched against any part of the string
-            if (! \preg_match_all($regex, $contents, $matches, \PREG_OFFSET_CAPTURE | \PREG_SET_ORDER)) {
+            if (! preg_match_all($regex, $contents, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER)) {
                 continue;
             }
 
@@ -152,13 +163,13 @@ final class InlineParserEngine implements InlineParserEngineInterface
             foreach ($matches as $match) {
                 if ($isMultibyte) {
                     // PREG_OFFSET_CAPTURE always returns the byte offset, not the char offset, which is annoying
-                    $offset = \mb_strlen(\substr($contents, 0, $match[0][1]), 'UTF-8');
+                    $offset = mb_strlen(substr($contents, 0, $match[0][1]), 'UTF-8');
                 } else {
-                    $offset = \intval($match[0][1]);
+                    $offset = intval($match[0][1]);
                 }
 
                 // Remove the offsets, keeping only the matched text
-                $m = \array_column($match, 0);
+                $m = array_column($match, 0);
 
                 if ($m === []) {
                     continue;
@@ -170,7 +181,7 @@ final class InlineParserEngine implements InlineParserEngineInterface
         }
 
         // Sort matches by position so we visit them in order
-        \ksort($ret);
+        ksort($ret);
 
         return $ret;
     }

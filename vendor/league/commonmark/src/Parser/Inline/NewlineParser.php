@@ -19,6 +19,8 @@ namespace League\CommonMark\Parser\Inline;
 use League\CommonMark\Node\Inline\Newline;
 use League\CommonMark\Node\Inline\Text;
 use League\CommonMark\Parser\InlineParserContext;
+use function rtrim;
+use function strlen;
 
 final class NewlineParser implements InlineParserInterface
 {
@@ -35,8 +37,8 @@ final class NewlineParser implements InlineParserInterface
         $spaces     = 0;
         $lastInline = $inlineContext->getContainer()->lastChild();
         if ($lastInline instanceof Text) {
-            $trimmed = \rtrim($lastInline->getLiteral(), ' ');
-            $spaces  = \strlen($lastInline->getLiteral()) - \strlen($trimmed);
+            $trimmed = rtrim($lastInline->getLiteral(), ' ');
+            $spaces  = strlen($lastInline->getLiteral()) - strlen($trimmed);
             if ($spaces) {
                 $lastInline->setLiteral($trimmed);
             }

@@ -20,26 +20,31 @@ use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Block\ParagraphParser;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
+use function array_pop;
+use function count;
+use function explode;
+use function implode;
+use function strpos;
 
 final class TableStartParser implements BlockStartParserInterface
 {
     public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
     {
         $paragraph = $parserState->getParagraphContent();
-        if ($paragraph === null || \strpos($paragraph, '|') === false) {
+        if ($paragraph === null || strpos($paragraph, '|') === false) {
             return BlockStart::none();
         }
 
         $columns = self::parseSeparator($cursor);
-        if (\count($columns) === 0) {
+        if (count($columns) === 0) {
             return BlockStart::none();
         }
 
-        $lines    = \explode("\n", $paragraph);
-        $lastLine = \array_pop($lines);
+        $lines    = explode("\n", $paragraph);
+        $lastLine = array_pop($lines);
 
         $headerCells = TableParser::split($lastLine);
-        if (\count($headerCells) > \count($columns)) {
+        if (count($headerCells) > count($columns)) {
             return BlockStart::none();
         }
 
@@ -47,9 +52,9 @@ final class TableStartParser implements BlockStartParserInterface
 
         $parsers = [];
 
-        if (\count($lines) > 0) {
+        if (count($lines) > 0) {
             $p = new ParagraphParser();
-            $p->addLine(\implode("\n", $lines));
+            $p->addLine(implode("\n", $lines));
             $parsers[] = $p;
         }
 
@@ -88,7 +93,7 @@ final class TableStartParser implements BlockStartParserInterface
                     break;
                 case '-':
                 case ':':
-                    if ($pipes === 0 && \count($columns) > 0) {
+                    if ($pipes === 0 && count($columns) > 0) {
                         // Need a pipe after the first column (first column doesn't need to start with one)
                         return [];
                     }

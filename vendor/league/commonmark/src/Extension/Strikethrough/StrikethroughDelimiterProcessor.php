@@ -16,6 +16,8 @@ namespace League\CommonMark\Extension\Strikethrough;
 use League\CommonMark\Delimiter\DelimiterInterface;
 use League\CommonMark\Delimiter\Processor\DelimiterProcessorInterface;
 use League\CommonMark\Node\Inline\AbstractStringContainer;
+use function min;
+use function str_repeat;
 
 final class StrikethroughDelimiterProcessor implements DelimiterProcessorInterface
 {
@@ -36,14 +38,14 @@ final class StrikethroughDelimiterProcessor implements DelimiterProcessorInterfa
 
     public function getDelimiterUse(DelimiterInterface $opener, DelimiterInterface $closer): int
     {
-        $min = \min($opener->getLength(), $closer->getLength());
+        $min = min($opener->getLength(), $closer->getLength());
 
         return $min >= 2 ? $min : 0;
     }
 
     public function process(AbstractStringContainer $opener, AbstractStringContainer $closer, int $delimiterUse): void
     {
-        $strikethrough = new Strikethrough(\str_repeat('~', $delimiterUse));
+        $strikethrough = new Strikethrough(str_repeat('~', $delimiterUse));
 
         $tmp = $opener->next();
         while ($tmp !== null && $tmp !== $closer) {
