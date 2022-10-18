@@ -58,7 +58,7 @@
     width: 0;
     height: 0;
     box-shadow: #80398f 300px 900px 1000px 200px;
-    z-index: 0;
+    z-index: 999;
 }
 
 .shadow:nth-child(5) {
@@ -143,135 +143,44 @@
     margin-top: -60px;
 }
 
-
 .contents-page {
-    margin-top: 50px;
     width: 100%;
-}
-
-.code-header {
-    width: 100%;
-    height: 50px;
-    background: #181817;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: #000 0px 5px 10px;
-}
-
-.file-display:nth-child(2) {
-    background: #3a3a3a;
-    height: 80%;
-    width: 40%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 5px;
-}
-
-.file-display:nth-child(1) {
-    background: #242423;
-    height: 100%;
-    width: 40%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 5px;
-}
-
-.line-display {
-    position: absolute;
-    height: 30px;
-    font-size: 17px;
-    padding-left: 5px;
-    padding-top: 3px;
-}
-
-.welcom-display {
-    width: 75%;
-    height: 1000px;
-
-    margin: 50px;
-    padding-top: 20px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-
-    border-radius: 15px;
-    background: #242423;
-
-    font-family: 'Titillium Web';
-    color: #e8eddf;
-    letter-spacing: 3px;
+    margin-top: 100px;
 }
 
 .article-display {
     width: 100%;
-    height: 2000px;
+    height: auto;
 
-    padding-top: 20px;
     background: #0b162c;
 
     color: #e8eddf;
     letter-spacing: 3px;
+
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-
-.following-text p {
-    display: none;
-}
-
-.site-usefullness p {
-    display: none;
-}
-
-.site-usefullness-bottom p {
-    display: none;
-}
-
-#welcom {
-    padding: 20px 0px 0px 20px;
-    font-size: 40px;
-}
-
-.following-text {
-    padding-left: 60px;
-    font-size: 20px;
-}
-
-.site-usefullness{
-    padding-left: 40px;
-    font-size: 20px;
-}
-
-.site-usefullness-bottom {
-    padding-left: 40px;
-    font-size: 20px;
-}
-
-
-
-
 
 .article-display .big-title {
     font-family: 'Mulish';
     letter-spacing: .2px;
     font-size: 25px;
+
     margin-bottom: 10px;
     margin-left: 95px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .gallery {
+    position: relative;
+
     overflow: hidden;
     outline: none;
     border: none;
     background: none;
 
     height: 400px;
-    margin-bottom: 50px;
     letter-spacing: 0;
 }
 
@@ -285,12 +194,19 @@
     border-radius: 5px;
 }
 
-.gallery-cell img {
+.img-container {
     width: 50%;
     height: 400px;
-    aspect-ratio: 16/9;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container img {
+    aspect-ratio: auto;
 }
 
 .gallery-cell h1 {

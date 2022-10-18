@@ -19,6 +19,7 @@ $db = getDB();
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="backend/js/fontawesome.js"></script>
+    <script defer src="backend/js/grid-check-ratio.js"></script>
 </head>
 <body>
 <section class="top-page">
@@ -79,99 +80,6 @@ $db = getDB();
 </section>
 
 <section class="contents-page">
-    <div class="welcom-display">
-        <header class="code-header">
-            <div class="file-display"><p><>infinidea.cdd</p></div>
-            <div class="file-display"><p><>main.cdd</p></div>
-        </header>
-        <div class="line-display"><p>01</p></div>
-
-        <div class="site-usefullness line">
-            <?php
-            if(isset($_SESSION['id'])) // Si connecté, prenom
-            {
-                echo('<p class="o">Bienvenue(string pseudo = "' . getPseudo($_SESSION['id']) . '") {</p>');
-            }
-            else
-            {
-                echo('<p class="o">Bienvenue() {</p>');
-            }
-            ?>
-        </div>
-
-        <div class="line-display"><p>02</p></div>
-
-        <div class="following-text">
-            <p class="o">sur InfinIdea;</p>
-        </div>
-
-        <div class="line-display"><p>03</p></div>
-
-        <div class="site-usefullness-bottom">
-            <p class="o">}</p>
-        </div>
-
-        <div class="line-display"><p>04</p></div>
-
-        <div class="site-usefullness">
-            <p class="o">Decouvrir() {</p>
-        </div>
-
-        <div class="line-display"><p>05</p></div>
-
-        <div class="following-text">
-            <p class="o">Un clique, un nouveau projet vous est présenté !
-                Vous l'aimez ? Likez, et suivez son
-                avancement;</p>
-        </div>
-
-        <div class="line-display"><p>06</p></div>
-
-        <div class="site-usefullness-bottom">
-            <p class="o">}</p>
-        </div>
-
-        <div class="line-display"><p>07</p></div>
-
-        <div class="site-usefullness">
-            <p class="o">Créer() {</p>
-        </div>
-
-        <div class="line-display"><p>08</p></div>
-
-        <div class="following-text">
-            <p class="o">Créez les projets que vous voulez,
-                à volonté. Une idée ? Un projet;</p>
-        </div>
-
-        <div class="line-display"><p>09</p></div>
-
-        <div class="site-usefullness-bottom">
-            <p class="o">}</p>
-        </div>
-
-        <div class="line-display"><p>10</p></div>
-
-        <div class="site-usefullness">
-            <p class="o">Discutez() {</p>
-        </div>
-
-        <div class="line-display"><p>11</p></div>
-
-        <div class="following-text">
-            <p class="o">Une question ? Posez-la, un passioné vous
-                répondra;</p>
-        </div>
-
-        <div class="line-display"><p>12</p></div>
-
-        <div class="site-usefullness-bottom">
-            <p class="o last-txt">}</p>
-        </div>
-
-        <div class="line-display"><p>13</p></div>
-    </div>
-
     <div class="article-display">
         <h1 class="big-title">Découvrez</h1>
         <div class="gallery js-flickity"
@@ -211,7 +119,9 @@ $db = getDB();
                 }
                 ?>
                 <a href="<?php echo $href; ?>" class="gallery-cell">
-                    <img src="<?php echo $img; ?>" alt="">
+                    <div class="img-container">
+                        <img src="<?php echo $img; ?>" alt="" class="img-article">
+                    </div>
                     <div class="text">
                         <h1><?php echo($row['name']); ?></h1>
                         <p class="description"><?php echo($row['description']); ?></p>
@@ -275,7 +185,9 @@ $db = getDB();
                 }
                 ?>
                 <a href="<?php echo $href; ?>" class="gallery-cell">
-                    <img src="<?php echo $img; ?>" alt="">
+                    <div class="img-container">
+                        <img src="<?php echo $img; ?>" alt="" class="img-article">
+                    </div>
                     <div class="text">
                         <h1><?php echo($row['name']); ?></h1>
                         <p class="description"><?php echo($row['description']); ?></p>
@@ -373,7 +285,6 @@ $db = getDB();
     </footer>
 </section>
 
-<script src="backend/js/main.js"></script>
 <script src="backend/js/flickity.pkgd.min.js"></script>
 </body>
 </html>
