@@ -48,7 +48,48 @@ document.getElementsByClassName("submit-email")[0].addEventListener('click', () 
 
 document.getElementsByClassName("submit-password")[0].addEventListener('click', () => {
     if(checkFieldSize(document.getElementsByClassName("password-value")[0], 8, 100) === true) {
-        //tu fais encore ton truc
+
+        const mail = document.getElementsByClassName("email-value")[0].value
+        const passwd = document.getElementsByClassName("password-value")[0].value
+
+        jQuery.ajax({
+            url: "/backend/php/veagle-connect.php",
+            data: {
+                email: mail,
+                password: passwd
+            },
+            type: "post",
+            success: function (data) {
+                const code = data;
+                switch (code) {
+                    case "0": // success
+                        document.getElementsByClassName("email-value")[0].style.border = "none"
+                        document.getElementsByClassName("error")[0].style.display = "none"
+                        document.getElementsByClassName("password-value")[0].style.border = "none"
+                        document.getElementsByClassName("error")[1].style.display = "none"
+
+                        window.location.replace("https://infinidea.veagle.fr/");
+                        break;
+                    case "1":
+                        console.log(document.getElementsByClassName("password-value")[0])
+                        document.getElementsByClassName("password-value")[0].style.border = "red 1px solid"
+                        document.getElementsByClassName("error")[1].style.display = "block"
+                        break;
+                    case "2":
+                        document.getElementsByClassName("email-value")[0].style.border = "red 1px solid"
+                        document.getElementsByClassName("error")[0].style.display = "block"
+                        break;
+                    case "3":
+                        alert('Une erreur est survenue, veuillez rééssayer');
+                        break;
+                }
+            },
+            error: function (xhr, status) {
+                alert("Une erreur est survenue durant la connexion")
+            },
+            complete: function (xhr, status) {
+            }
+        });
 
         document.getElementsByClassName("password-value")[0].style.border = "none"
         document.getElementsByClassName("error")[1].style.display = "none"
