@@ -28,7 +28,7 @@ var elInput = 0
 
 document.getElementsByClassName("step-one")[0].style.display = "block"
 
-typeEffect(document.getElementsByClassName("type-effect")[el], 20)
+typeEffect(document.getElementsByClassName("type-effect")[el], 30)
 
 
 

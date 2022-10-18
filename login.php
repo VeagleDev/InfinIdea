@@ -28,20 +28,20 @@ if (isset($_SESSION['id'])) {
     <section class="page-content">
         <div class="steps">
             <div class="step step-one">
-                <p class="type-effect">Vous revoilà ! Reconnectez-vous, où étiez-vous passé ?</p>
-                <p class="type-effect before-append-input">Veuillez mettre votre E-mail;</p>
+                <p class="type-effect">Vous revoilà !</p>
+                <p class="type-effect before-append-input">Veuillez renseigner votre e-mail</p>
                 <div class="input-container">
                     <input type="text" class="email-value">
-                    <button class="submit-email">soumettre</button>
+                    <button class="submit-email">Soumettre</button>
                 </div>
                 <p class="error">L'E-mail renseignée n'est pas correcte.</p>
             </div>
 
             <div class="step step-two">
-                <p class="type-effect before-append-input">Et enfin votre mot de passe;</p>
+                <p class="type-effect before-append-input">Veuillez renseigner votre mot de passe</p>
                 <div class="input-container">
                     <input type="text" class="password-value">
-                    <button class="submit-password">soumettre</button>
+                    <button class="submit-password">Soumettre</button>
                 </div>
                 <p class="error">Le mot de passe renseigné est incorrect.</p>
             </div>
