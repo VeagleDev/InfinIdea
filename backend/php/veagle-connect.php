@@ -11,7 +11,7 @@ $db = getDB();
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = SQLpurify($_POST['email']);
     $password = SQLpurify($_POST['password']);
-
+    $password = hash('sha512', $password);
     $sql = "SELECT id, pseudo, prenom, email, password FROM users WHERE email = '$email'";
     $result = mysqli_query($db, $sql);
     if (mysqli_affected_rows($db) == 1) {

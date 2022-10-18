@@ -82,6 +82,9 @@ document.getElementsByClassName("submit-password")[0].addEventListener('click', 
                     case "3":
                         alert('Une erreur est survenue, veuillez rééssayer');
                         break;
+                    default:
+                        console.log(code);
+                        break;
                 }
             },
             error: function (xhr, status) {
