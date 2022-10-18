@@ -16,11 +16,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $result = mysqli_query($db, $sql);
     if (mysqli_affected_rows($db) == 1) {
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['password'])) {
+        if ($password == $row['password']) {
             $_SESSION['id'] = $row['id'];
             echo "0";
         } else {
-            echo "1";
+            echo "1 (" . $password . " != " . $row['password'] . ")";
         }
     } else {
         echo "2";
