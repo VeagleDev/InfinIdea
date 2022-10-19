@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 # exlude .idea and .vscode folders in the root of the project
 .idea/
 .vscode/
 images/uploads/body/*
 .fleet/
-=======
-# exlude .idea and .vscode folders in the root of the project
-.idea/
-.vscode/
-images/uploads/body/*
-.fleet/
->>>>>>> 34567c7 (merge)
