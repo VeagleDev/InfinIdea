@@ -27,7 +27,7 @@ class SuperRegexer
     }
 
 }
-
+/*
 // make a series of tests
 $testStrings = array(
     // add a series of string like a pseudo, a surname, a email, an article name and others random strings
@@ -61,4 +61,4 @@ foreach ($testStrings as $string => $value) {
             echo $string . ' doesn\'t match ' . $regex . '<br/>';
         }
     }
-}
+}*/
