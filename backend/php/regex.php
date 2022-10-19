@@ -28,33 +28,37 @@ class SuperRegexer
 
 }
 
-if (SuperRegexer::check('Je suis un test', 'articleName')) {
-    echo 'OK';
-} else {
-    echo 'KO';
-}
+// make a series of tests
+$testStrings = array(
+    // add a series of string like a pseudo, a surname, a email, an article name and others random strings
+    'pseudo' => 'Pseudo',
+    'surname' => 'Surname',
+    'email' => 'pierre@gmail.com',
+    'articleName' => 'Article name',
+    'random' => 'Random string'
+);
 
+// make an array of possibles regexes
+$regexes = array(
+    'pseudo',
+    'surname',
+    'email',
+    'articleName'
+);
 
-if (SuperRegexer::check('Je suis un test', 'pseudo')) {
-    echo 'OK';
-} else {
-    echo 'KO';
-}
-
-if (SuperRegexer::check('Je suis un test', 'email')) {
-    echo 'OK';
-} else {
-    echo 'KO';
-}
-
-if (SuperRegexer::check('Je suis un test', 'surname')) {
-    echo 'OK';
-} else {
-    echo 'KO';
-}
-
-if (SuperRegexer::check('ogeajijga@gmail.com', 'email')) {
-    echo 'OK';
-} else {
-    echo 'KO';
+// for each string
+foreach ($testStrings as $string => $value) {
+    // for each regex
+    foreach ($regexes as $regex) {
+        // check if the string matches the regex
+        $result = SuperRegexer::check($value, $regex);
+        // if the string matches the regex
+        if ($result) {
+            // display a success message
+            echo $string . ' matches ' . $regex . '<br/>';
+        } else {
+            // display a failure message
+            echo $string . ' doesn\'t match ' . $regex . '<br/>';
+        }
+    }
 }
