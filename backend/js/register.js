@@ -90,6 +90,30 @@ document.getElementsByClassName("submit-password")[0].addEventListener('click', 
 document.getElementsByClassName("confirm-password")[0].addEventListener('click', () => {
     if(document.getElementsByClassName("password-value")[0].value === document.getElementsByClassName("confirm-password-value")[0].value) {
         //tu fais ce que ta a faire et tu te demerde sale grosse pute de ta mere
+        // fais très attention à ce que tu dis
+
+        // go ajax
+        const userpseudo = document.getElementsByClassName("pseudo-value")[0].value;
+        const surname = document.getElementsByClassName("name-value")[0].value;
+        const email = document.getElementsByClassName("email-value")[0].value;
+        const passwd = document.getElementsByClassName("value-value")[0].value;
+
+        jQuery.ajax({
+            url: "/backend/php/veagle-register.php",
+            data: {
+                pseudo: userpseudo,
+                prenom: surname,
+                mail: email,
+                password: passwd
+            },
+            type: "post",
+            success: function (data) {
+            },
+            error: function (xhr, status) {
+            },
+            complete: function (xhr, status) {
+            }
+        });
 
         document.getElementsByClassName("confirm-password-value")[0].style.border = "none"
         document.getElementsByClassName("error")[3].style.display = "none"
