@@ -315,7 +315,7 @@ width: 5px;
     /* make sure to remove numbers and bullets from list items */
     margin-left: 0;
     padding-left: 0;
-
+    max-width: 1200px;
     list-style: none;
     height: auto;
     width: 100%;
