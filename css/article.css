@@ -335,7 +335,7 @@ width: 5px;
     .article {
         flex-direction: column;
         align-items: baseline;
-        margin: none;
+        margin: 0;
     }
     
     .txt-container {
