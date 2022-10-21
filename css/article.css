@@ -290,9 +290,6 @@ width: 5px;
 .content-txt {
     height: auto;
     width: 100%;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 
