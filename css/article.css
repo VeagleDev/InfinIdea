@@ -279,14 +279,21 @@ width: 5px;
 }
 
 .comment-section::-webkit-scrollbar-track {
-background: none;
+    background: none;
 }
 
 .comment-section::-webkit-scrollbar-thumb {
-background-color: #b3b3b3;
-border-radius: 10px;
+    background-color: #b3b3b3;
+    border-radius: 10px;
 }
 
+.content-txt {
+    height: auto;
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 
 @media (max-width: 700px) {

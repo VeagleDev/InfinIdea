@@ -186,12 +186,12 @@ $db = getDB();
 
             </div>
 
-            <br />
-            <br />
-            <br />
-            <br />
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
-            <div class="content-txt" style="width: 100%; height: auto;"><?php echo $body; ?></div>
+            <div class="content-txt"><?php echo $body; ?></div>
         </div>
 
         <div class="comment-section">
@@ -200,8 +200,8 @@ $db = getDB();
                 <ul>
 
                     <?php
-                        $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC';
-                        $result = mysqli_query($db, $sql);
+                    $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC';
+                    $result = mysqli_query($db, $sql);
                         if(mysqli_affected_rows($db) > 0)
                         {
                             while($row = mysqli_fetch_assoc($result))
