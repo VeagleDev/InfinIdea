@@ -111,8 +111,9 @@
 }
 
 #discover-interaction {
+    margin-top: 10px;
     position: absolute;
-    background: linear-gradient(50deg, rgba(95,194,186,.2) 25%, rgba(61,122,117,.2) 82%);
+    background: linear-gradient(50deg, rgba(95, 194, 186, .2) 25%, rgba(61, 122, 117, .2) 82%);
     border: #647799 2px solid;
 
     width: 280px;
@@ -145,7 +146,6 @@
 
 .contents-page {
     width: 100%;
-    margin-top: 100px;
 }
 
 .article-display {
