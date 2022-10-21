@@ -313,24 +313,6 @@ width: 5px;
     text-align: center;
 }
 
-.content-txt li {
-    /* make sure to remove numbers and bullets from list items */
-    margin-left: 0;
-    padding-left: 0;
-    max-width: 1200px;
-    list-style: none;
-    height: auto;
-    width: 100%;
-    /* center the images in them */
-    text-align: center;
-    /* add some space between the images */
-    margin-bottom: 20px;
-
-}
-
-.content-txt ol li img {
-    list-style: none;
-}
 
 
 @media (max-width: 700px) {
