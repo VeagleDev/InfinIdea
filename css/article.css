@@ -313,6 +313,9 @@ width: 5px;
 
 .content-txt li {
     /* make sure to remove numbers and bullets from list items */
+    margin-left: 0;
+    padding-left: 0;
+
     list-style: none;
     height: auto;
     width: 100%;
