@@ -16,7 +16,7 @@ function typeEffect(element, speed) {
             document.getElementsByClassName("input-container")[elInput].style.display = "flex"
             elInput++
         } else {
-            typeEffect(document.getElementsByClassName("type-effect")[el], 20)
+            typeEffect(document.getElementsByClassName("type-effect")[el], 30)
         }
         
       }
@@ -28,7 +28,7 @@ var elInput = 0
 
 document.getElementsByClassName("step-one")[0].style.display = "block"
 
-typeEffect(document.getElementsByClassName("type-effect")[el], 20)
+typeEffect(document.getElementsByClassName("type-effect")[el], 30)
 
 
 
@@ -96,7 +96,7 @@ document.getElementsByClassName("confirm-password")[0].addEventListener('click',
         const userpseudo = document.getElementsByClassName("pseudo-value")[0].value;
         const surname = document.getElementsByClassName("name-value")[0].value;
         const email = document.getElementsByClassName("email-value")[0].value;
-        const passwd = document.getElementsByClassName("value-value")[0].value;
+        const passwd = document.getElementsByClassName("password-value")[0].value;
 
         jQuery.ajax({
             url: "/backend/php/veagle-register.php",
@@ -108,8 +108,33 @@ document.getElementsByClassName("confirm-password")[0].addEventListener('click',
             },
             type: "post",
             success: function (data) {
+                const code = data;
+                switch (code) {
+                    case "0":
+                        location.href = 'https://infinidea.veagle.fr/';
+                        break;
+                    case "1": // request error
+                        alert('Une erreur est survenue lors de votre inscription dans la base de données');
+                        break;
+                    case "2": // same mail
+                        document.getElementsByClassName("email-value")[0].style.border = "red 1px solid";
+                        document.getElementsByClassName("error")[2].style.display = "block";
+                        break;
+                    case "3": // same pseudo
+                        document.getElementsByClassName("pseudo-value")[0].style.border = "red 1px solid";
+                        document.getElementsByClassName("error")[0].style.display = "block";
+                        break;
+                    case "4":
+                        alert('Erreur inconnue');
+                        break;
+                    default:
+                        alert('Erreur inconnue');
+                        break;
+
+                }
             },
             error: function (xhr, status) {
+                alert('Une erreur est survenue lors de la requête au serveur !');
             },
             complete: function (xhr, status) {
             }

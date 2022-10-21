@@ -1,26 +1,13 @@
-<?php
-set_include_path('/var/www/blog');
-if (session_status() == PHP_SESSION_NONE)
-    session_start(); // On démarre la session AVANT toute chose
-
-if (isset($_SESSION['id'])) {
-    echo '<p style="color:red;">Vous ne pouvez pas créer de compte en étant connecté !</p><p><a href="/">Retourner à l\'accueil</a></p>';
-    die();
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>InfinIdea : S'inscrire</title>
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet">
     <script src="backend/js/fontawesome.js"></script>
-    <script src="backend/library/jquery-3.6.1.min.js"></script>
     <script defer src="backend/js/register.js"></script>
 </head>
 <body>
@@ -30,8 +17,8 @@ if (isset($_SESSION['id'])) {
             <p class="type-effect">Bienvenue dans la création de votre compte Infinidea avec VeagleConnect</p>
             <p class="type-effect before-append-input">Pour commencer, veuillez renseignez votre pseudo;</p>
             <div class="input-container">
-                <input type="text" class="pseudo-value">
-                <button class="submit-pseudo">Soumettre</button>
+                <input class="pseudo-value" type="text">
+                <button class="submit-pseudo">soumettre</button>
             </div>
             <p class="error">Ce pseudo est déjà utilisé ou est incorrect.</p>
         </div>
@@ -39,8 +26,8 @@ if (isset($_SESSION['id'])) {
         <div class="step step-two">
             <p class="type-effect before-append-input">Maintenant, votre prénom;</p>
             <div class="input-container">
-                <input type="text" class="name-value">
-                <button class="submit-name">Soumettre</button>
+                <input class="name-value" type="text">
+                <button class="submit-name">soumettre</button>
             </div>
             <p class="error">Votre nom fait vraiment moins de 3 caractères ? Vérifiez ce que vous avez renseignez !</p>
         </div>
@@ -48,18 +35,18 @@ if (isset($_SESSION['id'])) {
         <div class="step step-three">
             <p class="type-effect before-append-input">Bien ! Veuillez désormais inscrire votre E-mail;</p>
             <div class="input-container">
-                <input type="text" class="email-value">
-                <button class="submit-email">Soumettre</button>
+                <input class="email-value" type="text">
+                <button class="submit-email">soumettre</button>
             </div>
-            <p class="error">L'E-mail renseignée est incorrecte.</p>
+            <p class="error">L'E-mail renseignez est incorrect.</p>
         </div>
 
         <div class="step step-four">
             <p class="type-effect before-append-input">Pour finir, la sécurité ! Renseignez votre mot de passe et
                 confirmez-le. Prennez-en un sécurisé, c'est le plus important;</p>
             <div class="input-container">
-                <input type="text" class="password-value">
-                <button class="submit-password">Soumettre</button>
+                <input class="password-value" type="text">
+                <button class="submit-password">soumettre</button>
             </div>
             <p class="error">Votre mot de passe doit contenir au moins 8 caractères.</p>
         </div>
@@ -67,8 +54,8 @@ if (isset($_SESSION['id'])) {
         <div class="step step-five">
             <p class="type-effect before-append-input">Confirmez votre mot de passe;</p>
             <div class="input-container">
-                <input type="text" class="confirm-password-value">
-                <button class="confirm-password">Valider</button>
+                <input class="confirm-password-value" type="text">
+                <button class="confirm-password">Valider l'inscription</button>
             </div>
             <p class="error">Le mot de passe renseigné n'est pas le même !</p>
         </div>
@@ -118,9 +105,9 @@ if (isset($_SESSION['id'])) {
                     <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><i class="fa-brands fa-discord"></i></a>
                     </li>
                     <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><i
-                                    class="fa-brands fa-instagram"></i></a></li>
+                            class="fa-brands fa-instagram"></i></a></li>
                     <li><a href="https://github.com/Mysterious-Developers" target="_blank"><i
-                                    class="fa-brands fa-github"></i></a></li>
+                            class="fa-brands fa-github"></i></a></li>
                     <li><a href="https://veagle.fr" target="_blank"><i class="fa-solid fa-window-restore"></i></a></li>
                 </ul>
             </nav>

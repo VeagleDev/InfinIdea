@@ -20,7 +20,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $_SESSION['id'] = $row['id'];
             echo "0";
         } else {
-            echo "1 (" . $password . " != " . $row['password'] . ")";
+            echo "1";
         }
     } else {
         echo "2";

@@ -1,132 +1,131 @@
 <?php
 set_include_path('/var/www/blog');
-if(session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
+
+if (isset($_SESSION['id'])) {
+    echo '<p style="color:red;">Vous ne pouvez pas créer de compte en étant connecté !</p><p><a href="/">Retourner à l\'accueil</a></p>';
+    die();
 }
-require_once 'tools/tools.php';
-require_once 'tools/strings.php';
-$db = getDB();
+
 ?>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inscription</title>
+    <title>InfinIdea : S'inscrire</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../backend/js/fontawesome.js"></script>
+    <script src="../backend/library/jquery-3.6.1.min.js"></script>
+    <script defer src="../backend/js/register.js"></script>
 </head>
 <body>
-    <h1>Inscription</h1>
+<section class="page-content">
+    <div class="steps">
+        <div class="step step-one">
+            <p class="type-effect">Bienvenue dans la création de votre compte Infinidea avec VeagleConnect</p>
+            <p class="type-effect before-append-input">Pour commencer, veuillez renseignez votre pseudo;</p>
+            <div class="input-container">
+                <input type="text" class="pseudo-value">
+                <button class="submit-pseudo">Soumettre</button>
+            </div>
+            <p class="error">Ce pseudo est déjà utilisé ou est incorrect.</p>
+        </div>
 
-    <!-- TU PEUX FAIRE COMME LE FORMULAIRE DE LOGIN MAIS AVEC PLUS DE CHAMPS -->
+        <div class="step step-two">
+            <p class="type-effect before-append-input">Maintenant, votre prénom;</p>
+            <div class="input-container">
+                <input type="text" class="name-value">
+                <button class="submit-name">Soumettre</button>
+            </div>
+            <p class="error">Votre nom fait vraiment moins de 3 caractères ? Vérifiez ce que vous avez renseignez !</p>
+        </div>
 
+        <div class="step step-three">
+            <p class="type-effect before-append-input">Bien ! Veuillez désormais inscrire votre E-mail;</p>
+            <div class="input-container">
+                <input type="text" class="email-value">
+                <button class="submit-email">Soumettre</button>
+            </div>
+            <p class="error">L'E-mail renseignée est incorrecte.</p>
+        </div>
 
-<?php
-    if( isset($_POST['pseudo']) &&
-        isset($_POST['firstname']) &&
-        isset($_POST['email']) &&
-        isset($_POST['password']) &&
-        isset($_POST['password_confirm']) &&
-        isset($_POST['age']) &&
-        isset($_POST['avatar']))
-    {
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $firstname = htmlspecialchars($_POST['firstname']);
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-        $password_confirm = htmlspecialchars($_POST['password_confirm']);
-        $age = htmlspecialchars($_POST['age']);
-        $avatar = htmlspecialchars($_POST['avatar']);
-        if($password != $password_confirm)
-        {
-            echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-            echo '<p style="color:red">Les mots de passe ne correspondent pas</p>';
-            logs('register', 'utilisateur essaye d\'inscrire un compte avec des mots de passe différents', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-        }
-        else
-        {
-            $stayConnected = isset($_POST['stayConnected']);
-            if(strlen($pseudo) > 24 || strlen($pseudo) < 3)
-            {
-                echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                echo '<p style="color:red;">Le pseudo doit contenir entre 3 et 24 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un pseudo invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-            }
-            else if(strlen($firstname) > 30 || strlen($firstname) < 3)
-            {
-                echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                echo '<p style="color:red;">Le prénom doit contenir entre 3 et 30 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un prénom invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-            }
-            else if(strlen($email) > 100 || strlen($email) < 4 || !filter_var($email, FILTER_VALIDATE_EMAIL))
-            {
-                echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                echo '<p style="color:red;">L\'email doit être correcte et contenir entre 3 et 100 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un email invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-            }
-            else if(strlen($age) > 2 || strlen($age) < 1)
-            {
-                echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                echo '<p style="color:red;">L\'age doit contenir entre 1 et 2 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un age invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-            }
-            else if(strlen($avatar) > 200 || strlen($avatar) < 3)
-            {
-                echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                echo '<p style="color:red;">L\'avatar doit contenir entre 3 et 200 caractères !</p>';
-                logs('register', 'utilisateur essaye d\'inscrire un compte avec un avatar invalide', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-            }
-            else
-            {
-                list($ok, $error) = verifyPasswordStrongness($password);
-                if(!$ok)
-                {
-                    echo register_form($pseudo, $firstname, $email, $password, $password_confirm, $age, $avatar);
-                    echo '<p style="color:red;">'.$error.'</p>';
-                    logs('register', 'utilisateur essaye d\'inscrire un compte avec un mot de passe trop faible', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-                    exit;
-                }
-                $ret = register($pseudo, $firstname, $email, $password, $age, $avatar, $db);
-                echo $ret;
+        <div class="step step-four">
+            <p class="type-effect before-append-input">Pour finir, la sécurité ! Renseignez votre mot de passe et
+                confirmez-le. Prennez-en un sécurisé, c'est le plus important;</p>
+            <div class="input-container">
+                <input type="text" class="password-value">
+                <button class="submit-password">Soumettre</button>
+            </div>
+            <p class="error">Votre mot de passe doit contenir au moins 8 caractères.</p>
+        </div>
 
-                if($ret = '<p style="color:green">Inscription réussie</p>')
-                {
-                    echo '<a href="/">Retour à l\'accueil</a>';
-                    logs('register', 'utilisateur inscrit un compte', getID($pseudo));
-                    $userID = mysqli_insert_id($db);
-                    $_SESSION['id'] = $userID;
-                    if(isset($_POST['stay_csonnected']))
-                    {
-                        $token = createAuthToken($userID, $db); // On crée un jeton d'authentification
-                        if(isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
-                        {
-                            setcookie( // On crée un cookie
-                                'token', // Le nom du cookie
-                                $token, // Son contenu
-                                [
-                                    'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
-                                    'secure' => true, // On dit que le cookie est sécurisé
-                                    'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
-                                    'path' => '/', // On dit que le cookie est accessible sur tout le site
-                                ]
-                            );
-                        }
-                    }
-                }
-                else
-                {
-                    logs('register', 'utilisateur essaye d\'inscrire un compte qui existe déjà', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-                }
+        <div class="step step-five">
+            <p class="type-effect before-append-input">Confirmez votre mot de passe;</p>
+            <div class="input-container">
+                <input type="text" class="confirm-password-value">
+                <button class="confirm-password">Valider</button>
+            </div>
+            <p class="error">Le mot de passe renseigné n'est pas le même !</p>
+        </div>
 
-            }
-        }
-    }
-    else
-    {
-        echo register_form();
-    }
+        <div class="other-interaction">
+            <p>Déjà un compte VeagleConnect ? <a href="/login">Connectez-vous</a>, c'est plus simple !</p>
+        </div>
+    </div>
+</section>
 
-    ?>
+<section class="bottom-page">
+    <footer>
+        <div class="site-nav">
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Soutien</p></li>
+                    <li><a href=""><p>Nous contacter</p></a></li>
+                    <li><a href=""><p>A propos</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Contactez-nous</p></li>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
+                    <li><a href=""><p>Mail</p></a></li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Rejoignez-nous</p></li>
+                    <li><a href="https://veagle.fr" target="_blank"><p>veagle.fr</p></a></li>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="copyright-infos-nav">
+            <nav>
+                <ul>
+                    <li><p>© 2022 InfinIdea, by VEagle</p></li>
+                    <li><a href="">Politique de confidentialité</a></li>
+                </ul>
+            </nav>
+            <nav class="social-media">
+                <ul>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                    </li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><i
+                                    class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://github.com/Mysterious-Developers" target="_blank"><i
+                                    class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://veagle.fr" target="_blank"><i class="fa-solid fa-window-restore"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</section>
 </body>
 </html>
