@@ -288,6 +288,7 @@ width: 5px;
 }
 
 .content-txt {
+    max-width: 1080px;
     height: auto;
     width: 100%;
 }
