@@ -288,41 +288,31 @@ width: 5px;
 }
 
 .content-txt {
-    /* make a beautiful style for
-    the html reader which is made to read an article
-    the site is in dark mode*/
     color: #FFF;
     font-family: 'Cabin';
     letter-spacing: .5px;
-    font-size: 36px;
+    font-size: 30px;
     line-height: 1.5;
     height: auto;
     width: 100%;
     margin-top: 100px;
-    /* add more styles to make it look better */
-    /* add spaces at each side of the article */
-    padding-left: 100px;
-    padding-right: 100px;
-    /* add space between each paragraph */
+    padding-left: 150px;
+    padding-right: 150px;
     margin-bottom: 100px;
 
 }
 
 .content-txt img {
-    /* make the images in the article look better */
-    /* and make that the images are not too big */
-    /* and stay in the middle of the article */
     width: 100%;
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    /* make the images a bit smaller */
-    max-width: 100px;
+    max-width: 800px;
+    max-height: 800px;
 }
 
-/* make the li of images dont add a bullet point */
-.content-txt li {
+.content-txt ol li img {
     list-style: none;
 }
 
