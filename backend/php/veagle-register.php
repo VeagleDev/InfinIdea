@@ -1,6 +1,9 @@
 <?php
 
 set_include_path('/var/www/blog');
+if (session_status() == PHP_SESSION_NONE)
+    session_start();
+
 require_once 'tools/tools.php';
 
 $val = array(
@@ -31,14 +34,14 @@ if (
     if (mysqli_affected_rows($db) > 0) {
         $row = mysqli_fetch_assoc($result);
         if ($row['email'] == $email) {
-            echo 'Email identique';
+            echo '2';
             die();
         }
         if ($row['pseudo'] == $pseudo) {
-            echo 'Pseudo identique';
+            echo '3';
             die();
         } else {
-            echo 'Erreur inconnue';
+            echo '4';
             die();
         }
     }
@@ -47,9 +50,15 @@ if (
             VALUES ('$pseudo', '$surname', '$email', 'veagleconnect', '$password', '$ip')";
     $result = mysqli_query($db, $sql);
     if ($result) {
-        echo 'Nouveau pseudo : ' . mysqli_insert_id($db);
+        $_SESSION['id'] = mysqli_insert_id($db);
+        echo '0';
+        $wannaStayConnected = false;
+        if ($wannaStayConnected) {
+            // set cookie
+        }
+
     } else {
-        echo 'Erreur : ' . mysqli_error($db);
+        echo '1';
     }
 
 
