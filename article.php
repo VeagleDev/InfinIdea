@@ -148,6 +148,7 @@ $db = getDB();
                     </nav>
                 </div>
 
+
                 <div class="txt-container">
 
                     <h3 class="title"><?php echo $title; ?></h3>
@@ -176,7 +177,10 @@ $db = getDB();
                                     echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
                                 }
                                 ?>
-                                <li><button class="open-comment"><i class="fa-regular fa-comment interaction"></i></button></li>
+                                <li>
+                                    <button class="open-comment"><i class="fa-regular fa-comment interaction"></i>
+                                    </button>
+                                </li>
 
                             </ul>
                         </nav>
@@ -186,10 +190,7 @@ $db = getDB();
 
             </div>
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <hr class="separator"/>
 
             <div class="content-txt"><?php echo $body; ?></div>
         </div>
