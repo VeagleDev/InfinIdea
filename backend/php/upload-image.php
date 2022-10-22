@@ -9,51 +9,50 @@ require_once 'tools/tools.php';
 $db = getDB();
 
 
-if(isset($_POST['image']) && isset($_POST['article']))
+if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'article sont définis
 {
-    $img = htmlspecialchars($_POST['image']);
-    $article = htmlspecialchars($_POST['article']);
+    $img = htmlspecialchars($_POST['image']); // On récupère l'image
+    $article = htmlspecialchars($_POST['article']); // On récupère l'article
 
-    $base_to_php = explode(',', $img);
-    $data = base64_decode($base_to_php[1]);
+    $base_to_php = explode(',', $img); // On sépare le type de l'image et le contenu
+    $data = base64_decode($base_to_php[1]); // On décode le contenu
 
-    if(articleExists($article))
+    if (articleExists($article)) // Si l'article existe
     {
-        $sql = "SELECT id FROM articles WHERE id = " . $article . " AND creator = " . $_SESSION['id'];
-        $result = mysqli_query($db, $sql);
+        $sql = "SELECT id FROM articles WHERE id = " . $article . " AND creator = " . $_SESSION['id']; // On prépare la requête
+        $result = mysqli_query($db, $sql); // On exécute la requête
         // On vérifie que l'article existe bien et qu'il appartient bien à l'utilisateur
-        if(mysqli_num_rows($result) == 1) {
-            // create an unique id for the image
-            $id = uniqid();
-            $sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")";
-            $result = mysqli_query($db, $sql);
-            if($result)
-            {
-                $path = '/var/www/blog/images/uploads/temp/' . $id . '.jpg';
-                file_put_contents($path, $data);
-                require_once 'tools/resize-image.php';
-                list($hd, $sd, $td) = process_image($path, $id);
-                $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'";
-                $result = mysqli_query($db, $sql);
-                $absolute_path = 'https://infinidea.veagle.fr/' . $hd;
-                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'";
-                $markdown = '![](' . $absolute_path . ')';
-                echo($markdown);
-            }
+        if (mysqli_num_rows($result) == 1) { // Si l'article existe et qu'il appartient bien à l'utilisateur
+            $id = uniqid(); // On génère un id unique
+            $sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")"; // On prépare la requête
+            $result = mysqli_query($db, $sql); // On exécute la requête
+            if ($result) { // Si l'insertion s'est bien déroulée
+                {
+                    $path = '/var/www/blog/images/uploads/temp/' . $id . '.jpg'; // On définit le chemin de l'image
+                    file_put_contents($path, $data); // On écrit l'image dans le fichier temporaire
+                    require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
+                    list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
+                    $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
+                    $result = mysqli_query($db, $sql); // On exécute la requête
+                    $absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
+                    $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
+                    $markdown = '![](' . $absolute_path . ')'; // On définit le markdown de l'image
+                    echo($markdown); // On affiche le markdown de l'image
+                }
             else
             {
-                echo("Error while inserting the image in the database");
+                echo("Erreur lors de l'insertion de l'image dans la base de données");
             }
 
         }
         else
         {
-            echo("You don't have the right to add an image to this article");
+            echo("Vous n'avez pas le droit de modifier cet article");
         }
     }
     else
     {
-        echo "Article doesn't exist";
+        echo "Cet article n'existe pas";
     }
 
 }
