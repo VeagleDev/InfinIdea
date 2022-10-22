@@ -43,25 +43,33 @@ if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'artic
                 echo("Erreur lors de l'insertion de l'image dans la base de données");
             }
 
-        }
-        else
-        {
+        } else {
             echo("Vous n'avez pas le droit de modifier cet article");
         }
-    }
-    else
-    {
+    } else {
         echo "Cet article n'existe pas";
     }
 
-} else if (isset($_GET['id']) && isset($_GET['path'])) {
-    $id = htmlspecialchars($_GET['id']);
-    $path = htmlspecialchars($_GET['path']);
+} else if (isset($_GET['path']) && isset($_GET['article'])) // Si l'id, le chemin et l'article sont définis
+    $id = uniqid(); // On génère un id unique
+$path = htmlspecialchars($_GET['path']);
+$article = htmlspecialchars($_GET['article']);
 
-    require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
-    list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
-    $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
-    $result = mysqli_query($db, $sql); // On exécute la requête
-    $absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
-    $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
+$sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")"; // On prépare la requête
+$result = mysqli_query($db, $sql); // On exécute la requête
+
+require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
+list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
+$sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
+$result = mysqli_query($db, $sql); // On exécute la requête
+$absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
+$sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
+mysqli_query($db, $sql); // On exécute la requête
+// on affiche les differents chemins de l'image en html
+echo '<p>HD : ' . $hd . '</p>';
+echo '<p>SD : ' . $sd . '</p>';
+echo '<p>TD : ' . $td . '</p>';
+echo '<p>Path : ' . $absolute_path . '</p>';
+
+
 }
