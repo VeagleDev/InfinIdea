@@ -7,10 +7,10 @@ require_once 'tools/strings.php';
 require_once 'vendor/autoload.php';
 
 
-require_once('backend/php/creditentials.php');
-include_once('backend/php/creditentials.php');
-require('backend/php/creditentials.php');
-include('backend/php/creditentials.php');
+require_once('creditentials.php');
+include_once('creditentials.php');
+require('creditentials.php');
+include('creditentials.php');
 
 function getDB()
 {
