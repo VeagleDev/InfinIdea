@@ -50,7 +50,9 @@ if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'artic
         echo "Cet article n'existe pas";
     }
 
-} else if (isset($_GET['path']) && isset($_GET['article'])) // Si l'id, le chemin et l'article sont définis
+}
+
+/*else if (isset($_GET['path']) && isset($_GET['article'])) // Si l'id, le chemin et l'article sont définis
 {
     $id = uniqid(); // On génère un id unique
 $path = htmlspecialchars($_GET['path']);
@@ -73,4 +75,4 @@ echo '<p>TD : ' . $td . '</p>';
 echo '<p>Path : ' . $absolute_path . '</p>';
 
 
-}
+}*/
