@@ -15,6 +15,10 @@ include('creditentials.php');
 function getDB()
 {
     if (PHP_SESSION_ACTIVE) {
+
+        global $creditentials;
+        // print array creditentials
+        print_r($creditentials);
         $_SESSION['db'] = mysqli_connect(
             $creditentials['host'],
             $creditentials['user'],
