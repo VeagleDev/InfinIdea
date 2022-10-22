@@ -8,6 +8,7 @@ require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 
 require_once 'vendor/autoload.php';
+
 use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 $db = getDB();
@@ -154,19 +155,16 @@ $db = getDB();
                 echo "<style> .input[type='submit'] { backdrop-filter: red; } </style>";
             }
         }
-        else
-        {
-            $sql = "INSERT INTO articles (creator, visibility) VALUES ('" . $_SESSION['id'] . "', 'not-written')";
+        else {
+            $uuid = uniqid();
+            $sql = "INSERT INTO articles (uid, creator, visibility) VALUES ('" . $uuid . "', '" . $_SESSION['id'] . "', 'not-written')";
             $result = mysqli_query($db, $sql);
-            if(!$result)
-            {
+            if (!$result) {
                 echo '<p style="color:red;">Erreur lors de la création de l\'article';
-            }
-            else
-            {
+            } else {
                 $aid = mysqli_insert_id($db);
 
-        ?>
+                ?>
 
             <form action="write.php" method="post">
                 <input type="text" name="title" placeholder="Titre">
