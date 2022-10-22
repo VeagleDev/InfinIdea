@@ -1,16 +1,20 @@
 <?php
 set_include_path('/var/www/blog');
-if(session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE) {
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'tools/strings.php';
 require_once 'vendor/autoload.php';
-include 'backend/php/creditentials.php';
+
+
+require_once('backend/php/creditentials.php');
+include_once('backend/php/creditentials.php');
+require('backend/php/creditentials.php');
+include('backend/php/creditentials.php');
 
 function getDB()
 {
-    if(PHP_SESSION_ACTIVE) {
+    if (PHP_SESSION_ACTIVE) {
         $_SESSION['db'] = mysqli_connect(
             $creditentials['host'],
             $creditentials['user'],
