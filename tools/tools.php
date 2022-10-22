@@ -1,4 +1,7 @@
 <?php
+
+// Fichier à trier
+// Commandes à ajouter
 set_include_path('/var/www/blog');
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); // On démarre la session AVANT toute chose
@@ -70,63 +73,6 @@ function getPseudo($id) : string
     else
     {
         return "Utilisateur inconnu ($id)";
-    }
-}
-function getMail($id) : string
-{
-    $db = getDB();
-    $query = "SELECT email FROM users WHERE id = $id";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['email'];
-}
-function getPassword($id) : string
-{
-    $db = getDB();
-    $query = "SELECT password FROM users WHERE id = $id";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['password'];
-}
-function getPasswordbyUser($user) : string
-{
-    $db = getDB();
-    $query = "SELECT password FROM users WHERE pseudo = '$user'";
-    $result = mysqli_query($db, $query);
-    if($result)
-    {
-        $row = mysqli_fetch_assoc($result);
-        return $row['password'];
-    }
-    else
-    {
-        return '';
-    }
-}
-function register($pseudo, $firstname, $email, $password, $age, $avatar, mysqli $db) : string
-{
-    $query = "SELECT pseudo FROM users WHERE pseudo = '$pseudo'";
-    $result = mysqli_query($db, $query);
-    if(mysqli_num_rows($result) > 0)
-    {
-        return '<p style="color:red">Le pseudo " . $pseudo . " est déjà utilisé</p>';
-    }
-    $query = "SELECT email FROM users WHERE email = '$email'";
-    $result = mysqli_query($db, $query);
-    if(mysqli_num_rows($result) > 0)
-    {
-        return '<p style="color:red">L\'email " . $email . " est déjà utilisée</p>';
-    }
-    $password = hash('sha512', $password);
-    $query = "INSERT INTO users (pseudo, prenom, email, age, password, avatar) VALUES ('$pseudo', '$firstname', '$email', '$age', '$password', '$avatar')";
-    $result = mysqli_query($db, $query);
-    if($result)
-    {
-        return '<p style="color:green">Inscription réussie</p>';
-    }
-    else
-    {
-        return '<p style="color:red">Inscription échouée</p>';
     }
 }
 function createAuthToken($id) : string

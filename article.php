@@ -1,6 +1,8 @@
 <?php
+
+// On inclut ce dont on a besoin
 set_include_path('/var/www/blog');
-if(session_status() == PHP_SESSION_NONE)
+if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
@@ -72,31 +74,31 @@ $db = getDB();
     <section class="contents-page">
 
         <?php
-            if(isset($_GET['id']))
+        if (isset($_GET['id'])) // Si on a l'id de l'article
+        {
+            $aid = HTMLpurify($_GET['id']); // On le récupère
+            if (articleExists($aid)) // Si l'article existe
             {
-                $aid = HTMLpurify($_GET['id']);
-                if(articleExists($aid))
+                $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article
+                $result = mysqli_query($db, $sql); // On exécute la requête
+                if (mysqli_affected_rows($db) == 1) // Si Il existe
                 {
-                    $sql = "SELECT * FROM articles WHERE uid = '$aid'";
-                    $result = mysqli_query($db, $sql);
-                    if(mysqli_affected_rows($db) == 1)
+                    $row = mysqli_fetch_assoc($result); // On récupère les infos
+                    $aid = $row['id']; // On récupère l'id de l'article
+                    $title = $row['name']; // On récupère le titre de l'article
+                    $desc = $row['description']; // On récupère la description de l'article
+                    $body = $row['content']; // On récupère le contenu de l'article
+                    $author = getPseudo($row['creator']); // On récupère le pseudo de l'auteur
+                    $created = correctTimestamp($row['created']); // On récupère la date de création de l'article
+                    $tags = $row['tags']; // On récupère les tags de l'article
+
+                    $blocked = $row['blocked']; // On récupère le statut de l'article
+
+                    if ($blocked == 1) // Si il est bloqué
                     {
-                        $row = mysqli_fetch_assoc($result);
-                        $aid = $row['id'];
-                        $title = $row['name'];
-                        $desc = $row['description'];
-                        $body = $row['content'];
-                        $author = getPseudo($row['creator']);
-                        $created = correctTimestamp($row['created']);
-                        $tags = $row['tags'];
-
-                        $blocked = $row['blocked'];
-
-                        if($blocked == 1)
-                        {
-                            echo('<p color="red">L\'article que vous avez sélectionné est bloqué !</p>');
-                        }
+                        echo('<p color="red">L\'article que vous avez sélectionné est bloqué !</p>');
                     }
+                }
                     else
                     {
                         echo('<p color="blue">L\'article que vous avez sélectionné n\'est pas valide !</p>');
@@ -120,29 +122,36 @@ $db = getDB();
 
                 <div class="img-nav">
                     <?php
-                            $sql = 'SELECT path FROM images WHERE aid = \'' . $aid . '\'';
-                            $result = mysqli_query($db, $sql);
-                            if(mysqli_affected_rows($db) > 0)
-                            {
-                                $row = mysqli_fetch_assoc($result);
-                                $firstPath = $row['path'];
-                            }
-                            else
-                            {
-                                $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png';
-                            }
+                    $sql = 'SELECT path FROM images WHERE aid = \'' . $aid . '\''; // On récupère les images de l'article
+                    $result = mysqli_query($db, $sql); // On exécute la requête
+                    if (mysqli_affected_rows($db) > 0)  // Si il y a des images
+                    {
+                        $row = mysqli_fetch_assoc($result); // On récupère les infos
+                        $firstPath = $row['path']; // On récupère le chemin de la première image
+                    } else // Sinon
+                    {
+                        $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png'; // On met l'image par défaut
+                    }
                     ?>
                     <div class="displayed-img">
                         <img src="<?php echo $firstPath; ?>" alt="Image de l'article" id="displayed-img">
+                        <!-- On affiche l'image par défaut -->
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
-                            <li class="li-img"><button class="li-img"><img src="<?php echo $firstPath; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
+                            <li class="li-img">
+                                <button class="li-img"><img src="<?php echo $firstPath; ?>"
+                                                            alt="Bouton de prévisualisation" class="preview"></button>
+                            </li>
                             <?php
-                            while($row = mysqli_fetch_assoc($result))
+                            while ($row = mysqli_fetch_assoc($result)) // Tant qu'il y a des images
                             {
-                                $path = $row['path']; ?>
-                                    <li class="li-img"><button class="li-img"><img src="<?php echo $path; ?>" alt="Bouton de prévisualisation" class="preview"></button></li>
+                                $path = $row['path']; // On récupère leut chemin
+                                ?>
+                                <li class="li-img">
+                                    <button class="li-img"><img src="<?php echo $path; // Et on les affiche
+                                        ?>" alt="Bouton de prévisualisation" class="preview"></button>
+                                </li>
                             <?php } ?>
                         </ul>
                     </nav>
@@ -151,30 +160,30 @@ $db = getDB();
 
                 <div class="txt-container">
 
-                    <h3 class="title"><?php echo $title; ?></h3>
-                    <p class="description"><?php echo $desc; ?></p>
+                    <h3 class="title"><?php echo $title; ?></h3> <!-- On affiche le titre de l'article -->
+                    <p class="description"><?php echo $desc; ?></p> <!-- On affiche la description de l'article -->
                     <div class="interaction-nav">
                         <nav class="nav">
                             <ul class="interaction-container">
-                                <li><button><i class="fa-regular fa-user interaction"></i></button></li>
+                                <li>
+                                    <button><i class="fa-regular fa-user interaction"></i></button>
+                                </li>
                                 <?php
-                                if(isset($_SESSION['id']))
+                                if (isset($_SESSION['id'])) // Si l'utilisateur est connecté
                                 {
-                                    $sql = 'SELECT * FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id'];
+                                    $sql = 'SELECT * FROM likes WHERE aid = ' . $aid . ' AND uid = ' . $_SESSION['id']; // On récupère les likes de l'article
 
-                                    $result = mysqli_query($db, $sql);
-                                    if(mysqli_affected_rows($db) == 1)
+                                    $result = mysqli_query($db, $sql); // On exécute la requête
+                                    if (mysqli_affected_rows($db) == 1) // Si il a déjà liké
                                     {
-                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-heart interaction like fa-solid\"></i></button></li>");
-                                    }
-                                    else
+                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-heart interaction like fa-solid\"></i></button></li>"); // On affiche le bouton de like rempli
+                                    } else  // Sinon
                                     {
-                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>");
+                                        echo("<li><button onclick='performLike(" . $aid . ")'><i class=\"fa-regular fa-heart interaction like\"></i></button></li>"); // On affiche le bouton de like vide
                                     }
                                 }
-                                else
-                                {
-                                    echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>');
+                                else {
+                                    echo('<li><button><i class="fa-regular fa-heart interaction like"></i></button></li>'); // On affiche le bouton de like vide
                                 }
                                 ?>
                                 <li>
@@ -192,7 +201,7 @@ $db = getDB();
 
             <hr class="separator"/>
 
-            <div class="content-txt"><?php echo $body; ?></div>
+            <div class="content-txt"><?php echo $body;  // On met le body de l'article ?></div>
         </div>
 
         <div class="comment-section">
@@ -201,25 +210,28 @@ $db = getDB();
                 <ul>
 
                     <?php
-                    $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC';
-                    $result = mysqli_query($db, $sql);
-                        if(mysqli_affected_rows($db) > 0)
-                        {
-                            while($row = mysqli_fetch_assoc($result))
-                            {
-                                $pseudo = getPseudo($row['uid']);
-                                $message = $row['message'];
-                                ?>
-                                <li class="comment">
-                                    <h1 class="username"><?php echo $pseudo; ?></h1>
-                                    <p class="comment-content"><?php echo $message; ?></p>
-                                    <ul class="comment-user-interaction">
-                                        <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
-                                        <li><button><i class="fa-regular fa-comment interaction"></i></button></li>
-                                    </ul>
-                                </li>
-                                <?php
-                            }
+                    $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC'; // On récupère les commentaires de l'article
+                    $result = mysqli_query($db, $sql); // On exécute la requête
+                    if (mysqli_affected_rows($db) > 0) // Si il a des commentaires
+                    {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $pseudo = getPseudo($row['uid']); // On récupère le pseudo de l'auteur
+                            $message = $row['message']; // On récupère le message
+                            ?>
+                            <li class="comment">
+                                <h1 class="username"><?php echo $pseudo; ?></h1> <!-- On affiche le pseudo -->
+                                <p class="comment-content"><?php echo $message; ?></p> <!-- On affiche le message -->
+                                <ul class="comment-user-interaction">
+                                    <li>
+                                        <button><i class="fa-regular fa-heart interaction like"></i></button>
+                                    </li>
+                                    <li>
+                                        <button><i class="fa-regular fa-comment interaction"></i></button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <?php
+                        }
                         }
                         else
                         {
