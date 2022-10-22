@@ -89,27 +89,24 @@ document.getElementsByClassName("submit-password")[0].addEventListener('click', 
 
 document.getElementsByClassName("confirm-password")[0].addEventListener('click', () => {
     if(document.getElementsByClassName("password-value")[0].value === document.getElementsByClassName("confirm-password-value")[0].value) {
-        //tu fais ce que ta a faire et tu te demerde sale grosse pute de ta mere
-        // fais très attention à ce que tu dis
 
-        // go ajax
-        const userpseudo = document.getElementsByClassName("pseudo-value")[0].value;
-        const surname = document.getElementsByClassName("name-value")[0].value;
-        const email = document.getElementsByClassName("email-value")[0].value;
-        const passwd = document.getElementsByClassName("password-value")[0].value;
+        const userpseudo = document.getElementsByClassName("pseudo-value")[0].value; // On récupère la valeur du champ pseudo
+        const surname = document.getElementsByClassName("name-value")[0].value; // On récupère la valeur du champ nom
+        const email = document.getElementsByClassName("email-value")[0].value; // On récupère la valeur du champ email
+        const passwd = document.getElementsByClassName("password-value")[0].value; // On récupère la valeur du champ mot de passe
 
-        jQuery.ajax({
-            url: "/backend/php/veagle-register.php",
-            data: {
-                pseudo: userpseudo,
-                prenom: surname,
-                mail: email,
-                password: passwd
+        jQuery.ajax({ // On utilise la fonction ajax de jQuery
+            url: "/backend/php/veagle-register.php", // On passe l'url du fichier de traitement
+            data: { // On envoie les données
+                pseudo: userpseudo, // On envoie le pseudo
+                prenom: surname, // On envoie le nom
+                mail: email, // On envoie l'email
+                password: passwd // On envoie le mot de passe
             },
-            type: "post",
+            type: "post", // On définit le type de la requête
             success: function (data) {
-                const code = data;
-                switch (code) {
+                const code = data; // On récupère le code de retour
+                switch (code) { // On vérifie le code de retour
                     case "0":
                         location.href = 'https://infinidea.veagle.fr/';
                         break;

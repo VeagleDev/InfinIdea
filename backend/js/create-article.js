@@ -1,3 +1,5 @@
+// A commenter
+
 document.getElementsByClassName("text-open-creation-display")[0].addEventListener("click", () => {
     document.getElementsByClassName("add-text")[0].style.display = "block";
 
@@ -25,7 +27,6 @@ document.querySelectorAll(".submit").forEach((el) => {
         document.getElementsByClassName("add-text")[0].style.display = "none";
     })
 })
-
 
 
 var articleResult = document.getElementsByClassName("article-result")[0];
@@ -58,7 +59,7 @@ addTextBtn.addEventListener("click", () => {
         //Mettre l'id et la class
         textElement.classList.add("element");
         textElement.classList.add("text-element")
-        
+
         //Créer l'élement de liste pour intéragir même après intégration
         var textElementInteraction = document.createElement("div");
         //Mettre sa class et son id
@@ -117,7 +118,7 @@ addLinkBtn.addEventListener("click", () => {
         textElement.href = linkValue;
         //Mettre l'id et la class
         textElement.classList.add("element");
-        
+
         //Créer l'élement de liste pour intéragir même après intégration
         var textElementInteraction = document.createElement("div");
         //Mettre sa class et son id
@@ -177,7 +178,7 @@ addRowBtn.addEventListener("click", () => {
     row.classList.add("row-element")
 
     deleteBtn.classList.add("delete-btn");
- 
+
     //Créer l'élement de liste pour intéragir même après intégration
     var textElementInteraction = document.createElement("div");
     //Mettre sa class et son id

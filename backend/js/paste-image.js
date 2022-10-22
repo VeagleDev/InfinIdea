@@ -8,15 +8,19 @@
  * @param {string|string} imageFormat
  */
 
-function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
-    if(pasteEvent.clipboardData == false){
-        if(typeof(callback) == "function"){
+
+/*
+    Cette fonction permet de récupérer les images du presse-papier
+ */
+function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat) {
+    if (pasteEvent.clipboardData == false) {
+        if (typeof (callback) == "function") {
             callback(undefined);
         }
     }
     var items = pasteEvent.clipboardData.items;
-    if(items == undefined){
-        if(typeof(callback) == "function"){
+    if (items == undefined) {
+        if (typeof (callback) == "function") {
             callback(undefined);
         }
     }
@@ -53,48 +57,44 @@ function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
 }
 
 
-window.addEventListener("paste", function(e){
+window.addEventListener("paste", function (e) { // Quand on colle une image
 
     // Handle the event
-    retrieveImageFromClipboardAsBase64(e, function(imageDataBase64){
-        // If there's an image, open it in the browser as a new window :)
-        if(imageDataBase64){
-            sendImageToServer(imageDataBase64);
+    retrieveImageFromClipboardAsBase64(e, function (imageDataBase64) { // On récupère l'image du presse-papier
+        if (imageDataBase64) { // Si on a une image
+            sendImageToServer(imageDataBase64); // On envoie l'image au serveur
         }
     });
 }, false);
 
 
+
 // create a function which send the base64 image to the server
-function sendImageToServer(imageDataBase64){
-    const aid = document.getElementById('article-id').value;
-    jQuery.ajax({
-        url:"/backend/php/upload-image.php",
-        // send the base64 post parameter
-        data:{
-            article: aid,
-            image: imageDataBase64
+function sendImageToServer(imageDataBase64) { // On envoie l'image au serveur
+    const aid = document.getElementById('article-id').value; // On récupère l'id de l'article
+    jQuery.ajax({ // On envoie l'image au serveur avec AJAX
+        url: "/backend/php/upload-image.php",  // On envoie l'image au serveur
+        data: { // On envoie les données
+            article: aid, // L'id de l'article
+            image: imageDataBase64 // L'image
         },
-        // important POST method !
-        type:"post",
-        // when complete, call the responseHandler
-        success: function (data) {
-            const doc = document.getElementById("content-txt");
-            // get text from the response
-            const text = data;
-            // insert the text at the cursor position
-            const cursorPos = doc.selectionStart;
-            const v = doc.value;
-            const textBefore = v.substring(0,  cursorPos );
-            const textAfter  = v.substring( cursorPos, v.length );
-            doc.value = textBefore + text + textAfter;
+        type: "post", // On envoie les données en POST
+        success: function (data) { // Si le serveur a répondu
+            const doc = document.getElementById("content-txt"); // On récupère le contenu de l'article
+            const text = data; // On récupère le texte
+            const cursorPos = doc.selectionStart; // On récupère la position du curseur
+            const v = doc.value; // On récupère le contenu de l'article
+            const textBefore = v.substring(0, cursorPos); // On récupère le texte avant le curseur
+            const textAfter = v.substring(cursorPos, v.length); // On récupère le texte après le curseur
+            doc.value = textBefore + text + textAfter; // On ajoute le texte
 
-            console.log(data);
+            console.log(data); // On affiche le texte dans la console
 
         },
-        error: function (xhr, status) {
-            alert("Erreur durant l'envoi de l'image");
+        error: function (xhr, status) { // Si le serveur n'a pas répondu
+            alert("Erreur durant l'envoi de l'image"); // On affiche un message d'erreur
         },
-        complete: function (xhr, status) {  }
+        complete: function (xhr, status) {
+        }
     });
 }

@@ -1,25 +1,17 @@
-/**
- * This handler retrieves the images from the clipboard as a base64 string and returns it in a callback.
- *
- * @param pasteEvent
- * @param callback
- * @param {Event} pasteEvent
- * @param {*} callback
- * @param {string|string} imageFormat
- */
+// Même script que paste-image.js mais avec des modifications pour l'éditeur simple
 
  function retrieveImageFromClipboardAsBase64(pasteEvent, callback, imageFormat){
     if(pasteEvent.clipboardData == false){
         if(typeof(callback) == "function"){
             callback(undefined);
         }
-    };
+    }
     var items = pasteEvent.clipboardData.items;
     if(items == undefined){
         if(typeof(callback) == "function"){
             callback(undefined);
         }
-    };
+    }
     for (var i = 0; i < items.length; i++) {
         // Skip content if not image
         if (items[i].type.indexOf("image") == -1) continue;

@@ -16,54 +16,53 @@ $db = getDB(); // On récupère la base de données
     <title>MyProject : Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <h1>MyProject - Réinitialiser le mot de passe</h1>
-    <?php
-    if(isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) // Si on a les informations pour changer le mdp
-    {
-        // On récupère les informations
-        $token = htmlspecialchars($_POST['token']);
-        $pass = htmlspecialchars($_POST['pass']);
-        $pass2 = htmlspecialchars($_POST['pass2']);
-        logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, 0);
-        list($ok, $error) = verifyPasswordStrongness($pass); // On vérifie la force du mot de passe
-        if (!$ok) {
-            logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, 0);
-            echo('<form action="forgot.php" method="post">
+<h1>MyProject - Réinitialiser le mot de passe</h1>
+<?php
+if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) // Si on a les informations pour changer le mdp
+{
+    // On récupère les informations
+    $token = htmlspecialchars($_POST['token']);
+    $pass = htmlspecialchars($_POST['pass']);
+    $pass2 = htmlspecialchars($_POST['pass2']);
+    logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, 0);
+    list($ok, $error) = verifyPasswordStrongness($pass); // On vérifie la force du mot de passe
+    if (!$ok) {
+        logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, 0);
+        echo('<form action="forgot.php" method="post">
                 <input type="hidden" name="token" value="' . $token . '">
                 <input type="password" name="pass" placeholder="Nouveau mot de passe">
                 <input type="password" name="pass2" placeholder="Confirmer le mot de passe">
                 <input type="submit" value="Changer le mot de passe">
                 </form>
                 <p style="color:red">' . $error . '</p>');
-            exit;
-        }
-        if ($pass == $pass2) // On vérifie si les mdp sont identiques
+        exit;
+    }
+    if ($pass == $pass2) // On vérifie si les mdp sont identiques
+    {
+        $password = hash('sha512', $pass); // On hash le mot de passe
+        $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'"; // On récupère les informations du token
+        $result = mysqli_query($db, $sql); // On exécute la requête
+        if (mysqli_num_rows($result) == 1) // Si on a un résultat
         {
-            $password = hash('sha512', $pass); // On hash le mot de passe
-            $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'"; // On récupère les informations du token
-            $result = mysqli_query($db, $sql); // On exécute la requête
-            if (mysqli_num_rows($result) == 1) // Si on a un résultat
+            $row = mysqli_fetch_assoc($result);
+            $user = $row['user'];
+            $expiration = $row['expiration'];
+            $used = $row['used'] == 1;
+            if ($expiration > time() && !$used) // Si le token n'est pas expiré et n'a pas été utilisé
             {
-                $row = mysqli_fetch_assoc($result);
-                $user = $row['user'];
-                $expiration = $row['expiration'];
-                $used = $row['used'] == 1;
-                if ($expiration > time() && !$used) // Si le token n'est pas expiré et n'a pas été utilisé
-                {
-                    $sql = "UPDATE users SET password='" . $password . "' WHERE id='" . $user . "'"; // On change le mot de passe
-                    $result = mysqli_query($db, $sql); // On exécute la requête
-                    if ($result) {
-                        // on met used à 1 pour dire que le token est utilisé
-                        $sql = "UPDATE tokens SET used=1 WHERE token='" . $token . "'";
-                        $result = mysqli_query($db, $sql);
+                $sql = "UPDATE users SET password='" . $password . "' WHERE id='" . $user . "'"; // On change le mot de passe
+                $result = mysqli_query($db, $sql); // On exécute la requête
+                if ($result) {
+                    // on met used à 1 pour dire que le token est utilisé
+                    $sql = "UPDATE tokens SET used=1 WHERE token='" . $token . "'";
+                    $result = mysqli_query($db, $sql);
 
-                        echo "<p style='color: green;'>Votre mot de passe a bien été modifié !</p>";
-                        logs('reinit', 'utilisateur a réinitialisé son mot de passe avec le token ' . $token, $user);
-                    } else
-                    {
-                        echo "<p style='color: red;'>Une erreur est survenue lors de la modification de votre mot de passe !</p>";
-                        logs('reinit', 'erreur réinitialisation de mot de passe (sql erreur changement) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
-                    }
+                    echo "<p style='color: green;'>Votre mot de passe a bien été modifié !</p>";
+                    logs('reinit', 'utilisateur a réinitialisé son mot de passe avec le token ' . $token, $user);
+                } else {
+                    echo "<p style='color: red;'>Une erreur est survenue lors de la modification de votre mot de passe !</p>";
+                    logs('reinit', 'erreur réinitialisation de mot de passe (sql erreur changement) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
+                }
                 }
                 else
                 {
@@ -77,29 +76,26 @@ $db = getDB(); // On récupère la base de données
                 logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token, 0);
             }
 
-        }
-        else
-        {
-            echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
-            logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 0);
-        }
-    } elseif (isset($_GET['token'])) // Si on a juste un token
-    {
-        // On le récupère
-        $token = htmlspecialchars($_GET['token']);
-        $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
-        $result = mysqli_query($db, $sql);
-        if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
-            $user = $row['user'];
-            $expiration = $row['expiration'];
-            $used = $row['used'] == 1;
-            if($expiration > time() && !$used)
-            {
-                ?>
-                <form action="forgot.php" method="post">
-                    <input type="hidden" name="token" value="<?=$token?>">
-                    <input type="password" name="pass" placeholder="Nouveau mot de passe">
+    } else {
+        echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
+        logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 0);
+    }
+} elseif (isset($_GET['token'])) // Si on a juste un token
+{
+    // On le récupère
+    $token = htmlspecialchars($_GET['token']);
+    $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
+    $result = mysqli_query($db, $sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $user = $row['user'];
+        $expiration = $row['expiration'];
+        $used = $row['used'] == 1;
+        if ($expiration > time() && !$used) {
+            ?>
+            <form action="forgot.php" method="post">
+                <input type="hidden" name="token" value="<?= $token ?>">
+                <input type="password" name="pass" placeholder="Nouveau mot de passe">
                     <input type="password" name="pass2" placeholder="Confirmer le mot de passe">
                     <input type="submit" value="Changer le mot de passe">
                 </form>

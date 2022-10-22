@@ -1,14 +1,16 @@
+// A commenter
+
 var width = document.getElementById("displayed-img").offsetWidth
 var height = document.getElementById("displayed-img").offsetHeight
 
 var previewContainer = document.getElementsByClassName("preview-container")[0]
 
-if(width / height <= 1) {
+if (width / height <= 1) {
     displayedImg.style.height = "100%"
     displayedImg.style.width = "auto"
     displayedImg.style.marginTop = "0px"
     previewContainer.style.marginTop = "0px"
-    
+
     document.getElementsByClassName("displayed-img")[0].style.height = "450px"
 } else {
     displayedImg.style.height = "auto"
@@ -33,7 +35,7 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
             displayedImg.style.width = "auto"
             displayedImg.style.margin = "0px"
             previewContainer.style.margin = "0px"
-            
+
             document.getElementsByClassName("displayed-img")[0].style.height = "450px"
         } else {
             displayedImg.style.height = "auto"
@@ -47,7 +49,7 @@ document.getElementsByClassName("preview-container")[0].addEventListener("click"
         if(newHeight >= document.getElementsByClassName("displayed-img")[0].offsetHeight) {
             displayedImg.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
             previewContainer.style.marginTop = (newHeight - document.getElementsByClassName("displayed-img")[0].offsetHeight) + "px"
-        } 
+        }
     }
 
 })
