@@ -1,12 +1,14 @@
 <?php
-set_include_path('/var/www/blog');
+set_include_path('/var/www/blog'); // On définit le chemin d'accès aux fichiers
 if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 
-if (isset($_SESSION['id'])) {
-    header('Location: index.php');
-    die();
+if (isset($_SESSION['id'])) {  // Si l'utilisateur est connecté
+    header('Location: index.php'); // On le redirige vers la page d'accueil
+    die(); // On arrête le script
 }
+
+// Pour voir le processus de connexion, voir le fichier veagle-connect.php et login.js
 
 ?>
 

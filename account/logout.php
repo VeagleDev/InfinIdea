@@ -9,21 +9,21 @@ if(session_status() == PHP_SESSION_NONE)
 
 if(session_status() == PHP_SESSION_ACTIVE)
 {
-    logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-    session_destroy() ;
-    session_unset() ;
-    $_SESSION = [] ;
+    logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0)); // On log l'action
+    session_destroy(); // On détruit la session
+    session_unset(); // On détruit les variables de session
+    $_SESSION = []; // On détruit les variables de session
 }
 
-setcookie( // On crée un cookie
-    'token', // Le nom du cookie
-    'NONE', // Son contenu
+setcookie( // On supprime le cookie
+    'token',
+    'NONE',
     [
-        'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
+        'expires' => time() + 15 * 24 * 3600, // On dit qu'il expire dans 15 jours
         'secure' => true, // On dit que le cookie est sécurisé
         'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
         'path' => '/',
     ]
 );
 
-header('Location: /');
+header('Location: /'); // On redirige l'utilisateur vers la page d'accueil

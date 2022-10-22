@@ -1,12 +1,14 @@
 <?php
-set_include_path('/var/www/blog');
+set_include_path('/var/www/blog'); // On définit le chemin d'accès aux fichiers
 if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
     echo '<p style="color:red;">Vous ne pouvez pas créer de compte en étant connecté !</p><p><a href="/">Retourner à l\'accueil</a></p>';
     die();
 }
+
+// Pour voir le processus d'inscription, voir le fichier veagle-register.php et register.js
 
 ?>
 
