@@ -76,3 +76,17 @@ echo '<p>Path : ' . $absolute_path . '</p>';
 
 
 }*/
+if (isset($_GET['test'])) {
+    $sql = "SELECT * FROM images";
+    $result = mysqli_query($db, $sql);
+    // for each results, make hd = images/uploads/hd/itsid.jpg, sd = images/uploads/sd/itsid.jpg, td = images/uploads/td/itsid.jpg, path = images/uploads/sd/itsid.jpg
+    while ($row = mysqli_fetch_assoc($result)) {
+        $id = $row['uid'];
+        $hd = 'images/uploads/hd/' . $id . '.jpg';
+        $sd = 'images/uploads/sd/' . $id . '.jpg';
+        $td = 'images/uploads/thumb/' . $id . '.jpg';
+        $path = 'images/uploads/hd/' . $id . '.jpg';
+        $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$path' WHERE uid = '$id'";
+        mysqli_query($db, $sql);
+    }
+}
