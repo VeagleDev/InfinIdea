@@ -3,3 +3,4 @@
 .vscode/
 images/uploads/body/*
 .fleet/
+backend/php/creditentials.php

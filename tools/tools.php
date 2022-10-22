@@ -6,12 +6,16 @@ if(session_status() == PHP_SESSION_NONE)
 }
 require_once 'tools/strings.php';
 require_once 'vendor/autoload.php';
+include 'backend/php/creditentials.php';
 
 function getDB()
 {
-    if(PHP_SESSION_ACTIVE)
-    {
-        $_SESSION['db'] = mysqli_connect('p:' . 'localhost', 'blog', 'youllneverknow', 'blog');
+    if(PHP_SESSION_ACTIVE) {
+        $_SESSION['db'] = mysqli_connect(
+            $creditentials['host'],
+            $creditentials['user'],
+            $creditentials['password'],
+            $creditentials['database']);
         return $_SESSION['db'];
     }
     else
