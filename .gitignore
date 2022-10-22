@@ -4,3 +4,5 @@
 images/uploads/body/*
 .fleet/
 backend/php/creditentials.php
+creditentials.php
+tools/creditentials.php
