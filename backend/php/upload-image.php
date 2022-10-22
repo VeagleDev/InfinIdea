@@ -27,18 +27,17 @@ if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'artic
             $sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")"; // On prépare la requête
             $result = mysqli_query($db, $sql); // On exécute la requête
             if ($result) { // Si l'insertion s'est bien déroulée
-                {
-                    $path = '/var/www/blog/images/uploads/temp/' . $id . '.jpg'; // On définit le chemin de l'image
-                    file_put_contents($path, $data); // On écrit l'image dans le fichier temporaire
-                    require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
-                    list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
-                    $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
-                    $result = mysqli_query($db, $sql); // On exécute la requête
-                    $absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
-                    $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
-                    $markdown = '![](' . $absolute_path . ')'; // On définit le markdown de l'image
-                    echo($markdown); // On affiche le markdown de l'image
-                }
+                $path = '/var/www/blog/images/uploads/temp/' . $id . '.jpg'; // On définit le chemin de l'image
+                file_put_contents($path, $data); // On écrit l'image dans le fichier temporaire
+                require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
+                list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
+                $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
+                $result = mysqli_query($db, $sql); // On exécute la requête
+                $absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
+                $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
+                $markdown = '![](' . $absolute_path . ')'; // On définit le markdown de l'image
+                echo($markdown); // On affiche le markdown de l'image
+            }
             else
             {
                 echo("Erreur lors de l'insertion de l'image dans la base de données");
@@ -55,4 +54,14 @@ if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'artic
         echo "Cet article n'existe pas";
     }
 
+} else if (isset($_GET['id']) && isset($_GET['path'])) {
+    $id = htmlspecialchars($_GET['id']);
+    $path = htmlspecialchars($_GET['path']);
+
+    require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
+    list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
+    $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
+    $result = mysqli_query($db, $sql); // On exécute la requête
+    $absolute_path = 'https://infinidea.veagle.fr/' . $hd; // On définit le chemin absolu de l'image
+    $sql = "UPDATE images SET path = '" . $absolute_path . "' WHERE uid = '" . $id . "'"; // On prépare la requête
 }
