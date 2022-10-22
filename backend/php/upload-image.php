@@ -51,14 +51,15 @@ if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'artic
     }
 
 } else if (isset($_GET['path']) && isset($_GET['article'])) // Si l'id, le chemin et l'article sont définis
+{
     $id = uniqid(); // On génère un id unique
 $path = htmlspecialchars($_GET['path']);
 $article = htmlspecialchars($_GET['article']);
 
-$sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")"; // On prépare la requête
+    $sql = "INSERT INTO images(uid, aid) VALUES('" . $id . "', " . $article . ")"; // On prépare la requête
 $result = mysqli_query($db, $sql); // On exécute la requête
 
-require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
+    require_once 'tools/resize-image.php'; // On inclut le fichier resize-image.php
 list($hd, $sd, $td) = process_image($path, $id); // On redimensionne l'image
 $sql = "UPDATE images SET hd = '$hd', sd = '$sd', td = '$td', path = '$sd' WHERE uid = '$id'"; // On prépare la requête
 $result = mysqli_query($db, $sql); // On exécute la requête
