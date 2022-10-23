@@ -7,6 +7,11 @@ encore disponibles*.
 
 --- 
 
+## Aperçu
+
+![img.png](images/git/img.png)
+![img.png](images/git/img2.png)
+
 ## Fonctionnalités
 
 - Créer un compte
