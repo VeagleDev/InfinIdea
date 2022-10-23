@@ -43,7 +43,7 @@ Ce projet est sous licence [GPL-3.0](https://github.com/Mysterious-Developers/In
 
 ## Remerciements
 
-- [Veagle](veagle.fr) pour le développement du projet
+- [Veagle](https://veagle.fr) pour le développement du projet
 - Les [contributeurs]().
 - Les [donateurs]().
 - Les [testeurs]().
