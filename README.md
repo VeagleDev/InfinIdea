@@ -28,7 +28,8 @@ Vous pouvez contribuer au projet par plusieurs moyens :
   suggestions**, etc.)
 - En *discutant* sur le [serveur Discord](https://discord.gg/TAUUEP9JkR)
 - En *discutant* dans les [discussions](https://github.com/Mysterious-Developers/InfinIdea/discussions) du dépôt GitHub
-- En *créant des pull requests*, pour plus de détails, voir le fichier [CONTRIBUTING.md]().
+- En *créant des pull requests*, c'est-à-dire apporter des modifications au code source, pour plus de détails, voir le
+  fichier [CONTRIBUTING.md]().
 - En **faisant des dons** sur le [uTip](https://utip.io/veagle).
 - En *signalant des problèmes* dans les [issues](https://github.com/Mysterious-Developers/InfinIdea/issues) du dépôt
   GitHub.
