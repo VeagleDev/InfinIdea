@@ -57,7 +57,7 @@ Ou bien par [mail](mailto:contact@veagle.fr).
 
 - pierrbt : Développeur back-end
 - nicolas : Développeur front-end
-- contributeurs
+- Contributeurs
 
 ---
 
