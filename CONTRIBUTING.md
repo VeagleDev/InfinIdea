@@ -1,7 +1,7 @@
 # Comment faire des Pull-Requests
 
 1. Créer un fork du projet
-2. Faire un commit avec vos changements
+2. Faire un commit avec vos changements sur votre fork
 3. Faire un push de votre branche
 4. Ouvrir une Pull-Request
 5. Attendre la validation de la Pull-Request
