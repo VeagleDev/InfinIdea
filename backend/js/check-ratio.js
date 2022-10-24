@@ -2,6 +2,7 @@
 
 var width = document.getElementById("displayed-img").offsetWidth
 var height = document.getElementById("displayed-img").offsetHeight
+var displayedImg = document.getElementById("displayed-img")
 
 var previewContainer = document.getElementsByClassName("preview-container")[0]
 

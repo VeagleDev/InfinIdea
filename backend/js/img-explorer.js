@@ -24,4 +24,4 @@ container.addEventListener('click', (event) => { // Quand on clique sur le conte
             event.target.classList.add("glow") // On ajoute la classe glow à l'image cliquée
         }
     }
-)
+})
