@@ -70,3 +70,4 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
 
 
     }
+}
