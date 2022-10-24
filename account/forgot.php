@@ -121,7 +121,7 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
     }
     elseif(isset($_POST['email']))
     {
-        $email = htmlspecialchars($_POST['email']);
+        $email = SQLpurify($_POST['email']);
         // verification de l'email
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {

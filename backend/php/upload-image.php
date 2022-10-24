@@ -11,8 +11,8 @@ $db = getDB();
 
 if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'article sont définis
 {
-    $img = htmlspecialchars($_POST['image']); // On récupère l'image
-    $article = htmlspecialchars($_POST['article']); // On récupère l'article
+    $img = HTMLpurify($_POST['image']); // On récupère l'image
+    $article = SQLpurify($_POST['article']); // On récupère l'article
 
     $base_to_php = explode(',', $img); // On sépare le type de l'image et le contenu
     $data = base64_decode($base_to_php[1]); // On décode le contenu

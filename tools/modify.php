@@ -22,17 +22,17 @@ if(!isset($_SESSION['id']))
 
 if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']))
 {
-    $id = htmlspecialchars($_POST['id']);
-    $title = htmlspecialchars($_POST['title']);
-    $desc = htmlspecialchars($_POST['desc']);
-    $content = htmlspecialchars($_POST['content']);
-    $tags = htmlspecialchars($_POST['tags']);
+    $id = SQLpurify($_POST['id']);
+    $title = SQLpurify($_POST['title']);
+    $desc = SQLpurify($_POST['desc']);
+    $content = SQLpurify($_POST['content']);
+    $tags = SQLpurify($_POST['tags']);
 
     $db = getDB();
     $sql = "SELECT * FROM articles WHERE id = $id";
     $result = mysqli_query($db, $sql);
 
-    if($result) {
+    if ($result) {
         $row = mysqli_fetch_assoc($result);
         if ($row) {
             if ($row['creator'] != $_SESSION['id']) {

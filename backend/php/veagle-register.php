@@ -50,7 +50,7 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
             // Pour l'instant on le fait tt le temps
 
             $token = createAuthToken($_SESSION['id'], $db); // On crée un jeton d'authentification
-            if (isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
+            if (isset($_POST['stay_connected']) or true) // Si l'utilisateur a coché la case "Rester connecté"
             {
                 setcookie( // On crée un cookie
                     'token', // Le nom du cookie

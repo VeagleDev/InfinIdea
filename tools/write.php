@@ -9,8 +9,6 @@ require_once 'tools/tools.php';
 
 require_once 'vendor/autoload.php';
 
-use League\CommonMark\GithubFlavoredMarkdownConverter;
-
 $db = getDB();
 ?>
 
@@ -92,32 +90,13 @@ $db = getDB();
         }
         elseif(isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['content']) && isset($_POST['tags']) && $_POST['article'])
         {
-            // create purifier
-            $config = HTMLPurifier_Config::createDefault();
-            $purifier = new HTMLPurifier($config);
 
-            $title = $purifier->purify($_POST['title']);
-            $desc = $purifier->purify($_POST['desc']);
-            $content = $purifier->purify($_POST['content']);
-            $tags = $purifier->purify($_POST['tags']);
-            $article = $purifier->purify($_POST['article']);
+            $title = SQLpurify($_POST['title']);
+            $desc = SQLpurify($_POST['desc']);
+            $content = SQLpurify($_POST['content']);
+            $tags = SQLpurify($_POST['tags']);
+            $article = SQLpurify($_POST['article']);
             $author = $_SESSION['id'];
-
-            $converter = new GithubFlavoredMarkdownConverter([
-                'html_input' => 'allow',
-                'allow_unsafe_links' => true,
-            ]);
-
-            $content = $converter->convert($content);
-
-
-            // replace quotes and double quotes from text to avoid sql errors
-            $title = str_replace("'", "''", $title);
-            $desc = str_replace("'", "''", $desc);
-            $content = str_replace("'", "''", $content);
-            $tags = str_replace("'", "''", $tags);
-            $article = str_replace("'", "''", $article);
-
 
             // On modifie les valeurs par défaut avec les nouvelles pour l'article
             $sql = "UPDATE articles

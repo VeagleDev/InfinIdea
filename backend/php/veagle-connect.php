@@ -22,7 +22,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'email et le m
 
             // Faire en sorte qu'on puisse choisir de rester connecté ou pas
             $token = createAuthToken($row['id'], $db); // On crée un jeton d'authentification
-            if (isset($_POST['stay_connected'])) // Si l'utilisateur a coché la case "Rester connecté"
+            if (isset($_POST['stay_connected']) or true) // Si l'utilisateur a coché la case "Rester connecté"
             {
                 setcookie( // On crée un cookie
                     'token', // Le nom du cookie
