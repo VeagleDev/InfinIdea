@@ -28,15 +28,18 @@ $db = getDB();
             <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
             <ul class="main-list">
                 <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
-                <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
-                <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
-                <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
+                <li class="first-child"><a href="explore.php"><p><i class="fa-solid fa-shuffle nav-icon"></i>
+                            Recommendations</p></a></li>
+                <li class="first-child"><a href="explore.php"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p>
+                    </a></li>
+                <li class="first-child"><a href="tools/write.php"><p><i class="fa-solid fa-question nav-icon"></i>Créer
+                        </p></a></li>
             </ul>
         </nav>
         <nav class="user-connection-interaction-nav">
             <ul class="user-connection-interaction-list">
                 <li class="user-menu">
-                    <a href="account/login.php">
+                    <a href="/login">
                         <p>Bonjour, &nbsp;
 
                             <?php
@@ -53,9 +56,10 @@ $db = getDB();
                         </p>
                         <ul class="user-connection-scrolling-menu">
                             <li><a href="account/account.php"><p>Mon compte</p></a></li>
-                            <li><a href=""><p>A propos</p></a></li>
+                            <li><a href="tools/write.php"><p>Écrire</p></a></li>
+                            <!--<li><a href=""><p>A propos</p></a></li>
                             <li><a href=""><p>Mes projets</p></a></li>
-                            <li><a href="account/account.php"><p>Paramètres</p></a></li>
+                            <li><a href="account/account.php"><p>Paramètres</p></a></li> -->
                             <li><a href="account/logout.php"><p>Déconnexion</p></a></li>
                         </ul>
                     </a>
@@ -63,7 +67,7 @@ $db = getDB();
                 <?php
                 if(!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
                 {
-                    echo('<a href="account/register.php" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
+                    echo('<a href="/register" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
                 }
                 ?>
             </ul>
@@ -131,21 +135,7 @@ $db = getDB();
             }
 
             ?>
-
-            <!--
-            <a href="" class="gallery-cell">
-                <img src="images/uploads/1.jpg" alt="">
-                <div class="text">
-                    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>
-                </div>
-            </a>
-            -->
-
-
         </div>
-
-
 
         <h1 class="big-title">Nouveaux</h1>
         <div class="gallery js-flickity"
@@ -197,43 +187,7 @@ $db = getDB();
             }
 
             ?>
-
-            <!--
-            <a href="" class="gallery-cell">
-                <img src="images/uploads/1.jpg" alt="">
-                <div class="text">
-                    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>
-                </div>
-            </a>
-            -->
-
         </div>
-
-        <!--
-        <h1 class="big-title">Applications et jeux</h1>
-        <div class="gallery js-flickity"
-        data-flickity-options='{ "wrapAround": true }'>
-            <a href="" class="gallery-cell">
-                <img src="images/base.jpg" alt="">
-                <div class="text">
-                    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>
-                </div>
-            </a>
-        </div>
-        <h1 class="big-title">Mécanismes et projets manuels</h1>
-        <div class="gallery js-flickity"
-        data-flickity-options='{ "wrapAround": true }'>
-            <a href="" class="gallery-cell">
-                <img src="images/base.jpg" alt="">
-                <div class="text">
-                    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, quam.</h1>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis itaque ipsum tenetur sed officia, sequi dignissimos illum doloribus veritatis voluptatibus dolore, rem, est dolorum iure nam quae fugiat vero et beatae eligendi unde iste? Ullam debitis consequuntur labore numquam enim nobis nostrum officiis tempore aliquam, expedita facere et perspiciatis?</p>
-                </div>
-            </a>
-        </div>
-        -->
     </div>
 
 </section>
@@ -244,7 +198,7 @@ $db = getDB();
             <nav>
                 <ul>
                     <li><p class="nav-title">Soutien</p></li>
-                    <li><a href=""><p>Nous contacter</p></a></li>
+                    <li><a href="mailto:contact@veagle.fr"><p>Nous contacter</p></a></li>
                     <li><a href=""><p>A propos</p></a></li>
                 </ul>
             </nav>
@@ -252,7 +206,7 @@ $db = getDB();
                 <ul>
                     <li><p class="nav-title">Contactez-nous</p></li>
                     <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
-                    <li><a href=""><p>Mail</p></a></li>
+                    <li><a href="mailto:contact@veagle.fr"><p>Mail</p></a></li>
                     <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
                 </ul>
             </nav>
@@ -261,7 +215,7 @@ $db = getDB();
                     <li><p class="nav-title">Rejoignez-nous</p></li>
                     <li><a href="https://veagle.fr" target="_blank"><p>veagle.fr</p></a></li>
                     <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
-                    <li><a href="https://www.instagram.com/nicolas_fsn_/"  target="_blank"><p>Instagram</p></a></li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
                     <li><a href="https://github.com/Mysterious-Developers" target="_blank"><p>GitHub</p></a></li>
                 </ul>
             </nav>

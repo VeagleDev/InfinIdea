@@ -23,24 +23,28 @@ $db = getDB();
     <script src="backend/js/fontawesome.js"></script>
 </head>
 <body>
-    <section class="top-page">
-        <header>
-            <nav class="top-nav">
-                <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
-                <ul class="main-list">
-                    <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
-                    <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
-                    <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
-                    <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i> A propos</p></a></li>
-                </ul>
-            </nav>
-            <nav class="user-connection-interaction-nav">
-                <ul class="user-connection-interaction-list">
-                    <li class="user-menu">
-                        <a href="account/login.php">
-                            <p>Bonjour, &nbsp;
+<section class="top-page">
+    <header>
+        <nav class="top-nav">
+            <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
+            <ul class="main-list">
+                <li class="first-child"><a href="index.php"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p>
+                    </a></li>
+                <li class="first-child"><a href="explore.php"><p><i class="fa-solid fa-shuffle nav-icon"></i>
+                            Recommendations</p></a></li>
+                <li class="first-child"><a href="explore.php"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p>
+                    </a></li>
+                <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i> A propos</p></a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="user-connection-interaction-nav">
+            <ul class="user-connection-interaction-list">
+                <li class="user-menu">
+                    <a href=/login">
+                        <p>Bonjour, &nbsp;
 
-                                <?php
+                            <?php
                                 if(isset($_SESSION['id'])) // Si l'utilisateur est connecté, on affiche son pseudo
                                 {
                                     echo('<p class="unconnected">' . getPseudo($_SESSION['id']) . '<i class="fa-solid fa-angle-down arrow"></i></p>');
@@ -64,7 +68,7 @@ $db = getDB();
                     <?php
                     if(!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
                     {
-                        echo('<a href="account/register.php" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
+                        echo('<a href="/register" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
                     }
                     ?>
                 </ul>
@@ -123,31 +127,31 @@ $db = getDB();
 
     </section>
 
-    <section class="bottom-page">
-        <footer>
-            <div class="site-nav">
-                <nav>
-                    <ul>
-                        <li><p class="nav-title">Soutien</p></li>
-                        <li><a href=""><p>Nous contacter</p></a></li>
-                        <li><a href=""><p>A propos</p></a></li> 
-                    </ul>
-                </nav>
-                <nav>
-                    <ul>
-                        <li><p class="nav-title">Contactez-nous</p></li>
-                        <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
-                        <li><a href=""><p>Mail</p></a></li>
-                        <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <ul>
-                        <li><p class="nav-title">Rejoignez-nous</p></li>
-                        <li><a href="https://veagle.fr" target="_blank"><p>veagle.fr</p></a></li>
-                        <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
-                        <li><a href="https://www.instagram.com/nicolas_fsn_/"  target="_blank"><p>Instagram</p></a></li>
-                    </ul>
+<section class="bottom-page">
+    <footer>
+        <div class="site-nav">
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Soutien</p></li>
+                    <li><a href="mailto:contact@veagle.fr"><p>Nous contacter</p></a></li>
+                    <li><a href=""><p>A propos</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Contactez-nous</p></li>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
+                    <li><a href="mailto:contact@veagle.fr"><p>Mail</p></a></li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Rejoignez-nous</p></li>
+                    <li><a href="https://veagle.fr" target="_blank"><p>veagle.fr</p></a></li>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><p>Discord</p></a></li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/" target="_blank"><p>Instagram</p></a></li>
+                </ul>
                 </nav>
             </div>
             <div class="copyright-infos-nav">
