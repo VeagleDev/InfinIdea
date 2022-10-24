@@ -103,54 +103,48 @@ $db = getDB();
                     {
                         echo('<p color="blue">L\'article que vous avez sélectionné n\'est pas valide !</p>');
                     }
-                }
-                else
-                {
-                    echo('<p color="blue">L\'article que vous avez sélectionné n\'existe pas.</p>');
-                }
+                } else {
+                echo('<p color="blue">L\'article que vous avez sélectionné n\'existe pas.</p>');
             }
-            else
-            {
-                echo('<p color="blue">Pas d\'article sélectionné</p>');
-                die();
-            }
+        } else {
+            echo('<p color="blue">Pas d\'article sélectionné</p>');
+            die();
+        }
+
+
+        $sql = 'SELECT hd FROM images WHERE aid = \'' . $aid . '\''; // On récupère les images de l'article
+        $result = mysqli_query($db, $sql); // On exécute la requête
+        if (mysqli_affected_rows($db) > 0)  // Si il y a des images
+        {
+            $row = mysqli_fetch_assoc($result); // On récupère les infos
+            $firstPath = $row['path']; // On récupère le chemin de la première image
+        } else // Sinon
+        {
+            $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png'; // On met l'image par défaut
+        }
 
         ?>
 
         <div class="article-container">
             <div class="article">
-
                 <div class="img-nav">
-                    <?php
-                    $sql = 'SELECT path FROM images WHERE aid = \'' . $aid . '\''; // On récupère les images de l'article
-                    $result = mysqli_query($db, $sql); // On exécute la requête
-                    if (mysqli_affected_rows($db) > 0)  // Si il y a des images
-                    {
-                        $row = mysqli_fetch_assoc($result); // On récupère les infos
-                        $firstPath = $row['path']; // On récupère le chemin de la première image
-                    } else // Sinon
-                    {
-                        $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png'; // On met l'image par défaut
-                    }
-                    ?>
                     <div class="displayed-img">
-                        <img src="<?php echo $firstPath; ?>" alt="Image de l'article" id="displayed-img">
-                        <!-- On affiche l'image par défaut -->
+                        <img src="<?= $firstPath ?>>" alt="Image de l'article" id="displayed-img">
                     </div>
                     <nav class="nav">
                         <ul class="preview-container">
                             <li class="li-img">
-                                <button class="li-img"><img src="<?php echo $firstPath; ?>"
-                                                            alt="Bouton de prévisualisation" class="preview"></button>
+                                <button class="li-img"><img src="<?= $firstPath ?>" alt="Bouton de prévisualisation"
+                                                            class="preview"></button>
                             </li>
                             <?php
                             while ($row = mysqli_fetch_assoc($result)) // Tant qu'il y a des images
                             {
-                                $path = $row['path']; // On récupère leut chemin
                                 ?>
                                 <li class="li-img">
-                                    <button class="li-img"><img src="<?php echo $path; // Et on les affiche
-                                        ?>" alt="Bouton de prévisualisation" class="preview"></button>
+                                    <button class="li-img"><img src="<?= $row['path'] ?>"
+                                                                alt="Bouton de prévisualisation" class="preview">
+                                    </button>
                                 </li>
                             <?php } ?>
                         </ul>
