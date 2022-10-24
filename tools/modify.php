@@ -67,7 +67,7 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['desc']) && iss
 elseif(isset($_GET['article']))
 {
     $db = getDB();
-    $id = $_GET['article'];
+    $id = SQLpurify($_GET['article']);
     $sql = "SELECT * FROM articles WHERE id = $id";
     $result = mysqli_query($db, $sql);
     // if result found

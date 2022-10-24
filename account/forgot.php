@@ -83,7 +83,7 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
 } elseif (isset($_GET['token'])) // Si on a juste un token
 {
     // On le récupère
-    $token = htmlspecialchars($_GET['token']);
+    $token = SQLpurify($_GET['token']);
     $sql = "SELECT user, expiration, used FROM tokens WHERE type='pass' AND token='" . $token . "'";
     $result = mysqli_query($db, $sql);
     if (mysqli_num_rows($result) == 1) {
