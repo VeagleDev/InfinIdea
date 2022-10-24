@@ -81,7 +81,9 @@ $db = getDB();
             {
                 $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article
                 $result = mysqli_query($db, $sql); // On exécute la requête
-                if (mysqli_affected_rows($db) == 1) // Si Il existe
+                echo '<p> Request : ' . $sql . '</p>';
+                echo '<p> Nombre de résultats : ' . mysqli_num_rows($result) . '</p>';
+                if ($result) // Si Il existe
                 {
                     $row = mysqli_fetch_assoc($result); // On récupère les infos
                     $aid = $row['id']; // On récupère l'id de l'article
