@@ -142,7 +142,7 @@ $db = getDB();
                             {
                                 ?>
                                 <li class="li-img">
-                                    <button class="li-img"><img src="<?= $row['path'] ?>"
+                                    <button class="li-img"><img src="<?= $row['hd'] ?>"
                                                                 alt="Bouton de prévisualisation" class="preview">
                                     </button>
                                 </li>
