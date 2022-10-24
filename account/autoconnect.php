@@ -6,7 +6,7 @@ $db = getDB(); // On récupère la base de données
 
 function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se connecter grâce aux cookies
 {
-    $token = htmlspecialchars($_COOKIE['token']); // On récupère le token
+    $token = SQLpurify($_COOKIE['token']); // On récupère le token
     $query = "SELECT id, user, expiration FROM tokens WHERE token = '$token'"; // On prépare la requête
     $result = mysqli_query($db, $query); // On exécute la requête
     if (!$result) {
