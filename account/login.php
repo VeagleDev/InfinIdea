@@ -50,7 +50,7 @@ if (isset($_SESSION['id'])) {  // Si l'utilisateur est connecté
 
             <div class="other-interaction">
                 <p>Retourner à l'<a href="../index.php">accueil</a>.</p>
-                <p>Vous n'avez pas encore de compte VeagleConnect ? <a href="../register.html">Inscrivez-vous</a>, ça
+                <p>Vous n'avez pas encore de compte VeagleConnect ? <a href="../register">Inscrivez-vous</a>, ça
                     prend
                     1 minute !</p>
             </div>
