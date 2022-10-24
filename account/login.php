@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 
 if (isset($_SESSION['id'])) {  // Si l'utilisateur est connecté
-    header('Location: index.php'); // On le redirige vers la page d'accueil
+    header('Location: /'); // On le redirige vers la page d'accueil
     die(); // On arrête le script
 }
 

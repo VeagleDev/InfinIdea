@@ -39,33 +39,35 @@ $db = getDB();
         <nav class="user-connection-interaction-nav">
             <ul class="user-connection-interaction-list">
                 <li class="user-menu">
-                    <a href="/login">
-                        <p>Bonjour, &nbsp;
-
-                            <?php
-                            if(isset($_SESSION['id'])) // Si l'utilisateur est connecté, on affiche son pseudo
-                            {
-                                echo('<p class="unconnected">' . getPseudo($_SESSION['id']) . '<i class="fa-solid fa-angle-down arrow"></i></p>');
-                            }
-                            else // Sinon on affiche qu'il faut de connecter
-                            {
-                                echo('<p class="unconnected">connectez-vous<i class="fa-solid fa-angle-down arrow"></i></p>');
-                            }
-                            ?>
-
-                        </p>
+                    <?php
+                    if (isset($_SESSION['id'])) {
+                        ?>
+                        <a href="account/account.php">
+                            <p>Bonjour, &nbsp;
+                            <p class="unconnected"><?= getPseudo($_SESSION['id']) ?><i
+                                        class="fa-solid fa-angle-down arrow"></i></p>
+                            </p>
+                        </a>
                         <ul class="user-connection-scrolling-menu">
                             <li><a href="account/account.php"><p>Mon compte</p></a></li>
                             <li><a href="tools/write.php"><p>Écrire</p></a></li>
-                            <!--<li><a href=""><p>A propos</p></a></li>
-                            <li><a href=""><p>Mes projets</p></a></li>
-                            <li><a href="account/account.php"><p>Paramètres</p></a></li> -->
                             <li><a href="account/logout.php"><p>Déconnexion</p></a></li>
                         </ul>
-                    </a>
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <a href="account/login.php">
+                            <p>Bonjour, &nbsp;
+                            <p class="unconnected">connectez-vous</p>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </li>
+
                 <?php
-                if(!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
+                if (!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
                 {
                     echo('<a href="/register" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
                 }
