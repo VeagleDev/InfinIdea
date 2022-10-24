@@ -117,7 +117,7 @@ $db = getDB();
         if (mysqli_affected_rows($db) > 0)  // Si il y a des images
         {
             $row = mysqli_fetch_assoc($result); // On récupère les infos
-            $firstPath = $row['path']; // On récupère le chemin de la première image
+            $firstPath = $row['hd']; // On récupère le chemin de la première image
         } else // Sinon
         {
             $firstPath = 'https://infinidea.veagle.fr/images/Logo_InfinIdea.png'; // On met l'image par défaut
