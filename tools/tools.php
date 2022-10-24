@@ -83,7 +83,6 @@ function createAuthToken($id) : string
     // on définit la date d'expiration du token
     $expiration = time() + 15*24*3600; // 15 jours
     $query = "INSERT INTO tokens (type, token, user, expiration) VALUES ('auth', '$token', " . $id . ", '$expiration');";
-    echo $query;
     $result = mysqli_query($db, $query);
     if($result)
     {
