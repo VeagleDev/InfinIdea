@@ -237,14 +237,14 @@ function articleExists($id) : bool
     $db = getDB();
     if(is_numeric($id))
     {
-        $query = "SELECT id FROM articles WHERE id = " . $id;
+        $query = "SELECT id FROM articles WHERE id = " . $id . " OR uid = '$id'";
     }
     else
     {
         $query = "SELECT id FROM articles WHERE uid = '" . $id . "'";
     }
     $result = mysqli_query($db, $query);
-    if(mysqli_num_rows($result) == 1)
+    if (mysqli_num_rows($result) > 0)
         return true;
     else
         return false;
