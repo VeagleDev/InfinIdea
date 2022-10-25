@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once 'tools/tools.php'; // On inclut les outils
 require_once 'account/autoconnect.php'; // On connecte l'utilisateur automatiquement
 $db = getDB(); // On récupère la base de données
-logs('Va sur la page d\'oubli de mdp'); // On log l'action
+logs('Va sur la page d\'\'oubli de mdp'); // On log l'action
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -77,7 +77,7 @@ $db = getDB();
         if (isset($_GET['id'])) // Si on a l'id de l'article
         {
             $aid = SQLpurify($_GET['id']); // On le récupère
-            logs('Utilisateur essaie de regarder l\'article : ' . $aid);
+            logs('Utilisateur essaie de regarder l\'\'article : ' . $aid);
             if (articleExists($aid)) // Si l'article existe
             {
                 $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article

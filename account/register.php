@@ -8,7 +8,7 @@ require_once 'account/autoconnect.php'; // On inclut le fichier de connexion aut
 
 $db = getDB(); // On récupère la base de données
 
-logs('Va sur la page d\'inscription'); // On écrit dans les logs
+logs('Va sur la page d\'\'inscription'); // On écrit dans les logs
 
 if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
     echo '<p style="color:red;">Vous ne pouvez pas créer de compte en étant connecté !</p><p><a href="/">Retourner à l\'accueil</a></p>';
