@@ -6,6 +6,8 @@ if (session_status() == PHP_SESSION_NONE)
 require_once 'tools/tools.php'; // On inclut les outils
 require_once 'account/autoconnect.php'; // On inclut le fichier de connexion automatique
 
+$db = getDB(); // On récupère la base de données
+
 logs('Va sur la page d\'inscription'); // On écrit dans les logs
 
 if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
