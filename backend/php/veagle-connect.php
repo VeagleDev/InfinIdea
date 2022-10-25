@@ -6,6 +6,8 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
 require_once 'tools/tools.php'; // On inclut le fichier tools.php
 require_once 'vendor/autoload.php'; // On inclut le fichier autoload.php
 
+logs('Inconnu tente de se connecter'); // On log l'action
+
 $db = getDB(); // On récupère la base de données
 
 if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'email et le mot de passe sont définis
@@ -19,6 +21,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'email et le m
         if ($password == $row['password']) { // Si le mot de passe est correct
             $_SESSION['id'] = $row['id']; // On stocke l'id de l'utilisateur dans la session
             echo "0"; // On renvoie 0
+            logs('Utilisateur se connecte'); // On log l'action
 
             // Faire en sorte qu'on puisse choisir de rester connecté ou pas
             $token = createAuthToken($row['id'], $db); // On crée un jeton d'authentification

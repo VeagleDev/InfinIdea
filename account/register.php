@@ -3,6 +3,11 @@ set_include_path('/var/www/blog'); // On définit le chemin d'accès aux fichier
 if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 
+require_once 'tools/tools.php'; // On inclut les outils
+require_once 'account/autoconnect.php'; // On inclut le fichier de connexion automatique
+
+logs('Va sur la page d\'inscription'); // On écrit dans les logs
+
 if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
     echo '<p style="color:red;">Vous ne pouvez pas créer de compte en étant connecté !</p><p><a href="/">Retourner à l\'accueil</a></p>';
     die();

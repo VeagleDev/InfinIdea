@@ -11,6 +11,7 @@ $db = getDB();
 
 if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'article sont définis
 {
+    logs('Utilisateur upload une image');
     $img = HTMLpurify($_POST['image']); // On récupère l'image
     $article = SQLpurify($_POST['article']); // On récupère l'article
 

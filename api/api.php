@@ -13,15 +13,15 @@ require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 $db = getDB();
 
+logs('Va dans api.php');
 
 
-if(isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']) && isset($_GET['action']))
-{
+if (isset($_POST['comment']) && isset($_POST['article']) && isset($_SESSION['id']) && isset($_GET['action'])) {
     $comment = SQLpurify($_POST['comment']);
     $article = SQLpurify($_POST['article']);
     $action = HTMLPurify($_GET['action']);
 
-    if($action == 'comment')
+    if ($action == 'comment')
     {
         $sql = "INSERT INTO comments (aid, uid, message) VALUES ($article, " . $_SESSION['id'] . ", '$comment')";
         mysqli_query($db, $sql);

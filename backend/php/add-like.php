@@ -18,10 +18,12 @@ if (isset($_GET['article']) && isset($_SESSION['id'])) { // Si l'article et l'ut
         mysqli_query($db, $sql); // On exécute la requête
         $sql = "UPDATE articles SET likes = likes + 1 WHERE id = " . $id; // On prépare la requête
         mysqli_query($db, $sql); // On exécute la requête
+        logs('Utilisateur like article ' . $id); // On log l'action
     } else { // Si l'utilisateur a déjà liké l'article
         $sql = "DELETE FROM likes WHERE aid = " . $id . " AND uid = " . $_SESSION['id'];  // On prépare la requête
         mysqli_query($db, $sql); // On exécute la requête
         $sql = "UPDATE articles SET likes = likes - 1 WHERE id = " . $id; // On prépare la requête
         mysqli_query($db, $sql); // On exécute la requête
+        logs('Utilisateur unlike article ' . $id); // On log l'action
     }
 }

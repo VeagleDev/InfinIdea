@@ -11,6 +11,7 @@ function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se 
     $result = mysqli_query($db, $query); // On exécute la requête
     if (!$result) {
         return false;
+        logs('Token de connexion invalide');
     }
     $row = mysqli_fetch_assoc($result);
     if ($row) {
@@ -18,9 +19,11 @@ function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se 
         $user = $row['user']; // On récupère l'utilisateur
         logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user); // On log l'action
         updateUserIP($user); // On met à jour l'IP de l'utilisateur
+
         if ($ts > time()) // Si la date d'expiration est supérieure à la date actuelle
         {
             $_SESSION['id'] = $user;
+            logs('Connexion grâce au cookie');
             setcookie( // On actualise le cookie
                 'token', // Le nom du cookie
                 $token, // Son contenu
@@ -31,6 +34,8 @@ function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se 
                     'path' => '/',
                 ]
             );
+        } else {
+            logs('Token de connexion expiré');
         }
     }
 }

@@ -7,9 +7,10 @@ if(session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 }
 
+
 if(session_status() == PHP_SESSION_ACTIVE)
 {
-    logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0)); // On log l'action
+    logs('L\'utilisateur se déconnecte');
     session_destroy(); // On détruit la session
     session_unset(); // On détruit les variables de session
     $_SESSION = []; // On détruit les variables de session

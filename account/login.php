@@ -3,10 +3,18 @@ set_include_path('/var/www/blog'); // On définit le chemin d'accès aux fichier
 if (session_status() == PHP_SESSION_NONE)
     session_start(); // On démarre la session AVANT toute chose
 
+require_once 'tools/tools.php';
+require_once 'account/autoconnect.php'; // On se connecte à la base de données
+
+$db = getDB(); // On récupère la base de données
+
+logs('Va sur la page de connexion'); // On log l'action
+
 if (isset($_SESSION['id'])) {  // Si l'utilisateur est connecté
     header('Location: /'); // On le redirige vers la page d'accueil
     die(); // On arrête le script
 }
+
 
 // Pour voir le processus de connexion, voir le fichier veagle-connect.php et login.js
 

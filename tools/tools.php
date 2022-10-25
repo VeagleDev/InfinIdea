@@ -150,19 +150,28 @@ function getIP() : string
     }
     return $ip;
 }
-function updateUserIP($user) : void
+function updateUserIP($user): void
 {
     $db = getDB();
     $ip = getIP();
     $query = "UPDATE users SET ip = '$ip' WHERE id = '$user'";
     mysqli_query($db, $query);
 }
-function logs($action, $details = '', $user = 0) : void
+
+function logs($action): void
 {
-    $db = getDB();
-    $ip = getIP();
-    $query = 'INSERT INTO logs (action, details, user, ip) VALUES ("' . $action . '", "' . $details . '", ' . $user . ', "' . $ip . '")';
-    mysqli_query($db, $query);
+    if (isset($_SESSION['db'])) {
+        $db = $_SESSION['db'];
+        $ip = getIP();
+        $user = 0;
+        $username = 'guest';
+        if (isset($_SESSION['id'])) {
+            $user = $_SESSION['id'];
+            $username = getPseudo($user);
+        }
+        $sql = "INSERT INTO logs (action, user, username, ip) VALUES ('$action', " . $user . ", '$username', '$ip')";
+        mysqli_query($db, $sql);
+    }
 }
 
 function logout() : void
