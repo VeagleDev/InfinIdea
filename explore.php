@@ -1,13 +1,14 @@
 <?php
 set_include_path('/var/www/blog');
-if(session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE) {
     session_start(); // On démarre la session AVANT toute chose
 }
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 
 $db = getDB();
+
+logs('Va chercher les articles');
 
 ?>
 

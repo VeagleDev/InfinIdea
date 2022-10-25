@@ -9,7 +9,10 @@ require_once 'tools/tools.php';
 
 require_once 'vendor/autoload.php';
 
+
 $db = getDB();
+
+logs('Commence à écrire');
 ?>
 
 <!DOCTYPE html>
@@ -127,11 +130,13 @@ $db = getDB();
             if($result) {
                 echo '<p style="color: green;">Votre article a bien été publié !</p>';
                 echo "<style> .input[type='submit'] { backdrop-filter: green; } </style>";
+                logs('Utilisateur publie un article');
             }
             else
             {
                 echo '<p style="color: red;">Une erreur est survenue lors de la publication de votre article.</p>';
                 echo "<style> .input[type='submit'] { backdrop-filter: red; } </style>";
+                logs('Utilisateur a une erreur en publiant un article');
             }
         }
         else {

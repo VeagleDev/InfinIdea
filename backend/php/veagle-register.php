@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
     session_start(); // On démarre la session AVANT toute chose
 
     require_once 'tools/tools.php'; // On inclut le fichier tools.php
+    logs('Tente de se créer un compte'); // On log l'action
 
     if (
         isset($_POST['pseudo']) && // Si le pseudo est défini
@@ -44,6 +45,7 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
         $result = mysqli_query($db, $sql); // On exécute la requête
         if ($result) { // Si la requête s'est bien exécutée
             $_SESSION['id'] = mysqli_insert_id($db); // On stocke l'id de l'utilisateur dans la session
+            logs('Utilisateur créé'); // On log l'action
             echo '0'; // On renvoie 0
 
             // Ajouter un bouton pour savoir si il veut rester connecté ou pas
