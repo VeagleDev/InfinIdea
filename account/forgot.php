@@ -25,10 +25,9 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
     $token = htmlspecialchars($_POST['token']);
     $pass = htmlspecialchars($_POST['pass']);
     $pass2 = htmlspecialchars($_POST['pass2']);
-    logs('reinit', 'utilisateur réinitialise son mot de passe avec : ' . $token, 0);
+    logs('Tentative de réinitialisation du mot de passe'); // On log l'action
     list($ok, $error) = verifyPasswordStrongness($pass); // On vérifie la force du mot de passe
     if (!$ok) {
-        logs('reinit', 'erreur réinitalisation de mot de passe (' . $error . ') avec le token ' . $token, 0);
         echo('<form action="forgot.php" method="post">
                 <input type="hidden" name="token" value="' . $token . '">
                 <input type="password" name="pass" placeholder="Nouveau mot de passe">
@@ -59,27 +58,23 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
                     $result = mysqli_query($db, $sql);
 
                     echo "<p style='color: green;'>Votre mot de passe a bien été modifié !</p>";
-                    logs('reinit', 'utilisateur a réinitialisé son mot de passe avec le token ' . $token, $user);
+                    logs('Mot de passe modifié'); // On log l'action
                 } else {
                     echo "<p style='color: red;'>Une erreur est survenue lors de la modification de votre mot de passe !</p>";
-                    logs('reinit', 'erreur réinitialisation de mot de passe (sql erreur changement) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
                 }
                 }
                 else
                 {
                     echo "<p style=\"color:red\">Le lien est expiré</p>";
-                    logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
                 }
             }
             else
             {
                 echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-                logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token, 0);
             }
 
     } else {
         echo '<p style="color:red;">Les mots de passe ne correspondent pas !</p>';
-        logs('reinit', 'erreur réinitialisation de mot de passe (mots de passe différents) avec le token ' . $token, 0);
     }
 } elseif (isset($_GET['token'])) // Si on a juste un token
 {
@@ -105,20 +100,17 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
             else
             {
                 echo "<p style=\"color:red\">Le lien est expiré</p>";
-                logs('reinit', 'erreur réinitialisation de mot de passe (lien expiré) avec le token ' . $token . ' pour l\'utilisateur ' . $user, $user);
             }
         }
         else
         {
             echo "<p style=\"color:red\">Le lien n'est pas valide</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (lien invalide) avec le token ' . $token , 0);
         }
     }
     elseif(isset($_SESSION['id']))
     {
         echo '<p>Bienvenue ' . getPseudo($_SESSION['id']) . ' sur la page de réinitialisation de votre mot de passe !</p>
         <p style="color:red">Attention, vous êtes connecté, veuillez vous <a href="logout.php">déconnecter</a> pour pouvoir réinitialiser votre mot de passe.</p>';
-        logs('reinit', 'utilisateur essaie de réinitialiser son mdp en étant connecté', $_SESSION['id']);
     }
     elseif(isset($_POST['email']))
     {
@@ -127,7 +119,6 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             echo "<p style='color:red'>L'adresse email n'est pas valide !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email invalide)', 0);
             exit;
         }
         $sql = "SELECT prenom, id FROM users WHERE email = '$email'";
@@ -137,7 +128,6 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
         {
             echo passwordForgotten();
             echo "<p style='color:red'>L'email est inconnue !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (email inconnu)', 0);
             exit;
         }
         $token = createPassForgotToken($row['id']);
@@ -161,18 +151,15 @@ if (isset($_POST['token']) && isset($_POST['pass']) && isset($_POST['pass2'])) /
         {
             echo '<p>Un email vous a été envoyé à <code>' . $to . "</code> pour réinitialiser votre mot de passe !</p>
             <p>Si vous n'avez pas reçu d'email, veuillez vérifier dans les spams ou <a href=\"mailto:contact@mysteriousdev.fr\">contactez-nous</a>.</p>";
-            logs('reinit', 'email envoyé pour réinitialisation de mot de passe', $row['id']);
         }
         else
         {
             echo "<p style='color:red'>Une erreur est survenue lors de l'envoi de l'email !</p>";
-            logs('reinit', 'erreur réinitialisation de mot de passe (envoi email)', $row['id']);
         }
     }
     else
     {
         echo passwordForgotten();
-        logs('reinit', 'utilisateur charge le formulaire de réinitialisation de mot de passe', 0);
     }
 
     ?>

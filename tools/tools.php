@@ -86,7 +86,6 @@ function createAuthToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
-        logs('token', 'create auth token', $id, $db);
         return $token;
     }
     else
@@ -106,12 +105,10 @@ function createPassForgotToken($id) : string
     $result = mysqli_query($db, $query);
     if($result)
     {
-        logs('token', 'create pass forgot token', $id, $db);
         return $token;
     }
     else
     {
-        logs('token', 'error creating pass forgot token', $id, $db);
         return 'NONE';
     }
 
@@ -174,28 +171,6 @@ function logs($action): void
     }
 }
 
-function logout() : void
-{
-    if(session_status() == PHP_SESSION_NONE)
-        session_start(); // On démarre la session AVANT toute chose
-    if(session_status() == PHP_SESSION_ACTIVE)
-    {
-        logs('logout', 'utilisateur se déconnecte', (isset($_SESSION['id']) ? $_SESSION['id'] : 0));
-        session_destroy() ;
-        session_unset() ;
-        $_SESSION = [] ;
-    }
-    setcookie( // On crée un cookie
-        'token', // Le nom du cookie
-        'NONE', // Son contenu
-        [
-            'expires' => time() + 15*24*3600, // On dit qu'il expire dans 15 jours
-            'secure' => true, // On dit que le cookie est sécurisé
-            'httponly' => true, // On dit que le cookie n'est accessible que via le protocole http
-            'path' => '/', // On dit que le cookie est accessible sur tout le site
-        ]
-    );
-}
 
 function correctTimestamp($timestamp) : string
 {

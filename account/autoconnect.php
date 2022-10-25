@@ -17,7 +17,6 @@ function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se 
     if ($row) {
         $ts = $row['expiration']; // On récupère la date d'expiration
         $user = $row['user']; // On récupère l'utilisateur
-        logs('connexion automatique', 'utilisateur se connecte grâce au cookie', $user); // On log l'action
         updateUserIP($user); // On met à jour l'IP de l'utilisateur
 
         if ($ts > time()) // Si la date d'expiration est supérieure à la date actuelle
