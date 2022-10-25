@@ -161,7 +161,7 @@ function logs($action): void
         $db = $_SESSION['db'];
         $ip = getIP();
         $user = 0;
-        $username = 'guest';
+        $username = 'Guest';
         if (isset($_SESSION['id'])) {
             $user = $_SESSION['id'];
             $username = getPseudo($user);
