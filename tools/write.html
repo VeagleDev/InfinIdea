@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Infinidea : Créer</title>
+    <link href="../css/write-simplify.css" rel="stylesheet">
+    <link href="../css/header.css" rel="stylesheet">
+
+    <script src="../backend/library/jquery-3.6.1.min.js"></script>
+    <script src="../backend/js/fontawesome.js"></script>
+</head>
+<body>
+<section class="top-page">
+    <header>
+        <nav class="top-nav">
+            <img alt="Logo de Veagle" class="logo-top" src="../images/logo_veagle_white.png">
+            <ul class="main-list">
+                <li class="first-child"><a href="#"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
+                <li class="first-child"><a href="explore.php?type=recommandations"><p><i
+                        class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
+                <li class="first-child"><a href="explore.php?type=recents"><p><i
+                        class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
+                <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
+            </ul>
+        </nav>
+        <nav class="user-connection-interaction-nav">
+            <ul class="user-connection-interaction-list">
+                <li class="user-menu">
+                    <a href="account/login.php">
+                        <p>Bonjour, &nbsp;
+                        <p class="unconnected">connectez-vous<i class="fa-solid fa-angle-down arrow"></i></p></p>
+                        <ul class="user-connection-scrolling-menu">
+                            <li><a href="account/account.php"><p>Mon compte</p></a></li>
+                            <li><a href=""><p>A propos</p></a></li>
+                            <li><a href=""><p>Mes projets</p></a></li>
+                            <li><a href="account/account.php"><p>Paramètres</p></a></li>
+                        </ul>
+                    </a>
+                </li>
+                <a class="sign-in unconnected" href="account/register.php">
+                    <li class="sign-in-sub-element"><p>S'inscrire</p></li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+</section>
+
+<section class="page-content">
+
+    <div class="editor">
+        <input id="title" name="title" placeholder="Titre de l'article" type="text">
+        <input id="description" name="description" placeholder="Description de l'article" type="text">
+        <textarea cols="30" id="content" name="content" placeholder="Contenu de l'article" rows="10"></textarea>>
+        <input id="tags" name="tags" placeholder="Tags de l'article" type="text">
+        <input id="image" name="image" placeholder="Image de l'article" type="file">
+        <button id="submit" type="submit">Publier</button>
+
+        <style>
+            .title {
+                font-size: 2em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+
+            }
+
+            .description {
+                font-size: 1.5em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+            }
+
+            .content {
+                font-size: 1em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+                width: 100%;
+                min-height: 10em;
+                max-height: 30em;
+
+            }
+
+            .tags {
+                font-size: 1em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+            }
+
+            .image {
+                font-size: 1em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+            }
+
+            .submit {
+                font-size: 1em;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0.5em;
+                background-color: #3ab53a;
+            }
+        </style>
+    </div>
+
+</section>
+
+<section class="bottom-page">
+    <footer>
+        <div class="site-nav">
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Soutien</p></li>
+                    <li><a href=""><p>Nous contacter</p></a></li>
+                    <li><a href=""><p>A propos</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Contactez-nous</p></li>
+                    <li><a href=""><p>Discord</p></a></li>
+                    <li><a href=""><p>Mail</p></a></li>
+                    <li><a href=""><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Rejoignez-nous</p></li>
+                    <li><a href=""><p>veagle.fr</p></a></li>
+                    <li><a href=""><p>Discord</p></a></li>
+                    <li><a href=""><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="copyright-infos-nav">
+            <nav>
+                <ul>
+                    <li><p>© 2022 InfinIdea, by VEagle</p></li>
+                    <li><a href="">Politique de confidentialité</a></li>
+                </ul>
+            </nav>
+            <nav class="social-media">
+                <ul>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                    </li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li><a href="https://github.com/Mysterious-Developers"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://mysteriousdev.fr" target="_blank"><i
+                            class="fa-solid fa-window-restore"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</section>
+</body>
+</html>
