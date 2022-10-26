@@ -10,7 +10,7 @@ document.getElementsByClassName("submit")[0].addEventListener('click', () => {
     const title_regex = /^.{4,50}$/
     const description_regex = /^.{4,200}$/
     const content_regex = /^.{30,10000}$/
-    const tags_regex = /^[a-zA-Z0-9_-,\[\]]{0,1000}$/
+    const tags_regex = /^.{0,1000}$/
 
     let legit = true;
 
