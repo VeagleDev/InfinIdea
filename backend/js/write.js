@@ -56,7 +56,12 @@ document.getElementsByClassName("submit")[0].addEventListener('click', () => {
             error: function (data) {
                 alert('No')
             }
-        })
+        });
+        return true;
+
+    } else {
+        alert('Not legit')
+        return false;
     }
 
 
