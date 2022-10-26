@@ -1,0 +1,161 @@
+<?php
+set_include_path('/var/www/blog');
+if (session_status() == PHP_SESSION_NONE)
+    session_start();
+require_once 'account/autoconnect.php';
+require_once 'tools/tools.php';
+
+$db = getDB();
+
+logs('Commence l\'\'écriture d\'\'un article');
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Infinidea : Créer</title>
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/write.css" rel="stylesheet">
+    <script src="/backend/library/jquery-3.6.1.min.js"></script>
+    <script src="/backend/js/fontawesome.js"></script>
+</head>
+<body>
+<section class="top-page">
+    <header>
+        <nav class="top-nav">
+            <img alt="Logo de Veagle" class="logo-top" src="../images/logo_veagle_white.png">
+            <ul class="main-list">
+                <li class="first-child"><a href="/"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
+                <li class="first-child"><a href="/explore"><p><i
+                                    class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
+                <li class="first-child"><a href="/explore"><p><i
+                                    class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
+                <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
+            </ul>
+        </nav>
+        <nav class="user-connection-interaction-nav">
+            <ul class="user-connection-interaction-list">
+                <li class="user-menu">
+                    <?php
+                    if (isset($_SESSION['id'])) {
+                        ?>
+                        <a href="/account/account.php">
+                            <p>Bonjour, &nbsp;
+                            <p class="unconnected"><?= getPseudo($_SESSION['id']) ?><i
+                                        class="fa-solid fa-angle-down arrow"></i></p>
+                            </p>
+                        </a>
+                        <ul class="user-connection-scrolling-menu">
+                            <li><a href="/account/account.php"><p>Mon compte</p></a></li>
+                            <li><a href="/tools/write.php"><p>Écrire</p></a></li>
+                            <li><a href="/account/logout.php"><p>Déconnexion</p></a></li>
+                        </ul>
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <a href="/login">
+                            <p>Bonjour, &nbsp;
+                            <p class="unconnected">connectez-vous</p>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </li>
+
+                <?php
+                if (!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
+                {
+                    echo('<a href="/register" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
+                }
+                ?>
+            </ul>
+        </nav>
+    </header>
+</section>
+
+<section class="page-content">
+
+    <?php
+    if (!isset($_SESSION['id'])) {
+        echo('<div class="error-message">Vous devez être connecté pour écrire un article</div>');
+    } else {
+        ?>
+        <div class="editor">
+            <br/>
+            <input class="title" id="title" name="title" placeholder="Titre de l'article" type="text">
+            <br/>
+            <input class="description" id="description" name="description" placeholder="Description de l'article"
+                   type="text">
+            <br/>
+            <textarea class="content" cols="30" id="content" name="content" placeholder="Contenu de l'article"
+                      rows="10"></textarea>
+            <br/>
+            <input class="tags" id="tags" name="tags" placeholder="Tags de l'article" type="text">
+            <br/>
+            <input class="image" id="image" name="image" placeholder="Image de l'article" type="file">
+            <br/>
+            <button class="submit" id="submit" type="submit">Publier</button>
+            <br/>
+        </div>
+
+        <?php
+    }
+    ?>
+
+</section>
+
+<section class="bottom-page">
+    <footer>
+        <div class="site-nav">
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Soutien</p></li>
+                    <li><a href=""><p>Nous contacter</p></a></li>
+                    <li><a href=""><p>A propos</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Contactez-nous</p></li>
+                    <li><a href=""><p>Discord</p></a></li>
+                    <li><a href=""><p>Mail</p></a></li>
+                    <li><a href=""><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Rejoignez-nous</p></li>
+                    <li><a href=""><p>veagle.fr</p></a></li>
+                    <li><a href=""><p>Discord</p></a></li>
+                    <li><a href=""><p>Instagram</p></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="copyright-infos-nav">
+            <nav>
+                <ul>
+                    <li><p>© 2022 InfinIdea, by VEagle</p></li>
+                    <li><a href="">Politique de confidentialité</a></li>
+                </ul>
+            </nav>
+            <nav class="social-media">
+                <ul>
+                    <li><a href="https://discord.gg/Vahr76XmpU" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                    </li>
+                    <li><a href="https://www.instagram.com/nicolas_fsn_/"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li><a href="https://github.com/Mysterious-Developers"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://mysteriousdev.fr" target="_blank"><i
+                                    class="fa-solid fa-window-restore"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</section>
+</body>
+</html>
