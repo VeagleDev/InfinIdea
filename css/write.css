@@ -14,7 +14,7 @@
 }
 
 .description {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: normal;
     margin-left: 30px;
     border: 1px solid #000;
@@ -26,8 +26,8 @@
 }
 
 .content {
-    font-size: 1em;
-    font-weight: bold;
+    font-size: 1.2em;
+    font-weight: normal;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
     border: 1px solid #000;
@@ -43,7 +43,7 @@
 }
 
 .tags {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: normal;
     margin-bottom: 0.5em;
     border: 1px solid #000;
@@ -54,7 +54,7 @@
 }
 
 .image {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: bold;
     margin-left: 30px;
     margin-bottom: 0.5em;
@@ -65,7 +65,7 @@
 }
 
 .submit {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 0.5em;
     border: 1px solid #000;
