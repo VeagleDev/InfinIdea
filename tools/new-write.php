@@ -19,10 +19,10 @@ logs('Commence l\'\'écriture d\'\'un article');
     <title>Infinidea : Créer</title>
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/write.css" rel="stylesheet">
-    <script src="/backend/library/jquery-3.6.1.min.js" defer></script>
-    <script src="/backend/js/paste-image.js" defer></script>
-    <script src="/backend/js/write.js" defer></script>
-    <script src="/backend/js/fontawesome.js" async></script>
+    <script src="/backend/library/jquery-3.6.1.min.js"></script>
+    <script src="/backend/js/paste-image.js"></script>
+    <script src="/backend/js/write.js"></script>
+    <script src="/backend/js/fontawesome.js"></script>
 </head>
 <body>
 <section class="top-page">
