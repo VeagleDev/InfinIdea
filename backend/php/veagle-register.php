@@ -5,6 +5,8 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
     session_start(); // On démarre la session AVANT toute chose
 
     require_once 'tools/tools.php'; // On inclut le fichier tools.php
+    $db = getDB(); // On récupère la base de données
+
     logs('Tente de se créer un compte'); // On log l'action
 
     if (
@@ -23,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
         $password = hash('sha512', $password); // On hash le mot de passe avec sha512
 
         $sql = "SELECT * FROM users WHERE pseudo = '$pseudo' OR email = '$email'"; // On prépare la requête
-        $db = getDB(); // On récupère la base de données
+
         $result = mysqli_query($db, $sql); // On exécute la requête
         if (mysqli_affected_rows($db) > 0) { // Si l'utilisateur existe
             $row = mysqli_fetch_assoc($result); // On récupère les données de l'utilisateur

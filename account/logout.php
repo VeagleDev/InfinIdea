@@ -1,6 +1,7 @@
 <?php
 set_include_path('/var/www/blog');
 require_once 'tools/tools.php';
+$db = getDB();
 
 if(session_status() == PHP_SESSION_NONE)
 {
@@ -10,7 +11,7 @@ if(session_status() == PHP_SESSION_NONE)
 
 if(session_status() == PHP_SESSION_ACTIVE)
 {
-    logs('L\'utilisateur se déconnecte');
+    logs('L\'\'utilisateur se déconnecte');
     session_destroy(); // On détruit la session
     session_unset(); // On détruit les variables de session
     $_SESSION = []; // On détruit les variables de session

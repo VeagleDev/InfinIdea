@@ -6,9 +6,10 @@ if (session_status() == PHP_SESSION_NONE) { // Si la session n'est pas démarré
 require_once 'tools/tools.php'; // On inclut le fichier tools.php
 require_once 'vendor/autoload.php'; // On inclut le fichier autoload.php
 
-logs('Inconnu tente de se connecter'); // On log l'action
 
 $db = getDB(); // On récupère la base de données
+
+logs('Inconnu tente de se connecter'); // On log l'action
 
 if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'email et le mot de passe sont définis
     $email = SQLpurify($_POST['email']); // On récupère l'email
