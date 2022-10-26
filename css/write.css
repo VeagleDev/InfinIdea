@@ -8,6 +8,8 @@
     padding: 0.1em;
     min-width: 40%;
     height: 1.5em;
+    font-family: 'Nanum Gothic', sans-serif;
+
 
 }
 
@@ -20,6 +22,7 @@
     padding: 0.1em;
     min-width: 40%;
     height: 1.5em;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .content {
@@ -35,6 +38,7 @@
     margin-right: 30px;
     min-height: 20em;
     max-height: 30em;
+    font-family: 'Nanum Gothic', sans-serif;
 
 }
 
@@ -46,6 +50,7 @@
     border-radius: 5px;
     margin-left: 30px;
     padding: 0.1em;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .image {
@@ -56,6 +61,7 @@
     border: 1px solid #000;
     border-radius: 5px;
     padding: 0.5em;
+
 }
 
 .submit {
@@ -67,6 +73,7 @@
     padding: 0.5em;
     background-color: #3ab53a;
     margin-left: 30px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .submit:hover {
