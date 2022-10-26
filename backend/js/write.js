@@ -2,7 +2,7 @@
 console.log('salut');
 
 
-document.getElementsByClassName("submit")[0].addEventListener('click', () => {
+document.getElementById("submit").addEventListener('click', () => {
     console.log('bouton cliqué');
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
