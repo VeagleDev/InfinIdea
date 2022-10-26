@@ -11,17 +11,52 @@ document.getElementsByClassName("submit")[0].addEventListener('click', () => {
     const content_regex = /^.{30,10000}$/
     const tags_regex = /^[a-zA-Z0-9_-,\[\]]{0,1000}$/
 
+    let legit = true;
+
     if (!title_regex.test(title)) {
-        // title is not valid
+        // display error message
+        document.getElementsByClassName("title-error")[0].style.display = "block"
+        legit = false;
+    } else {
+        document.getElementsByClassName("title-error")[0].style.display = "none"
     }
     if (!description_regex.test(description)) {
-        // description is not valid
+        document.getElementsByClassName("description-error")[0].style.display = "block"
+        legit = false;
+    } else {
+        document.getElementsByClassName("description-error")[0].style.display = "none"
     }
     if (!content_regex.test(content)) {
-        // content is not valid
+        document.getElementsByClassName("content-error")[0].style.display = "block"
+        legit = false;
+    } else {
+        document.getElementsByClassName("content-error")[0].style.display = "none"
     }
     if (!tags_regex.test(tags)) {
-        // tags are not valid
+        document.getElementsByClassName("tags-error")[0].style.display = "block"
+        legit = false;
+    } else {
+        document.getElementsByClassName("tags-error")[0].style.display = "none"
     }
+
+    if (legit) {
+        jQuery.ajax({
+            url: '/backend/php/publish-article.php',
+            type: 'POST',
+            data: {
+                title: title,
+                description: description,
+                content: content,
+                tags: tags
+            },
+            success: function (data) {
+                alert('Yes')
+            },
+            error: function (data) {
+                alert('No')
+            }
+        })
+    }
+
 
 })
