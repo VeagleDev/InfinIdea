@@ -1,6 +1,7 @@
 // eventlistener to click event on the submit button
-
+console.log('salut');
 document.getElementsByClassName("submit")[0].addEventListener('click', () => {
+    console.log('bouton cliqué');
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
     const content = document.getElementsByClassName("content")[0].value
