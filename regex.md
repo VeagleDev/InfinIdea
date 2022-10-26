@@ -45,7 +45,7 @@
 (regex that allow article titles with up to 50 chars with every character)
 
 ```regex
-    ^.{1,50}$
+    ^.{4,50}$
 ```
 
 ## Article description :
@@ -53,7 +53,7 @@
 (regex that allow article descriptions with up to 200 chars with every character)
 
 ```regex
-    ^.{1,200}$
+    ^.{4,200}$
 ```
 
 ## Article content :
@@ -61,7 +61,7 @@
 (regex that allow article contents with up to 10000 chars with every character)
 
 ```regex
-    ^.{1,10000}$
+    ^.{30,10000}$
 ```
 
 ## Article tags :
@@ -70,5 +70,5 @@
 commas)
 
 ```regex
-    ^[a-zA-Z0-9_-,\[\]]{1,1000}$
+    ^[a-zA-Z0-9_-,\[\]]{0,1000}$
 ```

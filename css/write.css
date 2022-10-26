@@ -100,3 +100,35 @@
     padding: 0.5em;
     font-family: 'Nanum Gothic', sans-serif;
 }
+
+.title-error {
+    display: none;
+    border: 1px solid red;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.description-error {
+    display: none;
+    border: 1px solid red;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.content-error {
+    display: none;
+    border: 1px solid red;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.tags-error {
+    display: none;
+    border: 1px solid red;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
