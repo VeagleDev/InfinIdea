@@ -90,10 +90,12 @@
     bottom: 0;
     width: 100%;*/
 
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
+    /* make the footer stays to the bottom but go down when the content is too long */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+
 }
 
 .error-message {
