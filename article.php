@@ -61,7 +61,7 @@ $db = getDB();
                         </a>
                     </li>
                     <?php
-                    if(!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
+                    if (!isset($_SESSION['id'])) // S'il n'est pas connecté, on lui propose de se connecter
                     {
                         echo('<a href="account/register.php" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');
                     }
