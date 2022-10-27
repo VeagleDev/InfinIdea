@@ -6,6 +6,9 @@ if (session_status() == PHP_SESSION_NONE)
 
 require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
+require_once 'vendor/autoload.php';
+
+use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 $db = getDB();
 
@@ -21,6 +24,15 @@ if (
     $description = SQLpurify($_POST['description']);
     $content = SQLpurify($_POST['content']);
     $tags = SQLpurify($_POST['tags']);
+
+    $converter = new GithubFlavoredMarkdownConverter([
+        'html_input' => 'allow',
+        'allow_unsafe_links' => true,
+    ]);
+
+    $content = $converter->convert($content);
+
+// <h1>Hello World!</h1>
 
 
     $author = $_SESSION['id'];

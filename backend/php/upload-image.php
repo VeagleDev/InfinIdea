@@ -15,7 +15,7 @@ if (isset($_POST['image'])) // Si l'image et l'article sont définis
     $img = HTMLpurify($_POST['image']); // On récupère l'image
 
     if (isset($_SESSION['id'])) {
-        $sql = "SELECT * FROM articles WHERE creator = " . $_SESSION['id'] . " WHERE visibility = 'not-written' ORDER BY id DESC LIMIT 1"; // On vérifie que l'article appartient bien à l'utilisateur
+        $sql = "SELECT * FROM articles WHERE creator = " . $_SESSION['id'] . " AND visibility = 'not-written' ORDER BY id DESC LIMIT 1"; // On vérifie que l'article appartient bien à l'utilisateur
         $res = $db->query($sql);
         if ($res->num_rows == 1) {
             $article = $res->fetch_assoc()['id'];
