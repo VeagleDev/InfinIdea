@@ -3,6 +3,11 @@ console.log('salut')
 
 // add eventlistener to the submit button
 
+const button = document.getElementsByClassName('submit')[0];
+
+button.addEventListener('click', function (e) {
+    console.log('salut2')
+})
 
 document.getElementsByClassName('submit')[0].addEventListener('click', function (e) {
     console.log('bouton cliqué')
