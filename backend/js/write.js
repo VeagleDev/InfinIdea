@@ -14,7 +14,7 @@ button.addEventListener("click", function () {
 
     const title_regex = /^.{4,50}$/
     const description_regex = /^.{4,200}$/
-    const content_regex = /^.{30,10000}$[\r\n]/
+    const content_regex = /^[\s\S]{30,10000}$/
     const tags_regex = /^.{0,1000}$/
 
     let legit = true;
