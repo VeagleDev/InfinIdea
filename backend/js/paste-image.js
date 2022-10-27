@@ -48,11 +48,9 @@ window.addEventListener("paste", function (e) { // Quand on colle une image
 
 // create a function which send the base64 image to the server
 function sendImageToServer(imageDataBase64) { // On envoie l'image au serveur
-    const aid = document.getElementById('article-id').value; // On récupère l'id de l'article
     jQuery.ajax({ // On envoie l'image au serveur avec AJAX
         url: "/backend/php/upload-image.php",  // On envoie l'image au serveur
         data: { // On envoie les données
-            article: aid, // L'id de l'article
             image: imageDataBase64 // L'image
         },
         type: "post", // On envoie les données en POST

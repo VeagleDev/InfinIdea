@@ -9,11 +9,26 @@ require_once 'tools/tools.php';
 $db = getDB();
 
 
-if (isset($_POST['image']) && isset($_POST['article'])) // Si l'image et l'article sont définis
+if (isset($_POST['image'])) // Si l'image et l'article sont définis
 {
     logs('Utilisateur upload une image');
     $img = HTMLpurify($_POST['image']); // On récupère l'image
-    $article = SQLpurify($_POST['article']); // On récupère l'article
+
+    if (isset($_SESSION['id'])) {
+        $sql = "SELECT * FROM articles WHERE creator = " . $_SESSION['id'] . " WHERE visibility = 'not-written' ORDER BY id DESC LIMIT 1"; // On vérifie que l'article appartient bien à l'utilisateur
+        $res = $db->query($sql);
+        if ($res->num_rows == 1) {
+            $article = $res->fetch_assoc()['id'];
+        } else {
+            echo "Cet article n'existe pas";
+            exit();
+        }
+
+    } else {
+        echo "Vous n'êtes pas connecté";
+        exit();
+    }
+
 
     $base_to_php = explode(',', $img); // On sépare le type de l'image et le contenu
     $data = base64_decode($base_to_php[1]); // On décode le contenu
