@@ -291,26 +291,23 @@ width: 5px;
     color: #FFF;
     font-family: 'Cabin';
     letter-spacing: 0.5px;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 1.5;
     height: auto;
-    width: 100%;
+    width: 70%;
     margin-top: 150px;
-    padding-left: 300px;
-    padding-right: 300px;
     margin-bottom: 150px;
-
+    border: solid 1px black;
+    border-radius: 50px;
+    padding: 50px;
 }
 
 .content-txt img {
-    width: 100%;
-    height: auto;
     display: block;
-    margin-left: 0;
-    padding-left: 0;
-    max-width: 1200px;
-    margin-bottom: 20px;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: auto;
 }
 
 
