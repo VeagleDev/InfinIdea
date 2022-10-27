@@ -86,16 +86,9 @@
 }
 
 .bottom-page {
-    /*position: fixed;
-    bottom: 0;
-    width: 100%;*/
-
-    /* make the footer stays to the bottom but go down when the content is too long */
-    position: static;
+    margin-top: 1em;
     bottom: 0;
     width: 100%;
-
-
 }
 
 .error-message {
