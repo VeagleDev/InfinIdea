@@ -25,6 +25,12 @@ if (
 
     $author = $_SESSION['id'];
 
+    $sql = "SELECT * FROM articles WHERE name = '" . $title . "'";
+    if (mysqli_num_rows(mysqli_query($db, $sql)) > 0) {
+        logs('L\'\'article existe déjà');
+        echo "4";
+        exit();
+    }
 
     $sql = "SELECT * FROM articles WHERE creator = " . $author . " AND visibility = 'not-written' ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($db, $sql);
@@ -41,16 +47,16 @@ if (
         $result = mysqli_query($db, $sql);
         if ($result) {
             logs('Article publié avec succès');
-            echo "0";
+            echo "https://infinidea.veagle.fr/article.php?id=" . $row['uid'];
         } else {
-            logs('Erreur lors de la publication de l\'article');
+            logs('Erreur lors de la publication de l\'\'article');
             echo "2";
         }
     } else {
         echo "3";
     }
 } else {
-    logs('Erreur : Tous les champs ne sont pas remplis');
+    logs('Erreur publication : Tous les champs ne sont pas remplis');
     echo "1";
     die();
 }

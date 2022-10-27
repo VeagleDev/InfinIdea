@@ -1,12 +1,8 @@
-// eventlistener to click event on the submit button
-console.log('salut');
-
-// add eventlistener to the submit button
-
 const button = document.getElementById('submit');
 
 button.addEventListener("click", function () {
-    console.log('bouton cliqué')
+    button.enabled = false;
+
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
     const content = document.getElementsByClassName("content")[0].value
@@ -20,7 +16,6 @@ button.addEventListener("click", function () {
     let legit = true;
 
     if (!title_regex.test(title)) {
-        // display error message
         document.getElementsByClassName("title-error")[0].style.display = "block"
         legit = false;
     } else {
@@ -55,17 +50,48 @@ button.addEventListener("click", function () {
                 content: content,
                 tags: tags
             },
-            success: function () {
-                alert('Yes')
+            success: function (data) {
+                code = data;
+                if (code.startsWith("https://")) {
+                    const success = document.getElementsByClassName("success")[0]
+                    const link = document.getElementsByClassName("link-article")[0]
+                    button.style.color = "green"
+                    button.innerHTML = "Publié"
+                    button.enabled = false;
+                    success.style.display = "block"
+                    link.href = code
+                } else {
+                    switch (code) {
+                        case "2":
+                            alert("Erreur lors de la publication de l'article")
+                            break;
+                        case "3":
+                            alert("Les données envoyées n\'ont pas pu être associées à un article")
+                            break;
+                        case "1":
+                            alert("Les données envoyées ne sont pas valides")
+                            break;
+                        case "4":
+                            alert("Un article avec le même titre existe déjà")
+                            break;
+
+                        default:
+                            alert("Erreur inconnue")
+                            break;
+
+                    }
+                }
+
             },
             error: function () {
-                alert('No')
+                alert("Erreur durant la publication de l'article")
+                button.style.backgroundColor = "red"
+                button.enabled = true;
             }
         })
         return true;
 
     } else {
-        alert('Not legit')
         return false;
     }
 

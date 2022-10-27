@@ -124,6 +124,8 @@ logs('Commence l\'\'écriture d\'\'un article');
 
             <button class="submit" id="submit" type="submit">Publier</button>
             <br/>
+            <p class="success" id="sucess">L'article a bien été publié, allez le voir <a href="" class="link-article"
+                                                                                         id="link-article">ici</a></p>
         </div>
 
         <?php
