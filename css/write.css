@@ -86,9 +86,14 @@
 }
 
 .bottom-page {
-    position: fixed;
+    /*position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 100%;*/
+
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
 }
 
 .error-message {
