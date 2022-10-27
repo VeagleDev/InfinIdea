@@ -103,32 +103,40 @@
 
 .title-error {
     display: none;
-    border: 1px solid red;
-    margin-left: 50px;
-    margin-top: 5px;
+    color: red;
+    margin-left: 35px;
     margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .description-error {
     display: none;
-    border: 1px solid red;
-    margin-left: 50px;
-    margin-top: 5px;
+    color: red;
+    margin-left: 35px;
     margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .content-error {
     display: none;
-    border: 1px solid red;
-    margin-left: 50px;
-    margin-top: 5px;
+    color: red;
+    margin-left: 35px;
     margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .tags-error {
     display: none;
-    border: 1px solid red;
-    margin-left: 50px;
-    margin-top: 5px;
+    color: red;
+    margin-left: 35px;
     margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
 }
