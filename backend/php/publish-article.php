@@ -26,7 +26,7 @@ if (
     $author = $_SESSION['id'];
 
 
-    $sql = "SELECT * INTO articles WHERE creator = " . $author . " AND visibility = 'not-written' ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT * FROM articles WHERE creator = " . $author . " AND visibility = 'not-written' ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($db, $sql);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
