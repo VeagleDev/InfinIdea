@@ -25,21 +25,10 @@ if (
 
     $author = $_SESSION['id'];
 
-    $author = getPseudo($author);
-    echo(
-        "<p>Titre : $title</p>"
-        . "<p>Description : $description</p>"
-        . "<p>Contenu : $content</p>"
-        . "<p>Tags : $tags</p>"
-        . "<p>Auteur : $author</p>"
 
-    );
-
-    /*
     $sql = "SELECT * INTO articles WHERE creator = " . $author . " AND visibility = 'not-written' ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($db, $sql);
-    if($result)
-    {
+    if ($result) {
         $row = mysqli_fetch_assoc($result);
         $aid = $row['id'];
         $sql = "UPDATE articles SET 
@@ -50,21 +39,16 @@ if (
                     modified = NOW() 
                 WHERE id = $aid";
         $result = mysqli_query($db, $sql);
-        if($result)
-        {
+        if ($result) {
             logs('Article publié avec succès');
-            echo 'Article publié avec succès';
-        }
-        else
-        {
+            echo "0";
+        } else {
             logs('Erreur lors de la publication de l\'article');
-            echo 'Erreur lors de la publication de l\'article';
+            echo "2";
         }
+    } else {
+        echo "3";
     }
-    else
-    {
-
-    }*/
 } else {
     logs('Erreur : Tous les champs ne sont pas remplis');
     echo "1";

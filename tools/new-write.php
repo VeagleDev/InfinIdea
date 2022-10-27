@@ -9,6 +9,7 @@ $db = getDB();
 
 logs('Commence l\'\'écriture d\'\'un article');
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +86,13 @@ logs('Commence l\'\'écriture d\'\'un article');
     if (!isset($_SESSION['id'])) {
         echo('<div class="error-message">Vous devez être connecté pour écrire un article</div>');
     } else {
+        $sql = "SELECT id FROM articles WHERE creator = " . $_SESSION['id'] . " AND visibility = 'not-written'";
+        $result = $db->query($sql);
+        if ($result->num_rows == 0) {
+            $uuid = uniqid();
+            $sql = "INSERT INTO articles (uid, creator, visibility) VALUES ('" . $uuid . "', '" . $_SESSION['id'] . "', 'not-written')";
+            $result = mysqli_query($db, $sql);
+        }
         ?>
         <div class="editor">
             <br/>
