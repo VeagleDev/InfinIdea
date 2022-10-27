@@ -1,15 +1,11 @@
 // eventlistener to click event on the submit button
-console.log('salut')
+console.log('salut');
 
 // add eventlistener to the submit button
 
-const button = document.getElementsByClassName('submit')[0];
+const button = document.getElementById('submit');
 
-button.addEventListener('click', function (e) {
-    console.log('salut2')
-})
-
-document.getElementsByClassName('submit')[0].addEventListener('click', function (e) {
+button.addEventListener("click", function () {
     console.log('bouton cliqué')
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
@@ -59,10 +55,10 @@ document.getElementsByClassName('submit')[0].addEventListener('click', function 
                 content: content,
                 tags: tags
             },
-            success: function (data) {
+            success: function () {
                 alert('Yes')
             },
-            error: function (data) {
+            error: function () {
                 alert('No')
             }
         })
@@ -74,5 +70,5 @@ document.getElementsByClassName('submit')[0].addEventListener('click', function 
     }
 
 
-})
+});
 

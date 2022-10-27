@@ -21,7 +21,7 @@ logs('Commence l\'\'écriture d\'\'un article');
     <link href="/css/write.css" rel="stylesheet">
     <script src="/backend/library/jquery-3.6.1.min.js"></script>
     <script src="/backend/js/paste-image.js"></script>
-    <script src="/backend/js/write.js"></script>
+    <script src="/backend/js/write.js" defer></script>
     <script src="/backend/js/fontawesome.js"></script>
 </head>
 <body>
