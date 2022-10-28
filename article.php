@@ -21,6 +21,9 @@ $db = getDB();
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
     <link rel="stylesheet" href="css/markdown.css">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js" defer></script>
 </head>
 <body>
 <section class="top-page">
