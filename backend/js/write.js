@@ -12,6 +12,7 @@ viewMore.addEventListener('click', () => {
 
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";
+    button.style.padding = "0";
 
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
@@ -72,6 +73,7 @@ button.addEventListener("click", function () {
                     link.href = code
                 } else {
                     button.innerHTML = "Publier"
+                    button.style.padding = "0.5em"
                     switch (code) {
                         case "2":
                             alert("Erreur lors de la publication de l'article")
@@ -98,6 +100,7 @@ button.addEventListener("click", function () {
             error: function () {
                 alert("Erreur durant la publication de l'article")
                 button.innerHTML = "Publier"
+                button.style.padding = "0.5em"
                 button.style.backgroundColor = "red"
                 button.enabled = true;
             }
