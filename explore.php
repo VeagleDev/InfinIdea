@@ -56,17 +56,15 @@ logs('Va chercher les articles');
                                 }
                                 ?>
 
-                            </p>
-                            <ul class="user-connection-scrolling-menu">
-                                <li><a href="account/account.php"><p>Mon compte</p></a></li>
-                                <li><a href=""><p>A propos</p></a></li>
-                                <li><a href=""><p>Mes projets</p></a></li>
-                                <li><a href="account/account.php"><p>Paramètres</p></a></li>
-                                <li><a href="account/logout.php"><p>Déconnexion</p></a></li>
-                            </ul>
-                        </a>
-                    </li>
-                    <?php
+                        </p>
+                        <ul class="user-connection-scrolling-menu">
+                            <li><a href="/account/account.php"><p>Mon compte</p></a></li>
+                            <li><a href="/write"><p>Écrire</p></a></li>
+                            <li><a href="/account/logout.php"><p>Déconnexion</p></a></li>
+                        </ul>
+                    </a>
+                </li>
+                <?php
                     if(!isset($_SESSION['id'])) // Si il n'est pas connecté, on lui propose de se connecter
                     {
                         echo('<a href="/register" class="sign-in unconnected"><li class="sign-in-sub-element"><p>S\'inscrire</p></li></a>');

@@ -34,7 +34,7 @@ logs('Visite le site');
                             Recommendations</p></a></li>
                 <li class="first-child"><a href="explore.php"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p>
                     </a></li>
-                <li class="first-child"><a href="tools/write.php"><p><i class="fa-solid fa-question nav-icon"></i>Créer
+                <li class="first-child"><a href="/write"><p><i class="fa-solid fa-question nav-icon"></i>Créer
                         </p></a></li>
             </ul>
         </nav>
@@ -51,9 +51,9 @@ logs('Visite le site');
                             </p>
                         </a>
                         <ul class="user-connection-scrolling-menu">
-                            <li><a href="account/account.php"><p>Mon compte</p></a></li>
-                            <li><a href="tools/write.php"><p>Écrire</p></a></li>
-                            <li><a href="account/logout.php"><p>Déconnexion</p></a></li>
+                            <li><a href="/account/account.php"><p>Mon compte</p></a></li>
+                            <li><a href="/write"><p>Écrire</p></a></li>
+                            <li><a href="/account/logout.php"><p>Déconnexion</p></a></li>
                         </ul>
                         </a>
                         <?php

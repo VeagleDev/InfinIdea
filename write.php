@@ -54,7 +54,7 @@ logs('Commence l\'\'écriture d\'\'un article');
                         </a>
                         <ul class="user-connection-scrolling-menu">
                             <li><a href="/account/account.php"><p>Mon compte</p></a></li>
-                            <li><a href="/tools/write.php"><p>Écrire</p></a></li>
+                            <li><a href="/write"><p>Écrire</p></a></li>
                             <li><a href="/account/logout.php"><p>Déconnexion</p></a></li>
                         </ul>
                         </a>
