@@ -111,6 +111,16 @@ logs('Commence l\'\'écriture d\'\'un article');
 
             <textarea class="content" cols="30" id="content" name="content" placeholder="Contenu de l'article"
                       rows="10"></textarea>
+
+            <i class="fa-solid fa-question" id="viewMore">
+                <p class="more-info">
+                    Vous pouvez utiliser le langage Markdown pour rendre votre article plus flamboyant 🔥
+                    Vous pouvez même utiliser le raccourci CTRL+V pour coller une image dans le contenu !
+                </p>
+            </i>
+
+            <!-- add a small ? icon to explain markdown  from fontawesome -->
+
             <p class="content-error">Le contenu doit faire entre 30 et 10000 caractères</p>
 
             <br/>

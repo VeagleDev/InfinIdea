@@ -1,5 +1,10 @@
 const button = document.getElementById('submit');
 
+const viewMore = document.getElementById('viewMore');
+viewMore.addEventListener('click', () => {
+    alert('View More');
+});
+
 button.addEventListener("click", function () {
     button.enabled = false;
 

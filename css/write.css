@@ -163,3 +163,8 @@
 .link-article:active {
     color: #1f5f1f;
 }
+
+.more-info {
+    display: none;
+}
+
