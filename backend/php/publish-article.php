@@ -22,7 +22,7 @@ if (
 ) {
     $title = SQLpurify($_POST['title']);
     $description = SQLpurify($_POST['description']);
-    $content = SQLpurify($_POST['content']);
+    $content = $_POST['content'];
     $tags = SQLpurify($_POST['tags']);
 
     $converter = new GithubFlavoredMarkdownConverter([
@@ -31,10 +31,7 @@ if (
     ]);
 
     $content = $converter->convert($content);
-
-// <h1>Hello World!</h1>
-
-
+    $content = SQLpurify($content);
     $author = $_SESSION['id'];
 
     $sql = "SELECT * FROM articles WHERE name = '" . $title . "'";
