@@ -12,7 +12,7 @@ viewMore.addEventListener('click', () => {
 
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";
-    button.style.padding = "0";
+    button.style.padding = "10px";
 
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
@@ -29,24 +29,32 @@ button.addEventListener("click", function () {
     if (!title_regex.test(title)) {
         document.getElementsByClassName("title-error")[0].style.display = "block"
         legit = false;
+        button.innerHTML = "Publier"
+        button.style.padding = "0.5em"
     } else {
         document.getElementsByClassName("title-error")[0].style.display = "none"
     }
     if (!description_regex.test(description)) {
         document.getElementsByClassName("description-error")[0].style.display = "block"
         legit = false;
+        button.innerHTML = "Publier"
+        button.style.padding = "0.5em"
     } else {
         document.getElementsByClassName("description-error")[0].style.display = "none"
     }
     if (!content_regex.test(content)) {
         document.getElementsByClassName("content-error")[0].style.display = "block"
         legit = false;
+        button.innerHTML = "Publier"
+        button.style.padding = "0.5em"
     } else {
         document.getElementsByClassName("content-error")[0].style.display = "none"
     }
     if (!tags_regex.test(tags)) {
         document.getElementsByClassName("tags-error")[0].style.display = "block"
         legit = false;
+        button.innerHTML = "Publier"
+        button.style.padding = "0.5em"
     } else {
         document.getElementsByClassName("tags-error")[0].style.display = "none"
     }
