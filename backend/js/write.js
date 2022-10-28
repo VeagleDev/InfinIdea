@@ -12,7 +12,7 @@ viewMore.addEventListener('click', () => {
 
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";
-    button.style.padding = "10px";
+    button.style.padding = "5px";
 
     const title = document.getElementsByClassName("title")[0].value
     const description = document.getElementsByClassName("description")[0].value
