@@ -295,7 +295,11 @@ width: 5px;
     line-height: 1.5;
 
 
-    width: 70%;
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+
     margin-bottom: 150px;
 
     border: solid 5px black;
@@ -303,10 +307,7 @@ width: 5px;
 
     padding: 50px;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
 
 
 }
