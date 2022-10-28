@@ -1,8 +1,13 @@
 const button = document.getElementById('submit');
 
 const viewMore = document.getElementById('viewMore');
+const text = document.getElementsByClassName("more-info")[0]
 viewMore.addEventListener('click', () => {
-    alert('View More');
+    if (text.style.display === "none") {
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
 });
 
 button.addEventListener("click", function () {
