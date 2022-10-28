@@ -287,29 +287,7 @@ width: 5px;
     border-radius: 10px;
 }
 
-.content-txt {
-    color: #FFF;
-    font-family: 'Cabin';
-    letter-spacing: 0.5px;
-    font-size: 16px;
-    line-height: 1.5;
 
-    width: 80%;
-    height: auto;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 150px;
-
-
-}
-
-.content-txt img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    height: auto;
-}
 
 
 .separator {
