@@ -20,6 +20,10 @@ if (
     isset($_POST['content']) &&
     isset($_POST['tags'])
 ) {
+
+    // wait a second
+    sleep(1);
+
     $title = SQLpurify($_POST['title']);
     $description = SQLpurify($_POST['description']);
     $content = $_POST['content'];
