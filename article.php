@@ -20,6 +20,7 @@ $db = getDB();
     <script src="backend/js/fontawesome.js"></script>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/markdown.css">
 </head>
 <body>
 <section class="top-page">
@@ -27,9 +28,12 @@ $db = getDB();
         <nav class="top-nav">
             <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
             <ul class="main-list">
-                    <li class="first-child"><a href="index.php"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
-                    <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
-                    <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
+                <li class="first-child"><a href="index.php"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p>
+                    </a></li>
+                <li class="first-child"><a href="explore.php?type=recommandations"><p><i
+                                    class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
+                <li class="first-child"><a href="explore.php?type=recents"><p><i
+                                    class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>
                     <li class="first-child"><a href=""><p><i class="fa-solid fa-question nav-icon"></i>Créer</p></a></li>
                 </ul>
             </nav>
