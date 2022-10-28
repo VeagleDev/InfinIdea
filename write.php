@@ -108,7 +108,7 @@ logs('Commence l\'\'écriture d\'\'un article');
 
             <i class="fa-solid fa-question" id="viewMore">
                 <p class="more-info">
-                    Vous pouvez utiliser le langage Markdown pour rendre votre article plus flamboyant 🔥
+                    Vous pouvez utiliser le langage Markdown pour rendre votre article plus flamboyant 🔥 <br/>
                     Vous pouvez même utiliser le raccourci CTRL+V pour coller une image dans le contenu !
                 </p>
             </i>
