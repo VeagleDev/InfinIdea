@@ -293,13 +293,22 @@ width: 5px;
     letter-spacing: 0.5px;
     font-size: 20px;
     line-height: 1.5;
-    height: auto;
+
+
     width: 70%;
-    margin-top: 150px;
     margin-bottom: 150px;
-    border: solid 1px black;
+
+    border: solid 5px black;
     border-radius: 50px;
+
     padding: 50px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
 }
 
 .content-txt img {
