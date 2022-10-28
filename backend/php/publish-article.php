@@ -34,6 +34,36 @@ if (
     $content = SQLpurify($content);
     $author = $_SESSION['id'];
 
+    $title_regex = '/^.{4,50}$/';
+    $description_regex = '/^.{4,200}$/';
+    $content_regex = '/^[\s\S]{30,10000}$/';
+    $tags_regex = '/^.{0,1000}$/';
+
+    if (!preg_match($title_regex, $title)) {
+        logs('Le titre n\'\'est pas valide');
+        echo "5";
+        exit();
+    }
+
+    if (!preg_match($description_regex, $description)) {
+        logs('La description n\'\'est pas valide');
+        echo "6";
+        exit();
+    }
+
+    if (!preg_match($content_regex, $content)) {
+        logs('Le contenu n\'\'est pas valide');
+        echo "7";
+        exit();
+    }
+
+    if (!preg_match($tags_regex, $tags)) {
+        logs('Les tags ne sont pas valide');
+        echo "8";
+        exit();
+    }
+
+
     $sql = "SELECT * FROM articles WHERE name = '" . $title . "'";
     if (mysqli_num_rows(mysqli_query($db, $sql)) > 0) {
         logs('L\'\'article existe déjà');
