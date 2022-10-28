@@ -299,7 +299,11 @@ width: 5px;
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 150px;
-    border-radius: 50px;
+
+    border-left: #000 5px solid;
+    border-right: #000 5px solid;
+    padding: 10px;
+
 }
 
 .content-txt img {
