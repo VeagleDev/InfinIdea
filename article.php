@@ -24,6 +24,7 @@ $db = getDB();
 
     <link rel="stylesheet" type="text/css" href="/backend/library/prettify/prettify.css">
     <script type="text/javascript" src="/backend/library/prettify/prettify.js"></script>
+    <script type="text/javascript" src=/backend/library/jquery-3.6.1.min.js></script>
     <script type="text/javascript" src="/backend/js/start-article.js"></script>
 </head>
 <body>
