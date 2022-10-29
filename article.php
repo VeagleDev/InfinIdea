@@ -16,17 +16,17 @@ $db = getDB();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfinIdea : Bienvenue</title>
+    <title>InfinIdea : Article</title>
     <script src="backend/js/fontawesome.js"></script>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
 </head>
 <body>
-    <section class="top-page">
-        <header>
-            <nav class="top-nav">
-                <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
-                <ul class="main-list">
+<section class="top-page">
+    <header>
+        <nav class="top-nav">
+            <img src="images/logo_veagle_white.png" alt="MysteriousDevelopers creation" class="logo-top">
+            <ul class="main-list">
                     <li class="first-child"><a href="index.php"><p><i class="fa-solid fa-house nav-icon"></i> Accueil</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recommandations"><p><i class="fa-solid fa-shuffle nav-icon"></i> Recommendations</p></a></li>
                     <li class="first-child"><a href="explore.php?type=recents"><p><i class="fa-regular fa-heart nav-icon"></i> Suivis</p></a></li>

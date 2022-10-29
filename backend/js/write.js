@@ -76,6 +76,8 @@ button.addEventListener("click", function () {
                     const link = document.getElementsByClassName("link-article")[0]
                     button.style.color = "green"
                     button.innerHTML = "Publié"
+                    button.style.padding = "0.5em"
+
                     button.enabled = false;
                     success.style.display = "block"
                     link.href = code
