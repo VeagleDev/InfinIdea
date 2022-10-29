@@ -118,6 +118,7 @@ logs('Commence l\'\'écriture d\'\'un article');
             <br/>
 
             <textarea class="content" id="content" name="content" placeholder="Contenu de l'article"></textarea>
+
             <img src="/images/markdown.svg" class="markdown-logo" alt="Logo Markdown">
 
             <p class="content-error">Le contenu doit faire entre 30 et 10000 caractères</p>
