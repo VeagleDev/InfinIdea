@@ -106,6 +106,7 @@
     background-color: #3ab53a;
     margin-left: 30px;
     font-family: 'Nanum Gothic', sans-serif;
+    min-height: 30px;
 }
 
 .submit:hover {
