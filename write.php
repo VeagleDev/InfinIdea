@@ -115,6 +115,8 @@ logs('Commence l\'\'écriture d\'\'un article');
             <a href="https://www.ionos.fr/digitalguide/sites-internet/developpement-web/markdown/" alt="Guide Markdown"
                target="_blank">
                 <img src="/images/markdown-logo.svg" class="markdown-logo" alt="Logo Markdown">
+                <p class="markdown-explane">Le contenu supporte le langage Markdown pour mettre en forme votre article.
+                    Cliquez pour comprendre comment ça fonctionne.</p>
             </a>
 
 
