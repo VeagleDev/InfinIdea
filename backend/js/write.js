@@ -1,5 +1,11 @@
 const button = document.getElementById('submit');
 
+const image = document.getElementsByClassName("markdown-logo")[0];
+const explanation = document.getElementsByClassName("markdown-explane")[0];
+
+image.addEventListener("click", function () {
+    explanation.classList.toggle("hidden");
+});
 
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";

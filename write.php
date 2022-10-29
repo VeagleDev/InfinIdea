@@ -111,13 +111,17 @@ logs('Commence l\'\'écriture d\'\'un article');
             <br/>
 
             <textarea class="content" id="content" name="content" placeholder="Contenu de l'article"></textarea>
+            
 
-            <a href="https://www.ionos.fr/digitalguide/sites-internet/developpement-web/markdown/" alt="Guide Markdown"
-               target="_blank">
+            <div>
                 <img src="/images/markdown-logo.svg" class="markdown-logo" alt="Logo Markdown">
-                <p class="markdown-explane">Le contenu supporte le langage Markdown pour mettre en forme votre article.
-                    Cliquez pour comprendre comment ça fonctionne.</p>
-            </a>
+                <a href="https://www.ionos.fr/digitalguide/sites-internet/developpement-web/markdown/"
+                   alt="Guide Markdown" target="_blank">
+                    <p class="markdown-explane">Le contenu supporte le langage Markdown pour mettre en forme votre
+                        article.
+                        Cliquez pour comprendre comment ça fonctionne.</p>
+                </a>
+            </div>
 
 
             <p class="content-error">Le contenu doit faire entre 30 et 10000 caractères</p>
