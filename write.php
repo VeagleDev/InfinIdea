@@ -111,7 +111,6 @@ logs('Commence l\'\'écriture d\'\'un article');
             <br/>
 
             <textarea class="content" id="content" name="content" placeholder="Contenu de l'article"></textarea>
-            <<
 
             <div>
                 <img src="/images/markdown-logo.svg" class="markdown-logo" alt="Logo Markdown">
