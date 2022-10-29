@@ -287,6 +287,14 @@ width: 5px;
     border-radius: 10px;
 }
 
+.markdown-logo {
+    width: 50px;
+    height: 30px;
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
