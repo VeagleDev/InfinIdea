@@ -1,7 +1,9 @@
 
 window.onload = () => {
-    document.querySelectorAll("pre").forEach((el) => {
+    /*document.querySelectorAll("pre").forEach((el) => {
         el.classList.add("prettyprint")
     })
-    PR.prettyPrint();
+    PR.prettyPrint();*/
+
+    hljs.highlightAll();
 }
