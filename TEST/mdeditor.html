@@ -15,23 +15,7 @@
 </textarea>
 
 <script>
-    var simplemde = new SimpleMDE({
-        element: document.getElementById("test-editormd"),
-        autofocus: true,
-        autosave: {
-            enabled: true,
-            uniqueId: "test-editormd",
-            delay: 1000,
-        },
-        spellChecker: false,
-        toolbar: [
-            "bold", "italic", "heading", "|",
-            "quote", "code", "table", "horizontal-rule", "|",
-            "link", "image", "video", "unordered-list", "ordered-list", "|",
-            "preview", "side-by-side", "fullscreen", "|",
-            "guide"
-        ],
-    });
+    var simplemde = new SimpleMDE({element: document.getElementById("test-editormd")});
 </script>
 
 
