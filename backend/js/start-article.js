@@ -4,6 +4,4 @@ window.onload = () => {
         el.classList.add("prettyprint")
     })
     PR.prettyPrint();*/
-
-    hljs.highlightAll();
 }
