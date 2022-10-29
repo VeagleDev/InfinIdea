@@ -7,6 +7,10 @@ image.addEventListener("click", function () {
     explanation.style.display = (explanation.style.display == "block") ? "none" : "block";
 });
 
+document.body.addEventListener("click", function (e) {
+    explanation.style.display = "none";
+});
+
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";
     button.style.padding = "5px";
