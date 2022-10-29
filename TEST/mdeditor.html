@@ -3,27 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="/backend/library/editor.md/css/simplemde-dark-theme.min.css" rel="stylesheet">
+    <script src="/backend/library/editor.md/js/simplemde.js"></script>
+
 </head>
 <body>
 
-<link rel="stylesheet" href="/backend/library/editor.md/css/editormd.min.css" />
+<textarea id="test-editormd" name="test-editormd">
+    # Hello world!
+</textarea>
 
-<div id="editor">
-  <textarea style="display:none;">### Hello Editor.md !</textarea>
-</div>
-
-
-<script src="/backend/library/jquery-3.6.1.min.js"></script>
-<script src="/backend/library/editor.md/editormd.min.js"></script>
-
-<script type="text/javascript">
-  $(function() {
-    var editor = editormd("editor", {
-        height: 1000,
-        path: "/backend/library/editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("test-editormd"),
+        autofocus: true,
+        autosave: {
+            enabled: true,
+            uniqueId: "test-editormd",
+            delay: 1000,
+        },
+        spellChecker: false,
+        toolbar: [
+            "bold", "italic", "heading", "|",
+            "quote", "code", "table", "horizontal-rule", "|",
+            "link", "image", "video", "unordered-list", "ordered-list", "|",
+            "preview", "side-by-side", "fullscreen", "|",
+            "guide"
+        ],
     });
-  });
 </script>
+
 
 </body>
 </html>
