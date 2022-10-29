@@ -206,6 +206,8 @@
     position: absolute;
     left: 80%;
 
+    cursor: grab;
+
 }
 
 .markdown-explane {
