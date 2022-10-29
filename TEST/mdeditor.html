@@ -12,9 +12,10 @@
 </head>
 <body>
 
+<textarea id="editor"></textarea>
 
 <script>
-    var simplemde = new SimpleMDE();
+    var simplemde = new SimpleMDE({element: document.getElementById("MyID")});
 </script>
 
 <!--<textarea id="test-editormd" name="test-editormd">
