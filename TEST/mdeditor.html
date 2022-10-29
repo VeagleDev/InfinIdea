@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="/backend/library/editor.md/css/editormd.min.css" />
+
+<div id="editor">
+  <textarea style="display:none;">### Hello Editor.md !</textarea>
+</div>
+
+
+<script src="/backend/library/jquery-3.6.1.min.js"></script>
+<script src="/backend/library/editor.md/editormd.min.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    var editor = editormd("editor", {
+      path : "/backend/library/editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+    });
+  });
+</script>
+
+</body>
+</html>
