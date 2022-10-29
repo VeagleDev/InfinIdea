@@ -8,8 +8,10 @@ image.addEventListener("click", function () {
 });
 
 document.body.addEventListener("click", function (e) {
-    explanation.style.display = "none";
-});
+    if (e.target != image && e.target != explanation) {
+        explanation.style.display = "none";
+    }
+}
 
 button.addEventListener("click", function () {
     button.innerHTML = "<div class='lds-dual-ring'></div>";
