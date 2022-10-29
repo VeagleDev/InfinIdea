@@ -224,15 +224,11 @@
 
     position: absolute;
     left: 80%;
-    margin-right: 100px;
+    margin-left: -100px;
     padding: 15px;
     line-height: 1.5;
 
 
-}
-
-.markdown-explane:hover {
-    display: block;
 }
 
 
