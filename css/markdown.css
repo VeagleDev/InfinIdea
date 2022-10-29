@@ -848,7 +848,7 @@
 .content-txt pre code,
 .content-txt pre tt {
     display: inline;
-    max-width: auto;
+    width: auto;
     padding: 0;
     margin: 0;
     overflow: visible;
