@@ -112,7 +112,11 @@ logs('Commence l\'\'écriture d\'\'un article');
 
             <textarea class="content" id="content" name="content" placeholder="Contenu de l'article"></textarea>
 
-            <img src="/images/markdown-logo.svg" class="markdown-logo" alt="Logo Markdown">
+            <a href="https://www.ionos.fr/digitalguide/sites-internet/developpement-web/markdown/" alt="Guide Markdown"
+               target="_blank">
+                <img src="/images/markdown-logo.svg" class="markdown-logo" alt="Logo Markdown">
+            </a>
+
 
             <p class="content-error">Le contenu doit faire entre 30 et 10000 caractères</p>
 
