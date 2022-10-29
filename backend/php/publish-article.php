@@ -41,25 +41,25 @@ if (
 
     if (!preg_match($title_regex, $title)) {
         logs('Le titre n\'\'est pas valide');
-        echo "5";
+        echo "Le titre n'est pas valide";
         exit();
     }
 
     if (!preg_match($description_regex, $description)) {
         logs('La description n\'\'est pas valide');
-        echo "6";
+        echo "La description n'est pas valide";
         exit();
     }
 
     if (!preg_match($content_regex, $content)) {
         logs('Le contenu n\'\'est pas valide');
-        echo "7";
+        echo "Le contenu n'est pas valide";
         exit();
     }
 
     if (!preg_match($tags_regex, $tags)) {
         logs('Les tags ne sont pas valide');
-        echo "8";
+        echo "Les tags ne sont pas valide";
         exit();
     }
 
