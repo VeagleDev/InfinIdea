@@ -28,9 +28,9 @@ $db = getDB();
     <script type="text/javascript" src=/backend/library/jquery-3.6.1.min.js></script>
     <script type="text/javascript" src="/backend/js/start-article.js"></script>
     -->
-    <link rel="stylesheet" href="backend/library/highlight.js/highlight.min.js">
-    <script src="backend/library/highlight.js/styles/atom-one-dark.min.css"></script>
-    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="/backend/library/highlight.js/highlight.min.js">
+    <script src="/backend/library/highlight.js/styles/atom-one-dark.min.css"></script>
+    <script src="/backend/js/start-article.js"></script>
 
 </head>
 <body>
