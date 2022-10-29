@@ -199,33 +199,12 @@
     color: #1f5f1f;
 }
 
-.more-info {
-    display: none;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin-top: 30px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    background-color: gray;
-    opacity: 0.8;
-    z-index: 10;
-    /* make the div get centered with the left side as anchor */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 20px;
-    line-height: 1.5;
-
-
-}
 
 
 .markdown-logo {
     width: 50px;
-    display: flex;
+    position: absolute;
     left: 80%;
-    margin-top: -8px;
 
 }
 
