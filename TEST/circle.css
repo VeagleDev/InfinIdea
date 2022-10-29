@@ -1,3 +1,7 @@
+* {
+    background-color: black;
+}
+
 .lds-dual-ring {
     display: inline-block;
     width: 80px;
