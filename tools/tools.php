@@ -242,11 +242,10 @@ function SQLpurify($string) : string
     $purifier = new HTMLPurifier($config);
 
     $string = $purifier->purify($string);
-
-    $string =  str_replace("'", "''", $string);
-    $string = str_replace('"', '""', $string);
-    $string = str_replace('`', '``', $string);
-
+/*
+    $string =  str_replace("'", "\\\'", $string);
+    $string = str_replace('"', '\\\"', $string);
+*/
     $string = mysqli_real_escape_string($db, $string);
 
     return $string;
