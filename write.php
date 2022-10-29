@@ -106,13 +106,6 @@ logs('Commence l\'\'écriture d\'\'un article');
             <input class="description" id="description" name="description" placeholder="Description de l'article"
                    type="text">
 
-            <i class="fa-solid fa-question" id="viewMore">
-                <p class="more-info">
-                    Vous pouvez utiliser le langage Markdown pour rendre votre article plus flamboyant 🔥 <br/>
-                    Vous pouvez même utiliser le raccourci CTRL+V pour coller une image dans le contenu !
-                </p>
-            </i>
-
             <p class="description-error">La description doit faire entre 4 et 200 caractères</p>
 
             <br/>
