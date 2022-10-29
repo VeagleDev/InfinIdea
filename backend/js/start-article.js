@@ -1,10 +1,12 @@
 document.onload = () => {
-    $(document).ready(function () {
-        $('code').addClass('prettyprint');
-    });
-    $(document).ready(function () {
-        $('pre').addClass('prettyprint');
-    });
+
+    // select all pre elements and add the prettyprint class without ajax
+    document.querySelectorAll("pre").forEach((el) => {
+        el.classList.add("prettyprint")
+    })
+    document.querySelectorAll("code").forEach((el) => {
+        el.classList.add("prettyprint")
+    })
 
     PR.prettyPrint();
 }
