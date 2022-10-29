@@ -15,7 +15,15 @@
 </textarea>
 
 <script>
-    var simplemde = new SimpleMDE({element: document.getElementById("test-editormd")});
+    window.onload = function () {
+        var simplemde = new SimpleMDE({element: document.getElementById("test-editormd")});
+        console.log('Yes');
+    }
+
+
+    function test() {
+        var simplemde = new SimpleMDE({element: document.getElementById("test-editormd")});
+    }
 </script>
 
 
