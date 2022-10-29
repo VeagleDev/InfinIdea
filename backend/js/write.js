@@ -4,7 +4,7 @@ const image = document.getElementsByClassName("markdown-logo")[0];
 const explanation = document.getElementsByClassName("markdown-explane")[0];
 
 image.addEventListener("click", function () {
-    explanation.style.display = (explanation.style.display == "none") ? "block" : "none";
+    explanation.style.display = (explanation.style.display == "block") ? "none" : "block";
 });
 
 button.addEventListener("click", function () {
