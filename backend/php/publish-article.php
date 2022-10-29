@@ -22,7 +22,7 @@ if (
 ) {
     $title = SQLpurify($_POST['title']);
     $description = SQLpurify($_POST['description']);
-    $content = SQLpurify($_POST['content']);
+    $content = $_POST['content'];
     $tags = SQLpurify($_POST['tags']);
 
     $converter = new GithubFlavoredMarkdownConverter([
@@ -31,11 +31,38 @@ if (
     ]);
 
     $content = $converter->convert($content);
-
-// <h1>Hello World!</h1>
-
-
+    $content = SQLpurify($content);
     $author = $_SESSION['id'];
+
+    $title_regex = '/^.{4,50}$/';
+    $description_regex = '/^.{4,200}$/';
+    $content_regex = '/^[\s\S]{30,10000}$/';
+    $tags_regex = '/^.{0,1000}$/';
+
+    if (!preg_match($title_regex, $title)) {
+        logs('Le titre n\'\'est pas valide');
+        echo "Le titre n'est pas valide";
+        exit();
+    }
+
+    if (!preg_match($description_regex, $description)) {
+        logs('La description n\'\'est pas valide');
+        echo "La description n'est pas valide";
+        exit();
+    }
+
+    if (!preg_match($content_regex, $content)) {
+        logs('Le contenu n\'\'est pas valide');
+        echo "Le contenu n'est pas valide";
+        exit();
+    }
+
+    if (!preg_match($tags_regex, $tags)) {
+        logs('Les tags ne sont pas valide');
+        echo "Les tags ne sont pas valide";
+        exit();
+    }
+
 
     $sql = "SELECT * FROM articles WHERE name = '" . $title . "'";
     if (mysqli_num_rows(mysqli_query($db, $sql)) > 0) {
