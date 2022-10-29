@@ -22,10 +22,10 @@ $db = getDB();
     <link rel="stylesheet" href="css/article.css">
     <link rel="stylesheet" href="css/markdown.css">
 
-    <link rel="stylesheet" type="text/css" href="/backend/library/prettify/prettify.css">
-    <script type="text/javascript" src="/backend/library/prettify/prettify.js"></script>
-    <script type="text/javascript" src=/backend/library/jquery-3.6.1.min.js></script>
-    <script type="text/javascript" src="/backend/js/start-article.js"></script>
+    <link rel="stylesheet" href="/backend/library/highlight.js/styles/atom-one-dark.min.css">
+    <script src="/backend/library/highlight.js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
 </head>
 <body>
 <section class="top-page">
