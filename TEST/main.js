@@ -7,6 +7,7 @@ var addLinkBtn = document.getElementsByClassName("submit-link")[0];
 var addRowBtn = document.getElementsByClassName("submit-row")[0];
 var addImgBtn = document.getElementsByClassName("submit-img-link")[0];
 
+
 // //Récuperer les valeurs des inputs
 // var addTextValue = document.getElementsByClassName("text-value")[0].value;
 
