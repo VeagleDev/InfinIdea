@@ -67,7 +67,7 @@ if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
             <p class="type-effect before-append-input">Pour finir, la sécurité ! Renseignez votre mot de passe et
                 confirmez-le. Prennez-en un sécurisé, c'est le plus important;</p>
             <div class="input-container">
-                <input type="text" class="password-value">
+                <input type="password" for="password" class="password-value">
                 <button class="submit-password">Soumettre</button>
             </div>
             <p class="error">Votre mot de passe doit contenir au moins 8 caractères.</p>
@@ -76,7 +76,7 @@ if (isset($_SESSION['id'])) { // Si l'utilisateur est connecté
         <div class="step step-five">
             <p class="type-effect before-append-input">Confirmez votre mot de passe;</p>
             <div class="input-container">
-                <input type="text" class="confirm-password-value">
+                <input type="password" for="password" class="confirm-password-value">
                 <button class="confirm-password">Valider</button>
             </div>
             <p class="error">Le mot de passe renseigné n'est pas le même !</p>
