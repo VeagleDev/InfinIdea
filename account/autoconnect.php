@@ -33,6 +33,8 @@ function connectViaCookie(mysqli $db) // On définit la fonction qui sert à se 
                     'path' => '/',
                 ]
             );
+            updateUserIP($user);
+            updateLastSeen();
         } else {
             logs('Token de connexion expiré');
         }
@@ -52,8 +54,5 @@ if(isset($_COOKIE['token'])) // Si on a un cookie et qu'on est pas connecté
 if(isset($_SESSION['id']))
 {
     updateUserIP($_SESSION['id']);
+    updateLastSeen();
 }
-
-
-
-

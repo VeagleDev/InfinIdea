@@ -251,11 +251,27 @@ function SQLpurify($string) : string
     return $string;
 }
 
-function HTMLpurify($string) : string
+function HTMLpurify($string): string
 {
     $purifier = new HTMLPurifier();
 
     $string = $purifier->purify($string);
 
     return $string;
+}
+
+function updateLastSeen(): bool
+{
+    if (isset($_SESSION['id'])) {
+        $db = getDB();
+        $sql = "UPDATE users SET last_seen = NOW() WHERE id = " . $_SESSION['id'];
+        $res = $db->query($sql);
+        if ($res) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
