@@ -50,7 +50,7 @@ if (isset($_SESSION['id'])) {  // Si l'utilisateur est connecté
             <div class="step step-two">
                 <p class="type-effect before-append-input">Veuillez renseigner votre mot de passe</p>
                 <div class="input-container">
-                    <input type="password" for="password" class="password-value">
+                    <input type="password" class="password-value">
                     <button class="submit-password">Soumettre</button>
                 </div>
                 <p class="error">Le mot de passe renseigné est incorrect.</p>
