@@ -25,6 +25,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     $ips[] = $row['ip'];
 }
 
+echo "Nombre d'IPs différentes : " . count($ips) . "<br />";
+
+$count = 0;
 foreach ($ips as $ip) {
     $query = "SELECT * FROM ip WHERE ip = '$ip'";
     $result = mysqli_query($db, $query);
@@ -38,5 +41,7 @@ foreach ($ips as $ip) {
         $org = $details->org;
         $query = "INSERT INTO ip (ip, city, region, country, loc, fai) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org')";
         mysqli_query($db, $query);
+        $count++;
     }
 }
+echo "Nombre d'IPs ajoutées : " . $count;
