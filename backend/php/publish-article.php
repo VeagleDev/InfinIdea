@@ -8,7 +8,7 @@ require_once 'account/autoconnect.php';
 require_once 'tools/tools.php';
 require_once 'vendor/autoload.php';
 
-use League\CommonMark\GithubFlavoredMarkdownConverter;
+use League\CommonMark\CommonMarkConverter;
 
 $db = getDB();
 
@@ -29,7 +29,7 @@ if (
     $content = $_POST['content'];
     $tags = SQLpurify($_POST['tags']);
 
-    $converter = new GithubFlavoredMarkdownConverter([
+    $converter = new CommonMarkConverter([
         'html_input' => 'allow',
         'allow_unsafe_links' => true,
     ]);
