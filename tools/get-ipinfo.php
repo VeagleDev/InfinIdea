@@ -73,6 +73,8 @@ foreach ($ips as $ip) {
             $usernames = "Unknown";
         } else {
             $usernames = implode(", ", $usernames);
+            $usernames = str_replace('"', '\\"', $usernames);
+
         }
         $query = "INSERT INTO ip (ip, city, region, country, loc, fai, username) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org', '$usernames')";
         echo $query . "<br />";
