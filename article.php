@@ -89,6 +89,7 @@ $db = getDB();
             logs('Utilisateur essaie de regarder l\'\'article : ' . $aid);
             if (articleExists($aid)) // Si l'article existe
             {
+                addView($aid); // On ajoute une vue
                 $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article
                 $result = mysqli_query($db, $sql); // On exécute la requête
                 if ($result) // Si Il existe
@@ -107,14 +108,17 @@ $db = getDB();
                     if ($blocked == 1) // Si il est bloqué
                     {
                         echo('<p color="red">L\'article que vous avez sélectionné est bloqué !</p>');
+                        die();
                     }
                 }
                     else
                     {
                         echo('<p color="blue">L\'article que vous avez sélectionné n\'est pas valide !</p>');
+                        die();
                     }
                 } else {
                 echo('<p color="blue">L\'article que vous avez sélectionné n\'existe pas.</p>');
+                die();
             }
         } else {
             echo('<p color="blue">Pas d\'article sélectionné</p>');
@@ -305,9 +309,29 @@ $db = getDB();
     </section>
 
 
-    <script src="backend/js/img-explorer.js"></script>
-    <script src="backend/js/article-interaction.js"></script>
-    <script src="backend/js/like.js"></script>
-    <script defer src="backend/js/check-ratio.js"></script>
+<script src="backend/js/img-explorer.js"></script>
+<script src="backend/js/article-interaction.js"></script>
+<script src="backend/js/like.js"></script>
+<script defer src="backend/js/check-ratio.js"></script>
 </body>
 </html>
+
+
+<?php
+
+function addView($aid) // Fonction qui ajoute une vue à l'article
+{
+    if (!articleExists($aid))
+        return;
+    if (!isset($_SESSION['id']))
+        return;
+    $db = getDB(); // On récupère la base de données
+    $sql = "SELECT * FROM views WHERE uid = " . $_SESSION['id'] . " AND date > DATE_SUB(NOW(), INTERVAL 30 MINUTE) AND aid = " . $aid;
+    $result = mysqli_query($db, $sql); // On exécute la requête
+    if ($result->num_rows > 0)
+        return;
+    $sql = 'UPDATE articles SET views = views + 1 WHERE id = ' . $aid; // On ajoute une vue à l'article
+    mysqli_query($db, $sql); // On exécute la requête
+    $sql = "INSERT INTO views (uid, ip, aid) VALUES(" . $_SESSION['id'] . ", '" . getIP() . "', " . $aid . ")";
+    mysqli_query($db, $sql);
+}
