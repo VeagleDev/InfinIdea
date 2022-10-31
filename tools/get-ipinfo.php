@@ -26,7 +26,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 echo "Nombre d'IPs différentes : " . count($ips) . "<br />";
-
 $count = 0;
 foreach ($ips as $ip) {
     $query = "SELECT * FROM ip WHERE ip = '$ip'";
