@@ -69,7 +69,11 @@ foreach ($ips as $ip) {
                 $usernames[] = $username;
             }
         }
-        $usernames = implode(", ", $usernames);
+        if (empty($usernames)) {
+            $usernames = "Unknown";
+        } else {
+            $usernames = implode(", ", $usernames);
+        }
         $query = "INSERT INTO ip (ip, city, region, country, loc, fai, username) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org', '$usernames')";
         mysqli_query($db, $query);
         $count++;
