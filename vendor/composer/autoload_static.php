@@ -4,29 +4,44 @@
 
 namespace Composer\Autoload;
 
-use Closure;
-
 class ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee
 {
     public static $files = array (
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'i' => 
+        array (
+            'ipinfo\\ipinfo\\' => 14,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
+            'Sabre\\Cache\\' => 12,
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
+            'Psr\\Http\\Message\\' => 17,
+            'Psr\\Http\\Client\\' => 16,
             'Psr\\EventDispatcher\\' => 20,
         ),
         'L' => 
         array (
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'D' => 
         array (
@@ -35,9 +50,30 @@ class ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee
     );
 
     public static $prefixDirsPsr4 = array (
+        'ipinfo\\ipinfo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ipinfo/ipinfo/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Sabre\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabre/cache/lib',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+        ),
+        'Psr\\Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
         'Psr\\EventDispatcher\\' => 
         array (
@@ -50,6 +86,18 @@ class ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee
         'League\\CommonMark\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
         'Dflydev\\DotAccessData\\' => 
         array (
@@ -134,7 +182,7 @@ class ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee
 
     public static function getInitializer(ClassLoader $loader)
     {
-        return Closure::bind(function () use ($loader) {
+        return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit1c67bca456bb562eb2dc09aaeb814aee::$prefixesPsr0;

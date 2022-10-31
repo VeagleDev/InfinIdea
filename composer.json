@@ -1,7 +1,8 @@
 {
     "require": {
-        "league/commonmark": "^2.3",
-        "ezyang/htmlpurifier": "^4.16",
-      "ext-mysqli": "*"
+      "league/commonmark": "^2.3",
+      "ezyang/htmlpurifier": "^4.16",
+      "ext-mysqli": "*",
+      "ipinfo/ipinfo": "^2.3"
     }
 }

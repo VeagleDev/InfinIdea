@@ -25,13 +25,12 @@ Le site est encore en <ins>cours de développement</ins>, vous pouvez rejoindre
 le [serveur Discord](https://discord.gg/TAUUEP9JkR) pour suivre les avancées et participer à la beta.
 Lien du Discord : [Veagle](https://discord.gg/TAUUEP9JkR)
 
-Le site est accessible sur le domaine [infinidea.veagle.fr](https://infinidea.veagle.fr/).
-
 ## Contribuer
 
 Vous pouvez contribuer au projet par plusieurs moyens :
 
-- En créant des [issues](https://github.com/Mysterious-Developers/InfinIdea/issues) sur le dépôt GitHub (**bugs**, **suggestions**, etc.)
+- En créant des [issues](https://github.com/Mysterious-Developers/InfinIdea/issues) sur le dépôt GitHub (**bugs**, **
+  suggestions**, etc.)
 - En *discutant* sur le [serveur Discord](https://discord.gg/TAUUEP9JkR)
 - En *discutant* dans les [discussions](https://github.com/Mysterious-Developers/InfinIdea/discussions) du dépôt GitHub
 - En *créant des pull requests*, c'est-à-dire apporter des modifications au code source, pour plus de détails, voir le
