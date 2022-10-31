@@ -17,4 +17,4 @@ jobs:
           tools: phpmd
 
       - name: Run PHPMD
-        run: phpmd . github phpmd.ruleset.xml --exclude 'vendor/*'
+        run: phpmd . github --exclude 'vendor/*'
