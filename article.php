@@ -89,7 +89,6 @@ $db = getDB();
             logs('Utilisateur essaie de regarder l\'\'article : ' . $aid);
             if (articleExists($aid)) // Si l'article existe
             {
-                addView($aid); // On ajoute une vue
 
                 $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article
                 $result = mysqli_query($db, $sql); // On exécute la requête
@@ -117,7 +116,7 @@ $db = getDB();
                         echo('<p color="blue">L\'article que vous avez sélectionné n\'est pas valide !</p>');
                         die();
                     }
-                } else {
+            } else {
                 echo('<p color="blue">L\'article que vous avez sélectionné n\'existe pas.</p>');
                 die();
             }
@@ -126,6 +125,7 @@ $db = getDB();
             die();
         }
 
+        addView($aid); // On ajoute une vue à l'article
 
         $sql = 'SELECT hd FROM images WHERE aid = \'' . $aid . '\''; // On récupère les images de l'article
         $result = mysqli_query($db, $sql); // On exécute la requête
