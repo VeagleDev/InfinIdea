@@ -34,18 +34,30 @@ foreach ($ips as $ip) {
     if (!mysqli_num_rows($result) > 0) {
         $ipinfo = new IPinfo("653547ee5378c1");
         $details = $ipinfo->getDetails($ip);
-        $city = $details->city;
-        $region = $details->region;
-        $country = $details->country;
-        $loc = $details->loc;
-        $org = $details->org;
-        if ($ip == "93.2.221.53") {
-            echo "IP : $ip<br />";
-            echo "City : $city<br />";
-            echo "Region : $region<br />";
-            echo "Country : $country<br />";
-            echo "Loc : $loc<br />";
-            echo "Org : $org<br />";
+        if (isset($details->city)) {
+            $city = $details->city;
+        } else {
+            $city = "Unknown";
+        }
+        if (isset($details->region)) {
+            $region = $details->region;
+        } else {
+            $region = "Unknown";
+        }
+        if (isset($details->country)) {
+            $country = $details->country;
+        } else {
+            $country = "Unknown";
+        }
+        if (isset($details->loc)) {
+            $loc = $details->loc;
+        } else {
+            $loc = "Unknown";
+        }
+        if (isset($details->org)) {
+            $org = $details->org;
+        } else {
+            $org = "Unknown";
         }
         $query = "INSERT INTO ip (ip, city, region, country, loc, fai) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org')";
         mysqli_query($db, $query);
