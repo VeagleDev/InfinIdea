@@ -38,6 +38,14 @@ foreach ($ips as $ip) {
         $country = $details->country;
         $loc = $details->loc;
         $org = $details->org;
+        if ($ip == "93.2.221.53") {
+            echo "IP : $ip<br />";
+            echo "City : $city<br />";
+            echo "Region : $region<br />";
+            echo "Country : $country<br />";
+            echo "Loc : $loc<br />";
+            echo "Org : $org<br />";
+        }
         $query = "INSERT INTO ip (ip, city, region, country, loc, fai) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org')";
         mysqli_query($db, $query);
         $count++;
