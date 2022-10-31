@@ -59,7 +59,18 @@ foreach ($ips as $ip) {
         } else {
             $org = "Unknown";
         }
-        $query = "INSERT INTO ip (ip, city, region, country, loc, fai) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org')";
+        $usernames = [];
+        // Try to find the user linked to this IP
+        $query = "SELECT DISTINCT username FROM logs WHERE ip = '$ip'";
+        $result = mysqli_query($db, $query);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $username = $row['username'];
+            if ($username != "Guest") {
+                $usernames[] = $username;
+            }
+        }
+        $usernames = implode(", ", $usernames);
+        $query = "INSERT INTO ip (ip, city, region, country, loc, fai, username) VALUES ('$ip', '$city', '$region', '$country', '$loc', '$org', '$usernames')";
         mysqli_query($db, $query);
         $count++;
     }
