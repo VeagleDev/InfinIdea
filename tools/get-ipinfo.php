@@ -26,11 +26,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 echo "Nombre d'IPs différentes : " . count($ips) . "<br />";
+print_r($ips);
 $count = 0;
 foreach ($ips as $ip) {
     $query = "SELECT * FROM ip WHERE ip = '$ip'";
     $result = mysqli_query($db, $query);
-    if (mysqli_num_rows($result) == 0) {
+    if (!mysqli_num_rows($result) > 0) {
         $ipinfo = new IPinfo("653547ee5378c1");
         $details = $ipinfo->getDetails($ip);
         $city = $details->city;
