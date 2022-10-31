@@ -90,6 +90,7 @@ $db = getDB();
             if (articleExists($aid)) // Si l'article existe
             {
                 addView($aid); // On ajoute une vue
+
                 $sql = "SELECT * FROM articles WHERE uid = '$aid'"; // On récupère les infos de l'article
                 $result = mysqli_query($db, $sql); // On exécute la requête
                 if ($result) // Si Il existe
