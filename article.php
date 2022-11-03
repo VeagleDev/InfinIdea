@@ -275,7 +275,7 @@ $db = getDB();
                     }
 
                     .comment-input {
-                        width: 100%;
+                        width: 90%;
                         height: 100%;
                         border: none;
                         outline: none;
