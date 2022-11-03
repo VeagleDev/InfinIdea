@@ -228,8 +228,8 @@ $db = getDB();
                             $message = $row['message']; // On récupère le message
                             ?>
                             <li class="comment">
-                                <h1 class="username"><?php echo $pseudo; ?></h1> <!-- On affiche le pseudo -->
-                                <p class="comment-content"><?php echo $message; ?></p> <!-- On affiche le message -->
+                                <h1 class="username"><?= $pseudo ?></h1> <!-- On affiche le pseudo -->
+                                <p class="comment-content"><?= $message ?></p> <!-- On affiche le message -->
                                 <ul class="comment-user-interaction">
                                     <li>
                                         <button><i class="fa-regular fa-heart interaction like"></i></button>
@@ -248,26 +248,57 @@ $db = getDB();
                             <li class="comment">
                                 <h1 class="username"></h1>
                                 <p class="comment-content">Il n'y a pas encore de commentaires !</p>
-                                <ul class="comment-user-interaction">
-                                    <li><button><i class="fa-regular fa-heart interaction like"></i></button></li>
-                                    <li><button><i class="fa-regular fa-comment interaction"></i></button></li>
-                                </ul>
                             </li>
                             <?php
                         }
                     ?>
 
                 </ul>
+
+                <div class="comment-form">
+                    <!-- create an input to add a comment -->
+                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
+                    <!-- ajouter un bouton avec comme le logo  fa-regular fa-comment -->
+                    <button class="comment-button"><i class="fa-regular fa-comment interaction"></i></button>
+                </div>
+                <!-- ajouter un style pour que le bouton soit à droite de l'input et que ce soit en bas de la fenêtre -->
+                <style>
+                    .comment-form {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        height: 50px;
+                        background-color: #f2f2f2;
+                        padding: 0 10px;
+                    }
+
+                    .comment-input {
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        outline: none;
+                        font-size: 1.2em;
+                    }
+
+                    .comment-button {
+                        background-color: #f2f2f2;
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+                    }
+                </style>
             </nav>
         </div>
     </section>
 
-    <section class="bottom-page">
-        <footer>
-            <div class="site-nav">
-                <nav>
-                    <ul>
-                        <li><p class="nav-title">Soutien</p></li>
+<section class="bottom-page">
+    <footer>
+        <div class="site-nav">
+            <nav>
+                <ul>
+                    <li><p class="nav-title">Soutien</p></li>
                         <li><a href=""><p>Nous contacter</p></a></li>
                         <li><a href=""><p>A propos</p></a></li> 
                     </ul>
