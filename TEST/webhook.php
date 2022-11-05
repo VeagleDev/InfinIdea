@@ -1,4 +1,5 @@
 <?php
+set_include_path('/var/www/blog');
 require_once 'tools/tools.php';
 
 if (isset($_POST['payload'])) {
