@@ -9,7 +9,7 @@ if (isset($_POST['payload'])) {
     // print the result of the git pull command
     // and write it to webhook.json
     $data = json_decode($_POST['payload']);
-    $output = shell_exec('git pull');
+    $output = shell_exec('cd /var/www/blog && git pull');
     $output = $output . " " . date("Y-m-d H:i:s");
 
     // add the output to data
