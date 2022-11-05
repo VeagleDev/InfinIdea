@@ -10,8 +10,9 @@ if (isset($_POST['payload'])) {
 } else {
     if (file_exists('webhook.json')) {
         $json = file_get_contents('webhook.json');
-        echo $json;
         header('Content-Type: application/json');
+        echo $json;
+
     } else {
         echo "No webhook.json file";
         die();
