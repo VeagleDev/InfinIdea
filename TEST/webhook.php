@@ -3,21 +3,23 @@ set_include_path('/var/www/blog');
 require_once 'tools/tools.php';
 
 if (isset($_POST['payload'])) {
-    $json = json_decode(HTMLpurify(['payload']), true);
-    $result = shell_exec('git pull');
-    // add result to the json
-    // create new array with the result string, the result code and the date
-    // add a new element to the json array
+    // get the received data and decode it to an array
+    // the data is in JSON format
+    // then run git pull to update the local repo
+    // print the result of the git pull command
+    // and write it to webhook.json
+    $data = json_decode($_POST['payload']);
+    $output = shell_exec('git pull');
+    $output = $output . " " . date("Y-m-d H:i:s");
 
-    // add new element to the json array withour overwriting the old one
-    $json['result'] = str_replace("\n", " - ", $result);
-    $json['date'] = date('Y-m-d H:i:s');
+    // add the output to data
+    $data->output = $output;
 
-
-    $file = fopen('webhook.json', 'w');
-    fwrite($file, json_encode($json));
-    fclose($file);
-
+    // write the data to a file
+    $fp = fopen('webhook.json', 'w');
+    fwrite($fp, json_encode($data));
+    fclose($fp);
+    
 
 } else {
     if (file_exists('webhook.json')) {
