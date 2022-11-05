@@ -8,10 +8,11 @@ if (isset($_POST['payload'])) {
     $result = shell_exec('git pull');
     // add result to the json
     // create new array with the result string, the result code and the date
-    $json['result'] = [
-        'date' => date('Y-m-d H:i:s'),
-        'code' => $result
-    ];
+    // add a new element to the json array
+
+    // add new element to the json array withour overwriting the old one
+    $json['result'] = str_replace("\n", " - ", $result);
+    $json['date'] = date('Y-m-d H:i:s');
 
     $file = fopen('webhook.json', 'w');
     fwrite($file, json_encode($json));
