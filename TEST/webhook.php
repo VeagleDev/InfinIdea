@@ -14,7 +14,7 @@ if (isset($_POST['payload'])) {
     ];
 
     $file = fopen('webhook.json', 'w');
-    fwrite($file, $json);
+    fwrite($file, json_encode($json));
     fclose($file);
 
 
