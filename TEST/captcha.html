@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script async defer src="https://js.hcaptcha.com/1/api.js?hl=fr&onload=onSubmit"></script>
+    <script async defer src="https://js.hcaptcha.com/1/api.js"></script>
 </head>
 <body>
-<div class="h-captcha" data-sitekey="d1b33669-b43e-4360-a9a4-99b6990e0a29"></div>
+<div
+        class="h-captcha"
+        data-callback="onSubmit"
+        data-sitekey="d1b33669-b43e-4360-a9a4-99b6990e0a29"
+        data-size="compact"
+        data-theme="dark"
+></div>
 <script>
   function onSubmit(token) {
-    if (token != undefined) {
-      alert('Token: ' + token);
-    }
+    alert('onSubmit: ' + token);
   }
 </script>
 </body>
