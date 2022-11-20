@@ -1,6 +1,6 @@
-# exlude .idea and .vscode folders in the root of the project
 .idea/
 .vscode/
+.github
 images/uploads/body/*
 .fleet/
 backend/php/creditentials.php
