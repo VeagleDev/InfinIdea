@@ -11,26 +11,19 @@ $result = mysqli_query($db, $sql);
 $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 foreach ($articles as $key => $article) {
-    $sql = "SELECT * FROM views WHERE aid = :article_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':article_id', $article['id']);
-    $stmt->execute();
-    $views = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $articles[$key]['views'] = count($views);
 
-    $sql = "SELECT * FROM likes WHERE aid = :article_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':article_id', $article['id']);
-    $stmt->execute();
-    $likes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $articles[$key]['likes'] = count($likes);
+    $sql = "SELECT id FROM comments WHERE aid = $articles[$key]['id']";
+    $result = mysqli_query($db, $sql);
+    $articles[$key]['views'] = mysqli_num_rows($result);
 
-    $sql = "SELECT * FROM comments WHERE aid = :article_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':article_id', $article['id']);
-    $stmt->execute();
-    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $articles[$key]['comments'] = count($comments);
+
+    $sql = "SELECT id FROM likes WHERE aid = $articles[$key]['id']";
+    $result = mysqli_query($db, $sql);
+    $articles[$key]['likes'] = mysqli_num_rows($result);
+
+    $sql = "SELECT id FROM comments WHERE aid = $articles[$key]['id']";
+    $result = mysqli_query($db, $sql);
+    $articles[$key]['comments'] = mysqli_num_rows($result);
 }
 
 // foreach article, calculate the score
@@ -44,6 +37,6 @@ $articles = array_sort($articles, 'score', SORT_DESC);
 
 // print the articles
 foreach ($articles as $article) {
-    echo $article['title'] . ' - ' . $article['score'] . '<br>';
+    echo $article['title'] . ' - ' . $article['score'] . ' | (' . $article['views'] . ' vues, ' . $article['likes'] . ' likes, ' . $article['comments'] . ' commentaires)' . '<br />';
 }
 
