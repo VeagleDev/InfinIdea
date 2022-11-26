@@ -29,7 +29,18 @@ foreach ($articles as $key => $article) {
 // foreach article, calculate the score
 // score = views * 0.2 + likes * 0.5 + comments * 0.3
 foreach ($articles as $key => $article) {
-    $articles[$key]['score'] = $article['views'] * 0.2 + $article['likes'] * 0.5 + $article['comments'] * 0.3;
+    // add up to 100% of the score if the article is recenntly published
+    $score = $article['views'] * 1 + $article['likes'] * 3 + $article['comments'] * 2;
+    $recent = time() - $article['created'];
+    if ($recent < 43200) {
+        $score = $score * 2;
+    } elseif ($recent < 86400) {
+        $score = $score * 1.5;
+    } elseif ($recent < 172800) {
+        $score = $score * 1.2;
+    }
+    $articles[$key]['score'] = $score;
+
 }
 
 // sort the articles by score
