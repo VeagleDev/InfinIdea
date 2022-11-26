@@ -12,7 +12,7 @@ $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 foreach ($articles as $key => $article) {
 
-    $sql = "SELECT id FROM comments WHERE aid = " . $article['id'];
+    $sql = "SELECT id FROM views WHERE aid = " . $article['id'];
     $result = mysqli_query($db, $sql);
     $articles[$key]['views'] = mysqli_num_rows($result);
 
