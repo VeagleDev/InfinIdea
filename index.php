@@ -89,6 +89,55 @@ logs('Visite le site');
 
 <section class="contents-page">
     <div class="article-display">
+
+        <h1 class="big-title">Tendances</h1>
+        <div class="gallery js-flickity"
+             data-flickity-options='{ "wrapAround": true }'>
+
+            <?php
+            require_once 'tools/algorithm.php';
+            $articles = getTrendArticles(50
+            );
+
+            foreach ($articles as $article) {
+                $articleid = $article['id'];
+                $href = "article.php?id=" . $article['uid']; // on recupere l'id de l'article
+                $sql = "SELECT * FROM images WHERE type = 'main' AND aid = " . $articleid . " LIMIT 1;"; // on charge l'image de l'article
+                $result2 = mysqli_query($db, $sql); // on execute la requete
+                if (mysqli_affected_rows($db) > 0) // si on a un resultat
+                {
+                    $row2 = mysqli_fetch_assoc($result2); // on recupere le resultat
+                    $img = $row2['path']; // on recupere l'image
+                } else {
+                    $sql = "SELECT * FROM images WHERE aid = " . $articleid . " LIMIT 1;"; // on charge l'image par defaut
+                    $result2 = mysqli_query($db, $sql); // on execute la requete
+                    if (mysqli_affected_rows($db) > 0) // si on a un resultat
+                    {
+                        $row2 = mysqli_fetch_assoc($result2); // on recupere le resultat
+                        $img = $row2['path']; // on recupere l'image
+                    } else {
+                        $img = "images/uploads/" . $articleid . ".jpg";
+                        if (!file_exists($img)) {
+                            $img = "images/Logo_InfinIdea.png"; // on charge l'image par defaut
+                        }
+                    }
+                }
+                ?>
+                <a href="<?php echo $href; ?>" class="gallery-cell">
+                    <div class="img-container">
+                        <img src="<?php echo $img; ?>" alt="" class="img-article">
+                    </div>
+                    <div class="text">
+                        <h1><?php echo($article['name']); ?></h1>
+                        <p class="description"><?php echo($article['description']); ?></p>
+                    </div>
+                </a>
+                <?php
+            }
+            ?>
+        </div>
+
+
         <h1 class="big-title">Découvrez</h1>
         <div class="gallery js-flickity"
              data-flickity-options='{ "wrapAround": true }'>
@@ -96,7 +145,7 @@ logs('Visite le site');
             <?php
             $sql = "SELECT * FROM articles WHERE visibility = 'public' ORDER BY views DESC LIMIT 20;"; // on charge les 50 articles les plus vus
             $result = mysqli_query($db, $sql); // on execute la requete
-            while($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
+            while ($row = mysqli_fetch_assoc($result)) // tant que on a un resultat
             {
                 $articleid = $row['id'];
                 $href = "article.php?id=" . $row['uid']; // on recupere l'id de l'article

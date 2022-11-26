@@ -204,18 +204,6 @@ function correctTimestamp($timestamp) : string
     }
 }
 
-function getClientUID() : string
-{
-    $ip = getIP();
-    $port = $_SERVER['REMOTE_PORT'];
-
-    $key = $ip . $port;
-
-    $hash = hash('sha1', $key);
-
-    return $hash;
-}
-
 function articleExists($id) : bool
 {
     $db = getDB();
@@ -242,10 +230,6 @@ function SQLpurify($string) : string
     $purifier = new HTMLPurifier($config);
 
     $string = $purifier->purify($string);
-/*
-    $string =  str_replace("'", "\\\'", $string);
-    $string = str_replace('"', '\\\"', $string);
-*/
     $string = mysqli_real_escape_string($db, $string);
 
     return $string;
