@@ -33,7 +33,8 @@ foreach ($articles as $key => $article) {
 }
 
 // sort the articles by score
-$articles = array_sort($articles, 'score', SORT_DESC);
+asort($articles);
+
 
 // print the articles
 foreach ($articles as $article) {
