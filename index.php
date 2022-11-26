@@ -96,7 +96,7 @@ logs('Visite le site');
 
             <?php
             require_once 'tools/algorithm.php';
-            $articles = getTrendingArticles($db);
+            $articles = getTrendArticles(50);
 
             foreach ($articles as $article) {
                 $articleid = $article['id'];
