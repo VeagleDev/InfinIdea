@@ -12,16 +12,16 @@ $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 foreach ($articles as $key => $article) {
 
-    $sql = "SELECT id FROM comments WHERE aid = $articles[$key]['id']";
+    $sql = "SELECT id FROM comments WHERE aid = " . $article['id'];
     $result = mysqli_query($db, $sql);
     $articles[$key]['views'] = mysqli_num_rows($result);
 
 
-    $sql = "SELECT id FROM likes WHERE aid = $articles[$key]['id']";
+    $sql = "SELECT id FROM likes WHERE aid = " . $article['id'];
     $result = mysqli_query($db, $sql);
     $articles[$key]['likes'] = mysqli_num_rows($result);
 
-    $sql = "SELECT id FROM comments WHERE aid = $articles[$key]['id']";
+    $sql = "SELECT id FROM comments WHERE aid = " . $article['id'];
     $result = mysqli_query($db, $sql);
     $articles[$key]['comments'] = mysqli_num_rows($result);
 }
