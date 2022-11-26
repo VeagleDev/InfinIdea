@@ -33,11 +33,13 @@ foreach ($articles as $key => $article) {
 }
 
 // sort the articles by score
-asort($articles);
+usort($articles, function ($a, $b) {
+    return $b['score'] - $a['score'];
+});
 
 
 // print the articles
 foreach ($articles as $article) {
-    echo $article['title'] . ' - ' . $article['score'] . ' | (' . $article['views'] . ' vues, ' . $article['likes'] . ' likes, ' . $article['comments'] . ' commentaires)' . '<br />';
+    echo $article['name'] . ' --> ' . $article['score'] . ' | (' . $article['views'] . ' vues, ' . $article['likes'] . ' likes, ' . $article['comments'] . ' commentaires)' . '<br />';
 }
 
