@@ -5,7 +5,7 @@ require_once 'account/autoconnect.php';
 
 $db = getDB();
 
-$sql = "SELECT * FROM articles";
+$sql = "SELECT * FROM articles WHERE visibility = 'public' AND blocked = 0 LIMIT 10000";
 $query = $db->query($sql);
 $result = mysqli_query($db, $sql);
 $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
