@@ -31,7 +31,7 @@ foreach ($articles as $key => $article) {
 foreach ($articles as $key => $article) {
     // add up to 100% of the score if the article is recenntly published
     $score = $article['views'] * 1 + $article['likes'] * 3 + $article['comments'] * 2;
-    $recent = time() - $article['created'];
+    $recent = time() - strtotime($article['created']);
     if ($recent < 43200) {
         $score = $score * 2;
     } elseif ($recent < 86400) {
