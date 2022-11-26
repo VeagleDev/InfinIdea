@@ -6,10 +6,10 @@ require_once 'account/autoconnect.php';
 $db = getDB();
 
 $sql = "SELECT * FROM articles";
+$query = $db->query($sql);
+$result = mysqli_query($db, $sql);
+$articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$sql = "SELECT * FROM articles";
-$articles = $db->query($sql);
-$articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 foreach ($articles as $key => $article) {
     $sql = "SELECT * FROM views WHERE aid = :article_id";
     $stmt = $db->prepare($sql);
