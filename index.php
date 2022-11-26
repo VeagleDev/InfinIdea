@@ -96,7 +96,8 @@ logs('Visite le site');
 
             <?php
             require_once 'tools/algorithm.php';
-            $articles = getTrendArticles(50);
+            $articles = getTrendArticles(50
+            );
 
             foreach ($articles as $article) {
                 $articleid = $article['id'];
@@ -133,7 +134,6 @@ logs('Visite le site');
                 </a>
                 <?php
             }
-
             ?>
         </div>
 
