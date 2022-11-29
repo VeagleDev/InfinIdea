@@ -256,12 +256,9 @@ $db = getDB();
                 </ul>
 
                 <div class="comment-form">
-                    <!-- create an input to add a comment -->
                     <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
-                    <!-- ajouter un bouton avec comme le logo  fa-regular fa-comment -->
                     <button class="comment-button"><i class="fa-regular fa-comment interaction"></i></button>
                 </div>
-                <!-- ajouter un style pour que le bouton soit à droite de l'input et que ce soit en bas de la fenêtre -->
                 <style>
                     .comment-form {
                         display: flex;
@@ -286,6 +283,8 @@ $db = getDB();
                         background-color: #f2f2f2;
                         border: none;
                         outline: none;
+                        margin-right: 10px;
+                        padding-right: 10px;
                         cursor: pointer;
                     }
                 </style>
