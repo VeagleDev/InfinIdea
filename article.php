@@ -258,7 +258,8 @@ $db = getDB();
 
                 <div class="comment-form">
                     <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
-                    <button class="comment-button"><i class="fa-regular fa-comment interaction"></i></button>
+                    <button class="comment-button" id="comment-button-post"><i
+                                class="fa-regular fa-comment interaction"></i></button>
                 </div>
                 <style>
                     .comment-form {

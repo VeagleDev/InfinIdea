@@ -1,4 +1,4 @@
-const buttonPost = document.getElementsByClassName('comment-button')[0];
+const buttonPost = document.getElementById('comment-button-post');
 const commentaire = document.getElementsByClassName('comment-input')[0];
 
 buttonPost.addEventListener('click', postComment);
