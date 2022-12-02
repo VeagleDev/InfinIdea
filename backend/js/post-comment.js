@@ -16,7 +16,7 @@ console.log("post-comment.js chargé");
 
 function postComment() {
     console.log('postComment');
-    const texte = input.innerHTML;
+    const texte = input.value;
     // get the id of the post from ?id= in the url
     const url = new URL(window.location.href);
     const id = url.searchParams.get('id');
