@@ -39,12 +39,12 @@ function postComment() {
                         '<h1 class="username">' + pseudo + '</h1>\n' +
                         '<p class="comment-content">' + texte + '</p>\n' +
                         '<ul class="comment-user-interaction">\n' +
-                        '<li>\n' +
+                        /*'<li>\n' +
                         '<button><i class="fa-regular fa-heart interaction like"></i></button>\n' +
                         '</li>\n' +
                         '<li>\n' +
                         '<button><i class="fa-regular fa-comment interaction"></i></button>\n' +
-                        '</li>\n' +
+                        '</li>\n' +*/
                         '</ul>\n' +
                         '</li>';
                     document.getElementsByClassName('comments')[0].innerHTML += html;

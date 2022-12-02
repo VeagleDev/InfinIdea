@@ -233,12 +233,12 @@ $db = getDB();
                                 <h1 class="username"><?= $pseudo ?></h1> <!-- On affiche le pseudo -->
                                 <p class="comment-content"><?= $message ?></p> <!-- On affiche le message -->
                                 <ul class="comment-user-interaction">
-                                    <li>
+                                    <!--<li>
                                         <button><i class="fa-regular fa-heart interaction like"></i></button>
                                     </li>
                                     <li>
                                         <button><i class="fa-regular fa-comment interaction"></i></button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <?php
