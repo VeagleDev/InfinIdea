@@ -1,7 +1,7 @@
-const buttonPost = document.getElementById('comment-button-post');
+
 const commentaire = document.getElementsByClassName('comment-input')[0];
 
-buttonPost.addEventListener('click', postComment);
+document.getElementsByClassName('comment-button')[0].addEventListener('click', postComment);
 commentaire.addEventListener('keyup', function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
