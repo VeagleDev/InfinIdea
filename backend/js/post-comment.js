@@ -50,16 +50,15 @@ function postComment() {
     }
 }
 
-window.onload = function () {
-    button.addEventListener('click', postComment);
-    commentaire.addEventListener('keyup', function (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            postComment();
-        }
-    });
-    console.log('post-comment.js event listeners added');
-}
+button.addEventListener('click', postComment);
+commentaire.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        postComment();
+    }
+});
+
+console.log('post-comment.js event listeners added');
 
 
 console.log("post-comment.js chargé");
