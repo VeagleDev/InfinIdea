@@ -25,6 +25,8 @@ $db = getDB();
     <link rel="stylesheet" href="/backend/library/highlight.js/styles/atom-one-dark.min.css">
     <script src="/backend/library/highlight.js/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script src="/backend/js/post-comment.js" defer></script>
+    <script src="/backend/library/jquery-3.6.1.min.js" defer></script>
 
 </head>
 <body>
@@ -216,7 +218,7 @@ $db = getDB();
         <div class="comment-section">
             <button class="close"><i class="fa-solid fa-xmark "></i></button>
             <nav>
-                <ul>
+                <ul class="comments">
 
                     <?php
                     $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC'; // On récupère les commentaires de l'article
@@ -231,12 +233,12 @@ $db = getDB();
                                 <h1 class="username"><?= $pseudo ?></h1> <!-- On affiche le pseudo -->
                                 <p class="comment-content"><?= $message ?></p> <!-- On affiche le message -->
                                 <ul class="comment-user-interaction">
-                                    <li>
+                                    <!--<li>
                                         <button><i class="fa-regular fa-heart interaction like"></i></button>
                                     </li>
                                     <li>
                                         <button><i class="fa-regular fa-comment interaction"></i></button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <?php
@@ -256,12 +258,11 @@ $db = getDB();
                 </ul>
 
                 <div class="comment-form">
-                    <!-- create an input to add a comment -->
-                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
-                    <!-- ajouter un bouton avec comme le logo  fa-regular fa-comment -->
-                    <button class="comment-button"><i class="fa-regular fa-comment interaction"></i></button>
+                    <input class="comment-input" type="text" placeholder="Ajouter un commentaire">
+                    <button class="comment-button">
+                        <i class="fa-regular fa-comment interaction"></i>
+                    </button>
                 </div>
-                <!-- ajouter un style pour que le bouton soit à droite de l'input et que ce soit en bas de la fenêtre -->
                 <style>
                     .comment-form {
                         display: flex;
@@ -286,6 +287,7 @@ $db = getDB();
                         background-color: #f2f2f2;
                         border: none;
                         outline: none;
+                        margin-right: 25px;
                         cursor: pointer;
                     }
                 </style>
