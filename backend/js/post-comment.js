@@ -59,6 +59,8 @@ function postComment() {
                 alert("Une erreur est survenue durant l'envoi du commentaire")
             },
         });
+    } else {
+        console.log("Le commentaire est vide");
     }
 }
 
