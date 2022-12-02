@@ -58,6 +58,7 @@ window.onload = function () {
             postComment();
         }
     });
+    console.log('post-comment.js event listeners added');
 }
 
 
