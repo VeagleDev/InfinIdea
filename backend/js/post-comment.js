@@ -48,6 +48,8 @@ function postComment() {
                         '</ul>\n' +
                         '</li>';
                     document.getElementsByClassName('comments')[0].innerHTML += html;
+                    input.value = "";
+
                 } else { // Si le commentaire n'a pas été posté
                     alert(data.message);
                 }
