@@ -1,14 +1,10 @@
-// add event listener to the button when the page is loaded
-window.addEventListener('load', function () {
-    document.getElementById('post-comment').addEventListener('click', postComment);
-    document.getElementById('comment-input').addEventListener('keyup', function (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            postComment();
-        }
-    });
+document.getElementById('post-comment').addEventListener('click', postComment);
+document.getElementById('comment-input').addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        postComment();
+    }
 });
-
 
 console.log('post-comment.js event listeners added');
 console.log("post-comment.js chargé");
