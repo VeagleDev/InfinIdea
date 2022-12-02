@@ -283,8 +283,7 @@ $db = getDB();
                         background-color: #f2f2f2;
                         border: none;
                         outline: none;
-                        margin-right: 10px;
-                        padding-right: 10px;
+                        margin-right: 25px;
                         cursor: pointer;
                     }
                 </style>
