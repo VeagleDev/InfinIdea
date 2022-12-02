@@ -26,6 +26,7 @@ $db = getDB();
     <script src="/backend/library/highlight.js/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script src="/backend/js/post-comment.js" defer></script>
+    <script src="/backend/library/jquery-3.6.1.min.js" defer></script>
 
 </head>
 <body>
