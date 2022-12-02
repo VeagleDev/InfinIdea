@@ -31,8 +31,8 @@ function postComment() {
                 aid: id
             },
             type: "post", // On envoie les données en POST
-            success: function (data) { // Si la requête est un succès
-                data = JSON.parse(data);
+            success: function (result) { // Si la requête est un succès
+                const data = JSON.parse(result);
                 if (data.success) { // Si le commentaire a bien été posté
                     console.log("Commentaire posté avec succès");
                     const pseudo = data.pseudo;
