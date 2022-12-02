@@ -1,13 +1,14 @@
-
-const commentaire = document.getElementsByClassName('comment-input')[0];
-
-document.getElementsByClassName('comment-button')[0].addEventListener('click', postComment);
-commentaire.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        postComment();
-    }
+// add event listener to the button when the page is loaded
+window.addEventListener('load', function () {
+    document.getElementById('post-comment').addEventListener('click', postComment);
+    document.getElementById('comment-input').addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            postComment();
+        }
+    });
 });
+
 
 console.log('post-comment.js event listeners added');
 console.log("post-comment.js chargé");
@@ -15,7 +16,7 @@ console.log("post-comment.js chargé");
 
 function postComment() {
     console.log('postComment');
-    const texte = commentaire.innerHTML;
+    const texte = document.getElementById('comment-input').innerHTML;
     // get the id of the post from ?id= in the url
     const url = new URL(window.location.href);
     const id = url.searchParams.get('id');
