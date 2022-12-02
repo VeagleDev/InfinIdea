@@ -56,3 +56,5 @@ commentaire.addEventListener('keyup', function (event) {
         postComment();
     }
 });
+
+console.log("post-comment.js chargé");
