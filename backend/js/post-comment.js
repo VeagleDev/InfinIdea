@@ -3,6 +3,7 @@ const commentaire = document.getElementsByClassName('comment-input')[0];
 
 
 function postComment() {
+    console.log('postComment');
     const texte = commentaire.innerHTML;
     // get the id of the post from ?id= in the url
     const url = new URL(window.location.href);
@@ -49,12 +50,15 @@ function postComment() {
     }
 }
 
-button.addEventListener('click', postComment);
-commentaire.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        postComment();
-    }
-});
+window.onload = function () {
+    button.addEventListener('click', postComment);
+    commentaire.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            postComment();
+        }
+    });
+}
+
 
 console.log("post-comment.js chargé");

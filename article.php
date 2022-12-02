@@ -25,7 +25,7 @@ $db = getDB();
     <link rel="stylesheet" href="/backend/library/highlight.js/styles/atom-one-dark.min.css">
     <script src="/backend/library/highlight.js/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <script src="backend/js/post-comment.js" async defer></script>
+    <script src="backend/js/post-comment.js"></script>
 
 </head>
 <body>
