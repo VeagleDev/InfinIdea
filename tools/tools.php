@@ -259,3 +259,16 @@ function updateLastSeen(): bool
         return false;
     }
 }
+
+function getArticleIdFromUID($uid): int
+{
+    $db = getDB();
+    $query = "SELECT id FROM articles WHERE uid = '$uid'";
+    $result = mysqli_query($db, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['id'];
+    } else {
+        return 0;
+    }
+}

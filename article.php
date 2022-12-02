@@ -25,6 +25,7 @@ $db = getDB();
     <link rel="stylesheet" href="/backend/library/highlight.js/styles/atom-one-dark.min.css">
     <script src="/backend/library/highlight.js/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script src="backend/js/post-comment.js" async defer></script>
 
 </head>
 <body>
@@ -216,7 +217,7 @@ $db = getDB();
         <div class="comment-section">
             <button class="close"><i class="fa-solid fa-xmark "></i></button>
             <nav>
-                <ul>
+                <ul class="comments">
 
                     <?php
                     $sql = 'SELECT * FROM comments WHERE aid = ' . $aid . ' ORDER BY time DESC'; // On récupère les commentaires de l'article
