@@ -1,6 +1,17 @@
 const button = document.getElementsByClassName('comment-button')[0];
 const commentaire = document.getElementsByClassName('comment-input')[0];
 
+button.addEventListener('click', postComment);
+commentaire.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        postComment();
+    }
+});
+
+console.log('post-comment.js event listeners added');
+console.log("post-comment.js chargé");
+
 
 function postComment() {
     console.log('postComment');
@@ -50,15 +61,3 @@ function postComment() {
     }
 }
 
-button.addEventListener('click', postComment);
-commentaire.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        postComment();
-    }
-});
-
-console.log('post-comment.js event listeners added');
-
-
-console.log("post-comment.js chargé");
